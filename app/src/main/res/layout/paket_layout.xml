@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Base"
+    android:paddingTop="10dp">
+
+    <!-- Layout untuk Paket Rnasum Hemat -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/titlePaket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ransum Hemat"
+            android:textSize="25sp"
+            android:textColor="@color/Shade"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/keterangan"
+            android:text="Komposisi sesuai kebutuhan, harga terjangkau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titlePaket"
+            android:textColor="@color/White"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cekPaket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <!-- Layout untuk Paket Ransum Hebat -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/titlePaket2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ransum Hebat"
+            android:textSize="25sp"
+            android:textColor="@color/Shade"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/keterangan2"
+            android:text="Komposisi berdasarkan rekomendasi para ahli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titlePaket2"
+            android:textColor="@color/White"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cekPaket2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <!-- Layout untuk Buat Ransum -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/titlePaket3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buat Ransum"
+            android:textSize="25sp"
+            android:textColor="@color/Shade"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/keterangan3"
+            android:text="Komposisi sesuai keinginan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titlePaket3"
+            android:textColor="@color/White"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cekPaket3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <!-- oke button -->
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="@string/oke"
+        android:id="@+id/buttonk"
+        android:layout_margin="40dp"
+        android:onClick="nextClick"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_custom" />
+
+</LinearLayout>
