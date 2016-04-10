@@ -8,6 +8,6 @@ public class Paket_hijauan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paket_hijauan);
+        setContentView(R.layout.paket_hijauan);
     }
 }
