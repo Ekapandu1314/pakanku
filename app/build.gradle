@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.github.moondroid.coverflow:library:1.0'
     //compile 'com.wefika:horizontal-picker:1.1.1'
+    compile project(':universal-image-loader-1.9.5')
 }
