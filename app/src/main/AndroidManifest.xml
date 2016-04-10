@@ -48,6 +48,8 @@
         </activity>
         <activity android:name=".Paket_hijauan" >
         </activity>
+        <activity android:name=".ArticleView" >
+        </activity>
         <activity android:name=".Paket_energi" >
         </activity>
         <activity android:name=".Paket_protein" >

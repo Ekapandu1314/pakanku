@@ -11,6 +11,7 @@ public class Record implements Serializable {
     private static final long serialVersionUID = -7406082437623008161L;
 
     private int idrecord;
+    private String nama_record;
     private String rtanggal;
     private String rhewan;
     private String rtujuan;
@@ -27,6 +28,7 @@ public class Record implements Serializable {
     }
 
     public Record(int idrecord,
+             String nama_record,
              String rtanggal,
              String rhewan,
              String rtujuan,
@@ -38,6 +40,7 @@ public class Record implements Serializable {
              int rtuntung)
     {
         this.idrecord = idrecord;
+        this.nama_record = nama_record;
         this.rtanggal = rtanggal;
         this.rhewan = rhewan;
         this.rtujuan = rtujuan;
@@ -49,7 +52,8 @@ public class Record implements Serializable {
         this.rtuntung = rtuntung;
     }
 
-    public Record(String rtanggal,
+    public Record( String nama_record,
+                 String rtanggal,
                  String rhewan,
                  String rtujuan,
                  double rberat,
@@ -59,6 +63,7 @@ public class Record implements Serializable {
                  int rtuang,
                  int rtuntung)
     {
+        this.nama_record = nama_record;
         this.rtanggal = rtanggal;
         this.rhewan = rhewan;
         this.rtujuan = rtujuan;
@@ -74,8 +79,16 @@ public class Record implements Serializable {
         this.idrecord = id;
     }
 
+    public void setNama_record(String nama_record) {
+        this.nama_record = nama_record;
+    }
+
     public int getIdrecord() {
         return this.idrecord;
+    }
+
+    public String getNama_record() {
+        return this.nama_record;
     }
 
     public void setRtanggal(String rtanggal){
