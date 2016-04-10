@@ -105,8 +105,6 @@ public class Info_tips extends Fragment {
 
         @Override
         protected void onPostExecute(Void args) {
-            // Locate the listview in listview_main.xml
-
             // Pass the results into ListViewAdapter.java
             adapter = new ListTipsAdapter(getActivity(), arraylist);
             // Set the adapter to the ListView
