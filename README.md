@@ -12,3 +12,4 @@ bahan pakan terbaru dan selalu diperbarui setiap pekan. Setiap hasil perhitungan
 akan disimpan, sehingga petani tahu riwayat pemberian pakan ternak. Riwayat
 bermanfaat untuk melakukan pemantauan perkembangan ternak setiap periode.
 
+![Alt text](
