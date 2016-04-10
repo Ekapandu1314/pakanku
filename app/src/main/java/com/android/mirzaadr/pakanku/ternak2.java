@@ -1,10 +1,12 @@
 package com.android.mirzaadr.pakanku;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,44 +43,48 @@ public class ternak2 extends AppCompatActivity {
         //TableListAdapter adapter = new TableListAdapter(this ,mListHarga);
         //bahanListView.setAdapter(adapter);
 
-        mBahanDao = new BahanDAO(this);
-        mVersionDao = new VersionDAO(this);
-        mHewanDao = new HewanDAO(this);
-        // fill the listView
-        mListBahan = mBahanDao.getAllBahan();
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
+        setupViewPager(mViewPager);
 
-        initViews();
-        mAdapter = new ListCheckBoxBahanAdapter(this, mListBahan);
-        bahanListView.setAdapter(mAdapter);
 
-        Utility.setListViewHeightBasedOnChildren(bahanListView);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsbahan);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void initViews() {
-        this.bahanListView = (ListView) findViewById(R.id.listBahan);
-        this.mTxtEmptyListBahan = (TextView) findViewById(R.id.table);
-
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Paket_hijauan(), "hijauan");
+        adapter.addFragment(new Paket_energi(), "sumber energi");
+        adapter.addFragment(new Paket_protein(), "sumber protein");
+        viewPager.setAdapter(adapter);
     }
 
-    //Test scrollview custom
-    public static class Utility {
-        public static void setListViewHeightBasedOnChildren(ListView listView) {
-            ListAdapter listAdapter = listView.getAdapter();
-            if (listAdapter == null) {
-                // pre-condition
-                return;
-            }
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-            int totalHeight = 0;
-            for (int i = 0; i < listAdapter.getCount(); i++) {
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            }
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
 

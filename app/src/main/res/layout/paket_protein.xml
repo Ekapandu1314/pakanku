@@ -50,9 +50,10 @@
     </TableLayout>
 
     <ListView
-        android:id="@+id/listBahan"
+        android:id="@+id/listProtein"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="463dp"
+        android:nestedScrollingEnabled="true">
     </ListView>
 
     <!-- oke button -->

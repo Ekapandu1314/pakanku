@@ -46,12 +46,6 @@
             android:name=".Resep"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Paket_hijauan" >
-        </activity>
-        <activity android:name=".Paket_energi" >
-        </activity>
-        <activity android:name=".Paket_protein" >
-        </activity>
     </application>
 
 </manifest>

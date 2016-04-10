@@ -21,7 +21,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBoxhijauan"
                 android:layout_weight="0.4" />
 
             <TextView
@@ -43,9 +43,10 @@
     </TableLayout>
 
     <ListView
-        android:id="@+id/listBahan"
+        android:id="@+id/listHijauan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="463dp"
+        android:nestedScrollingEnabled="true">
     </ListView>
 
     <!-- oke button -->
