@@ -46,6 +46,9 @@
             android:name=".Resep"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <activity android:name=".ArticleView" >
+        </activity>
     </application>
 
 </manifest>

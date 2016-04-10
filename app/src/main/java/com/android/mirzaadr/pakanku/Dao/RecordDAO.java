@@ -25,6 +25,7 @@ public class RecordDAO {
     private SQLiteDatabase mDatabase;
     private DBHelper mDbHelper;
     private String[] mAllColumns = { DBHelper.RECORD_ID,
+            DBHelper.NAMA_RECORD,
             DBHelper.RTANGGAL,
             DBHelper.RHEWAN,
             DBHelper.RTUJUAN,
@@ -56,7 +57,8 @@ public class RecordDAO {
         mDbHelper.close();
     }
 
-    public Record createRecord(String rtanggal,
+    public Record createRecord(String nama_record,
+                               String rtanggal,
                                String rhewan,
                                double rberat,
                                int rjternak,
@@ -66,6 +68,7 @@ public class RecordDAO {
                                int rtuntung) {
         ContentValues values = new ContentValues();
         //values.put(DBHelper.BAHAN_ID, idbahan);
+        values.put(DBHelper.NAMA_RECORD, nama_record);
         values.put(DBHelper.RTANGGAL, rtanggal);
         values.put(DBHelper.RHEWAN, rhewan);
         values.put(DBHelper.RBERAT, rberat);
@@ -98,6 +101,7 @@ public class RecordDAO {
         try{
             ContentValues values = new ContentValues();
             values.put(DBHelper.RECORD_ID, record.getIdrecord());
+            values.put(DBHelper.NAMA_RECORD, record.getNama_record());
             values.put(DBHelper.RTANGGAL, record.getRtanggal());
             values.put(DBHelper.RHEWAN, record.getRhewan());
             values.put(DBHelper.RBERAT, record.getRberat());
@@ -152,15 +156,16 @@ public class RecordDAO {
         Record record = new Record();
 
         record.setIdrecord(cursor.getInt(0));
-        record.setRtanggal(cursor.getString(1));
-        record.setRhewan(cursor.getString(2));
-        record.setRtujuan(cursor.getString(3));
-        record.setRberat(cursor.getDouble(4));
-        record.setRjternak(cursor.getInt(5));
-        record.setPbahan(cursor.getString(6));
-        record.setJbahan(cursor.getString(7));
-        record.setRtuang(cursor.getInt(8));
-        record.setRtuntung(cursor.getInt(9));
+        record.setNama_record(cursor.getString(1));
+        record.setRtanggal(cursor.getString(2));
+        record.setRhewan(cursor.getString(3));
+        record.setRtujuan(cursor.getString(4));
+        record.setRberat(cursor.getDouble(5));
+        record.setRjternak(cursor.getInt(6));
+        record.setPbahan(cursor.getString(7));
+        record.setJbahan(cursor.getString(8));
+        record.setRtuang(cursor.getInt(9));
+        record.setRtuntung(cursor.getInt(10));
 
         return record;
     }
