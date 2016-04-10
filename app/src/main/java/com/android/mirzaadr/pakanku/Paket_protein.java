@@ -55,7 +55,7 @@ public class Paket_protein extends Fragment {
         mAdapter = new ListCheckBoxBahanAdapter(getActivity(), mListBahan);
         bahanListView.setAdapter(mAdapter);
 
-        Utility.setListViewHeightBasedOnChildren(bahanListView);
+        //Utility.setListViewHeightBasedOnChildren(bahanListView);
 
         return view;
     }
