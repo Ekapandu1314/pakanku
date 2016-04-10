@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 version = versi.getVersiBahan();
                 tanggal = versi.getTanggal();
 
-                Toast.makeText(getBaseContext(), "Versi = " + version + "\n" + "Tanggal = " + tanggal, Toast.LENGTH_SHORT).show();
-
                 cekUpdate(version, tanggal);
 
             }
