@@ -1,10 +1,13 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.StackView;
 import java.util.ArrayList;
@@ -58,7 +61,7 @@ public class BuatPakan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buat_pakan);
 
-        check_potong = (CheckBox) findViewById(R.id.checkPotong);
+                check_potong = (CheckBox) findViewById(R.id.checkPotong);
         check_perah = (CheckBox) findViewById(R.id.checkPerah);
         check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
         check_hobi = (CheckBox) findViewById(R.id.checkHobi);
@@ -217,8 +220,14 @@ public class BuatPakan extends AppCompatActivity {
     }
 
     public void nextClick(View v) {
-        Intent intent = new Intent(this, ternak2.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, ternak2.class);
+        //startActivity(intent);
+        final Dialog dialog = new Dialog(BuatPakan.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_paket);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
     }
 
 
