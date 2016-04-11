@@ -7,6 +7,7 @@
     <string name="title_activity_buatpakan">Buat Pakan</string>
     <string name="BuatButton">Buat Pakan</string>
     <string name="InfoButton">Informasi</string>
+    <string name="CekUntung">Cek Untung</string>
     <string name="tips">TIPS</string>
     <string name="harga">Harga /kg</string>
     <string name="history">HISTORY</string>

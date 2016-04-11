@@ -373,6 +373,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void UntungClick(View v) {
+        Intent intent = new Intent(MainActivity.this, CekUntung.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
