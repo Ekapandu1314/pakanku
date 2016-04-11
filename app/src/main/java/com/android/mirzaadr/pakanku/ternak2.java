@@ -54,8 +54,8 @@ public class ternak2 extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new Paket_hijauan(), "hijauan");
-        adapter.addFragment(new Paket_energi(), "sumber energi");
-        adapter.addFragment(new Paket_protein(), "sumber protein");
+        adapter.addFragment(new Paket_energi(), "energi");
+        adapter.addFragment(new Paket_protein(), "protein");
         viewPager.setAdapter(adapter);
     }
 

@@ -12,45 +12,75 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"-->
 
-    <TableLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TableRow
-            android:background="#E77817">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkBox3"
-                android:layout_margin="5dp"
-                android:layout_weight="0.4" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#E77817">
 
-            <View
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@color/Base"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:id="@+id/divider"
+            android:background="@color/Base"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/checkBox3"
+            android:layout_toEndOf="@id/checkBox3"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/table"
-                android:layout_margin="5dp"
-                android:text="@string/nama"
-                android:textColor="@color/Base"
-                android:layout_weight="1"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:id="@+id/divider2"
+            android:background="@color/Base"
+            android:layout_marginRight="110dp"
+            android:layout_marginEnd="110dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/table2"
-                android:layout_margin="5dp"
-                android:textColor="@color/Base"
-                android:layout_weight="1"
-                android:text="@string/harga" />
-        </TableRow>
-    </TableLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nama"
+            android:id="@+id/table"
+            android:textColor="@color/Base"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/checkBox3"
+            android:layout_toEndOf="@+id/checkBox3"
+            android:layout_toLeftOf="@+id/table2"
+            android:layout_toStartOf="@+id/table2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/harga"
+            android:textColor="@color/Base"
+            android:id="@+id/table2"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox3"
+            android:checked="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listProtein"
+        android:layout_marginTop="1dip"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <TableRow
         android:background="@color/Button"
         android:padding="5dp">
@@ -10,6 +13,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkBox"
             android:layout_column="1"
+            android:layout_weight="0.4"
             />
 
         <TextView
@@ -27,31 +31,80 @@
             android:layout_weight="1"
             android:text="@string/harga"
             android:layout_column="4" />
-        <!--TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/table3"
             android:layout_weight="1"
-            android:text="API Level" /-->
+            android:text="API Level" />
     </TableRow>
-
-       <!-- <TableRow
-            android:padding="15dp">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.4"
-                android:id="@+id/checkBox2"
-                android:layout_weight="1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Android Kitkat" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="19" />
-        </TableRow>-->
 </TableLayout>
+
+    -->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/Button"
+    >
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:id="@+id/divider"
+        android:background="@color/Base"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@+id/checkBox"
+        android:layout_toEndOf="@+id/checkBox"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:id="@+id/divider2"
+        android:background="@color/Base"
+        android:layout_marginRight="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/nama"
+        android:id="@+id/table"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/checkBox"
+        android:layout_toEndOf="@+id/checkBox"
+        android:layout_toLeftOf="@+id/table2"
+        android:layout_toStartOf="@+id/table2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/harga"
+        android:id="@+id/table2"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        android:checked="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+
+</RelativeLayout>
