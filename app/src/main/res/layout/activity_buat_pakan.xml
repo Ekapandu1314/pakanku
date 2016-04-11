@@ -206,7 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/checkBox1"/>
+            android:id="@+id/checkPotong"
+            android:checked="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -226,7 +227,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/checkBox2"/>
+            android:id="@+id/checkPerah"
+            android:checked="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -246,7 +248,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/checkBox3"/>
+            android:id="@+id/checkPetelur"
+            android:checked="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -266,7 +269,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/checkBox4"/>
+            android:id="@+id/checkHobi"
+            android:checked="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -286,7 +290,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/checkBox5"/>
+            android:id="@+id/checkKerja"
+            android:checked="false" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
+
+import android.widget.CheckBox;
 import android.widget.StackView;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +47,77 @@ public class BuatPakan extends AppCompatActivity {
     Animation animationprevOut;
     Animation animationprevIn;
 
+    CheckBox check_potong;
+    CheckBox check_perah;
+    CheckBox check_petelur;
+    CheckBox check_hobi;
+    CheckBox check_kerja;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buat_pakan);
+
+        check_potong = (CheckBox) findViewById(R.id.checkPotong);
+        check_perah = (CheckBox) findViewById(R.id.checkPerah);
+        check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
+        check_hobi = (CheckBox) findViewById(R.id.checkHobi);
+        check_kerja = (CheckBox) findViewById(R.id.checkKerja);
+
+        check_potong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(true);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_perah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(true);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_petelur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(true);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_hobi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(true);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_kerja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(true);
+            }
+        });
 
         /*stackView = (StackView) findViewById(R.id.stackView1);
         list = new ArrayList<Stack_Items>();
@@ -123,6 +192,7 @@ public class BuatPakan extends AppCompatActivity {
 
         animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+
     }
 
     public void nextImageButton(View view) {

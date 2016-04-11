@@ -49,7 +49,7 @@ public class Paket_hijauan extends Fragment {
         mVersionDao = new VersionDAO(getActivity());
         mHewanDao = new HewanDAO(getActivity());
         // fill the listView
-        mListBahan = mBahanDao.getAllBahan();
+        mListBahan = mBahanDao.getAllBahanByKategori("hijauan");
 
         initViews();
         mAdapter = new ListCheckBoxBahanAdapter(getActivity(), mListBahan);
