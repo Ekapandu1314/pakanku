@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try{
                     HttpClient httpClient = new DefaultHttpClient();
-                    HttpGet httpGet = new HttpGet("http://patpatstudio.com/pakanku/update.php?versi=" + versi + "&tanggal=" + tgl);
+                    HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/update.php?versi=" + versi + "&tanggal=" + tgl);
 
                     HttpResponse response = httpClient.execute(httpGet);
 
