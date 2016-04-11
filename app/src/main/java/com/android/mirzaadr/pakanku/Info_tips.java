@@ -79,7 +79,7 @@ public class Info_tips extends Fragment {
             arraylist = new ArrayList<HashMap<String, String>>();
             // Retrieve JSON Objects from the given URL address
             jsonobject = JSONfunctions
-                    .getJSONfromURL("http://pakanku.patpatstudio.com/artikel.php");
+                    .getJSONfromURL("http://pakanku.patpatstudio.com/android/artikel.php");
 
             try {
                 // Locate the array name in JSON

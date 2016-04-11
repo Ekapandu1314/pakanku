@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             // Http Request Code start
 
             DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://patpatstudio.com/pakanku/cekall.php");
+            HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekall.php");
             try {
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
