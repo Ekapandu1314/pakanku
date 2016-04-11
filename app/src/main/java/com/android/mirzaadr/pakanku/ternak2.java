@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,18 +25,6 @@ import java.util.List;
 
 public class ternak2 extends AppCompatActivity {
 
-    private ListCheckBoxBahanAdapter mAdapter;
-    private List<Bahan> mListBahan;
-    private VersionDAO mVersionDao;
-    private HewanDAO mHewanDao;
-
-    private ListView mListviewBahan;
-
-    private TextView mTxtEmptyListBahan;
-    private ListView bahanListView;
-
-    private List<Bahan> mListHarga;
-    private BahanDAO mBahanDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +76,11 @@ public class ternak2 extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    public void ResumeClick(View v) {
+        Intent intent = new Intent(this, Resep.class);
+        startActivity(intent);
     }
 
 }

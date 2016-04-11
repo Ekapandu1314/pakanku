@@ -36,7 +36,7 @@
         android:layout_margin="10dp"
         android:text="@string/oke"
         android:id="@+id/button"
-        android:onClick="nextClick"
+        android:onClick="ResumeClick"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

@@ -35,7 +35,7 @@ public class BuatPakan extends AppCompatActivity {
     private static final Integer[] icons = { R.drawable.logo, R.drawable.logo,
             R.drawable.logo, R.drawable.logo2 };/*/
 
-    int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing};
+    int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
 
     ImageSwitcher myImageSwitcher;
     int switcherImage = imageSwitcherImages.length;
@@ -145,7 +145,6 @@ public class BuatPakan extends AppCompatActivity {
             counter = max;
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
     }
-
 
     public void nextClick(View v) {
         Intent intent = new Intent(this, ternak2.class);
