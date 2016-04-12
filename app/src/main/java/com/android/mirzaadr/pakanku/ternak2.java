@@ -9,16 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
-import com.android.mirzaadr.pakanku.Adapter.ListCheckBoxBahanAdapter;
-import com.android.mirzaadr.pakanku.Adapter.TableListAdapter;
-import com.android.mirzaadr.pakanku.Dao.BahanDAO;
-import com.android.mirzaadr.pakanku.Dao.HewanDAO;
-import com.android.mirzaadr.pakanku.Dao.VersionDAO;
-import com.android.mirzaadr.pakanku.Model.Bahan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +70,7 @@ public class ternak2 extends AppCompatActivity {
     }
 
     public void ResumeClick(View v) {
-        Intent intent = new Intent(this, Resep.class);
+        Intent intent = new Intent(this, ResepRansum.class);
         startActivity(intent);
     }
 
