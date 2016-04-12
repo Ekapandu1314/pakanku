@@ -97,8 +97,8 @@ public class ListTipsAdapter extends BaseAdapter {
 
 		// Capture position and set results to the TextViews
 		rank.setText(resultp.get(Info_tips.JUDUL));
-		country.setText(resultp.get(Info_tips.DESKRIPSI));
-		population.setText(resultp.get(Info_tips.LINK));
+		country.setText(resultp.get(Info_tips.DESKRIPSI).substring(0, 60) + "....");
+		population.setText(resultp.get(Info_tips.LINK).substring(0, 24) + "....");
 		// Capture position and set results to the ImageView
 		// Passes flag images URL into ImageLoader.class
 		//BaseActivity.imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseCont‌​ext()))

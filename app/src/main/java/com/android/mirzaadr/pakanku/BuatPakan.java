@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
+
+import android.widget.EditText;
 import android.widget.StackView;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +38,12 @@ public class BuatPakan extends AppCompatActivity {
             R.drawable.logo, R.drawable.logo2 };/*/
 
     int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
+    private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
 
     ImageSwitcher myImageSwitcher;
     int switcherImage = imageSwitcherImages.length;
     int counter = 0;
+    EditText textEdit;
     Animation animationOut;
     Animation animationIn;
     Animation animationprevOut;
@@ -102,6 +106,8 @@ public class BuatPakan extends AppCompatActivity {
         //spinner.setAdapter(dataAdapter);
         //spinner2.setAdapter(dataAdapter2);
 
+        textEdit = (EditText) findViewById(R.id.JenisTernak);
+        //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
         myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -113,6 +119,7 @@ public class BuatPakan extends AppCompatActivity {
                 ));
                 switcherImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 switcherImageView.setImageResource(R.drawable.sapi);
+                textEdit.setText(namaTernak[0]);
                 //switcherImageView.setMaxHeight(100);
                 return switcherImageView;
             }
@@ -133,6 +140,7 @@ public class BuatPakan extends AppCompatActivity {
         if (counter == switcherImage)
             counter = 0;
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+        textEdit.setText(namaTernak[counter]);
     }
 
     public void prevImageButton(View view) {
@@ -144,12 +152,17 @@ public class BuatPakan extends AppCompatActivity {
         if (counter == -1)
             counter = max;
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+        textEdit.setText(namaTernak[counter]);
+    }
+
+    public void editAction (View view){
+        textEdit.setFocusableInTouchMode(true);
+        textEdit.requestFocus();
     }
 
     public void nextClick(View v) {
         Intent intent = new Intent(this, ternak2.class);
         startActivity(intent);
     }
-
 
 }

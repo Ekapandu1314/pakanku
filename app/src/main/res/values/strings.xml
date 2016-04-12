@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pakanku</string>
     <string name="action_settings">Settings</string>
+    <string name="Button">button</string>
     <string name="title_activity_information">InformationActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="Logo">Logo Pakanku</string>
@@ -11,8 +12,15 @@
     <string name="tips">TIPS</string>
     <string name="harga">Harga /kg</string>
     <string name="history">HISTORY</string>
-    <string name="byk_ternak">jumlah ternak</string>
-    <string name="brt_ternak">bobot ternak</string>
+    <string name="byk_ternak">jumlah</string>
+    <string name="banyak">ekor</string>
+    <string name="brt_ternak">bobot</string>
+    <string name="kilogram">kg</string>
+    <string name="lama_ternak">lama pemeliharaan</string>
+    <string name="lama">hari</string>
+    <string name="hewan">Hewan</string>
+    <string name="plus_button">+</string>
+    <string name="min_button">-</string>
     <string name="oke">OKE</string>
     <string name="nama">Nama Bahan</string>
     <string name="potong">potong</string>
