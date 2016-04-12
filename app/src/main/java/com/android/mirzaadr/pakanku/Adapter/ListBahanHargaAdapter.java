@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class ListBahanHargaAdapter extends BaseAdapter {
             holder.intIdBahan = (TextView) v.findViewById(R.id.notable);
             holder.txtNamaBahan = (TextView) v.findViewById(R.id.namatable);
             holder.txtHarga = (TextView) v.findViewById(R.id.hargatable);
+            holder.intIdBahan.setVisibility(View.INVISIBLE);
 
             v.setTag(holder);
         }
@@ -68,6 +70,29 @@ public class ListBahanHargaAdapter extends BaseAdapter {
             holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan())+".");
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
             holder.txtHarga.setText("Rp. " + String.valueOf(currentItem.getHarga()));
+
+        }
+
+        if(currentItem.getKategori().equals("hijauan")) {
+
+
+            v.setBackgroundResource(R.color.listHijauan);
+            holder.txtNamaBahan.setTextColor(Color.parseColor("#ffffff"));
+            holder.txtHarga.setTextColor(Color.parseColor("#ffffff"));
+
+        }
+        else if(currentItem.getKategori().equals("protein")) {
+
+            v.setBackgroundResource(R.color.listProtein);
+            holder.txtNamaBahan.setTextColor(Color.parseColor("#000000"));
+            holder.txtHarga.setTextColor(Color.parseColor("#000000"));
+
+        }
+        else if(currentItem.getKategori().equals("energi")) {
+
+            v.setBackgroundResource(R.color.listEnergi);
+            holder.txtNamaBahan.setTextColor(Color.parseColor("#FFE817"));
+            holder.txtHarga.setTextColor(Color.parseColor("#FFE817"));
 
         }
 

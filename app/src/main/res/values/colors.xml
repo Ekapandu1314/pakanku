@@ -14,4 +14,9 @@
     <color name="White">#ffffff</color>
     <color name="Button">#558B2F</color>
     <color name="ButtonPressed">#9CCC65</color>
+    <color name="listHijauan">#558B2F</color>
+    <color name="listEnergi">#23421C</color>
+    <color name="listProtein">#FFB34F</color>
+    <color name="textHijauan">#fff</color>
+    <color name="textEnergi">#FFE817</color>
 </resources>

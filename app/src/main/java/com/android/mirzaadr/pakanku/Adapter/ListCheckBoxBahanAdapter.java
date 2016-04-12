@@ -1,6 +1,9 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +58,8 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
             holder.txtNamaBahan = (TextView) v.findViewById(R.id.table);
             holder.chckBahan = (CheckBox) v.findViewById(R.id.checkBox);
 
+            holder.txtNamaBahan.setTypeface(null, Typeface.BOLD);
+
             v.setTag(holder);
         }
         else {
@@ -83,8 +88,31 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
 
             //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
-            holder.txtKategori.setText(currentItem.getKategori());
+            holder.txtKategori.setText("Rp. " + String.valueOf(currentItem.getHarga()));
             holder.chckBahan.setChecked(currentItem.isSelected());
+
+            if(currentItem.getKategori().equals("hijauan")) {
+
+
+                v.setBackgroundResource(R.color.listHijauan);
+                holder.txtNamaBahan.setTextColor(Color.parseColor("#ffffff"));
+                holder.txtKategori.setTextColor(Color.parseColor("#ffffff"));
+
+            }
+            else if(currentItem.getKategori().equals("protein")) {
+
+                v.setBackgroundResource(R.color.listProtein);
+                holder.txtNamaBahan.setTextColor(Color.parseColor("#000000"));
+                holder.txtKategori.setTextColor(Color.parseColor("#000000"));
+
+            }
+            else if(currentItem.getKategori().equals("energi")) {
+
+                v.setBackgroundResource(R.color.listEnergi);
+                holder.txtNamaBahan.setTextColor(Color.parseColor("#FFE817"));
+                holder.txtKategori.setTextColor(Color.parseColor("#FFE817"));
+
+            }
 
 
 
