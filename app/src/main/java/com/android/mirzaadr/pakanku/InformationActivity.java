@@ -64,7 +64,7 @@ public class InformationActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new Info_tips(), "Tips & Trik");
         adapter.addFragment(new Info_harga(), "Harga");
-        adapter.addFragment(new Info_history(), "History");
+        adapter.addFragment(new Info_history(), "Record");
         viewPager.setAdapter(adapter);
     }
 
