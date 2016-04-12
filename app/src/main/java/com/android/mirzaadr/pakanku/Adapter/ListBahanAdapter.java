@@ -49,7 +49,7 @@ public class ListBahanAdapter extends BaseAdapter{
         if(v == null) {
             v = mInflater.inflate(R.layout.harga_item_list, parent, false);
             holder = new ViewHolder();
-            holder.intIdBahan = (TextView) v.findViewById(R.id.notable);
+            //holder.intIdBahan = (TextView) v.findViewById(R.id.notable);
             holder.txtNamaBahan = (TextView) v.findViewById(R.id.namatable);
             holder.txtKategori = (TextView) v.findViewById(R.id.hargatable);
 
@@ -65,7 +65,7 @@ public class ListBahanAdapter extends BaseAdapter{
 
             //Log.d("Data : ", currentItem.getIdbahan());
 
-            holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
+            //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
             holder.txtKategori.setText(currentItem.getKategori());
 
