@@ -47,7 +47,6 @@ public class BuatPakan extends AppCompatActivity {
 
     int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
     private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
-    //ImageView id1, id2, id3, id4;
     public ImageView indicatorImages[];
 
     ImageSwitcher myImageSwitcher;
@@ -125,13 +124,8 @@ public class BuatPakan extends AppCompatActivity {
 
                 }
                 else {
-
                     editBobot.setText(String.valueOf(Integer.parseInt("0")));
-
                 }
-
-
-
             }
         });
 
@@ -188,8 +182,6 @@ public class BuatPakan extends AppCompatActivity {
 
                 }
 
-
-
             }
         });
 
@@ -208,8 +200,6 @@ public class BuatPakan extends AppCompatActivity {
 
                 }
 
-
-
             }
         });
 
@@ -227,8 +217,6 @@ public class BuatPakan extends AppCompatActivity {
                     editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
 
                 }
-
-
 
             }
         });
@@ -561,6 +549,34 @@ public class BuatPakan extends AppCompatActivity {
 
         }
 
+    }
+
+    public void numPick (Button plus, Button min, final EditText num){
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(num.getText().toString().trim().length() > 0) {
+                    num.setText(String.valueOf(Integer.parseInt(num.getText().toString()) + 1));
+                }
+                else {
+                    num.setText(String.valueOf(Integer.parseInt("0")));
+                }
+            }
+        });
+
+        min.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Integer.parseInt(num.getText().toString()) <= 0) {
+                    num.setText(String.valueOf(0));
+                }
+                else {
+                    num.setText(String.valueOf(Integer.parseInt(num.getText().toString()) - 1));
+                }
+            }
+        });
     }
 
 }

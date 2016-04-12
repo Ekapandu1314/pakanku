@@ -42,7 +42,12 @@
             android:name=".ResepRansum"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ArticleView"></activity>
-        <activity android:name=".CekUntung"></activity>
+        <activity
+            android:name=".CekUntung"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ResepRansumRecord"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

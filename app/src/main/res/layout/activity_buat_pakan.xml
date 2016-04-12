@@ -43,24 +43,25 @@
         android:layout_gravity="center_horizontal">
         <ImageView android:layout_height="10dp" android:layout_width="10dp"
             android:id="@+id/btn1"
+            android:contentDescription="@string/indicator"
             android:src="@drawable/holo_circle"
             android:layout_gravity="center_vertical"
             />
         <ImageView android:layout_height="10dp" android:layout_width="10dp"
             android:id="@+id/btn2"
-            android:layout_toRightOf="@id/btn1"
+            android:contentDescription="@string/indicator"
             android:src="@drawable/holo_circle"
             android:layout_margin="10dp"
             />
         <ImageView android:layout_height="10dp" android:layout_width="10dp"
             android:id="@+id/btn3"
-            android:layout_toRightOf="@id/btn2"
+            android:contentDescription="@string/indicator"
             android:src="@drawable/holo_circle"
             android:layout_gravity="center_vertical"
             />
         <ImageView android:layout_height="10dp" android:layout_width="10dp"
             android:id="@+id/btn4"
-            android:layout_toRightOf="@id/btn3"
+            android:contentDescription="@string/indicator"
             android:src="@drawable/holo_circle"
             android:layout_margin="10dp"
             android:layout_gravity="center_vertical"
@@ -124,7 +125,8 @@
             android:clickable="false"
             android:focusable="false"
             android:textSize="14sp"
-            android:textColor="@color/Dark"
+            android:textStyle="bold"
+            android:textColor="@color/Accent"
             android:ems="10"/>
         <ImageView
             android:layout_width="20dp"
@@ -470,6 +472,7 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="@string/oke"
+        android:textColor="@color/Base"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="5dp"
