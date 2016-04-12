@@ -287,7 +287,6 @@
             android:layout_toLeftOf="@+id/buttonplus1"
             android:layout_toStartOf="@+id/buttonplus1 -->
 
-
         </RelativeLayout>
     </RelativeLayout>
 
