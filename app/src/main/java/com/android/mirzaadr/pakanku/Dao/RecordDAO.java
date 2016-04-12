@@ -29,12 +29,12 @@ public class RecordDAO {
             DBHelper.RTANGGAL,
             DBHelper.RHEWAN,
             DBHelper.RTUJUAN,
-            DBHelper.RBERAT,
+            DBHelper.RBERAT1,
+            DBHelper.RBERAT2,
             DBHelper.RJTERNAK,
-            DBHelper.PBAHAN,
-            DBHelper.JBAHAN,
-            DBHelper.RTUANG,
-            DBHelper.RTUNTUNG
+            DBHelper.RLAMA,
+            DBHelper.PBAHAN
+
     };
 
     public RecordDAO(Context context) {
@@ -57,26 +57,60 @@ public class RecordDAO {
         mDbHelper.close();
     }
 
-    public Record createRecord(String nama_record,
+    public Record createRecordAdg(String nama_record,
                                String rtanggal,
                                String rhewan,
-                               double rberat,
+                               String rtujuan,
+                               double rberat1,
+                               double rberat2,
                                int rjternak,
-                               String pbahan,
-                               String jbahan,
-                               int rtuang,
-                               int rtuntung) {
+                               int rlama,
+                               String pbahan
+) {
         ContentValues values = new ContentValues();
         //values.put(DBHelper.BAHAN_ID, idbahan);
         values.put(DBHelper.NAMA_RECORD, nama_record);
         values.put(DBHelper.RTANGGAL, rtanggal);
         values.put(DBHelper.RHEWAN, rhewan);
-        values.put(DBHelper.RBERAT, rberat);
+        values.put(DBHelper.RTUJUAN, rtujuan);
+        values.put(DBHelper.RBERAT1, rberat1);
+        values.put(DBHelper.RBERAT2, rberat2);
         values.put(DBHelper.RJTERNAK, rjternak);
+        values.put(DBHelper.RLAMA, rlama);
         values.put(DBHelper.PBAHAN, pbahan);
-        values.put(DBHelper.JBAHAN, jbahan);
-        values.put(DBHelper.RTUANG, rtuang);
-        values.put(DBHelper.RTUNTUNG, rtuntung);
+
+        int insertId = (int) mDatabase
+                .insert(DBHelper.TABLE_RECORD, null, values);
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_RECORD, mAllColumns,
+                DBHelper.RECORD_ID + " = " + insertId, null, null,
+                null, null);
+        cursor.moveToFirst();
+        Record newRecord = cursorToRecord(cursor);
+        cursor.close();
+        return newRecord;
+    }
+
+    public Record createRecord(String nama_record,
+                                  String rtanggal,
+                                  String rhewan,
+                                  String rtujuan,
+                                  double rberat,
+                                  int rjternak,
+                                  int rlama,
+                                  String pbahan
+) {
+        ContentValues values = new ContentValues();
+        //values.put(DBHelper.BAHAN_ID, idbahan);
+        values.put(DBHelper.NAMA_RECORD, nama_record);
+        values.put(DBHelper.RTANGGAL, rtanggal);
+        values.put(DBHelper.RHEWAN, rhewan);
+        values.put(DBHelper.RTUJUAN, rtujuan);
+        values.put(DBHelper.RBERAT1, rberat);
+        values.putNull(DBHelper.RBERAT2);
+        values.put(DBHelper.RJTERNAK, rjternak);
+        values.put(DBHelper.RLAMA, rlama);
+        values.put(DBHelper.PBAHAN, pbahan);
+
 
         int insertId = (int) mDatabase
                 .insert(DBHelper.TABLE_RECORD, null, values);
@@ -96,7 +130,7 @@ public class RecordDAO {
                 + " = " + id, null);
     }
 
-    public void addRecordJson(Record record) {
+    /*public void addRecordJson(Record record) {
         //SQLiteDatabase db = this.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
@@ -104,10 +138,10 @@ public class RecordDAO {
             values.put(DBHelper.NAMA_RECORD, record.getNama_record());
             values.put(DBHelper.RTANGGAL, record.getRtanggal());
             values.put(DBHelper.RHEWAN, record.getRhewan());
+            values.put(DBHelper.RTUJUAN, record.getRtujuan());
             values.put(DBHelper.RBERAT, record.getRberat());
             values.put(DBHelper.RJTERNAK, record.getRjternak());
             values.put(DBHelper.PBAHAN, record.getPbahan());
-            values.put(DBHelper.JBAHAN, record.getJbahan());
             values.put(DBHelper.RTUANG, record.getRtuang());
             values.put(DBHelper.RTUNTUNG, record.getRtuntung());
 
@@ -120,7 +154,7 @@ public class RecordDAO {
         }catch (Exception e){
             Log.e("problem",e+"");
         }
-    }
+    }*/
 
     public List<Record> getAllRecord() {
         List<Record> listRecord = new ArrayList<Record>();
@@ -141,16 +175,21 @@ public class RecordDAO {
     }
 
     public Record getRecordById(int id) {
-        Cursor cursorxx = mDatabase.query(DBHelper.TABLE_RECORD, mAllColumns, DBHelper.RECORD_ID + " = ",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursorxx != null)
-            cursorxx.moveToFirst();
 
-        Record record = cursorToRecord(cursorxx);
-        // return contact
-        return record;
+        String countQuery = "SELECT * FROM " + DBHelper.TABLE_RECORD + " WHERE " + DBHelper.RECORD_ID +
+                " = " + id;
+        Cursor cursor = mDatabase.rawQuery(countQuery, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Record newRecord = cursorToRecord(cursor);
+        cursor.close();
+        return newRecord;
 
     }
+
+
 
     private Record cursorToRecord(Cursor cursor) {
         Record record = new Record();
@@ -160,12 +199,11 @@ public class RecordDAO {
         record.setRtanggal(cursor.getString(2));
         record.setRhewan(cursor.getString(3));
         record.setRtujuan(cursor.getString(4));
-        record.setRberat(cursor.getDouble(5));
-        record.setRjternak(cursor.getInt(6));
-        record.setPbahan(cursor.getString(7));
-        record.setJbahan(cursor.getString(8));
-        record.setRtuang(cursor.getInt(9));
-        record.setRtuntung(cursor.getInt(10));
+        record.setRberat1(cursor.getDouble(5));
+        record.setRberat2(cursor.getDouble(6));
+        record.setRjternak(cursor.getInt(7));
+        record.setRlama(cursor.getInt(8));
+        record.setPbahan(cursor.getString(9));
 
         return record;
     }

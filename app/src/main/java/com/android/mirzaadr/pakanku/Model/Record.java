@@ -15,12 +15,11 @@ public class Record implements Serializable {
     private String rtanggal;
     private String rhewan;
     private String rtujuan;
-    private double rberat;
+    private double rberat1;
+    private double rberat2;
     private int rjternak;
+    private int rlama;
     private String pbahan;
-    private String jbahan;
-    private int rtuang;
-    private int rtuntung;
 
 
     public Record() {
@@ -32,10 +31,11 @@ public class Record implements Serializable {
              String rtanggal,
              String rhewan,
              String rtujuan,
-             double rberat,
+             double rberat1,
+             double rberat2,
              int rjternak,
+             int rlama,
              String pbahan,
-             String jbahan,
              int rtuang,
              int rtuntung)
     {
@@ -44,22 +44,22 @@ public class Record implements Serializable {
         this.rtanggal = rtanggal;
         this.rhewan = rhewan;
         this.rtujuan = rtujuan;
-        this.rberat = rberat;
+        this.rberat1 = rberat1;
+        this.rberat2 = rberat2;
         this.rjternak = rjternak;
+        this.rlama = rlama;
         this.pbahan = pbahan;
-        this.jbahan = jbahan;
-        this.rtuang = rtuang;
-        this.rtuntung = rtuntung;
     }
 
     public Record( String nama_record,
                  String rtanggal,
                  String rhewan,
                  String rtujuan,
-                 double rberat,
+                 double rberat1,
+                 double rberat2,
                  int rjternak,
+                 int rlama,
                  String pbahan,
-                 String jbahan,
                  int rtuang,
                  int rtuntung)
     {
@@ -67,12 +67,11 @@ public class Record implements Serializable {
         this.rtanggal = rtanggal;
         this.rhewan = rhewan;
         this.rtujuan = rtujuan;
-        this.rberat = rberat;
+        this.rberat1 = rberat1;
+        this.rberat2 = rberat2;
         this.rjternak = rjternak;
+        this.rlama = rlama;
         this.pbahan = pbahan;
-        this.jbahan = jbahan;
-        this.rtuang = rtuang;
-        this.rtuntung = rtuntung;
     }
 
     public void setIdrecord(int id) {
@@ -115,12 +114,20 @@ public class Record implements Serializable {
         return this.rtujuan;
     }
 
-    public void setRberat(double rberat) {
-        this.rberat = rberat;
+    public void setRberat1(double rberat1) {
+        this.rberat1 = rberat1;
     }
 
-    public double getRberat() {
-        return this.rberat;
+    public void setRberat2(double rberat2) {
+        this.rberat2 = rberat2;
+    }
+
+    public double getRberat1() {
+        return this.rberat1;
+    }
+
+    public double getRberat2() {
+        return this.rberat2;
     }
 
     public void setRjternak(int rjternak) {
@@ -131,36 +138,20 @@ public class Record implements Serializable {
         return this.rjternak;
     }
 
+    public void setRlama(int rlama) {
+        this.rlama = rlama;
+    }
+
+    public int getRlama() {
+        return this.rlama;
+    }
+
     public void setPbahan(String pbahan) {
         this.pbahan = pbahan;
     }
 
     public String getPbahan() {
         return this.pbahan;
-    }
-
-    public void setJbahan(String jbahan) {
-        this.jbahan = jbahan;
-    }
-
-    public String getJbahan() {
-        return this.jbahan;
-    }
-
-    public void setRtuang(int rtuang) {
-        this.rtuang = rtuang;
-    }
-
-    public int getRtuang() {
-        return rtuang;
-    }
-
-    public void setRtuntung(int rtuntung) {
-        this.rtuntung = rtuntung;
-    }
-
-    public int getRtuntung() {
-        return this.rtuntung;
     }
 
 }

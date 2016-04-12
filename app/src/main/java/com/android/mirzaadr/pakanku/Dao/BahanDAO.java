@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.android.mirzaadr.pakanku.Model.Bahan;
-import com.android.mirzaadr.pakanku.Model.Hewan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,10 +120,25 @@ public class BahanDAO {
         return listBahan;
     }
 
-    public List<Bahan> getAllBahanByKategori(String kategori) {
-        List<Bahan> listBahan = new ArrayList<Bahan>();
+    public Bahan getBahanById(int id) {
 
-        String countQuery = "SELECT * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.KATEGORI +
+        String countQuery = "SELECT  * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.BAHAN_ID +
+                " = " + id;
+        Cursor cursor = mDatabase.rawQuery(countQuery, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Bahan newBahan = cursorToBahan(cursor);
+        cursor.close();
+        return newBahan;
+
+    }
+
+    public List<Bahan> getAllBahanByKategori(String kategori) {
+
+        List<Bahan> listBahan = new ArrayList<Bahan>();
+        String countQuery = "SELECT  * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.KATEGORI +
                 " = '" + kategori + "'";
         Cursor cursor = mDatabase.rawQuery(countQuery, null);
 
@@ -139,34 +153,6 @@ public class BahanDAO {
             cursor.close();
         }
         return listBahan;
-    }
-
-    public Bahan getBahanById(int id) {
-        String countQuery = "SELECT  * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.BAHAN_ID +
-                " = " + id;
-        Cursor cursor = mDatabase.rawQuery(countQuery, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Bahan newBahan = cursorToBahan(cursor);
-        cursor.close();
-        return newBahan;
-
-    }
-
-    public Bahan getBahanByKategori(String kategori)
-    {
-        String countQuery = "SELECT * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.KATEGORI +
-            " = " + kategori;
-        Cursor cursor = mDatabase.rawQuery(countQuery, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Bahan newBahan = cursorToBahan(cursor);
-        cursor.close();
-        return newBahan;
     }
 
     public ArrayList<Bahan> getAllBahanArray() {

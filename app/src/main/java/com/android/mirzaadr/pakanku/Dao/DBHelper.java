@@ -47,12 +47,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String RTANGGAL = "rtanggal";
     public static final String RHEWAN = "rhewan";
     public static final String RTUJUAN = "rtujuan";
-    public static final String RBERAT = "rberat";
+    public static final String RBERAT1 = "rberat1";
+    public static final String RBERAT2 = "rberat2";
     public static final String RJTERNAK = "rjternak";
+    public static final String RLAMA = "rlama";
     public static final String PBAHAN = "pbahan";
-    public static final String JBAHAN = "jbahan";
-    public static final String RTUANG = "rtuang";
-    public static final String RTUNTUNG = "rtuntung";
+    //public static final String JBAHAN = "jbahan";
+    //public static final String RTUANG = "rtuang";
+    //public static final String RTUNTUNG = "rtuntung";
 
     private static final String DATABASE_NAME = "pakanku.db";
     private static final int DATABASE_VERSION = 1;
@@ -67,7 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + HEWAN + " TEXT NOT NULL, "+ TUJUAN + " TEXT NOT NULL, " + HIJAU + " DOUBLE NOT NULL," + KONSENTRAT + " DOUBLE NOT NULL, " + BK_HEWAN + " DOUBLE NOT NULL, " + PK_HEWAN + " DOUBLE NOT NULL, " + HARGA_JUAL + " INTEGER);";
 
     private static final String CREATE_TABLE_RECORD = "create table " + TABLE_RECORD + "(" + RECORD_ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAMA_RECORD + " TEXT NOT NULL, " + RTANGGAL + " TEXT NOT NULL, "+ RHEWAN + " TEXT NOT NULL, " + RTUJUAN + " TEXT NOT NULL," + RBERAT + " DOUBLE NOT NULL, "  + RJTERNAK + " INTEGER NOT NULL, "  + PBAHAN + " TEXT NOT NULL, "  + JBAHAN + " TEXT NOT NULL, "  + RTUANG + " INTEGER NOT NULL, "  + RTUNTUNG + " INTEGER);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAMA_RECORD + " TEXT NOT NULL, " + RTANGGAL + " TEXT NOT NULL, "+ RHEWAN + " TEXT NOT NULL, " + RTUJUAN + " TEXT NOT NULL, " + RBERAT1 + " DOUBLE NOT NULL, " + RBERAT2 + " DOUBLE, "  + RJTERNAK + " INTEGER NOT NULL, " + RLAMA + " INTEGER NOT NULL, "  + PBAHAN + " TEXT NOT NULL);";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
