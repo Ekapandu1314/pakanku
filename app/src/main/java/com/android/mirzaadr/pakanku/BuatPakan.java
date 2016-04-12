@@ -133,14 +133,23 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(Integer.parseInt(editBobot.getText().toString()) <= 0) {
+                if(editBobot.getText().toString().trim().length() > 0) {
 
-                    editBobot.setText(String.valueOf(0));
+                    if (Integer.parseInt(editBobot.getText().toString()) <= 0) {
+
+                        editBobot.setText(String.valueOf(0));
+
+                    }
+                    else {
+
+                        editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
+
+                    }
 
                 }
                 else {
 
-                    editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
+                    editBobot.setText(String.valueOf(0));
 
                 }
 
@@ -171,14 +180,25 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(Integer.parseInt(editJumlah.getText().toString()) <= 0) {
+                if(editJumlah.getText().toString().trim().length() > 0) {
 
-                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString())));
+                    if (Integer.parseInt(editJumlah.getText().toString()) <= 0) {
+
+                        editJumlah.setText(String.valueOf(0));
+
+                    }
+                    else {
+
+                        editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
+
+                    }
+
+
 
                 }
                 else {
 
-                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
+                    editJumlah.setText(String.valueOf(0));
 
                 }
 
@@ -207,14 +227,23 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(Integer.parseInt(editHari.getText().toString()) <= 0) {
+                if(editJumlah.getText().toString().trim().length() > 0) {
 
-                    editHari.setText(String.valueOf(0));
+                    if (Integer.parseInt(editJumlah.getText().toString()) <= 0) {
 
+                        editHari.setText(String.valueOf(0));
+
+                    }
+                    else {
+
+                        editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
+
+                    }
+                    
                 }
                 else {
 
-                    editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
+                    editHari.setText(String.valueOf(0));
 
                 }
 
