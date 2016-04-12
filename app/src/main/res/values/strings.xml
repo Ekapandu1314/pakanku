@@ -16,6 +16,7 @@
     <string name="banyak">ekor</string>
     <string name="brt_ternak">bobot</string>
     <string name="kilogram">kg</string>
+    <string name="nomor">No</string>
     <string name="lama_ternak">lama pemeliharaan</string>
     <string name="lama">hari</string>
     <string name="hewan">Hewan</string>
@@ -28,5 +29,8 @@
     <string name="petelur">petelur</string>
     <string name="hobi">hobi</string>
     <string name="kerja">kerja</string>
+    <string name="hijauan">Hijauan</string>
+    <string name="energi">Sumber Energi</string>
+    <string name="protein">Sumber Protein</string>
     <string name="copyright">copyright 2016 Pakanku Apps by Patpat Corp.</string>
 </resources>

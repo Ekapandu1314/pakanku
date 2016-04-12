@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-        <TableRow
-            android:padding="15dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/Button"
+    >
+    <View
+        android:layout_width="1dp"
+        android:id="@+id/mid"
+        android:layout_height="32dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"/>
+    <View
+        android:layout_width="2dp"
+        android:layout_height="32dp"
+        android:id="@+id/divider"
+        android:background="@color/Base"
+        android:layout_toRightOf="@+id/mid"
+        android:layout_toEndOf="@+id/mid"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/nama"
+        android:id="@+id/namatable"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/White"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/notable"
+        android:layout_toEndOf="@+id/notable"
+        android:layout_toLeftOf="@+id/divider"
+        android:layout_toStartOf="@+id/divider" />
+    <TextView
+        android:layout_width="20sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/notable"
+        android:hint="@string/nomor"
+        android:textColor="@color/White"
+        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/notable"
-                android:text="No"
-                android:layout_weight="0.4"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/divider"
+        android:layout_toEndOf="@+id/divider"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/harga"
+        android:textColor="@color/White"
+        android:id="@+id/hargatable"
+        android:layout_centerInParent="true" />
+    </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/namatable"
-                android:layout_weight="1"
-                android:text="Nama" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/hargatable"
-                android:layout_weight="1"
-                android:text="Harga" />
-        </TableRow>
-
-
-</TableLayout>
+</RelativeLayout>

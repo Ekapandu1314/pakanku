@@ -65,7 +65,7 @@ public class ListBahanHargaAdapter extends BaseAdapter {
 
             //Log.d("Data : ", currentItem.getIdbahan());
 
-            holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
+            holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan())+".");
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
             holder.txtHarga.setText("Rp. " + String.valueOf(currentItem.getHarga()));
 
