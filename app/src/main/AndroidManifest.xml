@@ -39,7 +39,7 @@
             android:name=".ternak2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".Resep"
+            android:name=".ResepRansum"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ArticleView"></activity>
         <activity android:name=".CekUntung"></activity>
