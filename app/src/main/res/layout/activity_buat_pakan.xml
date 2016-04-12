@@ -109,8 +109,14 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/nex_button" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageSwitcher"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="35dp"
             android:id="@+id/JenisTernak"
             android:hint="@string/hewan"
@@ -119,21 +125,17 @@
             android:focusable="false"
             android:textSize="14sp"
             android:textColor="@color/Dark"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:layout_below="@+id/imageSwitcher"/>
-
+            android:ems="10"/>
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:contentDescription="@string/Button"
             android:id="@+id/edit"
+            android:layout_gravity="center"
             android:src="@drawable/edit_action"
-            android:layout_below="@id/imageSwitcher"
             android:clickable="true"
-            android:onClick="editAction"
-            android:layout_toRightOf="@id/JenisTernak"
-            android:layout_toEndOf="@id/JenisTernak"/>
+            android:onClick="editAction"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <!-- insert bobot dan jumlah ternak layout -->
@@ -150,11 +152,25 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/mid"
             android:layout_toStartOf="@+id/mid">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:inputType="number"
+                android:hint="@string/brt_ternak"
+                android:ems="10"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:id="@+id/editbobot"
+                android:background="@drawable/round_object"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/kilogram"
+                android:layout_toStartOf="@+id/kilogram"/>
         <TextView
             android:id="@+id/buttonmin1"
             android:layout_width="25dp"
             android:layout_height="32dp"
-            android:background="@drawable/button_custom"
+            android:background="@drawable/button_plus_min"
             android:gravity="center"
             android:clickable="true"
             android:text="@string/min_button"
@@ -164,26 +180,12 @@
             android:id="@+id/buttonplus1"
             android:layout_width="25dp"
             android:layout_height="32dp"
-            android:background="@drawable/button_custom"
+            android:background="@drawable/button_plus_min"
             android:gravity="center"
             android:clickable="true"
             android:layout_toLeftOf="@+id/kilogram"
             android:layout_toStartOf="@+id/kilogram"
             android:text="@string/plus_button"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:inputType="number"
-            android:hint="@string/brt_ternak"
-            android:ems="10"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:id="@+id/editbobot"
-            android:background="@drawable/round_object"
-            android:layout_toRightOf="@+id/buttonmin1"
-            android:layout_toEndOf="@+id/buttonmin1"
-            android:layout_toLeftOf="@+id/buttonplus1"
-            android:layout_toStartOf="@+id/buttonplus1"/>
 
         <TextView
             android:id="@+id/kilogram"
@@ -197,6 +199,11 @@
             android:layout_marginLeft="3dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+            <!--
+            android:layout_toRightOf="@+id/buttonmin1"
+            android:layout_toEndOf="@+id/buttonmin1"
+            android:layout_toLeftOf="@+id/buttonplus1"
+            android:layout_toStartOf="@+id/buttonplus1" -->
         </RelativeLayout>
 
         <View
@@ -213,27 +220,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
-            <TextView
-                android:id="@+id/buttonmin2"
-                android:background="@drawable/button_custom"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:text="@string/min_button"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"/>
-            <TextView
-                android:id="@+id/buttonplus2"
-                android:background="@drawable/button_custom"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:layout_toLeftOf="@+id/ekor"
-                android:layout_toStartOf="@+id/ekor"
-                android:text="@string/plus_button"/>
-
             <EditText
                 android:layout_width="270dp"
                 android:layout_height="32dp"
@@ -244,10 +230,31 @@
                 android:textSize="15sp"
                 android:id="@+id/editjumlah"
                 android:background="@drawable/round_object"
-                android:layout_toRightOf="@+id/buttonmin2"
-                android:layout_toEndOf="@+id/buttonmin2"
-                android:layout_toLeftOf="@+id/buttonplus2"
-                android:layout_toStartOf="@+id/buttonplus2"/>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"/>
+            <TextView
+                android:id="@+id/buttonmin2"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:text="@string/min_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/buttonplus2"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"
+                android:text="@string/plus_button"/>
+
             <TextView
                 android:id="@+id/ekor"
                 android:layout_width="35dp"
@@ -262,10 +269,15 @@
                 android:layout_alignParentEnd="true" />
 
             <!--
-                android:layout_toRightOf="@+id/buttonmin2"
-                android:layout_toEndOf="@+id/buttonmin2"
-                android:layout_toLeftOf="@+id/buttonplus2"
-                android:layout_toStartOf="@+id/buttonplus2" -->
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"
+
+            android:layout_toRightOf="@+id/buttonmin1"
+            android:layout_toEndOf="@+id/buttonmin1"
+            android:layout_toLeftOf="@+id/buttonplus1"
+            android:layout_toStartOf="@+id/buttonplus1 -->
 
 
         </RelativeLayout>
@@ -288,13 +300,33 @@
             android:ems="10"
             android:textSize="15sp"
             android:id="@+id/editText2"
-            android:paddingLeft="15dp"
+            android:paddingLeft="30dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@drawable/round_object"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/hari"
             android:layout_toStartOf="@+id/hari"/>
+        <TextView
+            android:id="@+id/buttonmin3"
+            android:layout_width="25dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_plus_min"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/min_button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+        <TextView
+            android:id="@+id/buttonplus3"
+            android:layout_width="25dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_plus_min"
+            android:gravity="center"
+            android:clickable="true"
+            android:layout_toLeftOf="@+id/hari"
+            android:layout_toStartOf="@+id/hari"
+            android:text="@string/plus_button"/>
         <TextView
             android:id="@+id/hari"
             android:layout_width="35dp"
