@@ -95,7 +95,6 @@ public class BahanDAO {
 
             mDatabase.update(DBHelper.TABLE_BAHAN, values, DBHelper.BAHAN_ID + " = " + bahan.getIdbahan(), null);
 
-
             //mDatabase.close();
         }catch (Exception e){
             Log.e("problem",e+"");
@@ -205,6 +204,13 @@ public class BahanDAO {
         int cnt = cursor.getCount();
         cursor.close();
         return cnt;
+    }
+
+    public void updateBahanFromId(int id, int harga) {
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.HARGA,harga); //These Fields should be your String values of actual column names
+
+        mDatabase.update(DBHelper.TABLE_BAHAN, cv, DBHelper.BAHAN_ID + " = " + id, null);
     }
 
     private Bahan cursorToBahan(Cursor cursor) {

@@ -53,6 +53,8 @@ public class InformationActivity extends AppCompatActivity {
         //mViewPager.setAdapter(mSectionsPagerAdapter);
         setupViewPager(mViewPager);
 
+        mViewPager.setOffscreenPageLimit(0);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }

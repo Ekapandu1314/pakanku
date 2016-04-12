@@ -1,20 +1,16 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentController;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.mirzaadr.pakanku.Adapter.ListCheckBoxBahanAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
@@ -547,8 +543,6 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         }
 
-        //double prs_pk_hijauan[] = new double[10];
-
         double pk_kg_hijauan_temp = 0;
         double pk_kg_hijauan = 0;
 
@@ -566,18 +560,13 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         double pk_konsentrat = pk_kg - pk_kg_hijauan;
 
-        //Toast.makeText(getBaseContext(), "Pk dari hijauan" + " = " + String.valueOf(pk_kg_hijauan), Toast.LENGTH_SHORT).show();
-
         double pk_konsentrat_prs = (pk_konsentrat/bk_konsentrat)*100; //Tanpa %
 
-        //Bahan energi2;
+
         double pk_energi[] = new double[10];
-        //double total_pk_energi = 0;
         double harga_energi[] = new double[10];
         double perbandingan_energi_temp[] = new double[10];
         double total_perbandingan_energi = 0;
-
-        //responseText2.append("\n\nEnergi...");
 
         for (int i = 0; i < k; i++) {
 
@@ -733,8 +722,6 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         Resep resep = new Resep();
 
-        //Bahan haha = new Bahan(1, "Nama", 1.0, 1.0, "Kategori", 15000);
-
         List<Resep> newlistResepHijauan = new ArrayList<Resep>();
         List<Resep> newlistResepEnergi = new ArrayList<Resep>();
         List<Resep> newlistResepProtein = new ArrayList<Resep>();
@@ -784,7 +771,6 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         var_resep.putInt("lama", lama);
         newIntent.putExtras(var_resep);
         startActivity(newIntent);
-
     }
 
 }
