@@ -291,9 +291,7 @@ public class BuatPakan extends AppCompatActivity {
         });
 
         textEdit = (EditText) findViewById(R.id.JenisTernak);
-        textBobot = (EditText) findViewById(R.id.editbobot);
-        textJumlah= (EditText) findViewById(R.id.editjumlah);
-        textHari = (EditText) findViewById(R.id.editHari);
+
         //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 

@@ -155,7 +155,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:hint="@string/brt_ternak"
                 android:ems="10"
                 android:focusable="false"
@@ -284,7 +284,6 @@
             android:layout_toEndOf="@+id/buttonmin1"
             android:layout_toLeftOf="@+id/buttonplus1"
             android:layout_toStartOf="@+id/buttonplus1 -->
-
 
         </RelativeLayout>
     </RelativeLayout>
