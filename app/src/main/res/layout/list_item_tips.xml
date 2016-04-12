@@ -1,54 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:padding="5dp"
+    android:background="@color/ButtonPressed">
 
-    <TextView
-        android:id="@+id/ranklabel"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Judul : " />
-
+        android:layout_alignTop="@+id/flag"
+        android:layout_toRightOf="@+id/flag"
+        android:layout_toEndOf="@+id/flag"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/rank"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ranklabel" />
-
-    <TextView
-        android:id="@+id/countrylabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ranklabel"
-        android:text="Deskripsi : " />
+        android:textStyle="bold"
+        android:hint="judul"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/country"
         android:layout_width="wrap_content"
+        android:hint="artikel"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rank"
-        android:layout_toRightOf="@+id/countrylabel" />
+        android:layout_below="@+id/rank" />
 
-    <TextView
-        android:id="@+id/populationlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/countrylabel"
-        android:text="Link : " />
 
-    <TextView
-        android:id="@+id/population"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/country"
-        android:layout_toRightOf="@+id/populationlabel" />
+        <TextView
+            android:id="@+id/populationlabel"
+            android:hint="sumber : "
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/country" />
+
+        <TextView
+            android:id="@+id/population"
+            android:hint="web"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/country"
+            android:layout_toRightOf="@+id/populationlabel"
+            android:layout_toEndOf="@+id/populationlabel"/>
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/flag"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentRight="true"
-        android:background="#fff"
-        android:padding="1dp" />
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:background="@color/Button"
+        android:layout_margin="5dp"
+        android:padding="4dp" />
 
 </RelativeLayout>
