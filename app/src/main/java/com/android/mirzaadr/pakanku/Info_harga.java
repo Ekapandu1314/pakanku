@@ -1,6 +1,8 @@
 package com.android.mirzaadr.pakanku;
 
 
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,6 +60,14 @@ public class Info_harga extends Fragment {
         Utility.setListViewHeightBasedOnChildren(mListviewHijau);
         Utility.setListViewHeightBasedOnChildren(mListviewEnergi);
         Utility.setListViewHeightBasedOnChildren(mListviewProtein);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();}
+        });
 
         return view;
     }
