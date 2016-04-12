@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;import android.app.ActionBar;
@@ -60,6 +61,15 @@ public class BuatPakan extends AppCompatActivity {
     CheckBox check_hobi;
     CheckBox check_kerja;
 
+    TextView buttonPlus1;
+    TextView buttonPlus2;
+    TextView buttonMin1;
+    TextView buttonMin2;
+
+    EditText editBobot;
+    EditText editJumlah;
+    EditText editHari;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +80,76 @@ public class BuatPakan extends AppCompatActivity {
         check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
         check_hobi = (CheckBox) findViewById(R.id.checkHobi);
         check_kerja = (CheckBox) findViewById(R.id.checkKerja);
+
+        buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
+        buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
+        buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
+        buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
+
+        editBobot = (EditText) findViewById(R.id.editbobot);
+        editJumlah = (EditText) findViewById(R.id.editjumlah);
+        editHari = (EditText) findViewById(R.id.editHari);
+
+        editJumlah.setText("0");
+        editBobot.setText("0");
+
+        buttonPlus1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) + 1));
+
+            }
+        });
+
+        buttonMin1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Integer.parseInt(editBobot.getText().toString()) <= 0) {
+
+                    editBobot.setText(String.valueOf(0));
+
+                }
+                else {
+
+                    editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
+
+                }
+
+
+
+            }
+        });
+
+        buttonPlus2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) + 1));
+
+            }
+        });
+
+        buttonMin2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Integer.parseInt(editJumlah.getText().toString()) <= 0) {
+
+                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString())));
+
+                }
+                else {
+
+                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
+
+                }
+
+
+
+            }
+        });
 
         check_potong.setChecked(true);
 
