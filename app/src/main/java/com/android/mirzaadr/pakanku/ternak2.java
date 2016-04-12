@@ -36,6 +36,7 @@ public class ternak2 extends AppCompatActivity {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
         setupViewPager(mViewPager);
 
+        mViewPager.setOffscreenPageLimit(2);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsbahan);
         tabLayout.setupWithViewPager(mViewPager);

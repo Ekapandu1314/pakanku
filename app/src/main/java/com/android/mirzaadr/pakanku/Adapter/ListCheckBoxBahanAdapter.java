@@ -83,7 +83,7 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
 
             //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
-            holder.txtKategori.setText("Rp. " + String.valueOf(currentItem.getHarga()));
+            holder.txtKategori.setText(currentItem.getKategori());
             holder.chckBahan.setChecked(currentItem.isSelected());
 
 

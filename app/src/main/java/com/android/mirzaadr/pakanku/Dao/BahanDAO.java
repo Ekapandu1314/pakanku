@@ -121,6 +121,7 @@ public class BahanDAO {
     }
 
     public Bahan getBahanById(int id) {
+
         String countQuery = "SELECT  * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.BAHAN_ID +
                 " = " + id;
         Cursor cursor = mDatabase.rawQuery(countQuery, null);
@@ -132,6 +133,26 @@ public class BahanDAO {
         cursor.close();
         return newBahan;
 
+    }
+
+    public List<Bahan> getAllBahanByKategori(String kategori) {
+
+        List<Bahan> listBahan = new ArrayList<Bahan>();
+        String countQuery = "SELECT  * FROM " + DBHelper.TABLE_BAHAN + " WHERE " + DBHelper.KATEGORI +
+                " = '" + kategori + "'";
+        Cursor cursor = mDatabase.rawQuery(countQuery, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Bahan bahan = cursorToBahan(cursor);
+                listBahan.add(bahan);
+                cursor.moveToNext();
+            }
+            // make sure to close the cursor
+            cursor.close();
+        }
+        return listBahan;
     }
 
     public ArrayList<Bahan> getAllBahanArray() {

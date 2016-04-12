@@ -24,8 +24,8 @@
             android:background="@color/Base"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/checkBox3"
-            android:layout_toEndOf="@id/checkBox3"/>
+            android:layout_toRightOf="@id/checkPetelur"
+            android:layout_toEndOf="@id/checkPetelur"/>
 
         <View
             android:layout_width="1dp"
@@ -47,8 +47,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/checkBox3"
-            android:layout_toEndOf="@+id/checkBox3"
+            android:layout_toRightOf="@+id/checkPetelur"
+            android:layout_toEndOf="@+id/checkPetelur"
             android:layout_toLeftOf="@+id/table2"
             android:layout_toStartOf="@+id/table2" />
 
@@ -67,7 +67,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkPetelur"
             android:checked="false"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

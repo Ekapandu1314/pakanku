@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Dialog pDialog;
 
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,7 +243,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
+                dialog =  ProgressDialog.show(MainActivity.this, "",
+                        "Loading. Please wait...", true);
+                //loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
             }
 
             @Override
@@ -278,7 +282,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result){
 
-                loadingDialog.dismiss();
+                dialog.dismiss();
+                //loadingDialog.dismiss();
 
                 String hasil = result.trim();
 

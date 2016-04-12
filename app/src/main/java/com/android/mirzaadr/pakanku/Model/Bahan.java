@@ -17,6 +17,8 @@ public class Bahan implements Serializable {
     private String kategori;
     private int harga;
     private Boolean selected = false;
+    private String harga_baru = "";
+
 
 
     public Bahan() {
@@ -103,6 +105,14 @@ public class Bahan implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getHarga_baru() {
+        return this.harga_baru;
+    }
+
+    public void setHarga_baru(String harga_baru) {
+        this.harga_baru = harga_baru;
     }
 
 }

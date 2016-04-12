@@ -49,7 +49,7 @@ public class Paket_protein extends Fragment {
         mVersionDao = new VersionDAO(getActivity());
         mHewanDao = new HewanDAO(getActivity());
         // fill the listView
-        mListBahan = mBahanDao.getAllBahan();
+        mListBahan = mBahanDao.getAllBahanByKategori("protein");
 
         initViews();
         mAdapter = new ListCheckBoxBahanAdapter(getActivity(), mListBahan);

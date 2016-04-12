@@ -1,9 +1,14 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
+
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CheckBox;
 
 import android.widget.EditText;
 import android.widget.StackView;
@@ -49,10 +54,79 @@ public class BuatPakan extends AppCompatActivity {
     Animation animationprevOut;
     Animation animationprevIn;
 
+    CheckBox check_potong;
+    CheckBox check_perah;
+    CheckBox check_petelur;
+    CheckBox check_hobi;
+    CheckBox check_kerja;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buat_pakan);
+
+        check_potong = (CheckBox) findViewById(R.id.checkPotong);
+        check_perah = (CheckBox) findViewById(R.id.checkPerah);
+        check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
+        check_hobi = (CheckBox) findViewById(R.id.checkHobi);
+        check_kerja = (CheckBox) findViewById(R.id.checkKerja);
+
+        check_potong.setChecked(true);
+
+        check_potong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(true);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_perah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(true);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_petelur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(true);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_hobi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(true);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_kerja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(true);
+            }
+        });
 
         /*stackView = (StackView) findViewById(R.id.stackView1);
         list = new ArrayList<Stack_Items>();
@@ -130,6 +204,7 @@ public class BuatPakan extends AppCompatActivity {
 
         animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+
     }
 
     public void nextImageButton(View view) {
@@ -161,8 +236,66 @@ public class BuatPakan extends AppCompatActivity {
     }
 
     public void nextClick(View v) {
-        Intent intent = new Intent(this, ternak2.class);
-        startActivity(intent);
+
+        final Dialog dialog = new Dialog(BuatPakan.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_paket);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        final CheckBox check_hemat = (CheckBox) dialog.findViewById(R.id.cekPaket);
+        final CheckBox check_hebat = (CheckBox) dialog.findViewById(R.id.cekPaket2);
+        final CheckBox check_buat = (CheckBox) dialog.findViewById(R.id.cekBuat);
+        final Button buat_ransum = (Button) dialog.findViewById(R.id.buttonk);
+
+        check_buat.setChecked(true);
+
+        check_hemat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                check_hemat.setChecked(true);
+                check_hebat.setChecked(false);
+                check_buat.setChecked(false);
+
+            }
+        });
+
+        check_hebat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                check_hemat.setChecked(false);
+                check_hebat.setChecked(true);
+                check_buat.setChecked(false);
+
+            }
+        });
+
+        check_buat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                check_hemat.setChecked(false);
+                check_hebat.setChecked(false);
+                check_buat.setChecked(true);
+
+            }
+        });
+
+        buat_ransum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BuatPakan.this, ternak2.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+        dialog.show();
+
     }
 
 }
