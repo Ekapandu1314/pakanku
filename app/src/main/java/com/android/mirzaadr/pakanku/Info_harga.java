@@ -26,9 +26,14 @@ public class Info_harga extends Fragment {
 
     private ListView mListviewHijau, mListviewEnergi, mListviewProtein;
 
-    private ListBahanHargaAdapter mAdapter;
+    private ListBahanHargaAdapter mAdapterHijauan;
+    private ListBahanHargaAdapter mAdapterEnergi;
+    private ListBahanHargaAdapter mAdapterProtein;
 
-    private List<Bahan> mListHarga;
+    private List<Bahan> mListHargaHijauan;
+    private List<Bahan> mListHargaEnergi;
+    private List<Bahan> mListHargaProtein;
+
     private BahanDAO mBahanDao;
 
     View view;
@@ -46,14 +51,18 @@ public class Info_harga extends Fragment {
 
         mBahanDao = new BahanDAO(getActivity());
         // fill the listView
-        mListHarga = mBahanDao.getAllBahan();
+        mListHargaHijauan = mBahanDao.getAllBahanByKategori("hijauan");
+        mListHargaEnergi = mBahanDao.getAllBahanByKategori("energi");
+        mListHargaProtein = mBahanDao.getAllBahanByKategori("protein");
 
         initViews();
 
-        mAdapter = new ListBahanHargaAdapter(getActivity(), mListHarga);
-        mListviewHijau.setAdapter(mAdapter);
-        mListviewEnergi.setAdapter(mAdapter);
-        mListviewProtein.setAdapter(mAdapter);
+        mAdapterHijauan = new ListBahanHargaAdapter(getActivity(), mListHargaHijauan);
+        mAdapterEnergi = new ListBahanHargaAdapter(getActivity(), mListHargaEnergi);
+        mAdapterProtein = new ListBahanHargaAdapter(getActivity(), mListHargaProtein);
+        mListviewHijau.setAdapter(mAdapterHijauan);
+        mListviewEnergi.setAdapter(mAdapterEnergi);
+        mListviewProtein.setAdapter(mAdapterProtein);
 
         Utility.setListViewHeightBasedOnChildren(mListviewHijau);
         Utility.setListViewHeightBasedOnChildren(mListviewEnergi);

@@ -435,6 +435,8 @@ public class BuatPakan extends AppCompatActivity {
 
                     startActivity(intent);
 
+                    dialog.dismiss();
+
                 }
 
 
