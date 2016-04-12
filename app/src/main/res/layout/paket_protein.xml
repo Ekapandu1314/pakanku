@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@color/Base"
+    android:id="@+id/fragProtein"
     tools:context="com.android.mirzaadr.pakanku.ternak2">
 
     <!--LinearLayout

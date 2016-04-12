@@ -1,5 +1,7 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListBahanAdapter;
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
@@ -19,9 +22,14 @@ import com.android.mirzaadr.pakanku.Model.Bahan;
 
 import java.util.List;
 
-public class Paket_hijauan extends Fragment {
+public class Paket_hijauan extends Fragment implements interfaces.FragmentCommunicator{
 
     View view;
+
+    private interfaces.ActivityCommunicator activityCommunicator;
+    private interfaces.ActivityCommunicator fragmentCommunicator;
+
+    public Context context;
 
     private ListCheckBoxBahanAdapter mAdapter;
     private List<Bahan> mListBahan;
@@ -65,25 +73,41 @@ public class Paket_hijauan extends Fragment {
         this.mTxtEmptyListBahan = (TextView) view.findViewById(R.id.table);
     }
 
-    //Test scrollview custom
-    public static class Utility {
-        public static void setListViewHeightBasedOnChildren(ListView listView) {
-            ListAdapter listAdapter = listView.getAdapter();
-            if (listAdapter == null) {
-                // pre-condition
-                return;
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        context = getActivity();
+        activityCommunicator =(interfaces.ActivityCommunicator)context;
+        ((ternak2)context).fragmentCommunicator2 = this;
+    }
+
+
+    @Override
+    public void passDataToFragment(String haha){
+
+        if(haha.toString().equals("hijauan")){
+
+            StringBuffer responseText = new StringBuffer();
+
+            List<Bahan> bahanxxxx = mAdapter.getItems();
+            for (int i = 0; i < bahanxxxx.size(); i++) {
+                Bahan bahanxv = bahanxxxx.get(i);
+                if (bahanxv.isSelected()) {
+                    responseText.append("-" + bahanxv.getIdbahan());
+                }
+
             }
 
-            int totalHeight = 0;
-            for (int i = 0; i < listAdapter.getCount(); i++) {
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            }
+            String bahanid = responseText.toString();
 
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
+            activityCommunicator.passDataToActivity(bahanid);
+
+            //Toast.makeText(getActivity(), bahanid, Toast.LENGTH_SHORT).show();
         }
+        else {
+
+            Toast.makeText(getActivity(), "pass gagal", Toast.LENGTH_SHORT).show();
+        }
+        //textView.setText(activityAssignedValue);
     }
 }

@@ -21,10 +21,12 @@ import android.widget.Toast;
 import com.android.mirzaadr.pakanku.Adapter.ListBahanAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Dao.DBHelper;
+import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.VersionDAO;
 import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
 import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
+import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Version;
 
 import org.json.JSONArray;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Bahan> mListBahan;
     private BahanDAO mBahanDao;
+    private HewanDAO mHewanDao;
     private VersionDAO mVersionDao;
 
     AlertDialogManager alert = new AlertDialogManager();
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         mBahanDao = new BahanDAO(this);
         mVersionDao = new VersionDAO(this);
+        mHewanDao = new HewanDAO(this);
         // fill the listView
         mListBahan = mBahanDao.getAllBahan();
 
@@ -87,15 +91,18 @@ public class MainActivity extends AppCompatActivity {
             if(mListBahan != null && !mListBahan.isEmpty() && mVersionDao.getTopVersion() !=null) {
 
                 Version versi = mVersionDao.getTopVersion();
+
                 version = versi.getVersiBahan();
                 tanggal = versi.getTanggal();
 
+                new InputHewan().execute();
                 cekUpdate(version, tanggal);
 
             }
             else {
 
                 new DataFetcherTask().execute();
+                new InputHewan().execute();
 
             }
 
@@ -316,6 +323,82 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    class InputHewan extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String serverData = null;// String object to store fetched data from server
+            // Http Request Code start
+
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekhewan.php");
+            try {
+                HttpResponse httpResponse = httpClient.execute(httpGet);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                serverData = EntityUtils.toString(httpEntity);
+                Log.d("response", serverData);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+// Http Request Code end
+// Json Parsing Code Start
+            //success = jsonObj.getInt(TAG_SUCCESS);
+
+            try {
+                //bahanArrayList = new ArrayList<Bahan>();
+                JSONObject jsonObject = new JSONObject(serverData);
+                JSONArray jsonArray = jsonObject.getJSONArray("hewan");
+
+                for (int i=0;i<jsonArray.length();i++)
+                {
+                    JSONObject jsonObjectBahan = jsonArray.getJSONObject(i);
+                    int idhewan = jsonObjectBahan.getInt("idhewan");
+                    String hewan = jsonObjectBahan.getString("nama_hewan");
+                    String tujuan = jsonObjectBahan.getString("tujuan");
+                    double hijauan = jsonObjectBahan.getDouble("hijauan");
+                    double konsentrat = jsonObjectBahan.getDouble("konsentrat");
+                    double bk_hewan = jsonObjectBahan.getDouble("keb_bk");
+                    double pk_hewan = jsonObjectBahan.getDouble("keb_pk");
+                    int harga_jual = jsonObjectBahan.getInt("harga_jual");
+
+                    Hewan hewanxx = new Hewan();
+                    hewanxx.setIdhewan(idhewan);
+                    hewanxx.setHewan(hewan);
+                    hewanxx.setTujuan(tujuan);
+                    hewanxx.setHijau(hijauan);
+                    hewanxx.setKonsentrat(konsentrat);
+                    hewanxx.setBk_hewan(bk_hewan);
+                    hewanxx.setPk_hewan(pk_hewan);
+                    hewanxx.setHargajual(harga_jual);
+
+                    mHewanDao.addHewanJson(hewanxx);// Inserting into DB
+
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//Json Parsing code end
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+        }
+    }
+
     private void showUpdateDialogConfirmation() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
@@ -363,6 +446,8 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
+
     public void BuatClick(View v) {
         Intent intent = new Intent(MainActivity.this, BuatPakan.class);
         startActivity(intent);
@@ -399,4 +484,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
