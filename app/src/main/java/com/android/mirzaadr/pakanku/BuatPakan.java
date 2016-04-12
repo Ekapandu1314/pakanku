@@ -48,7 +48,7 @@ public class BuatPakan extends AppCompatActivity {
     ImageSwitcher myImageSwitcher;
     int switcherImage = imageSwitcherImages.length;
     int counter = 0;
-    EditText textEdit;
+    EditText textEdit, textBobot, textJumlah, textHari;;
     Animation animationOut;
     Animation animationIn;
     Animation animationprevOut;
@@ -181,6 +181,9 @@ public class BuatPakan extends AppCompatActivity {
         //spinner2.setAdapter(dataAdapter2);
 
         textEdit = (EditText) findViewById(R.id.JenisTernak);
+        textBobot = (EditText) findViewById(R.id.editbobot);
+        textJumlah= (EditText) findViewById(R.id.editjumlah);
+        textHari = (EditText) findViewById(R.id.editText2);
         //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
@@ -233,6 +236,21 @@ public class BuatPakan extends AppCompatActivity {
     public void editAction (View view){
         textEdit.setFocusableInTouchMode(true);
         textEdit.requestFocus();
+    }
+
+    public void editBobot (View view){
+        textBobot.setFocusableInTouchMode(true);
+        textBobot.requestFocus();
+    }
+
+    public void editJumlah (View view){
+        textJumlah.setFocusableInTouchMode(true);
+        textJumlah.requestFocus();
+    }
+
+    public void editHari (View view){
+        textHari.setFocusableInTouchMode(true);
+        textHari.requestFocus();
     }
 
     public void nextClick(View v) {
