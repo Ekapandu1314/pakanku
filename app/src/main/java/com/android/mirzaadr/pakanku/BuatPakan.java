@@ -47,11 +47,13 @@ public class BuatPakan extends AppCompatActivity {
 
     int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
     private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
+    //ImageView id1, id2, id3, id4;
+    public ImageView indicatorImages[];
 
     ImageSwitcher myImageSwitcher;
     int switcherImage = imageSwitcherImages.length;
+    int prev;
     int counter = 0;
-    EditText textEdit, textBobot, textJumlah, textHari;;
     Animation animationOut;
     Animation animationIn;
     Animation animationprevOut;
@@ -70,6 +72,7 @@ public class BuatPakan extends AppCompatActivity {
     TextView buttonMin2;
     TextView buttonMin3;
 
+    EditText textEdit;
     EditText editBobot;
     EditText editJumlah;
     EditText editHari;
@@ -85,6 +88,13 @@ public class BuatPakan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buat_pakan);
+
+        indicatorImages = new ImageView[switcherImage];
+        indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
+        indicatorImages[1] = (ImageView) findViewById(R.id.btn2);
+        indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
+        indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
+
 
         check_potong = (CheckBox) findViewById(R.id.checkPotong);
         check_perah = (CheckBox) findViewById(R.id.checkPerah);
@@ -280,58 +290,6 @@ public class BuatPakan extends AppCompatActivity {
             }
         });
 
-        /*stackView = (StackView) findViewById(R.id.stackView1);
-        list = new ArrayList<Stack_Items>();
-
-        //Adding items to the list
-        for (int i = 0; i < icons.length; i++) {
-            list.add(new Stack_Items("Item " + i, icons[i]));
-        }
-
-        //Calling adapter and setting it over stackview
-        Stack_Adapter adapter = new Stack_Adapter(BuatPakan.this, list);
-        stackView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();*/
-
-        // Spinner element
-        //Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        //Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-
-        // Spinner click listener
-        //spinner.setOnItemSelectedListener();
-
-        // Spinner Drop down elements
-        /*List<String> categories = new ArrayList<>();
-        categories.add("Kerbau");
-        categories.add("Sapi");
-        categories.add("Kuda");
-        categories.add("Kambing");
-        categories.add("Babi");
-        categories.add("Domba");
-        categories.add("Ayam");
-        categories.add("Bebek");
-        categories.add("Burung");
-        categories.add("Kelinci");
-
-        List<String> tujuan = new ArrayList<>();
-        tujuan.add("Potong");
-        tujuan.add("Perah");
-        tujuan.add("Petelur");
-        tujuan.add("Hobi");
-        tujuan.add("Kerja");*/
-
-        // Creating adapter for spinner
-        //ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-        //ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tujuan);
-
-        // Drop down layout style - list view with radio button
-        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        //spinner.setAdapter(dataAdapter);
-        //spinner2.setAdapter(dataAdapter2);
-
         textEdit = (EditText) findViewById(R.id.JenisTernak);
         textBobot = (EditText) findViewById(R.id.editbobot);
         textJumlah= (EditText) findViewById(R.id.editjumlah);
@@ -349,6 +307,7 @@ public class BuatPakan extends AppCompatActivity {
                 switcherImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 switcherImageView.setImageResource(R.drawable.sapi);
                 textEdit.setText(namaTernak[0]);
+                indicatorImages[0].setImageResource(R.drawable.fill_circle);
                 //switcherImageView.setMaxHeight(100);
                 return switcherImageView;
             }
@@ -363,7 +322,8 @@ public class BuatPakan extends AppCompatActivity {
     }
 
     public void nextImageButton(View view) {
-        counter++;
+        prev = counter;
+        counter ++;
         myImageSwitcher.setOutAnimation(animationOut);
         myImageSwitcher.setInAnimation(animationIn);
 
@@ -372,9 +332,12 @@ public class BuatPakan extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
 
     public void prevImageButton(View view) {
+        prev = counter;
         counter--;
         myImageSwitcher.setOutAnimation(animationprevOut);
         myImageSwitcher.setInAnimation(animationprevIn);
@@ -385,6 +348,8 @@ public class BuatPakan extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
 
     public void editAction (View view){
@@ -393,18 +358,18 @@ public class BuatPakan extends AppCompatActivity {
     }
 
     public void editBobot (View view){
-        textBobot.setFocusableInTouchMode(true);
-        textBobot.requestFocus();
+        editBobot.setFocusableInTouchMode(true);
+        editBobot.requestFocus();
     }
 
     public void editJumlah (View view){
-        textJumlah.setFocusableInTouchMode(true);
-        textJumlah.requestFocus();
+        editJumlah.setFocusableInTouchMode(true);
+        editJumlah.requestFocus();
     }
 
     public void editHari (View view){
-        textHari.setFocusableInTouchMode(true);
-        textHari.requestFocus();
+        editHari.setFocusableInTouchMode(true);
+        editHari.requestFocus();
     }
 
     public void nextClick(View v) {
