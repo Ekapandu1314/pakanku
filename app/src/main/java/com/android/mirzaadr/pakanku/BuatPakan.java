@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.view.Window;
@@ -72,6 +74,13 @@ public class BuatPakan extends AppCompatActivity {
     EditText editJumlah;
     EditText editHari;
 
+    String hewan;
+    String tujuan;
+    String nama;
+    double berat1;
+    int jumlah;
+    int lama;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +102,8 @@ public class BuatPakan extends AppCompatActivity {
         editBobot = (EditText) findViewById(R.id.editbobot);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
+
+        hewan = "Sapi";
 
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,7 +335,7 @@ public class BuatPakan extends AppCompatActivity {
         textEdit = (EditText) findViewById(R.id.JenisTernak);
         textBobot = (EditText) findViewById(R.id.editbobot);
         textJumlah= (EditText) findViewById(R.id.editjumlah);
-        textHari = (EditText) findViewById(R.id.editText2);
+        textHari = (EditText) findViewById(R.id.editHari);
         //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
@@ -360,6 +371,7 @@ public class BuatPakan extends AppCompatActivity {
             counter = 0;
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
+        hewan = namaTernak[counter];
     }
 
     public void prevImageButton(View view) {
@@ -372,6 +384,7 @@ public class BuatPakan extends AppCompatActivity {
             counter = max;
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
+        hewan = namaTernak[counter];
     }
 
     public void editAction (View view){
@@ -445,15 +458,146 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(BuatPakan.this, ternak2.class);
-                startActivity(intent);
+                if(check_buat.isChecked()) {
+
+                    Intent intent = new Intent(BuatPakan.this, ternak2.class);
+                    Bundle var_resep = new Bundle();
+
+                    var_resep.putString("nama", nama);
+                    var_resep.putString("hewan", hewan);
+                    var_resep.putString("tujuan", tujuan);
+                    var_resep.putDouble("berat1", berat1);
+                    var_resep.putInt("jumlah", jumlah);
+                    var_resep.putInt("lama", lama);
+                    intent.putExtras(var_resep);
+
+                    startActivity(intent);
+
+                }
+
+
+
 
             }
         });
 
-
-
         dialog.show();
+
+        if(check_potong.isChecked()){
+
+            tujuan = "Potong";
+
+        }
+        else if(check_perah.isChecked()) {
+
+            tujuan = "Perah";
+
+        }
+        else if(check_petelur.isChecked()) {
+
+            tujuan = "Petelur";
+
+        }
+        else if(check_hobi.isChecked()) {
+
+            tujuan = "Hobi";
+
+        }
+        else if(check_kerja.isChecked()) {
+
+            tujuan = "Kerja";
+
+        }
+        else {
+
+            Toast.makeText(getBaseContext(), "No checkbox selected", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+
+        }
+
+        if(editBobot.getText().toString().trim().length() > 0) {
+
+            if(editBobot.getText().toString().equals("0")) {
+
+                Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+            else {
+
+                berat1 = Double.parseDouble(editBobot.getText().toString());
+
+            }
+
+
+
+
+
+        }
+        else {
+
+            Toast.makeText(getBaseContext(), "Bobot tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+
+        }
+
+        if(editJumlah.getText().toString().trim().length() > 0) {
+
+            if(editJumlah.getText().toString().equals("0")) {
+
+                Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+            else {
+
+                jumlah = Integer.parseInt(editJumlah.getText().toString());
+
+            }
+
+        }
+        else {
+
+            Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+
+        }
+
+
+        if(editHari.getText().toString().trim().length() > 0) {
+
+            if(editHari.getText().toString().equals("0")) {
+
+                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+            else {
+
+                lama = Integer.parseInt(editHari.getText().toString());
+
+            }
+
+        }
+        else {
+
+            Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+
+        }
+
+        if(textEdit.getText().toString().trim().length() > 0) {
+
+            nama = textEdit.getText().toString();
+
+        }
+        else {
+
+            Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+            dialog.dismiss();
+
+        }
 
     }
 
