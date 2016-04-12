@@ -305,6 +305,8 @@
             android:hint="@string/byk_ternak"
             android:ems="10"
             android:textSize="15sp"
+            android:id="@+id/editHari"
+            android:paddingLeft="15dp"
             android:id="@+id/editText2"
             android:focusable="false"
             android:clickable="true"
