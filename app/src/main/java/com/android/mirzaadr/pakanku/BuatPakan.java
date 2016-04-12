@@ -63,8 +63,10 @@ public class BuatPakan extends AppCompatActivity {
 
     TextView buttonPlus1;
     TextView buttonPlus2;
+    TextView buttonPlus3;
     TextView buttonMin1;
     TextView buttonMin2;
+    TextView buttonMin3;
 
     EditText editBobot;
     EditText editJumlah;
@@ -83,21 +85,31 @@ public class BuatPakan extends AppCompatActivity {
 
         buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
         buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
+        buttonPlus3 = (TextView) findViewById(R.id.buttonplus3);
         buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
         buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
+        buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
 
         editBobot = (EditText) findViewById(R.id.editbobot);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
-        editJumlah.setText("0");
-        editBobot.setText("0");
-
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) + 1));
+                if(editBobot.getText().toString().trim().length() > 0) {
+
+                    editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) + 1));
+
+                }
+                else {
+
+                    editBobot.setText(String.valueOf(Integer.parseInt("0")));
+
+                }
+
+
 
             }
         });
@@ -126,7 +138,16 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) + 1));
+                if(editJumlah.getText().toString().trim().length() > 0) {
+
+                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) + 1));
+
+                }
+                else {
+
+                    editJumlah.setText(String.valueOf(Integer.parseInt("0")));
+
+                }
 
             }
         });
@@ -143,6 +164,46 @@ public class BuatPakan extends AppCompatActivity {
                 else {
 
                     editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
+
+                }
+
+
+
+            }
+        });
+
+        buttonPlus3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(editHari.getText().toString().trim().length() > 0) {
+
+                    editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) + 1));
+
+                }
+                else {
+
+                    editHari.setText(String.valueOf(Integer.parseInt("0")));
+
+                }
+
+
+
+            }
+        });
+
+        buttonMin3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Integer.parseInt(editHari.getText().toString()) <= 0) {
+
+                    editHari.setText(String.valueOf(0));
+
+                }
+                else {
+
+                    editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
 
                 }
 

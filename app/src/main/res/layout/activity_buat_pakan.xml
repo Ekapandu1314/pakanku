@@ -301,8 +301,6 @@
             android:textSize="15sp"
             android:id="@+id/editHari"
             android:paddingLeft="15dp"
-            android:id="@+id/editText2"
-            android:paddingLeft="30dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@drawable/round_object"
             android:layout_alignParentStart="true"
