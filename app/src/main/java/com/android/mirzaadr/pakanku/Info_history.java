@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
@@ -37,8 +39,16 @@ public class Info_history extends Fragment {
         View view = inflater.inflate(R.layout.history_layout, container, false);
 
         mRecordDao = new RecordDAO(getActivity());
-
         mListRecord = mRecordDao.getAllRecord();
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinnerHewan);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.hewan, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
         this.mListviewRecord = (ListView) view.findViewById(R.id.listRecord);
 

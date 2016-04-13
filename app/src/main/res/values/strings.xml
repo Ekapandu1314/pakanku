@@ -13,6 +13,7 @@
     <string name="indicator">Indicator</string>
     <string name="harga">Harga /kg</string>
     <string name="history">HISTORY</string>
+    <string name="record">Record Ternak</string>
     <string name="byk_ternak">jml</string>
     <string name="banyak">ekor</string>
     <string name="brt_ternak">bobot</string>
@@ -40,5 +41,12 @@
     <string-array name="spinneritem">
         <item>kg</item>
         <item>ltr</item>
+    </string-array>
+
+    <string-array name="hewan">
+        <item>Sapi</item>
+        <item>Ayam</item>
+        <item>Kambing</item>
+        <item>Domba</item>
     </string-array>
 </resources>

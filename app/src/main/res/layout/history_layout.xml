@@ -7,11 +7,44 @@
     android:paddingBottom="2dp"
     android:background="@color/Base">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/textview"
+        android:layout_height="40dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/Accent"
+        android:text="@string/record"/>
+
+        <TextView
+            android:layout_width="110dp"
+            android:padding="10dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/round_object"/>
+        <Spinner
+            android:id="@+id/spinnerHewan"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listRecord"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textview"
         android:layout_centerHorizontal="true" />
 
     <!-- android:paddingLeft="@dimen/activity_horizontal_margin"
