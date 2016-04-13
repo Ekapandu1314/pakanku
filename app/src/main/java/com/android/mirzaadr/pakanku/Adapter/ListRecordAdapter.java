@@ -22,7 +22,6 @@ public class ListRecordAdapter extends BaseAdapter {
 
     private List<Record> mItems;
     private LayoutInflater mInflater;
-    Context context;
 
     public ListRecordAdapter(Context context, List<Record> listBahan) {
         this.setItems(listBahan);
@@ -68,10 +67,6 @@ public class ListRecordAdapter extends BaseAdapter {
         final Record currentItem = getItem(position);
         if(currentItem != null) {
 
-            //Log.d("Data : ", currentItem.getIdbahan());
-
-
-            //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()))
             holder.txtNama.setText(currentItem.getNama_record());
             holder.txtHewan.setText(currentItem.getRhewan());
             holder.txtTujuan.setText(currentItem.getRtujuan());
@@ -79,36 +74,25 @@ public class ListRecordAdapter extends BaseAdapter {
 
             if(currentItem.getRhewan().equals("Sapi")){
 
-                //Drawable myDrawable = context.getResources().getDrawable(R.drawable.fail);
-
                 holder.thumbRecord.setImageResource(R.drawable.sapi);
-
-                //holder.thumbRecord.setImageDrawable(myDrawable);
 
             }
             else if (currentItem.getRhewan().equals("Kambing")){
-
-                //Drawable myDrawable = context.getResources().getDrawable(R.drawable.fail);
-
-                //holder.thumbRecord.setImageDrawable(myDrawable);
 
                 holder.thumbRecord.setImageResource(R.drawable.kambing);
 
             }
             else if (currentItem.getRhewan().equals("Ayam")){
 
-                //Drawable myDrawable = context.getResources().getDrawable(R.drawable.fail);
-
-                //holder.thumbRecord.setImageDrawable(myDrawable);
-
                 holder.thumbRecord.setImageResource(R.drawable.ayam);
 
             }
+            else if (currentItem.getRhewan().equals("Domba")){
+
+                holder.thumbRecord.setImageResource(R.drawable.domba);
+
+            }
             else{
-
-                //Drawable myDrawable = context.getResources().getDrawable(R.drawable.fail);
-
-                //holder.thumbRecord.setImageDrawable(myDrawable);
 
                 holder.thumbRecord.setImageResource(R.drawable.fail);
 

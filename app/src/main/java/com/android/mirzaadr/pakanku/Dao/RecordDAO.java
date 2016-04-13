@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Record;
 
 import java.util.ArrayList;
@@ -160,6 +161,34 @@ public class RecordDAO {
         List<Record> listRecord = new ArrayList<Record>();
 
         Cursor cursor = mDatabase.query(DBHelper.TABLE_RECORD, mAllColumns, null, null, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Record record = cursorToRecord(cursor);
+                listRecord.add(record);
+                cursor.moveToNext();
+            }
+            // make sure to close the cursor
+            cursor.close();
+        }
+        return listRecord;
+    }
+
+    public List<Record> getAllRecordByHewan(String hewan) {
+
+        List<Record> listRecord = new ArrayList<Record>();
+        String countQuery;
+
+        if(hewan.equals("Semua")) {
+            countQuery = "SELECT  * FROM " + DBHelper.TABLE_RECORD;
+        }
+        else {
+            countQuery = "SELECT  * FROM " + DBHelper.TABLE_RECORD + " WHERE " + DBHelper.RHEWAN +
+                    " = '" + hewan + "'";
+        }
+
+        Cursor cursor = mDatabase.rawQuery(countQuery, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
