@@ -1,6 +1,12 @@
 package com.android.mirzaadr.pakanku;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListTipsAdapter;
 import com.android.mirzaadr.pakanku.Internet.JSONfunctions;
+import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,9 +59,30 @@ public class Info_tips extends Fragment {
 
         listview = (ListView) view.findViewById(R.id.tipslist);
 
-        new DownloadJSON().execute();
+
 
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            NetworkUtils utils = new NetworkUtils(getActivity());
+            if(utils.isConnectingToInternet()) {
+
+                new DownloadJSON().execute();
+
+            }
+            else {
+
+                Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+
+            }
+        }else{
+
+            // fragment is no longer visible
+        }
     }
 
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
@@ -113,4 +141,5 @@ public class Info_tips extends Fragment {
             mProgressDialog.dismiss();
         }
     }
+
 }

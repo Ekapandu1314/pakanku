@@ -3,8 +3,13 @@ package com.android.mirzaadr.pakanku;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -64,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
     private HewanDAO mHewanDao;
     private VersionDAO mVersionDao;
 
+    Boolean internet = false;
+    Boolean internet_error = false;
+
     AlertDialogManager alert = new AlertDialogManager();
 
     String version;
@@ -71,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Dialog pDialog;
 
-    ProgressDialog dialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        registerReceiver(mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         mBahanDao = new BahanDAO(this);
         mVersionDao = new VersionDAO(this);
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         NetworkUtils utils = new NetworkUtils(MainActivity.this);
         if(utils.isConnectingToInternet())
         {
+            internet = true;
 
             if(mListBahan != null && !mListBahan.isEmpty() && mVersionDao.getTopVersion() !=null) {
 
@@ -159,76 +168,117 @@ public class MainActivity extends AppCompatActivity {
             String serverData = null;// String object to store fetched data from server
             // Http Request Code start
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekall.php");
-            try {
-                HttpResponse httpResponse = httpClient.execute(httpGet);
-                HttpEntity httpEntity = httpResponse.getEntity();
-                serverData = EntityUtils.toString(httpEntity);
-                Log.d("response", serverData);
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(!internet_error && internet) {
+
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekall.php");
+                try {
+                    HttpResponse httpResponse = httpClient.execute(httpGet);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    serverData = EntityUtils.toString(httpEntity);
+                    Log.d("response", serverData);
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                }
             }
+            else {
+                internet_error = true;
+                this.cancel(true);
+            }
+
 // Http Request Code end
 // Json Parsing Code Start
             //success = jsonObj.getInt(TAG_SUCCESS);
 
-            try {
-                //bahanArrayList = new ArrayList<Bahan>();
-                JSONObject jsonObject = new JSONObject(serverData);
-                JSONArray jsonArray = jsonObject.getJSONArray("bahan");
+            if(!internet_error && internet){
 
-                Version version = new Version();
+                try {
+                    //bahanArrayList = new ArrayList<Bahan>();
+                    JSONObject jsonObject = new JSONObject(serverData);
+                    JSONArray jsonArray = jsonObject.getJSONArray("bahan");
 
-                String versi = jsonObject.getString("versi");
-                String tanggal = jsonObject.getString("tanggal");
+                    Version version = new Version();
 
-                version.setVersiBahan(versi);
-                version.setTanggal(tanggal);
+                    String versi = jsonObject.getString("versi");
+                    String tanggal = jsonObject.getString("tanggal");
 
-                mVersionDao.addVersionJson(version);
+                    version.setVersiBahan(versi);
+                    version.setTanggal(tanggal);
 
-                //mVersionDao.createVersion(versi, tanggal);
+                    mVersionDao.addVersionJson(version);
 
-                for (int i=0;i<jsonArray.length();i++)
-                {
-                    JSONObject jsonObjectBahan = jsonArray.getJSONObject(i);
-                    int id_bahan = jsonObjectBahan.getInt(DBHelper.BAHAN_ID);
-                    String nama_bahan = jsonObjectBahan.getString(DBHelper.NAMA_BAHAN);
-                    double bk_prs = jsonObjectBahan.getDouble(DBHelper.BK_PRS);
-                    double pk_prs = jsonObjectBahan.getDouble(DBHelper.PK_PRS);
-                    String kategori = jsonObjectBahan.getString(DBHelper.KATEGORI);
-                    int harga = jsonObjectBahan.getInt(DBHelper.HARGA);
+                    //mVersionDao.createVersion(versi, tanggal);
 
-                    Bahan bahan = new Bahan();
-                    bahan.setIdBahan(id_bahan);
-                    bahan.setNamaBahan(nama_bahan);
-                    bahan.setBk_prs(bk_prs);
-                    bahan.setPk_prs(pk_prs);
-                    bahan.setKategori(kategori);
-                    bahan.setHarga(harga);
+                    for (int i=0;i<jsonArray.length();i++)
+                    {
+                        if(internet) {
 
-                    int id = id_bahan;
+                            JSONObject jsonObjectBahan = jsonArray.getJSONObject(i);
+                            int id_bahan = jsonObjectBahan.getInt(DBHelper.BAHAN_ID);
+                            String nama_bahan = jsonObjectBahan.getString(DBHelper.NAMA_BAHAN);
+                            double bk_prs = jsonObjectBahan.getDouble(DBHelper.BK_PRS);
+                            double pk_prs = jsonObjectBahan.getDouble(DBHelper.PK_PRS);
+                            String kategori = jsonObjectBahan.getString(DBHelper.KATEGORI);
+                            int harga = jsonObjectBahan.getInt(DBHelper.HARGA);
 
-                    //if (mBahanDao.getBahanById(id).getNama_bahan() == null)
-                    //{
-                    mBahanDao.addBahanJson(bahan);// Inserting into DB
-                    //}
-                    //else
-                    //{
-                    //mBahanDao.updateBahanJSON(bahan);
-                    //}
+                            Bahan bahan = new Bahan();
+                            bahan.setIdBahan(id_bahan);
+                            bahan.setNamaBahan(nama_bahan);
+                            bahan.setBk_prs(bk_prs);
+                            bahan.setPk_prs(pk_prs);
+                            bahan.setKategori(kategori);
+                            bahan.setHarga(harga);
 
+                            int id = id_bahan;
+
+                            //if (mBahanDao.getBahanById(id).getNama_bahan() == null)
+                            //{
+                            mBahanDao.addBahanJson(bahan);// Inserting into DB
+                            //}
+                            //else
+                            //{
+                            //mBahanDao.updateBahanJSON(bahan);
+                            //}
+
+                        }
+                        else {
+                            internet_error = true;
+                            this.cancel(true);
+                        }
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    internet_error = true;
+                    e.printStackTrace();
                 }
 
 
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-//Json Parsing code end
+            else {
+
+                this.cancel(true);
+            }
             return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            pDialog.dismiss();
+            Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -237,90 +287,15 @@ public class MainActivity extends AppCompatActivity {
 
             pDialog.dismiss();
 
+            if(internet_error) {
+
+                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+
         }
-    }
-
-
-    private void cekUpdate(final String version, final String tanggal) {
-
-        class LoginAsync extends AsyncTask<String, Void, String> {
-
-            private Dialog loadingDialog;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                dialog =  ProgressDialog.show(MainActivity.this, "",
-                        "Loading. Please wait...", true);
-                //loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
-
-                String versi = params[0];
-                String tgl = params[1];
-
-                InputStream is = null;
-                String result = null;
-
-                try{
-                    HttpClient httpClient = new DefaultHttpClient();
-                    HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/update.php?versi=" + versi + "&tanggal=" + tgl);
-
-                    HttpResponse response = httpClient.execute(httpGet);
-
-                    //response = httpClient.execute("patpatstudio.com", "/pakanku/update.php?versi=" + versi + "&tanggal=" + tgl);
-                    HttpEntity entity = response.getEntity();
-                    String htmlResponse = EntityUtils.toString(entity);
-                    result = htmlResponse;
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return result;
-
-
-            }
-
-            @Override
-            protected void onPostExecute(String result){
-
-                dialog.dismiss();
-                //loadingDialog.dismiss();
-
-                String hasil = result.trim();
-
-                Toast.makeText(getBaseContext(), hasil, Toast.LENGTH_SHORT).show();
-
-                if(result!=null)
-                {
-                    if (hasil.equals("update")){
-
-                        showUpdateDialogConfirmation();
-
-                    }
-                    else if (hasil.equals("tidak"))
-                    {
-                        alert.showAlertDialog(MainActivity.this, "Checking complete..", "No data update", false);
-                    }
-
-                }
-                else
-                {
-                    alert.showAlertDialog(MainActivity.this, "Checking Failed..", "Check your internet connection", false);
-                }
-
-
-            }
-        }
-
-        LoginAsync la = new LoginAsync();
-        la.execute(version, tanggal);
-
     }
 
     class InputHewan extends AsyncTask<Void,Void,Void> {
@@ -336,67 +311,238 @@ public class MainActivity extends AppCompatActivity {
             String serverData = null;// String object to store fetched data from server
             // Http Request Code start
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekhewan.php");
-            try {
-                HttpResponse httpResponse = httpClient.execute(httpGet);
-                HttpEntity httpEntity = httpResponse.getEntity();
-                serverData = EntityUtils.toString(httpEntity);
-                Log.d("response", serverData);
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(!internet_error && internet) {
+
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/cekhewan.php");
+                try {
+                    HttpResponse httpResponse = httpClient.execute(httpGet);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    serverData = EntityUtils.toString(httpEntity);
+                    Log.d("response", serverData);
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                }
+            }
+            else {
+                internet_error = true;
+                this.cancel(true);
             }
 // Http Request Code end
 // Json Parsing Code Start
             //success = jsonObj.getInt(TAG_SUCCESS);
+            if(!internet_error && internet) {
+                try {
+                    //bahanArrayList = new ArrayList<Bahan>();
+                    JSONObject jsonObject = new JSONObject(serverData);
+                    JSONArray jsonArray = jsonObject.getJSONArray("hewan");
 
-            try {
-                //bahanArrayList = new ArrayList<Bahan>();
-                JSONObject jsonObject = new JSONObject(serverData);
-                JSONArray jsonArray = jsonObject.getJSONArray("hewan");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObjectBahan = jsonArray.getJSONObject(i);
+                        int idhewan = jsonObjectBahan.getInt("idhewan");
+                        String hewan = jsonObjectBahan.getString("nama_hewan");
+                        String tujuan = jsonObjectBahan.getString("tujuan");
+                        double hijauan = jsonObjectBahan.getDouble("hijauan");
+                        double konsentrat = jsonObjectBahan.getDouble("konsentrat");
+                        double bk_hewan = jsonObjectBahan.getDouble("keb_bk");
+                        double pk_hewan = jsonObjectBahan.getDouble("keb_pk");
+                        int harga_jual = jsonObjectBahan.getInt("harga_jual");
 
-                for (int i=0;i<jsonArray.length();i++)
-                {
-                    JSONObject jsonObjectBahan = jsonArray.getJSONObject(i);
-                    int idhewan = jsonObjectBahan.getInt("idhewan");
-                    String hewan = jsonObjectBahan.getString("nama_hewan");
-                    String tujuan = jsonObjectBahan.getString("tujuan");
-                    double hijauan = jsonObjectBahan.getDouble("hijauan");
-                    double konsentrat = jsonObjectBahan.getDouble("konsentrat");
-                    double bk_hewan = jsonObjectBahan.getDouble("keb_bk");
-                    double pk_hewan = jsonObjectBahan.getDouble("keb_pk");
-                    int harga_jual = jsonObjectBahan.getInt("harga_jual");
+                        Hewan hewanxx = new Hewan();
+                        hewanxx.setIdhewan(idhewan);
+                        hewanxx.setHewan(hewan);
+                        hewanxx.setTujuan(tujuan);
+                        hewanxx.setHijau(hijauan);
+                        hewanxx.setKonsentrat(konsentrat);
+                        hewanxx.setBk_hewan(bk_hewan);
+                        hewanxx.setPk_hewan(pk_hewan);
+                        hewanxx.setHargajual(harga_jual);
 
-                    Hewan hewanxx = new Hewan();
-                    hewanxx.setIdhewan(idhewan);
-                    hewanxx.setHewan(hewan);
-                    hewanxx.setTujuan(tujuan);
-                    hewanxx.setHijau(hijauan);
-                    hewanxx.setKonsentrat(konsentrat);
-                    hewanxx.setBk_hewan(bk_hewan);
-                    hewanxx.setPk_hewan(pk_hewan);
-                    hewanxx.setHargajual(harga_jual);
-
-                    mHewanDao.addHewanJson(hewanxx);// Inserting into DB
+                        mHewanDao.addHewanJson(hewanxx);// Inserting into DB
 
 
+                    }
+
+
+                } catch (JSONException e) {
+                    this.cancel(true);
+                    e.printStackTrace();
                 }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }
+            else {
+                this.cancel(true);
             }
 //Json Parsing code end
             return null;
         }
 
         @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            internet_error = true;
+            Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            if(internet_error) {
+                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
+    }
+
+    private void cekUpdate(final String version, final String tanggal) {
+
+        class LoginAsync extends AsyncTask<String, Void, String> {
+
+            private Dialog loadingDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                String versi = params[0];
+                String tgl = params[1];
+
+                InputStream is = null;
+                String result = null;
+
+                if(!internet_error && internet) {
+
+                    try {
+                        HttpClient httpClient = new DefaultHttpClient();
+                        HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/update.php?versi=" + versi + "&tanggal=" + tgl);
+
+                        HttpResponse response = httpClient.execute(httpGet);
+
+                        //response = httpClient.execute("patpatstudio.com", "/pakanku/update.php?versi=" + versi + "&tanggal=" + tgl);
+                        HttpEntity entity = response.getEntity();
+                        String htmlResponse = EntityUtils.toString(entity);
+                        result = htmlResponse;
+                    } catch (ClientProtocolException e) {
+                        e.printStackTrace();
+                        internet_error = true;
+                        this.cancel(true);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                        internet_error = true;
+                        this.cancel(true);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        internet_error = true;
+                        this.cancel(true);
+                    }
+                }
+                else {
+                    internet_error = true;
+                    this.cancel(true);
+                }
+
+
+
+                return result;
+
+
+            }
+
+            @Override
+            protected void onCancelled() {
+                super.onCancelled();
+                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            protected void onPostExecute(String result){
+
+                if(internet_error || !internet) {
+
+                    loadingDialog.dismiss();
+                    Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+
+                    loadingDialog.dismiss();
+
+                    String hasil = result.trim();
+
+                    Toast.makeText(getBaseContext(), hasil, Toast.LENGTH_SHORT).show();
+
+                    if(result!=null)
+                    {
+                        if (hasil.equals("update")){
+
+                            showUpdateDialogConfirmation();
+
+                        }
+                        else if (hasil.equals("tidak"))
+                        {
+                            alert.showAlertDialog(MainActivity.this, "Checking complete..", "No data update", false);
+                        }
+
+                    }
+                    else
+                    {
+                        alert.showAlertDialog(MainActivity.this, "Checking Failed..", "Check your internet connection", false);
+                    }
+
+                }
+            }
+        }
+
+        LoginAsync la = new LoginAsync();
+        la.execute(version, tanggal);
+
+    }
+
+    private BroadcastReceiver mConnReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+            String reason = intent.getStringExtra(ConnectivityManager.EXTRA_REASON);
+            boolean isFailover = intent.getBooleanExtra(ConnectivityManager.EXTRA_IS_FAILOVER, false);
+
+            NetworkInfo currentNetworkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
+            NetworkInfo otherNetworkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
+
+            if(currentNetworkInfo.isConnected()){
+                //Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
+                internet = true;
+            }else{
+                //Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_LONG).show();
+                internet = false;
+            }
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        this.registerReceiver(this.mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(mConnReceiver);
+        super.onPause();
     }
 
     private void showUpdateDialogConfirmation() {
@@ -483,6 +629,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //unregisterReceiver(mConnReceiver);
+        mBahanDao.close();
+        mHewanDao.close();
+        mVersionDao.close();
     }
 
 
