@@ -46,8 +46,7 @@
             android:name=".CekUntung"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".InputHarga"
-            android:theme="@style/AppTheme"></activity>
+            android:name=".InputHarga"></activity>
         <activity
             android:name=".ResepRansumRecord"
             android:theme="@style/AppTheme.NoActionBar"></activity>
