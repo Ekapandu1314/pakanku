@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="2dp"
     android:paddingBottom="2dp"
     android:background="@color/Base">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/textview"
+        android:background="@color/Dark"
         android:layout_height="40dp">
 
         <TextView
@@ -18,10 +18,12 @@
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_centerInParent="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/Dark"
-            android:text="@string/record"/>
+            android:textColor="@color/White"
+            android:text="@string/record"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/view"
+            android:layout_toStartOf="@+id/view" />
 
         <View
             android:layout_width="110dp"
@@ -32,7 +34,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/round_object"/>
+            android:background="@drawable/button_custom"
+            android:id="@+id/view" />
         <Spinner
             android:id="@+id/spinnerHewan"
             android:layout_width="110dp"
