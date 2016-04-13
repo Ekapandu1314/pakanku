@@ -114,7 +114,7 @@ public class ResepRansumRecord extends Activity {
         textviewHargaHari.setText("Rp. " + harga_total);
         textviewHargaBulan.setText("Rp. " + biaya_pakan);
         textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
-        textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
+        //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
 
         if(keuntungan != 0) {
 
@@ -123,7 +123,7 @@ public class ResepRansumRecord extends Activity {
         }
         else {
 
-            textviewTextKeuntungan.setVisibility(View.GONE);
+            //textviewTextKeuntungan.setVisibility(View.GONE);
             textviewKeuntungan.setVisibility(View.GONE);
 
         }
@@ -138,7 +138,7 @@ public class ResepRansumRecord extends Activity {
         this.textviewHargaBulan = (TextView) findViewById(R.id.harga_bulan);
         this.textviewTextHargaBulan = (TextView) findViewById(R.id.text_harga_bulan);
         this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
-        this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
+        //this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
 
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);

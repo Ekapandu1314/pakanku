@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 
 import android.widget.EditText;
@@ -101,7 +102,6 @@ public class BuatPakan extends AppCompatActivity {
         indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
         indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
 
-
         check_potong = (CheckBox) findViewById(R.id.checkPotong);
         check_perah = (CheckBox) findViewById(R.id.checkPerah);
         check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
@@ -124,6 +124,10 @@ public class BuatPakan extends AppCompatActivity {
         editBobot = (EditText) findViewById(R.id.editbobot);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
+
+        editHari.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editBobot.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editJumlah.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         hewan = "Sapi";
 
