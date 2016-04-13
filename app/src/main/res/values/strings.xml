@@ -44,6 +44,10 @@
     <string name="tagpengeluaran">pengeluaran / hari x jum. ternak x lama</string>
     <string name="tagmasuk">(harga x jum. ternak x lama x produksi / hari)</string>
     <string name="taguntung">TOTAL PEMASUKAN - TOTAL PENGELUARAN</string>
+    <string name="datamasuk1">Harga Produk (per kg)</string>
+    <string name="datamasuk2">Jumlah Ternak (ekor)</string>
+    <string name="datamasuk3">Lama Pemeliharaan (hari)</string>
+    <string name="datamasuk4">Produksi Ternak per hari</string>
     <string name="copyright">copyright 2016 Pakanku Apps by Patpat Corp.</string>
 
     <string-array name="spinneritem">
