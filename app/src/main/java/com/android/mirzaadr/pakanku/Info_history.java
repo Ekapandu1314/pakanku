@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
@@ -26,6 +27,7 @@ public class Info_history extends Fragment {
     private List<Record> mListRecord;
     private RecordDAO mRecordDao;
     private ListView mListviewRecord;
+    Boolean list = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +38,12 @@ public class Info_history extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.history_layout, container, false);
+        final View vieww = inflater.inflate(R.layout.history_layout, container, false);
 
         mRecordDao = new RecordDAO(getActivity());
         mListRecord = mRecordDao.getAllRecord();
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinnerHewan);
+        final Spinner spinner = (Spinner) vieww.findViewById(R.id.spinnerHewan);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.hewan, android.R.layout.simple_spinner_item);
@@ -50,10 +52,30 @@ public class Info_history extends Fragment {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        this.mListviewRecord = (ListView) view.findViewById(R.id.listRecord);
+        this.mListviewRecord = (ListView) vieww.findViewById(R.id.listRecord);
 
         mAdapter = new ListRecordAdapter(getActivity(), mListRecord);
         mListviewRecord.setAdapter(mAdapter);
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String hewan;
+                hewan = spinner.getSelectedItem().toString();
+                mListviewRecord = (ListView) vieww.findViewById(R.id.listRecord);
+                mListRecord = mRecordDao.getAllRecordByHewan(hewan);
+                mAdapter = new ListRecordAdapter(getActivity(), mListRecord);
+                mListviewRecord.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         mListviewRecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,6 +92,8 @@ public class Info_history extends Fragment {
             }
         });
 
-        return view;
+
+
+        return vieww;
     }
 }

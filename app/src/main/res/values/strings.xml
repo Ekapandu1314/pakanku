@@ -44,6 +44,7 @@
     </string-array>
 
     <string-array name="hewan">
+        <item>Semua</item>
         <item>Sapi</item>
         <item>Ayam</item>
         <item>Kambing</item>

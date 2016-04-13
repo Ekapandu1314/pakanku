@@ -142,32 +142,19 @@ public class ListEdittextAdapter extends BaseAdapter {
                     Bahan bahanx = (Bahan) cb.getTag();
 
                     if(cb.getText().toString().trim().length() > 0){
-
                         if(cb.getText().toString().equals("0")) {
-
                             currentItem.setHarga_baru(cb.getText().toString());
-
                         }
                         else if (!cb.getText().toString().equals("0")){
-
                             currentItem.setHarga_baru(cb.getText().toString());
-
                         }
-
-
-
                     }
                     else {
-
                         currentItem.setHarga_baru("-");
-
                     }
-
                 }
             });
-
         }
-
         return v;
     }
 
