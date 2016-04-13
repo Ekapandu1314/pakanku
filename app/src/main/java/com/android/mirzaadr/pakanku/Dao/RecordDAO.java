@@ -124,6 +124,40 @@ public class RecordDAO {
         return newRecord;
     }
 
+    public Record createRecord(String nama_record,
+                               String rtanggal,
+                               String rhewan,
+                               String rtujuan,
+                               double rberat,
+                               double produk,
+                               int rjternak,
+                               int rlama,
+                               String pbahan
+    ) {
+        ContentValues values = new ContentValues();
+        //values.put(DBHelper.BAHAN_ID, idbahan);
+        values.put(DBHelper.NAMA_RECORD, nama_record);
+        values.put(DBHelper.RTANGGAL, rtanggal);
+        values.put(DBHelper.RHEWAN, rhewan);
+        values.put(DBHelper.RTUJUAN, rtujuan);
+        values.put(DBHelper.RBERAT1, rberat);
+        values.put(DBHelper.RBERAT2, produk);
+        values.put(DBHelper.RJTERNAK, rjternak);
+        values.put(DBHelper.RLAMA, rlama);
+        values.put(DBHelper.PBAHAN, pbahan);
+
+
+        int insertId = (int) mDatabase
+                .insert(DBHelper.TABLE_RECORD, null, values);
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_RECORD, mAllColumns,
+                DBHelper.RECORD_ID + " = " + insertId, null, null,
+                null, null);
+        cursor.moveToFirst();
+        Record newRecord = cursorToRecord(cursor);
+        cursor.close();
+        return newRecord;
+    }
+
     public void deleteRecord(Record record) {
         int id = record.getIdrecord();
         System.out.println("the deleted ingredient has the id: " + id);

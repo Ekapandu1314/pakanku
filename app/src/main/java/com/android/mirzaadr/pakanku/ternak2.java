@@ -740,7 +740,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         String tanggal = String.valueOf(date_calendar) + "-" + String.valueOf(month_calendar) + "-" + String.valueOf(year_calendar);
 
-        mRecordDao.createRecord(nama, tanggal, hewan, tujuan, berat1, jumlah, lama, bahanid);
+        mRecordDao.createRecord(nama, tanggal, hewan, tujuan, berat1, produk, jumlah, lama, bahanid);
 
         Intent newIntent = new Intent(getApplicationContext(), ResepRansum.class);
 
