@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,6 +97,12 @@ public class CekUntung extends AppCompatActivity {
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
+        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
+        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
+        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
+        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
+        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
+
         Spinner spinner = (Spinner) findViewById(R.id.kilogram);
         //Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
 
@@ -108,6 +115,44 @@ public class CekUntung extends AppCompatActivity {
         //spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
+
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
 
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,6 +437,43 @@ public class CekUntung extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
@@ -408,6 +490,43 @@ public class CekUntung extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
@@ -439,15 +558,22 @@ public class CekUntung extends AppCompatActivity {
 
     public void nextClick(View v) {
 
-        final Dialog dialog = new Dialog(CekUntung.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_paket);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        if(hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
 
-        final CheckBox check_hemat = (CheckBox) dialog.findViewById(R.id.cekPaket);
-        final CheckBox check_hebat = (CheckBox) dialog.findViewById(R.id.cekPaket2);
-        final CheckBox check_buat = (CheckBox) dialog.findViewById(R.id.cekBuat);
-        final Button buat_ransum = (Button) dialog.findViewById(R.id.buttonk);
+            Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+
+            final Dialog dialog = new Dialog(CekUntung.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_paket);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+            final CheckBox check_hemat = (CheckBox) dialog.findViewById(R.id.cekPaket);
+            final CheckBox check_hebat = (CheckBox) dialog.findViewById(R.id.cekPaket2);
+            final CheckBox check_buat = (CheckBox) dialog.findViewById(R.id.cekBuat);
+            final Button buat_ransum = (Button) dialog.findViewById(R.id.buttonk);
 
         check_buat.setChecked(true);
 

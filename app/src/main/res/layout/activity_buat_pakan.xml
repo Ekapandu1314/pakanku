@@ -379,7 +379,8 @@
         android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/layoutPotongBuat">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -400,7 +401,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/layoutPerahBuat">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -421,7 +423,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/layoutPetelurBuat">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -442,7 +445,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/layoutHobiBuat">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -463,7 +467,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/layoutKerjaBuat">
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
