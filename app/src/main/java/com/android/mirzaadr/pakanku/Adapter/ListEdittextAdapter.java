@@ -68,6 +68,13 @@ public class ListEdittextAdapter extends BaseAdapter {
         if(currentItem != null) {
 
 
+
+
+
+            //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
+            holder.txtBahanEdit.setText(currentItem.getNamaBahan());
+            holder.editHarga.setText(currentItem.getHarga_baru());
+
             holder.editHarga.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -76,10 +83,18 @@ public class ListEdittextAdapter extends BaseAdapter {
 
                     Bahan bahanx = (Bahan) cb.getTag();
 
-                    if(cb.getText().toString().trim().length() > 1){
+                    if(cb.getText().toString().trim().length() > 0){
 
-                        currentItem.setHarga_baru(cb.getText().toString());
+                        if(cb.getText().toString().equals("0")) {
 
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
+                        else if (!cb.getText().toString().equals("0")){
+
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
                     }
                     else {
 
@@ -97,9 +112,20 @@ public class ListEdittextAdapter extends BaseAdapter {
 
                     Bahan bahanx = (Bahan) cb.getTag();
 
-                    if(cb.getText().toString().trim().length() > 1){
+                    if(cb.getText().toString().trim().length() > 0){
 
-                        currentItem.setHarga_baru(cb.getText().toString());
+                        if(cb.getText().toString().equals("0")) {
+
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
+                        else if (!cb.getText().toString().equals("0")){
+
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
+
+
 
                     }
                     else {
@@ -117,9 +143,20 @@ public class ListEdittextAdapter extends BaseAdapter {
 
                     Bahan bahanx = (Bahan) cb.getTag();
 
-                    if(cb.getText().toString().trim().length() > 1){
+                    if(cb.getText().toString().trim().length() > 0){
 
-                        currentItem.setHarga_baru(cb.getText().toString());
+                        if(cb.getText().toString().equals("0")) {
+
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
+                        else if (!cb.getText().toString().equals("0")){
+
+                            currentItem.setHarga_baru(cb.getText().toString());
+
+                        }
+
+
 
                     }
                     else {
@@ -130,23 +167,6 @@ public class ListEdittextAdapter extends BaseAdapter {
 
                 }
             });
-
-            //Log.d("Data : ", currentItem.getIdbahan());
-            holder.editHarga.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-
-
-
-
-
-                }
-            });
-
-            //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
-            holder.txtBahanEdit.setText(currentItem.getNamaBahan());
-            holder.editHarga.setText(currentItem.getHarga_baru());
-
 
         }
 
