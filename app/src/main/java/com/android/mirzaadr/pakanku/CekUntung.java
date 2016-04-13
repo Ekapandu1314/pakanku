@@ -110,6 +110,7 @@ public class CekUntung extends AppCompatActivity {
         layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
 
         Spinner spinner = (Spinner) findViewById(R.id.kilogram);
+        //Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spinneritem, android.R.layout.simple_spinner_item);
@@ -117,6 +118,7 @@ public class CekUntung extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        //spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
 
@@ -781,10 +783,6 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
-        }
-
-
 
     }
 }

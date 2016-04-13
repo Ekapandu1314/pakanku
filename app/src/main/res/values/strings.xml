@@ -11,7 +11,9 @@
     <string name="CekUntung">Cek Untung</string>
     <string name="tips">TIPS</string>
     <string name="indicator">Indicator</string>
-    <string name="harga">Harga /kg</string>
+    <string name="harga">harga/kg</string>
+    <string name="porsi">porsi(gr)</string>
+    <string name="biaya">biaya(Rp)</string>
     <string name="history">HISTORY</string>
     <string name="record">Record Ternak</string>
     <string name="byk_ternak">jml</string>
@@ -36,6 +38,12 @@
     <string name="protein">Sumber Protein</string>
     <string name="uang">Rp.</string>
     <string name="sumber">Sumber : </string>
+    <string name="pengeluaran">Pengeluaran per hari</string>
+    <string name="masukTot">total pemasukan</string>
+    <string name="untungTot">total keuntungan</string>
+    <string name="tagpengeluaran">pengeluaran / hari x jum. ternak x lama</string>
+    <string name="tagmasuk">(harga x jum. ternak x lama x produksi / hari)</string>
+    <string name="taguntung">TOTAL PEMASUKAN - TOTAL PENGELUARAN</string>
     <string name="copyright">copyright 2016 Pakanku Apps by Patpat Corp.</string>
 
     <string-array name="spinneritem">
