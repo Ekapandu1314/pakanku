@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,12 @@ public class CekUntung extends AppCompatActivity {
     EditText editJumlah;
     EditText editHari;
 
+    LinearLayout layoutPotong;
+    LinearLayout layoutPetelur;
+    LinearLayout layoutPerah;
+    LinearLayout layoutKerja;
+    LinearLayout layoutHobi;
+
     String hewan;
     String tujuan;
     String nama;
@@ -96,8 +103,13 @@ public class CekUntung extends AppCompatActivity {
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
+        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
+        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
+        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
+        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
+        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
+
         Spinner spinner = (Spinner) findViewById(R.id.kilogram);
-        Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spinneritem, android.R.layout.simple_spinner_item);
@@ -105,9 +117,46 @@ public class CekUntung extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
+
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
 
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,6 +441,43 @@ public class CekUntung extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
@@ -408,6 +494,43 @@ public class CekUntung extends AppCompatActivity {
         myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
         textEdit.setText(namaTernak[counter]);
         hewan = namaTernak[counter];
+        if(hewan.equals("Sapi")) {
+
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Kambing")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+        }
+        else if(hewan.equals("Domba")) {
+
+            check_kerja.setClickable(false);
+            check_hobi.setClickable(false);
+            check_petelur.setClickable(false);
+            layoutPetelur.setVisibility(View.INVISIBLE);
+            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if(hewan.equals("Ayam")) {
+
+            check_kerja.setClickable(false);
+            check_perah.setClickable(false);
+            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPerah.setVisibility(View.INVISIBLE);
+
+        }
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
@@ -439,213 +562,229 @@ public class CekUntung extends AppCompatActivity {
 
     public void nextClick(View v) {
 
-        final Dialog dialog = new Dialog(CekUntung.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_paket);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        if(hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
 
-        final CheckBox check_hemat = (CheckBox) dialog.findViewById(R.id.cekPaket);
-        final CheckBox check_hebat = (CheckBox) dialog.findViewById(R.id.cekPaket2);
-        final CheckBox check_buat = (CheckBox) dialog.findViewById(R.id.cekBuat);
-        final Button buat_ransum = (Button) dialog.findViewById(R.id.buttonk);
+            Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
 
-        check_buat.setChecked(true);
+        }
+        else {
 
-        check_hemat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            final Dialog dialog = new Dialog(CekUntung.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_paket);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
-                check_hemat.setChecked(true);
-                check_hebat.setChecked(false);
-                check_buat.setChecked(false);
+            final CheckBox check_hemat = (CheckBox) dialog.findViewById(R.id.cekPaket);
+            final CheckBox check_hebat = (CheckBox) dialog.findViewById(R.id.cekPaket2);
+            final CheckBox check_buat = (CheckBox) dialog.findViewById(R.id.cekBuat);
+            final Button buat_ransum = (Button) dialog.findViewById(R.id.buttonk);
+
+            check_buat.setChecked(true);
+
+            check_hemat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    check_hemat.setChecked(true);
+                    check_hebat.setChecked(false);
+                    check_buat.setChecked(false);
+
+                }
+            });
+
+            check_hebat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    check_hemat.setChecked(false);
+                    check_hebat.setChecked(true);
+                    check_buat.setChecked(false);
+
+                }
+            });
+
+            check_buat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    check_hemat.setChecked(false);
+                    check_hebat.setChecked(false);
+                    check_buat.setChecked(true);
+
+                }
+            });
+
+            buat_ransum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(check_buat.isChecked()) {
+
+                        Intent intent = new Intent(CekUntung.this, ternak2.class);
+                        Bundle var_resep = new Bundle();
+
+                        var_resep.putString("nama", nama);
+                        var_resep.putString("hewan", hewan);
+                        var_resep.putString("tujuan", tujuan);
+                        var_resep.putDouble("berat1", berat1);
+                        var_resep.putDouble("berat2", berat2);
+                        var_resep.putInt("jumlah", jumlah);
+                        var_resep.putInt("lama", lama);
+                        intent.putExtras(var_resep);
+
+                        startActivity(intent);
+
+                        dialog.dismiss();
+
+                    }
+                    else {
+
+                        Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
+
+            dialog.show();
+
+            if(check_potong.isChecked()){
+
+                tujuan = "Potong";
 
             }
-        });
+            else if(check_perah.isChecked()) {
 
-        check_hebat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                check_hemat.setChecked(false);
-                check_hebat.setChecked(true);
-                check_buat.setChecked(false);
+                tujuan = "Perah";
 
             }
-        });
+            else if(check_petelur.isChecked()) {
 
-        check_buat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                check_hemat.setChecked(false);
-                check_hebat.setChecked(false);
-                check_buat.setChecked(true);
+                tujuan = "Petelur";
 
             }
-        });
+            else if(check_hobi.isChecked()) {
 
-        buat_ransum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                tujuan = "Hobi";
 
-                if(check_buat.isChecked()) {
+            }
+            else if(check_kerja.isChecked()) {
 
-                    Intent intent = new Intent(CekUntung.this, ternak2.class);
-                    Bundle var_resep = new Bundle();
+                tujuan = "Kerja";
 
-                    var_resep.putString("nama", nama);
-                    var_resep.putString("hewan", hewan);
-                    var_resep.putString("tujuan", tujuan);
-                    var_resep.putDouble("berat1", berat1);
-                    var_resep.putDouble("berat2", berat2);
-                    var_resep.putInt("jumlah", jumlah);
-                    var_resep.putInt("lama", lama);
-                    intent.putExtras(var_resep);
+            }
+            else {
 
-                    startActivity(intent);
+                Toast.makeText(getBaseContext(), "No checkbox selected", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
 
+            }
+
+            if(editBobot.getText().toString().trim().length() > 0) {
+
+                if(editBobot.getText().toString().equals("0")) {
+
+                    Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                }
+                else {
+
+                    berat1 = Double.parseDouble(editBobot.getText().toString());
+
+                }
+
+
+            }
+            else {
+
+                Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+
+            if(editJumlah.getText().toString().trim().length() > 0) {
+
+                if(editJumlah.getText().toString().equals("0")) {
+
+                    Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+
+                }
+                else {
+
+                    jumlah = Integer.parseInt(editJumlah.getText().toString());
 
                 }
 
             }
-        });
-
-        dialog.show();
-
-        if(check_potong.isChecked()){
-
-            tujuan = "Potong";
-
-        }
-        else if(check_perah.isChecked()) {
-
-            tujuan = "Perah";
-
-        }
-        else if(check_petelur.isChecked()) {
-
-            tujuan = "Petelur";
-
-        }
-        else if(check_hobi.isChecked()) {
-
-            tujuan = "Hobi";
-
-        }
-        else if(check_kerja.isChecked()) {
-
-            tujuan = "Kerja";
-
-        }
-        else {
-
-            Toast.makeText(getBaseContext(), "No checkbox selected", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-
-        }
-
-        if(editBobot.getText().toString().trim().length() > 0) {
-
-            if(editBobot.getText().toString().equals("0")) {
-
-                Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh nol", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
             else {
 
-                berat1 = Double.parseDouble(editBobot.getText().toString());
+                Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
 
             }
 
 
-        }
-        else {
+            if(editHari.getText().toString().trim().length() > 0) {
 
-            Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+                if(editHari.getText().toString().equals("0")) {
 
-        }
+                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
 
-        if(editJumlah.getText().toString().trim().length() > 0) {
+                }
+                else {
 
-            if(editJumlah.getText().toString().equals("0")) {
+                    lama = Integer.parseInt(editHari.getText().toString());
 
-                Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                }
 
             }
             else {
 
-                jumlah = Integer.parseInt(editJumlah.getText().toString());
+                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
 
             }
 
-        }
-        else {
+            if(textEdit.getText().toString().trim().length() > 0) {
 
-            Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-
-        }
-
-
-        if(editHari.getText().toString().trim().length() > 0) {
-
-            if(editHari.getText().toString().equals("0")) {
-
-                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                nama = textEdit.getText().toString();
 
             }
             else {
 
-                lama = Integer.parseInt(editHari.getText().toString());
+                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
 
             }
 
-        }
-        else {
+            if(editBobot2.getText().toString().trim().length() > 0) {
 
-            Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+                if(editBobot2.getText().toString().equals("0")) {
 
-        }
+                    Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                else {
 
-        if(textEdit.getText().toString().trim().length() > 0) {
+                    berat2 = Double.parseDouble(editBobot2.getText().toString());
 
-            nama = textEdit.getText().toString();
+                }
 
-        }
-        else {
 
-            Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-
-            dialog.dismiss();
-
-        }
-
-        if(editBobot2.getText().toString().trim().length() > 0) {
-
-            if(editBobot2.getText().toString().equals("0")) {
-
-                Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh nol", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
             }
             else {
 
-                berat2 = Double.parseDouble(editBobot2.getText().toString());
+                Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
 
             }
 
-
         }
-        else {
 
-            Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
 
-        }
 
     }
 }

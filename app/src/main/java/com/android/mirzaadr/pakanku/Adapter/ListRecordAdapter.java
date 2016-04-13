@@ -118,6 +118,5 @@ public class ListRecordAdapter extends BaseAdapter {
         TextView txtTujuan;
         TextView txtTanggal;
         ImageView thumbRecord;
-
     }
 }
