@@ -129,7 +129,6 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
     }
 
 
-
     public void passDataToActivity(String someValue){
 
 
