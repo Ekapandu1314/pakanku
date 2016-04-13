@@ -8,8 +8,8 @@
     <color name="colorAccent1">#FF4081</color>
     <color name="Dark">#27401A</color>
     <color name="Shade">#4D8D3F</color>
-    <color name="Base">#8BC34A</color>
-    <color name="Accent">#FFF500</color>
+    <color name="Base">#8bc34a</color>
+    <color name="Accent">#fff500</color>
     <color name="Black">#000000</color>
     <color name="White">#ffffff</color>
     <color name="Button">#558B2F</color>
@@ -19,4 +19,6 @@
     <color name="listProtein">#FFB34F</color>
     <color name="textHijauan">#fff</color>
     <color name="textEnergi">#FFE817</color>
+    <color name="cyan">#0093DD</color>
+    <color name="red">#DA251D</color>
 </resources>

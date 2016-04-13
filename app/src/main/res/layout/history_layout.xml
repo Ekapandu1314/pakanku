@@ -5,6 +5,7 @@
     android:paddingBottom="2dp"
     android:background="@color/Base">
 
+    <!-- toolbar layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/textview"
@@ -41,6 +42,7 @@
             android:layout_width="110dp"
             android:layout_height="30dp"
             android:gravity="center"
+            android:popupBackground="@color/Button"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
             android:layout_centerVertical="true"

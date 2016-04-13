@@ -1,271 +1,423 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-        <TextView
-            android:id="@+id/txt_header"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_centerHorizontal="true"
-            android:background="#000"
-            android:gravity="center"
-            android:text="Resep Ransum"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Base">
 
         <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/txt_header"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/relativeLayout">
+            android:paddingBottom="20dp">
 
-
+            <!-- toolbar layout -->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="kamar"
-                android:id="@+id/textView23"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentTop="true"
+                android:id="@+id/txt_header"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:text="Proporsi" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:background="@color/Dark"
+                android:gravity="center"
+                android:text="Resep Ransum"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="jumlah"
-                android:id="@+id/text3"
-                android:text="Harga"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/textView23"
-                android:layout_toEndOf="@+id/textView23"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp" />
+                android:textColor="@color/White" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- tabel layout pengeluaran pakan -->
+            <RelativeLayout
+                android:id="@+id/tabel"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nama Bahan"
-                android:id="@+id/text2"
-                android:layout_marginLeft="11dp"
-                android:layout_marginStart="11dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_margin="5dp"
+                android:layout_below="@+id/txt_header">
+
+                <!-- header untuk tabel -->
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/relativeLayout"
+                    android:background="@color/Black">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/nama"
+                        android:padding="5dp"
+                        android:id="@+id/text2"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/Accent"
+                        android:layout_toStartOf="@+id/divider2"
+                        android:layout_toLeftOf="@+id/divider2" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:id="@+id/textView"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textSize="12sp"
+                        android:text="@string/harga"
+                        android:textColor="@color/Accent"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/divider"
+                        android:layout_toStartOf="@id/divider"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:id="@+id/textView23"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textSize="12sp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/porsi"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/divider3"
+                        android:textColor="@color/Accent"
+                        android:layout_toLeftOf="@+id/divider3" />
+
+                    <TextView
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text3"
+                        android:textSize="12sp"
+                        android:text="@string/biaya"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/Accent" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider"
+                        android:background="@color/Base"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/textView23"
+                        android:layout_toStartOf="@+id/textView23" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider2"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/textView"
+                        android:layout_toStartOf="@+id/textView" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider3"
+                        android:background="@color/Base"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/text3"
+                        android:layout_toStartOf="@+id/text3" />
+
+                </RelativeLayout>
+
+                <!-- isi tabel dan harga -->
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/relativeLayout"
+                    android:id="@+id/relativeLayout2">
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/listResepHijauan"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="2dp" />
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/listResepEnergi"
+                        android:layout_below="@id/listResepHijauan"
+                        android:layout_marginTop="2dp" />
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/listResepProtein"
+                        android:layout_below="@+id/listResepEnergi"
+                        android:layout_marginTop="2dp" />
+
+                </RelativeLayout>
+
+                <!-- total biaya dan pengeluaran per hari -->
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@id/relativeLayout2"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/Black">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/pengeluaran"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/textView6"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/White"
+                        android:layout_toLeftOf="@+id/divider6"
+                        android:layout_toStartOf="@+id/divider6" />
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider4"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/harga_hari"
+                        android:layout_toStartOf="@+id/harga_hari"/>
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="12sp"
+                        android:text="Harga"
+                        android:id="@+id/harga_hari"
+                        android:gravity="end"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/White" />
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider6"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/porsi_hari"
+                        android:layout_toStartOf="@+id/porsi_hari"/>
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="12sp"
+                        android:id="@+id/porsi_hari"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/divider4"
+                        android:layout_toStartOf="@id/divider4"
+                        android:textColor="@color/White" />
+                </RelativeLayout>
+
+                <!-- total biaya  -->
+                <RelativeLayout
+                    android:id="@+id/relativeLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/relativeLayout3"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/Black">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/divider5"
+                        android:layout_toStartOf="@+id/divider5"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Harga pakan"
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:id="@+id/text_harga_bulan"
+                            android:textColor="@color/White" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tagpengeluaran"
+                            android:textSize="9sp"
+                            android:gravity="start"
+                            android:textColor="@color/White" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider5"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/harga_bulan"
+                        android:layout_toStartOf="@id/harga_bulan"/>
+                    <TextView
+                        android:layout_width="122dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Harga"
+                        android:gravity="end"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/harga_bulan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/White" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- total keuntungan  -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tabel"
+                android:layout_margin="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/totMasuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/cyan">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/divider7"
+                        android:layout_toStartOf="@+id/divider7"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/masukTot"
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:id="@+id/totSuk"
+                            android:textColor="@color/White" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tagmasuk"
+                            android:textSize="9sp"
+                            android:gravity="start"
+                            android:textColor="@color/White" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider7"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/masuk"
+                        android:layout_toStartOf="@id/masuk"/>
+                    <TextView
+                        android:layout_width="122dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Harga"
+                        android:gravity="end"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/masuk"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/White" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/totUntung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/totMasuk"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/red">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/divider8"
+                        android:layout_toStartOf="@+id/divider8"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/untungTot"
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:textColor="@color/White" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/taguntung"
+                            android:textSize="9sp"
+                            android:gravity="start"
+                            android:textColor="@color/White" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/divider8"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/keuntungan"
+                        android:layout_toStartOf="@id/keuntungan"/>
+                    <TextView
+                        android:layout_width="122dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Harga"
+                        android:gravity="end"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/keuntungan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/White" />
+                </RelativeLayout>
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:id="@+id/listResepHijauan"
-            android:layout_below="@+id/relativeLayout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/listResepHijauan"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingTop="10dp"
-            android:id="@+id/relativeLayout2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="kamar"
-                android:id="@+id/text4"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="Proporsi" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="jumlah"
-                android:id="@+id/text5"
-                android:text="Harga"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/text4"
-                android:layout_toEndOf="@+id/text4"
-                android:layout_marginLeft="48dp"
-                android:layout_marginStart="48dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nama Bahan"
-                android:id="@+id/text6"
-                android:layout_marginLeft="11dp"
-                android:layout_marginStart="11dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:id="@+id/listResepEnergi"
-                android:layout_below="@+id/text4"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="kamar"
-                android:id="@+id/text7"
-                android:layout_gravity="center_horizontal"
-                android:text="Proporsi"
-                android:layout_below="@+id/listResepEnergi"
-                android:layout_alignLeft="@+id/text4"
-                android:layout_alignStart="@+id/text4"
-                android:paddingTop="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="jumlah"
-                android:id="@+id/text8"
-                android:text="Harga"
-                android:layout_alignTop="@+id/text7"
-                android:layout_alignLeft="@+id/text5"
-                android:layout_alignStart="@+id/text5"
-                android:paddingTop="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nama Bahan"
-                android:id="@+id/text9"
-                android:layout_alignTop="@+id/text7"
-                android:layout_alignLeft="@+id/text6"
-                android:layout_alignStart="@+id/text6"
-                android:paddingTop="10dp"/>
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:id="@+id/listResepProtein"
-                android:layout_below="@+id/text7"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-
-        </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="----------------------------------------------"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/textView5"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harga pakan tiap hari"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/text_harga_bulan"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harga"
-        android:id="@+id/harga_hari"
-        android:layout_marginRight="54dp"
-        android:layout_marginEnd="54dp"
-        android:layout_above="@+id/text_harga_bulan"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harga pakan"
-        android:id="@+id/text_harga_bulan"
-        android:layout_below="@+id/textView7"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harga"
-        android:id="@+id/harga_bulan"
-        android:layout_alignTop="@+id/text_harga_bulan"
-        android:layout_alignLeft="@+id/harga_hari"
-        android:layout_alignStart="@+id/harga_hari" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Keuntungan"
-        android:id="@+id/text_keuntungan"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/text_harga_bulan"
-        android:layout_alignLeft="@+id/text_harga_bulan"
-        android:layout_alignStart="@+id/text_harga_bulan" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harga"
-        android:id="@+id/keuntungan"
-        android:layout_alignTop="@+id/text_keuntungan"
-        android:layout_alignLeft="@+id/harga_bulan"
-        android:layout_alignStart="@+id/harga_bulan" />
-
-
-</RelativeLayout>
-
-
-
-
     </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

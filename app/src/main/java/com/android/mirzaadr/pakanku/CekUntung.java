@@ -97,7 +97,7 @@ public class CekUntung extends AppCompatActivity {
         editHari = (EditText) findViewById(R.id.editHari);
 
         Spinner spinner = (Spinner) findViewById(R.id.kilogram);
-        Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
+        //Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spinneritem, android.R.layout.simple_spinner_item);
@@ -105,7 +105,7 @@ public class CekUntung extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter);
+        //spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
 

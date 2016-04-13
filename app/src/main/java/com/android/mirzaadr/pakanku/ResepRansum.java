@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -99,15 +101,31 @@ public class ResepRansum extends AppCompatActivity {
         this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
         this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
 
-        RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) mListviewResepHijauan.getLayoutParams();
-        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) mListviewResepEnergi.getLayoutParams();
-        RelativeLayout.LayoutParams lp3 = (RelativeLayout.LayoutParams) mListviewResepProtein.getLayoutParams();
-        lp1.height = 63*panjangListHijauan;
-        lp2.height = 63*panjangListEnergi;
-        lp3.height = 63*panjangListProtein;
-        mListviewResepHijauan.setLayoutParams(lp1);
-        mListviewResepEnergi.setLayoutParams(lp2);
-        mListviewResepProtein.setLayoutParams(lp3);
+        Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
+        Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
+        Utility.setListViewHeightBasedOnChildren(mListviewResepProtein);
 
+    }
+
+    //Test scrollview custom
+    public static class Utility {
+        public static void setListViewHeightBasedOnChildren(ListView listView) {
+            ListAdapter listAdapter = listView.getAdapter();
+            if (listAdapter == null) {
+                // pre-condition
+                return;
+            }
+
+            int totalHeight = 0;
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+        }
     }
 }

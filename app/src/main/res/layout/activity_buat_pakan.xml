@@ -91,8 +91,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/buttonPrev"
             android:background="@drawable/pre_button" />
 
@@ -119,8 +119,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/nex_button" />
 
         <LinearLayout
