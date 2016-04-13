@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -67,13 +68,10 @@ public class ListEdittextAdapter extends BaseAdapter {
         final Bahan currentItem = getItem(position);
         if(currentItem != null) {
 
-
-
-
-
-            //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
             holder.txtBahanEdit.setText(currentItem.getNamaBahan());
             holder.editHarga.setText(currentItem.getHarga_baru());
+
+            holder.txtBahanEdit.setTypeface(null, Typeface.BOLD);
 
             holder.editHarga.addTextChangedListener(new TextWatcher() {
                 @Override
