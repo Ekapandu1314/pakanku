@@ -1,47 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_below="@+id/txt_header"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
+    android:background="@color/Button">
 
+    <!-- table divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="2dp"
+        android:layout_height="35dp"
+        android:background="@color/Base"
+        android:layout_centerInParent="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView23"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/uang"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/editHarga"
-        android:layout_toStartOf="@id/editHarga"/>
-
+    <!-- TextView Nama Bahan -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nama"
         android:id="@+id/bahan_edittext"
+        android:textColor="@color/White"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        android:layout_alignTop="@+id/textView23"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/textView23"
-        android:layout_toStartOf="@id/textView23" />
+        android:layout_toLeftOf="@+id/layout5"
+        android:layout_toStartOf="@id/layout5" />
 
-    <EditText
-        android:layout_width="100dp"
+    <RelativeLayout
+        android:id="@+id/layout5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editHarga"
         android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/divider"
+        android:layout_toEndOf="@+id/divider"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginEnd="19dp" />
+        android:layout_alignParentEnd="true">
 
+        <!-- TextView Rp. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView23"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="@string/uang"
+            android:textColor="@color/White"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/editHarga"
+            android:layout_toStartOf="@id/editHarga"/>
+        <!-- EditText input harga -->
+        <EditText
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:id="@+id/editHarga"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:textColor="@color/White"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:ems="10"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

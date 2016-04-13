@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".InputHarga"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".ResepRansumRecord"
             android:theme="@style/AppTheme.NoActionBar"></activity>

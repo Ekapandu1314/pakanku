@@ -1,47 +1,115 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Base">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <!--
         <TextView
             android:id="@+id/txt_header"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="32dp"
             android:layout_centerHorizontal="true"
-            android:background="#000"
+            android:background="@color/Shade"
             android:gravity="center"
-            android:text="Resep Ransum"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Input Harga"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:id="@+id/listEdit"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txt_header" />
+            -->
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_below="@+id/txt_header"
+            android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/layot"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#23421C"
+            android:layout_gravity="center_horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/divider"
+                android:layout_toStartOf="@+id/divider"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nama"
+                    android:id="@+id/table"
+                    android:textColor="@color/White"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="32dp"
+                android:id="@+id/divider"
+                android:background="@color/Base"
+                android:layout_centerInParent="true"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/divider"
+                android:layout_toEndOf="@+id/divider"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/harga"
+                    android:textColor="@color/White"
+                    android:id="@+id/table2"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layot"
+            android:paddingTop="2dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listEdit" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:text="Check"
+            android:textColor="@color/Base"
             android:id="@+id/button6"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:background="@drawable/button_custom"
+            android:layout_below="@+id/listEdit"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:onClick="checkHargaBaru" />
 
-
+        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
+    </ScrollView>
 
 
-
-
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

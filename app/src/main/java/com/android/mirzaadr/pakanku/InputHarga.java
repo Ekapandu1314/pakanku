@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -48,19 +50,16 @@ public class InputHarga extends Activity {
         mAdapter = new ListEdittextAdapter(this, mListBahan);
         mListviewBahan.setAdapter(mAdapter);
 
-        RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) mListviewBahan.getLayoutParams();
-        lp1.height = 70*mListBahan.size();
+        //RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) mListviewBahan.getLayoutParams();
+        //lp1.height = 70*mListBahan.size();
 
-
-
+        Utility.setListViewHeightBasedOnChildren(mListviewBahan);
 
     }
 
     private void initViews() {
-
         this.mListviewBahan = (ListView) findViewById(R.id.listEdit);
         //this.mTxtEmptyListBahan = (TextView) findViewById(R.id.txt_empty_list_companies);
-
         //this.mListviewBahan.setOnItemClickListener(this);
 
     }
@@ -185,6 +184,28 @@ public class InputHarga extends Activity {
         LoginAsync la = new LoginAsync();
         la.execute(link);
 
+    }
+
+    //Test scrollview custom
+    public static class Utility {
+        public static void setListViewHeightBasedOnChildren(ListView listView) {
+            ListAdapter listAdapter = listView.getAdapter();
+            if (listAdapter == null) {
+                // pre-condition
+                return;
+            }
+
+            int totalHeight = 0;
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+        }
     }
 
 
