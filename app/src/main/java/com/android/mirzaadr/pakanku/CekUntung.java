@@ -68,7 +68,7 @@ public class CekUntung extends AppCompatActivity {
     String tujuan;
     String nama;
     double berat1;
-    double berat2;
+    double produk;
     int jumlah;
     int lama;
 
@@ -98,8 +98,8 @@ public class CekUntung extends AppCompatActivity {
         buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
         buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
 
-        editBobot = (EditText) findViewById(R.id.editbobot);
-        editBobot2 = (EditText) findViewById(R.id.editbobot2);
+        editBobot = (EditText) findViewById(R.id.editbobot2);
+        editBobot2 = (EditText) findViewById(R.id.editbobot);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
@@ -627,7 +627,7 @@ public class CekUntung extends AppCompatActivity {
                         var_resep.putString("hewan", hewan);
                         var_resep.putString("tujuan", tujuan);
                         var_resep.putDouble("berat1", berat1);
-                        var_resep.putDouble("berat2", berat2);
+                        var_resep.putDouble("produk", produk);
                         var_resep.putInt("jumlah", jumlah);
                         var_resep.putInt("lama", lama);
                         intent.putExtras(var_resep);
@@ -680,16 +680,16 @@ public class CekUntung extends AppCompatActivity {
 
             }
 
-            if(editBobot.getText().toString().trim().length() > 0) {
+            if(editBobot2.getText().toString().trim().length() > 0) {
 
-                if(editBobot.getText().toString().equals("0")) {
+                if(editBobot2.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Produk tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
                 else {
 
-                    berat1 = Double.parseDouble(editBobot.getText().toString());
+                    produk = Double.parseDouble(editBobot2.getText().toString());
 
                 }
 
@@ -760,16 +760,16 @@ public class CekUntung extends AppCompatActivity {
 
             }
 
-            if(editBobot2.getText().toString().trim().length() > 0) {
+            if(editBobot.getText().toString().trim().length() > 0) {
 
-                if(editBobot2.getText().toString().equals("0")) {
+                if(editBobot.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
                 else {
 
-                    berat2 = Double.parseDouble(editBobot2.getText().toString());
+                    berat1 = Double.parseDouble(editBobot2.getText().toString());
 
                 }
 

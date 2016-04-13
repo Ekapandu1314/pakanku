@@ -38,11 +38,13 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
     int date_calendar;
     int year_calendar;
 
+
+
     String hewan;
     String tujuan;
     String nama;
     double berat1;
-    double berat2 = 0;
+    double produk = 0;
     int jumlah;
     int lama;
 
@@ -75,7 +77,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         hewan = i.getExtras().getString("hewan");
         tujuan = i.getExtras().getString("tujuan");
         berat1= i.getExtras().getDouble("berat1");
-        berat2 = i.getExtras().getDouble("berat2");
+        produk = i.getExtras().getDouble("produk");
         jumlah = i.getExtras().getInt("jumlah");
         lama = i.getExtras().getInt("lama");
 
@@ -142,7 +144,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         if (j == 3) {
 
-            if (berat2 == 0) {
+            if (produk == 0) {
 
                 HitungPakan();
                 //Toast.makeText(getBaseContext(), "berat 2 kosong", Toast.LENGTH_SHORT).show();
@@ -345,11 +347,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double sbr_energi_kg = (prs_sbr_energi * bk_konsentrat)/100;
         double sbr_protein_kg = (prs_sbr_protein * bk_konsentrat)/100;
 
-        StringBuffer responseText2 = new StringBuffer();
-
-        DecimalFormat df2 = new DecimalFormat("##.###");
-
-        responseText2.append("Hijauan...");
+        DecimalFormat df2 = new DecimalFormat("##.");
 
         double asfeed_hijauan[] = new double[10];
         int harga_total = 0;
@@ -357,14 +355,11 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < j; i++) {
 
-            asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i])/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
+            asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
 
             harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga());
 
             harga_total += harga_hijauan[i];
-
-            responseText2.append("\n" + mBahanDao.getBahanById(hijau[i]).getNamaBahan() + " = " + df2.format(asfeed_hijauan[i]) + "kg (asfeed), Harga = Rp. " + harga_hijauan[i]);
-
 
         }
 
@@ -372,19 +367,15 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double asfeed_energi[] = new double[10];
         int harga_energi_akhir[] = new int[10];
 
-        responseText2.append("\n\nEnergi...");
-
         for (int i = 0; i < k; i++) {
 
             jml_energi[i] = (perbandingan_energi[i] * sbr_energi_kg)/100;
 
-            asfeed_energi[i] = (jml_energi[i] * 100)/mBahanDao.getBahanById(energi[i]).getBk_prs();
+            asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
 
             harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga());
 
             harga_total += harga_energi_akhir[i];
-
-            responseText2.append("\n" + mBahanDao.getBahanById(energi[i]).getNamaBahan() + " = " + df2.format(asfeed_energi[i]) + "kg (asfeed), Harga = Rp. " + harga_energi_akhir[i]);
 
         }
 
@@ -392,41 +383,33 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double asfeed_protein[] = new double[10];
         int harga_protein_akhir[] = new int[10];
 
-        responseText2.append("\n\nProtein...");
-
         for (int i = 0; i < l; i++) {
 
             jml_protein[i] = (perbandingan_protein[i] * sbr_protein_kg)/100;
 
-            asfeed_protein[i] = (jml_protein[i] * 100)/mBahanDao.getBahanById(protein[i]).getBk_prs();
+            asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
 
             harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga());
 
             harga_total += harga_protein_akhir[i];
 
-            responseText2.append("\n" + mBahanDao.getBahanById(protein[i]).getNamaBahan() + " = " + df2.format(asfeed_protein[i]) + "kg (asfeed), Harga = Rp. " + harga_protein_akhir[i]);
-
         }
 
+        int biaya_pakan = lama * harga_total * jumlah;
 
-        int hari = lama * 30;
-        int biaya_pakan = hari * harga_total;
-
-        responseText2.append("\n\nHarga Total = Rp. " + String.valueOf(harga_total) + "/hari");
-
-        Toast.makeText(getApplicationContext(),responseText2, Toast.LENGTH_LONG).show();
-
-        Resep resep = new Resep();
-
-        //Bahan haha = new Bahan(1, "Nama", 1.0, 1.0, "Kategori", 15000);
+        Resep resep;
 
         List<Resep> newlistResepHijauan = new ArrayList<Resep>();
         List<Resep> newlistResepEnergi = new ArrayList<Resep>();
         List<Resep> newlistResepProtein = new ArrayList<Resep>();
 
+        double asfeed_total = 0;
+
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+
+            asfeed_total += asfeed_hijauan[i];
 
             newlistResepHijauan.add(resep);
 
@@ -434,7 +417,9 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+
+            asfeed_total += asfeed_energi[i];
 
             newlistResepEnergi.add(resep);
 
@@ -443,7 +428,9 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < l; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(protein[i]).getHarga()),df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
+
+            asfeed_total += asfeed_protein[i];
 
             newlistResepProtein.add(resep);
 
@@ -460,15 +447,13 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         newIntent.putExtra("resephijauan", (Serializable) newlistResepHijauan);
         newIntent.putExtra("resepenergi", (Serializable) newlistResepEnergi);
         newIntent.putExtra("resepprotein", (Serializable) newlistResepProtein);
-        var_resep.putInt("jmlhijauan", j);
-        var_resep.putInt("jmlenergi", k);
-        var_resep.putInt("jmlprotein", l);
+        var_resep.putInt("asfeedtotal", (int)asfeed_total);
         var_resep.putInt("hargahari", harga_total);
-        var_resep.putInt("hargabulan", biaya_pakan);
+        var_resep.putInt("hargatotal", biaya_pakan);
+        var_resep.putInt("jmlternak", jumlah);
         var_resep.putInt("lama", lama);
         newIntent.putExtras(var_resep);
         startActivity(newIntent);
-
     }
 
     public void CekUntung() {
@@ -644,11 +629,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double sbr_energi_kg = (prs_sbr_energi * bk_konsentrat)/100;
         double sbr_protein_kg = (prs_sbr_protein * bk_konsentrat)/100;
 
-        StringBuffer responseText2 = new StringBuffer();
-
-        DecimalFormat df2 = new DecimalFormat("##.###");
-
-        responseText2.append("Hijauan...");
+        DecimalFormat df2 = new DecimalFormat("##.");
 
         double asfeed_hijauan[] = new double[10];
         int harga_total = 0;
@@ -656,14 +637,11 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < j; i++) {
 
-            asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i])/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
+            asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
 
             harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga());
 
             harga_total += harga_hijauan[i];
-
-            responseText2.append("\n" + mBahanDao.getBahanById(hijau[i]).getNamaBahan() + " = " + df2.format(asfeed_hijauan[i]) + "kg (asfeed), Harga = Rp. " + harga_hijauan[i]);
-
 
         }
 
@@ -671,19 +649,15 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double asfeed_energi[] = new double[10];
         int harga_energi_akhir[] = new int[10];
 
-        responseText2.append("\n\nEnergi...");
-
         for (int i = 0; i < k; i++) {
 
             jml_energi[i] = (perbandingan_energi[i] * sbr_energi_kg)/100;
 
-            asfeed_energi[i] = (jml_energi[i] * 100)/mBahanDao.getBahanById(energi[i]).getBk_prs();
+            asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
 
             harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga());
 
             harga_total += harga_energi_akhir[i];
-
-            responseText2.append("\n" + mBahanDao.getBahanById(energi[i]).getNamaBahan() + " = " + df2.format(asfeed_energi[i]) + "kg (asfeed), Harga = Rp. " + harga_energi_akhir[i]);
 
         }
 
@@ -691,43 +665,53 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         double asfeed_protein[] = new double[10];
         int harga_protein_akhir[] = new int[10];
 
-        responseText2.append("\n\nProtein...");
-
         for (int i = 0; i < l; i++) {
 
             jml_protein[i] = (perbandingan_protein[i] * sbr_protein_kg)/100;
 
-            asfeed_protein[i] = (jml_protein[i] * 100)/mBahanDao.getBahanById(protein[i]).getBk_prs();
+            asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
 
             harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga());
 
             harga_total += harga_protein_akhir[i];
 
-            responseText2.append("\n" + mBahanDao.getBahanById(protein[i]).getNamaBahan() + " = " + df2.format(asfeed_protein[i]) + "kg (asfeed), Harga = Rp. " + harga_protein_akhir[i]);
+        }
+
+        int biaya_pakan = lama * harga_total * jumlah;
+
+        String textProduk = new String();
+        int keuntungan = 0;
+        int penjualan_produk = 0;
+
+        if(tujuan.equals("Potong")) {
+
+            double kenaikan_bobot = lama * produk;
+            penjualan_produk = (int)(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual() * kenaikan_bobot * jumlah);
+            keuntungan = penjualan_produk - biaya_pakan;
+            textProduk = "kg";
+
+        }
+        else if (tujuan.equals("Perah")) {
+
+            penjualan_produk = (int)(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual() * produk * jumlah);
+            keuntungan = penjualan_produk - biaya_pakan;
+            textProduk = "lt";
 
         }
 
-
-        int hari = lama * 30;
-        int biaya_pakan = hari * harga_total;
-        double adg = berat1 - berat2;
-        double kenaikan_bobot = hari * adg;
-        int penjualan_daging = (int)(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual() * kenaikan_bobot);
-        int keuntungan = penjualan_daging - biaya_pakan;
-
-        responseText2.append("\n\nHarga Total = Rp. " + String.valueOf(harga_total) + "/hari\nKeuntungan = Rp. " + keuntungan);
-
-        Toast.makeText(getApplicationContext(),responseText2, Toast.LENGTH_LONG).show();
-
-        Resep resep = new Resep();
+        Resep resep;
 
         List<Resep> newlistResepHijauan = new ArrayList<Resep>();
         List<Resep> newlistResepEnergi = new ArrayList<Resep>();
         List<Resep> newlistResepProtein = new ArrayList<Resep>();
 
+        double asfeed_total = 0;
+
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+
+            asfeed_total += asfeed_hijauan[i];
 
             newlistResepHijauan.add(resep);
 
@@ -735,7 +719,9 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+
+            asfeed_total += asfeed_energi[i];
 
             newlistResepEnergi.add(resep);
 
@@ -744,7 +730,9 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         for (int i = 0; i < l; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]));
+            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
+
+            asfeed_total += asfeed_protein[i];
 
             newlistResepProtein.add(resep);
 
@@ -761,13 +749,16 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
         newIntent.putExtra("resephijauan", (Serializable) newlistResepHijauan);
         newIntent.putExtra("resepenergi", (Serializable) newlistResepEnergi);
         newIntent.putExtra("resepprotein", (Serializable) newlistResepProtein);
-        var_resep.putInt("jmlhijauan", j);
-        var_resep.putInt("jmlenergi", k);
-        var_resep.putInt("jmlprotein", l);
+        var_resep.putInt("asfeedtotal", (int)asfeed_total);
         var_resep.putInt("hargahari", harga_total);
-        var_resep.putInt("hargabulan", biaya_pakan);
-        var_resep.putInt("keuntungan", keuntungan);
+        var_resep.putInt("hargatotal", biaya_pakan);
+        var_resep.putInt("hargaproduk", mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual());
+        var_resep.putDouble("produk", produk);
+        var_resep.putInt("jmlternak", jumlah);
+        var_resep.putString("textproduk", textProduk);
         var_resep.putInt("lama", lama);
+        var_resep.putInt("totalpemasukan", penjualan_produk);
+        var_resep.putInt("keuntungan", keuntungan);
         newIntent.putExtras(var_resep);
         startActivity(newIntent);
     }
