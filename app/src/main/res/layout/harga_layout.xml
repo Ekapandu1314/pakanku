@@ -171,8 +171,6 @@
             android:layout_height="wrap_content">
         </ListView>
 
-
-
         <!-- Layout untuk sumber Energi -->
         <TextView
             android:layout_width="match_parent"
