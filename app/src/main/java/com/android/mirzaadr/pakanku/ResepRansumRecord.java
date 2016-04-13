@@ -139,7 +139,7 @@ public class ResepRansumRecord extends Activity {
         this.textviewHargaBulan = (TextView) findViewById(R.id.harga_bulan);
         this.textviewTextHargaBulan = (TextView) findViewById(R.id.text_harga_bulan);
         this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
-        this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
+        //this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
 
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);

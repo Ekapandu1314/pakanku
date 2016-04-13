@@ -301,12 +301,190 @@
                 android:layout_below="@+id/tabel"
                 android:layout_margin="5dp">
 
+
                 <RelativeLayout
-                    android:id="@+id/totMasuk"
+                    android:id="@+id/dataMasuk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="2dp"
+                    android:background="@color/cyan">
+
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text32"
+                        android:padding="5dp"
+                        android:text="@string/datamasuk1"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/White" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/divider10"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/text32"
+                        android:layout_toEndOf="@id/text32"/>
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text33"
+                        android:text="@string/datamasuk2"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/divider10"
+                        android:layout_toEndOf="@id/divider10"
+                        android:textColor="@color/White" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/divider11"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/text33"
+                        android:layout_toEndOf="@id/text33"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text34"
+                        android:padding="5dp"
+                        android:text="@string/datamasuk3"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/White"
+                        android:layout_toRightOf="@+id/divider11"
+                        android:layout_toEndOf="@+id/divider11"
+                        android:layout_toLeftOf="@+id/divider9"
+                        android:layout_toStartOf="@+id/divider9" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/divider9"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/text31"
+                        android:layout_toStartOf="@id/text31"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:id="@+id/text31"
+                        android:text="@string/datamasuk4"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/White" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/isiMasuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dataMasuk"
+                    android:background="@color/White">
+
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text42"
+                        android:padding="5dp"
+                        android:text="@string/uang"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/cyan" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/divider20"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/text42"
+                        android:layout_toEndOf="@id/text42"/>
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text43"
+                        android:text="@string/banyak"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/divider20"
+                        android:layout_toEndOf="@id/divider20"
+                        android:textColor="@color/cyan" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/divider21"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/text43"
+                        android:layout_toEndOf="@id/text43"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:id="@+id/text44"
+                        android:padding="5dp"
+                        android:text="@string/lama"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/cyan"
+                        android:layout_toRightOf="@+id/divider21"
+                        android:layout_toEndOf="@+id/divider21"
+                        android:layout_toLeftOf="@+id/divider29"
+                        android:layout_toStartOf="@+id/divider29" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/divider29"
+                        android:background="@color/Base"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/text41"
+                        android:layout_toStartOf="@id/text41"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:id="@+id/text41"
+                        android:text="@string/kilogram"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/cyan" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/totMasuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/isiMasuk"
+                    android:layout_marginTop="5dp"
                     android:background="@color/cyan">
                     <LinearLayout
                         android:layout_width="wrap_content"

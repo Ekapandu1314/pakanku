@@ -72,7 +72,7 @@ public class ResepRansum extends AppCompatActivity {
         textviewHargaHari.setText("Rp. " + hargaHari);
         textviewHargaBulan.setText("Rp. " + hargaBulan);
         textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
-        textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
+        //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
 
         if(Keuntungan != 0) {
 
@@ -99,7 +99,7 @@ public class ResepRansum extends AppCompatActivity {
         this.textviewHargaBulan = (TextView) findViewById(R.id.harga_bulan);
         this.textviewTextHargaBulan = (TextView) findViewById(R.id.text_harga_bulan);
         this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
-        this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
+        //this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
 
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
