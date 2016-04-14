@@ -706,7 +706,7 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
+            
             if (editBobot.getText().toString().trim().length() > 0) {
 
                 if (editBobot.getText().toString().equals("0")) {
@@ -799,6 +799,7 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
+
 
         }
     }

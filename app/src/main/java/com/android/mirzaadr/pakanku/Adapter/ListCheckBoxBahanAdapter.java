@@ -77,10 +77,6 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) holder.chckBahan;
                     Bahan bahanx = (Bahan) cb.getTag();
-                    Toast.makeText(v.getContext(),
-                            "Clicked on Checkbox: " + currentItem.getNamaBahan() +
-                                    " is " + cb.isChecked(),
-                            Toast.LENGTH_SHORT).show();
                     currentItem.setSelected(cb.isChecked());
                 }
             });
