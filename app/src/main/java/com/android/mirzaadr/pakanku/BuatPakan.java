@@ -657,6 +657,7 @@ public class BuatPakan extends AppCompatActivity {
 
             }
 
+
             if (editBobot.getText().toString().trim().length() > 0) {
 
                 if (editBobot.getText().toString().equals("0")) {
@@ -697,7 +698,6 @@ public class BuatPakan extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
 
             if (editHari.getText().toString().trim().length() > 0) {
 

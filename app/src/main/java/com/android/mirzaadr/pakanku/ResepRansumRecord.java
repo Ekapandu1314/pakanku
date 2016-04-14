@@ -138,7 +138,7 @@ public class ResepRansumRecord extends Activity {
             textviewProduksi.setText(String.valueOf(produk) + " " + textProduk);
             textviewTotalPemasukan.setText("Rp. " + String.valueOf(penjualan_produk));
             textviewTextTotalPemasukan.setText("Rp. " + String.valueOf(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual()) +
-                                                      " x "  + jumlah + " ekor x " + String.valueOf(produk) + " " + textProduk);
+                                                      " x "  + jumlah + " ekor x " + String.valueOf(produk) + " " + textProduk + " x " + lama + " hari");
             textviewTotalUntung.setText("Rp. " + keuntungan);
             textviewTextTotalUntung.setText("Rp. " + String.valueOf(penjualan_produk) + " - " + "Rp. " + biaya_pakan);
 

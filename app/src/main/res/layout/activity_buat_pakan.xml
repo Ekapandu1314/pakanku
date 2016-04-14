@@ -320,7 +320,7 @@
             android:layout_width="270dp"
             android:layout_height="32dp"
             android:inputType="number"
-            android:hint="@string/byk_ternak"
+            android:hint="hari"
             android:ems="10"
             android:textSize="15sp"
             android:id="@+id/editHari"

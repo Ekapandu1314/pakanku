@@ -643,6 +643,4 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.progressdialog);
         return dialog;
     }
-
-
 }
