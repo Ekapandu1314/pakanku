@@ -20,19 +20,20 @@
 
     <!-- Tanggal Input -->
     <TextView
-        android:id="@+id/tanggal_record"
+        android:id="@+id/nama_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:layout_toEndOf="@+id/thumbnail"
         android:textColor="@color/Accent"
-        android:text="@string/tanggal"
+        android:text="@string/hewan"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <!-- Nama hewan -->
     <TextView
-        android:id="@+id/nama_record"
+        android:id="@+id/tanggal_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
@@ -40,8 +41,8 @@
         android:layout_alignParentRight="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/Accent"
-        android:text="@string/hewan"
-        android:textStyle="bold" />
+        android:text="@string/tanggal"
+         />
 
     <RelativeLayout
         android:layout_width="match_parent"
