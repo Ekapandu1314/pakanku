@@ -2,6 +2,7 @@ package com.android.mirzaadr.pakanku;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,7 +85,10 @@ public class Paket_energi extends Fragment implements interfaces.FragmentCommuni
     @Override
     public void passDataToFragment(String haha){
 
+        String bahanid = null;
+
         if(haha.toString().equals("energi")){
+
 
             StringBuffer responseText = new StringBuffer();
 
@@ -92,13 +97,35 @@ public class Paket_energi extends Fragment implements interfaces.FragmentCommuni
                 Bahan bahanxv = bahanxxxx.get(i);
                 if (bahanxv.isSelected()) {
                     responseText.append("-" + bahanxv.getIdbahan());
+
                 }
 
             }
 
-            String bahanid = responseText.toString();
+            bahanid = responseText.toString();
 
-            activityCommunicator.passDataToActivity(bahanid);
+            if(bahanid.equals("")) {
+
+                TabLayout layout = (TabLayout) getActivity().findViewById(R.id.tabsbahan);
+
+                Toast.makeText(getActivity(), "Bahan sumber energi tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                bahanid = "";
+
+                activityCommunicator.passDataToActivity("haha");
+
+                layout.getTabAt(1).select();
+
+            }
+            else {
+
+                activityCommunicator.passDataToActivity(bahanid);
+
+                bahanid = "";
+
+            }
+
+
 
             //Toast.makeText(getActivity(), bahanid, Toast.LENGTH_SHORT).show();
         }

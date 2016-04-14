@@ -49,7 +49,7 @@ public class ListTipsAdapter extends BaseAdapter {
 		data = arraylist;
 		//imageLoader = new ImageLoader(context);
 		options = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.ic_stub)
+				.showImageOnLoading(R.drawable.ic_empty)
 				.showImageForEmptyUri(R.drawable.ic_empty)
 				.showImageOnFail(R.drawable.ic_error)
 				.cacheInMemory(true)

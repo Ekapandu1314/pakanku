@@ -135,8 +135,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Kambing")) {
@@ -144,9 +144,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Domba")) {
@@ -154,9 +154,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
 
         }
@@ -164,8 +164,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_kerja.setClickable(false);
             check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.INVISIBLE);
-            layoutPerah.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.GONE);
+            layoutPerah.setVisibility(View.GONE);
 
         }
 
@@ -418,8 +418,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Kambing")) {
@@ -427,9 +427,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Domba")) {
@@ -437,9 +437,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
 
         }
@@ -447,8 +447,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_kerja.setClickable(false);
             check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.INVISIBLE);
-            layoutPerah.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.GONE);
+            layoutPerah.setVisibility(View.GONE);
 
         }
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
@@ -485,8 +485,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Kambing")) {
@@ -494,9 +494,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
         }
         else if(hewan.equals("Domba")) {
@@ -504,9 +504,9 @@ public class BuatPakan extends AppCompatActivity {
             check_kerja.setClickable(false);
             check_hobi.setClickable(false);
             check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.INVISIBLE);
-            layoutHobi.setVisibility(View.INVISIBLE);
-            layoutKerja.setVisibility(View.INVISIBLE);
+            layoutPetelur.setVisibility(View.GONE);
+            layoutHobi.setVisibility(View.GONE);
+            layoutKerja.setVisibility(View.GONE);
 
 
         }
@@ -514,8 +514,8 @@ public class BuatPakan extends AppCompatActivity {
 
             check_kerja.setClickable(false);
             check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.INVISIBLE);
-            layoutPerah.setVisibility(View.INVISIBLE);
+            layoutKerja.setVisibility(View.GONE);
+            layoutPerah.setVisibility(View.GONE);
 
         }
 

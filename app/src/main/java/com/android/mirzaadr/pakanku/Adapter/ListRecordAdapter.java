@@ -115,14 +115,10 @@ public class ListRecordAdapter extends BaseAdapter {
 
             }
             else {
-
                 holder.thumbTujuan.setImageResource(R.drawable.fail);
 
-            }
-
+           }
         }
-
-
         return v;
     }
 

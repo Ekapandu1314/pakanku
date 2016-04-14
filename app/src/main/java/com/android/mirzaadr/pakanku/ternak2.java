@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
@@ -46,6 +48,8 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
     int jumlah;
     int lama;
 
+    Fragment myFragment;
+
     String bahanid = new String();
 
     int j = 0;
@@ -81,6 +85,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsbahan);
         tabLayout.setupWithViewPager(mViewPager);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -121,24 +126,39 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
     }
 
     public void ResumeClick(View v) {
-        //Intent intent = new Intent(this, ResepRansum.class);
         fragmentCommunicator1.passDataToFragment("energi");
         fragmentCommunicator2.passDataToFragment("hijauan");
         fragmentCommunicator3.passDataToFragment("protein");
-          //startActivity(intent);
     }
-
 
     public void passDataToActivity(String someValue){
 
 
-        if(!someValue.equals(null)) {
+        if(!someValue.equals(null) && !someValue.equals("haha")) {
 
             j++;
 
             bahanid = someValue+bahanid;
 
         }
+        else if (someValue.equals("")){
+
+            j = 0 ;
+
+        }
+        else if (someValue.equals(null)){
+
+            j=0;
+
+        }
+        else if (someValue.equals("haha")){
+
+            j=0;
+            bahanid = "";
+
+        }
+
+
 
         if (j == 3) {
 

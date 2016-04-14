@@ -2,6 +2,7 @@ package com.android.mirzaadr.pakanku;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -85,7 +86,11 @@ public class Paket_hijauan extends Fragment implements interfaces.FragmentCommun
     @Override
     public void passDataToFragment(String haha){
 
+        String bahanid = "";
+
         if(haha.toString().equals("hijauan")){
+
+
 
             StringBuffer responseText = new StringBuffer();
 
@@ -98,9 +103,28 @@ public class Paket_hijauan extends Fragment implements interfaces.FragmentCommun
 
             }
 
-            String bahanid = responseText.toString();
+            bahanid = responseText.toString();
 
-            activityCommunicator.passDataToActivity(bahanid);
+            if(bahanid.equals("")) {
+
+                TabLayout layout = (TabLayout) getActivity().findViewById(R.id.tabsbahan);
+
+                Toast.makeText(getActivity(), "Bahan hijauan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                bahanid = "";
+
+                activityCommunicator.passDataToActivity("haha");
+
+                layout.getTabAt(0).select();
+
+            }
+            else {
+
+                activityCommunicator.passDataToActivity(bahanid);
+
+                bahanid = "";
+
+            }
 
             //Toast.makeText(getActivity(), bahanid, Toast.LENGTH_SHORT).show();
         }
