@@ -29,15 +29,7 @@ public class Info_harga extends Fragment {
 
     private ListView mListviewHijau, mListviewEnergi, mListviewProtein;
 
-    private ListBahanHargaAdapter mAdapterHijauan;
-    private ListBahanHargaAdapter mAdapterEnergi;
-    private ListBahanHargaAdapter mAdapterProtein;
 
-    private List<Bahan> mListHargaHijauan;
-    private List<Bahan> mListHargaEnergi;
-    private List<Bahan> mListHargaProtein;
-
-    private BahanDAO mBahanDao;
 
     View view;
 
@@ -51,6 +43,16 @@ public class Info_harga extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.harga_layout, container, false);
+
+        ListBahanHargaAdapter mAdapterHijauan;
+        ListBahanHargaAdapter mAdapterEnergi;
+        ListBahanHargaAdapter mAdapterProtein;
+
+        List<Bahan> mListHargaHijauan;
+        List<Bahan> mListHargaEnergi;
+        List<Bahan> mListHargaProtein;
+
+        BahanDAO mBahanDao;
 
         mBahanDao = new BahanDAO(getActivity());
         // fill the listView

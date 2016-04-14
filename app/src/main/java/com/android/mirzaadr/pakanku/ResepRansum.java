@@ -93,6 +93,8 @@ public class ResepRansum extends AppCompatActivity {
         mListviewResepEnergi.setAdapter(mAdapterEnergi);
         mListviewResepProtein.setAdapter(mAdapterProtein);
 
+        initListHeight();
+
         textviewHargaHari.setText("Rp. " + harga_total);
         textviewHargaBulan.setText("Rp. " + biaya_pakan);
         textviewTextHargaBulan.setText("Pengeluaran selama " + lama + " hari");
@@ -142,12 +144,15 @@ public class ResepRansum extends AppCompatActivity {
         this.textviewTextTotalUntung = (TextView) findViewById(R.id.textTextTotalUntung);
         this.layoutUntung = (RelativeLayout) findViewById(R.id.layoutUntung);
 
-        Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
-        Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
-        Utility.setListViewHeightBasedOnChildren(mListviewResepProtein);
+
 
     }
 
+    private void initListHeight(){
+        Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
+        Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
+        Utility.setListViewHeightBasedOnChildren(mListviewResepProtein);
+    }
     //Test scrollview custom
     public static class Utility {
         public static void setListViewHeightBasedOnChildren(ListView listView) {

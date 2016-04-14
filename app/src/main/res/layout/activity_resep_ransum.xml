@@ -138,30 +138,28 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_below="@+id/relativeLayout"
                     android:id="@+id/relativeLayout2">
 
                     <ListView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/listResepHijauan"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="2dp" />
+                        android:layout_alignParentTop="true" />
 
                     <ListView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/listResepEnergi"
-                        android:layout_below="@id/listResepHijauan"
-                        android:layout_marginTop="2dp" />
+                        android:layout_below="@id/listResepHijauan" />
 
                     <ListView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/listResepProtein"
-                        android:layout_below="@+id/listResepEnergi"
-                        android:layout_marginTop="2dp" />
+                        android:layout_below="@+id/listResepEnergi" />
 
                 </RelativeLayout>
 
@@ -520,7 +518,7 @@
                     </LinearLayout>
                     <View
                         android:layout_width="2dp"
-                        android:layout_height="35dp"
+                        android:layout_height="40dp"
                         android:id="@+id/divider7"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"

@@ -121,6 +121,8 @@ public class ResepRansumRecord extends Activity {
         mListviewResepEnergi.setAdapter(mAdapterEnergi);
         mListviewResepProtein.setAdapter(mAdapterProtein);
 
+        initListHeight();
+
         textviewHargaHari.setText("Rp. " + harga_total);
         textviewHargaBulan.setText("Rp. " + biaya_pakan);
         textviewTextHargaBulan.setText("Pengeluaran selama " + lama + " hari");
@@ -146,6 +148,7 @@ public class ResepRansumRecord extends Activity {
             layoutUntung.setVisibility(View.GONE);
 
         }
+
     }
 
     private void initViewResep() {
@@ -168,11 +171,12 @@ public class ResepRansumRecord extends Activity {
         this.textviewTotalUntung = (TextView) findViewById(R.id.textTotalUntung);
         this.textviewTextTotalUntung = (TextView) findViewById(R.id.textTextTotalUntung);
         this.layoutUntung = (RelativeLayout) findViewById(R.id.layoutUntung);
+    }
 
+    private void initListHeight(){
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
         Utility.setListViewHeightBasedOnChildren(mListviewResepProtein);
-
     }
 
     public void HitungPakan() {

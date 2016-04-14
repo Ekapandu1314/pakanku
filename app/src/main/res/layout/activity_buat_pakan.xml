@@ -123,6 +123,7 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/nex_button" />
 
+        <!-- ganti namo -->
         <LinearLayout
             android:id="@+id/editNama"
             android:layout_width="wrap_content"
@@ -130,27 +131,29 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:orientation="horizontal">
-        <EditText
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:id="@+id/JenisTernak"
-            android:hint="@string/hewan"
-            android:gravity="center"
-            android:clickable="false"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textColor="@color/Accent"
-            android:textColorHint="@color/Accent"
-            android:ems="10"/>
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:contentDescription="@string/Button"
-            android:id="@+id/edit"
-            android:layout_gravity="center"
-            android:src="@drawable/edit_action"
-            android:clickable="true"
-            android:onClick="editAction"/>
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:maxLength="10"
+                android:id="@+id/JenisTernak"
+                android:hint="@string/hewan"
+                android:gravity="center"
+                android:clickable="false"
+                android:focusable="false"
+                android:textStyle="bold"
+                android:textColor="@color/Accent"
+                android:textColorHint="@color/Accent"
+                android:ems="10"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/Button"
+                android:id="@+id/edit"
+                android:layout_gravity="center"
+                android:src="@drawable/edit_action"
+                android:clickable="true"
+                android:onClick="editAction"/>
         </LinearLayout>
     </RelativeLayout>
 
