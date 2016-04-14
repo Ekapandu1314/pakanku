@@ -23,10 +23,18 @@ import com.android.mirzaadr.pakanku.Adapter.ListTipsAdapter;
 import com.android.mirzaadr.pakanku.Internet.JSONfunctions;
 import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,6 +53,7 @@ public class Info_tips extends Fragment {
     public static String DESKRIPSI = "deskripsi";
     public static String LINK = "link";
     public static String GAMBAR = "gambar";
+    Boolean internet_error = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +67,6 @@ public class Info_tips extends Fragment {
         View view = inflater.inflate(R.layout.tips_layout, container, false);
 
         listview = (ListView) view.findViewById(R.id.tipslist);
-
-
 
         return view;
     }
@@ -103,42 +110,99 @@ public class Info_tips extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            // Create an array
-            arraylist = new ArrayList<HashMap<String, String>>();
-            // Retrieve JSON Objects from the given URL address
-            jsonobject = JSONfunctions
-                    .getJSONfromURL("http://pakanku.patpatstudio.com/android/artikel.php");
+            String serverData = null;
 
-            try {
-                // Locate the array name in JSON
-                jsonarray = jsonobject.getJSONArray("artikel");
+            if(!internet_error) {
 
-                for (int i = 0; i < jsonarray.length(); i++) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    jsonobject = jsonarray.getJSONObject(i);
-                    // Retrive JSON Objects
-                    map.put(JUDUL, jsonobject.getString(JUDUL));
-                    map.put(DESKRIPSI, jsonobject.getString(DESKRIPSI));
-                    map.put(LINK, jsonobject.getString(LINK));
-                    map.put(GAMBAR, jsonobject.getString(GAMBAR));
-                    // Set the JSON Objects into the array
-                    arraylist.add(map);
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet("http://pakanku.patpatstudio.com/android/artikel.php");
+                try {
+                    HttpResponse httpResponse = httpClient.execute(httpGet);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    serverData = EntityUtils.toString(httpEntity);
+                    Log.d("response", serverData);
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    internet_error = true;
+                    this.cancel(true);
                 }
-            } catch (JSONException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
             }
+            else {
+                internet_error = true;
+                this.cancel(true);
+            }
+
+            if(!internet_error){
+
+                try {
+                    // Locate the array name in JSON
+                    JSONObject jsonObject = new JSONObject(serverData);
+                    JSONArray jsonarray = jsonObject.getJSONArray("artikel");
+
+                    jsonarray = jsonobject.getJSONArray("artikel");
+
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        jsonobject = jsonarray.getJSONObject(i);
+                        // Retrive JSON Objects
+                        map.put(JUDUL, jsonobject.getString(JUDUL));
+                        map.put(DESKRIPSI, jsonobject.getString(DESKRIPSI));
+                        map.put(LINK, jsonobject.getString(LINK));
+                        map.put(GAMBAR, jsonobject.getString(GAMBAR));
+                        // Set the JSON Objects into the array
+                        arraylist.add(map);
+                    }
+                } catch (JSONException e) {
+                    this.cancel(true);
+                    internet_error = true;
+                    e.printStackTrace();
+                }
+
+
+            }
+            else {
+
+                this.cancel(true);
+            }
+
             return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            internet_error = true;
+            super.onCancelled();
+            mProgressDialog.dismiss();
+            Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected void onPostExecute(Void args) {
             // Pass the results into ListViewAdapter.java
-            adapter = new ListTipsAdapter(getActivity(), arraylist);
-            // Set the adapter to the ListView
-            listview.setAdapter(adapter);
-            // Close the progressdialog
-            mProgressDialog.dismiss();
+            if(internet_error) {
+
+                mProgressDialog.dismiss();
+                Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+
+            }
+            else {
+
+                adapter = new ListTipsAdapter(getActivity(), arraylist);
+                // Set the adapter to the ListView
+                listview.setAdapter(adapter);
+                // Close the progressdialog
+                mProgressDialog.dismiss();
+
+            }
+
         }
     }
 

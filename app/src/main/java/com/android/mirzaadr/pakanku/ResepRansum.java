@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.mirzaadr.pakanku.Adapter.ListResepAdapter;
+import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Model.Resep;
 
 import java.util.List;
@@ -25,23 +26,43 @@ public class ResepRansum extends AppCompatActivity {
     private ListResepAdapter mAdapterEnergi;
     private ListResepAdapter mAdapterProtein;
 
+    private TextView textviewPorsi;
+    private TextView textviewHargaHari;
+    private TextView textviewHargaBulan;
+    private TextView textviewTextPengeluaran;
+    private TextView textviewTextHargaBulan;
+    private TextView textviewProdukperKg;
+    private TextView textviewTextProdukperKg;
+    private TextView textviewJumlahTernak;
+    private TextView textviewLama;
+    private TextView textviewProduksi;
+    private TextView textviewTotalPemasukan;
+    private TextView textviewTextTotalPemasukan;
+    private TextView textviewTotalUntung;
+    private TextView textviewTextTotalUntung;
+
     private ListView mListviewResepHijauan;
     private ListView mListviewResepEnergi;
     private ListView mListviewResepProtein;
-    private TextView textviewHargaHari;
-    private TextView textviewHargaBulan;
-    private TextView textviewTextHargaBulan;
-    private TextView textviewKeuntungan;
-    //private TextView textviewTextKeuntungan;
 
-    int panjangListHijauan;
-    int panjangListEnergi;
-    int panjangListProtein;
+    private RelativeLayout layoutUntung;
 
-    int hargaHari;
-    int hargaBulan;
-    int Keuntungan = 0;
+    String bahanid;
+    String hewan;
+    String tujuan;
+    String textProduk = new String();
+
+    double berat1;
+    double produk;
+    double asfeed_total;
+
+    int jumlah;
+    int harga_produk;
     int lama;
+    int harga_total;
+    int biaya_pakan;
+    int keuntungan = 0;
+    int penjualan_produk = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,38 +73,48 @@ public class ResepRansum extends AppCompatActivity {
         newlistResepHijauan = (List<Resep>) i.getSerializableExtra("resephijauan");
         newlistResepEnergi = (List<Resep>) i.getSerializableExtra("resepenergi");
         newlistResepProtein = (List<Resep>) i.getSerializableExtra("resepprotein");
-        panjangListHijauan = i.getExtras().getInt("jmlhijauan");
-        panjangListEnergi = i.getExtras().getInt("jmlenergi");
-        panjangListProtein = i.getExtras().getInt("jmlprotein");
-        hargaHari = i.getExtras().getInt("hargahari");
-        hargaBulan = i.getExtras().getInt("hargabulan");
-        Keuntungan = i.getExtras().getInt("keuntungan");
+        asfeed_total = i.getExtras().getInt("asfeedtotal");
+        harga_total = i.getExtras().getInt("hargahari");
+        biaya_pakan = i.getExtras().getInt("hargatotal");
+        harga_produk = i.getExtras().getInt("hargaproduk");
+        produk = i.getExtras().getDouble("produk");
+        jumlah = i.getExtras().getInt("jmlternak");
+        textProduk = i.getExtras().getString("textproduk");
+        penjualan_produk = i.getExtras().getInt("totalpemasukan");
+        keuntungan = i.getExtras().getInt("keuntungan");
         lama = i.getExtras().getInt("lama");
 
         initViewResep();
 
-        mAdapterHijauan = new ListResepAdapter(this, newlistResepHijauan);
+        mAdapterHijauan = new ListResepAdapter(getBaseContext(), newlistResepHijauan);
         mAdapterEnergi = new ListResepAdapter(this, newlistResepEnergi);
         mAdapterProtein = new ListResepAdapter(this, newlistResepProtein);
         mListviewResepHijauan.setAdapter(mAdapterHijauan);
         mListviewResepEnergi.setAdapter(mAdapterEnergi);
         mListviewResepProtein.setAdapter(mAdapterProtein);
 
-        textviewHargaHari.setText("Rp. " + hargaHari);
-        textviewHargaBulan.setText("Rp. " + hargaBulan);
-        //textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
-        //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
+        textviewHargaHari.setText("Rp. " + harga_total);
+        textviewHargaBulan.setText("Rp. " + biaya_pakan);
+        textviewTextHargaBulan.setText("Pengeluaran selama " + lama + " hari");
+        textviewPorsi.setText(String.valueOf((int)asfeed_total));
+        textviewTextPengeluaran.setText("pengeluaran / hari x " + jumlah + " ekor x " + lama + " hari");
 
-        if(Keuntungan != 0) {
+        if(keuntungan != 0) {
 
-            textviewKeuntungan.setText("Rp. " + Keuntungan);
-
+            textviewTextProdukperKg.setText("Harga Produk (per " + textProduk + ")");
+            textviewProdukperKg.setText("Rp. " + String.valueOf(harga_produk));
+            textviewJumlahTernak.setText(String.valueOf(jumlah));
+            textviewLama.setText(String.valueOf(lama));
+            textviewProduksi.setText(String.valueOf(produk) + " " + textProduk);
+            textviewTotalPemasukan.setText("Rp. " + String.valueOf(penjualan_produk));
+            textviewTextTotalPemasukan.setText("Rp. " + String.valueOf(harga_produk) +
+                    " x "  + jumlah + " ekor x " + String.valueOf(produk) + " " + textProduk);
+            textviewTotalUntung.setText("Rp. " + keuntungan);
+            textviewTextTotalUntung.setText("Rp. " + String.valueOf(penjualan_produk) + " - " + "Rp. " + biaya_pakan);
         }
         else {
 
-            //textviewTextKeuntungan.setVisibility(View.GONE);
-            textviewKeuntungan.setVisibility(View.GONE);
-
+            layoutUntung.setVisibility(View.GONE);
         }
 
 
@@ -98,8 +129,18 @@ public class ResepRansum extends AppCompatActivity {
         this.textviewHargaHari = (TextView) findViewById(R.id.harga_hari);
         this.textviewHargaBulan = (TextView) findViewById(R.id.harga_bulan);
         this.textviewTextHargaBulan = (TextView) findViewById(R.id.text_harga_bulan);
-        this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
-        //this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
+        this.textviewPorsi = (TextView) findViewById(R.id.porsi_hari);
+        this.textviewTextPengeluaran = (TextView) findViewById(R.id.textPengeluaranTotal);
+        this.textviewProdukperKg = (TextView) findViewById(R.id.textProdukperKg);
+        this.textviewTextProdukperKg = (TextView) findViewById(R.id.textTextProdukperKg);
+        this.textviewJumlahTernak = (TextView) findViewById(R.id.textJumlahTernak);
+        this.textviewLama = (TextView) findViewById(R.id.textLama);
+        this.textviewProduksi = (TextView) findViewById(R.id.textProduksi);
+        this.textviewTotalPemasukan = (TextView) findViewById(R.id.textTotalPemasukan);
+        this.textviewTextTotalPemasukan = (TextView) findViewById(R.id.textTextTotalPemasukan);
+        this.textviewTotalUntung = (TextView) findViewById(R.id.textTotalUntung);
+        this.textviewTextTotalUntung = (TextView) findViewById(R.id.textTextTotalUntung);
+        this.layoutUntung = (RelativeLayout) findViewById(R.id.layoutUntung);
 
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
