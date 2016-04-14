@@ -20,7 +20,6 @@ import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.Model.Resep;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,32 +37,43 @@ public class ResepRansumRecord extends Activity {
     String bahanid;
     String hewan;
     String tujuan;
+    String textProduk = new String();
 
     double berat1;
     double produk;
+    double asfeed_total = 0;
 
     int jumlah;
     int lama;
     int harga_total = 0;
     int biaya_pakan;
     int keuntungan = 0;
-
-    int j = 0;
-    int k = 0;
-    int l = 0;
+    int penjualan_produk = 0;
 
     private ListView mListviewResepHijauan;
     private ListView mListviewResepEnergi;
     private ListView mListviewResepProtein;
+
+    private TextView textviewPorsi;
     private TextView textviewHargaHari;
     private TextView textviewHargaBulan;
+    private TextView textviewTextPengeluaran;
     private TextView textviewTextHargaBulan;
-    private TextView textviewKeuntungan;
-    private TextView textviewTextKeuntungan;
+    private TextView textviewProdukperKg;
+    private TextView textviewTextProdukperKg;
+    private TextView textviewJumlahTernak;
+    private TextView textviewLama;
+    private TextView textviewProduksi;
+    private TextView textviewTotalPemasukan;
+    private TextView textviewTextTotalPemasukan;
+    private TextView textviewTotalUntung;
+    private TextView textviewTextTotalUntung;
 
     private ListResepAdapter mAdapterHijauan;
     private ListResepAdapter mAdapterEnergi;
     private ListResepAdapter mAdapterProtein;
+
+    private RelativeLayout layoutUntung;
 
     List<Resep> newlistResepHijauan = new ArrayList<Resep>();
     List<Resep> newlistResepEnergi = new ArrayList<Resep>();
@@ -113,18 +123,27 @@ public class ResepRansumRecord extends Activity {
 
         textviewHargaHari.setText("Rp. " + harga_total);
         textviewHargaBulan.setText("Rp. " + biaya_pakan);
-        textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
-        //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
+        textviewTextHargaBulan.setText("Pengeluaran selama " + lama + " hari");
+        textviewPorsi.setText(String.valueOf((int)asfeed_total));
+        textviewTextPengeluaran.setText("pengeluaran / hari x " + jumlah + " ekor x " + lama + " hari");
 
         if(keuntungan != 0) {
 
-            textviewKeuntungan.setText("Rp. " + keuntungan);
+            textviewTextProdukperKg.setText("Harga Produk (per " + textProduk + ")");
+            textviewProdukperKg.setText("Rp. " + String.valueOf(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual()));
+            textviewJumlahTernak.setText(String.valueOf(jumlah));
+            textviewLama.setText(String.valueOf(lama));
+            textviewProduksi.setText(String.valueOf(produk) + " " + textProduk);
+            textviewTotalPemasukan.setText("Rp. " + String.valueOf(penjualan_produk));
+            textviewTextTotalPemasukan.setText("Rp. " + String.valueOf(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual()) +
+                                                      " x "  + jumlah + " ekor x " + String.valueOf(produk) + " " + textProduk);
+            textviewTotalUntung.setText("Rp. " + keuntungan);
+            textviewTextTotalUntung.setText("Rp. " + String.valueOf(penjualan_produk) + " - " + "Rp. " + biaya_pakan);
 
         }
         else {
 
-            //textviewTextKeuntungan.setVisibility(View.GONE);
-            textviewKeuntungan.setVisibility(View.GONE);
+            layoutUntung.setVisibility(View.GONE);
 
         }
     }
@@ -137,8 +156,18 @@ public class ResepRansumRecord extends Activity {
         this.textviewHargaHari = (TextView) findViewById(R.id.harga_hari);
         this.textviewHargaBulan = (TextView) findViewById(R.id.harga_bulan);
         this.textviewTextHargaBulan = (TextView) findViewById(R.id.text_harga_bulan);
-        this.textviewKeuntungan = (TextView) findViewById(R.id.keuntungan);
-        //this.textviewTextKeuntungan = (TextView) findViewById(R.id.text_keuntungan);
+        this.textviewPorsi = (TextView) findViewById(R.id.porsi_hari);
+        this.textviewTextPengeluaran = (TextView) findViewById(R.id.textPengeluaranTotal);
+        this.textviewProdukperKg = (TextView) findViewById(R.id.textProdukperKg);
+        this.textviewTextProdukperKg = (TextView) findViewById(R.id.textTextProdukperKg);
+        this.textviewJumlahTernak = (TextView) findViewById(R.id.textJumlahTernak);
+        this.textviewLama = (TextView) findViewById(R.id.textLama);
+        this.textviewProduksi = (TextView) findViewById(R.id.textProduksi);
+        this.textviewTotalPemasukan = (TextView) findViewById(R.id.textTotalPemasukan);
+        this.textviewTextTotalPemasukan = (TextView) findViewById(R.id.textTextTotalPemasukan);
+        this.textviewTotalUntung = (TextView) findViewById(R.id.textTotalUntung);
+        this.textviewTextTotalUntung = (TextView) findViewById(R.id.textTextTotalUntung);
+        this.layoutUntung = (RelativeLayout) findViewById(R.id.layoutUntung);
 
         Utility.setListViewHeightBasedOnChildren(mListviewResepHijauan);
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
@@ -159,13 +188,8 @@ public class ResepRansumRecord extends Activity {
         double pk_kg = (bk_kg * pk_hewan)/100;
         double bk_hijauan = (hijauan * bk_kg)/100;
         double bk_konsentrat = (konsentrat * bk_kg)/100;
-        //double pk_hijauan = ()
-
-        //Toast.makeText(getBaseContext(), bk_kg + "\n" + pk_kg + "\n" + bk_hijauan + "\n" + bk_konsentrat, Toast.LENGTH_LONG).show();
 
         String bahan[] = bahanid.split("-");
-
-        //Toast.makeText(getBaseContext(), String.valueOf(bahan.length), Toast.LENGTH_SHORT).show();
 
         int hijau[] = new int[10];
         int energi[] = new int[10];
@@ -217,8 +241,6 @@ public class ResepRansumRecord extends Activity {
 
         }
 
-        //double prs_pk_hijauan[] = new double[10];
-
         double pk_kg_hijauan_temp = 0;
         double pk_kg_hijauan = 0;
 
@@ -230,24 +252,16 @@ public class ResepRansumRecord extends Activity {
 
             pk_kg_hijauan += pk_kg_hijauan_temp;
 
-            //Toast.makeText(getBaseContext(), "Pembagi hijauan = " + String.valueOf(pembagi_hijauan[i] + "\n" + "Pk prs hijauan = " + pk_prs_hijauan[i]) + "\nBk Hijauan = " + bk_hijauan + "\nPk kg hijauan = " + pk_kg_hijauan, Toast.LENGTH_LONG).show();
-
         }
 
         double pk_konsentrat = pk_kg - pk_kg_hijauan;
 
-        //Toast.makeText(getBaseContext(), "Pk dari hijauan" + " = " + String.valueOf(pk_kg_hijauan), Toast.LENGTH_SHORT).show();
-
         double pk_konsentrat_prs = (pk_konsentrat/bk_konsentrat)*100; //Tanpa %
 
-        //Bahan energi2;
         double pk_energi[] = new double[10];
-        //double total_pk_energi = 0;
         double harga_energi[] = new double[10];
         double perbandingan_energi_temp[] = new double[10];
         double total_perbandingan_energi = 0;
-
-        //responseText2.append("\n\nEnergi...");
 
         for (int i = 0; i < k; i++) {
 
@@ -326,17 +340,16 @@ public class ResepRansumRecord extends Activity {
         double sbr_energi_kg = (prs_sbr_energi * bk_konsentrat)/100;
         double sbr_protein_kg = (prs_sbr_protein * bk_konsentrat)/100;
 
-        DecimalFormat df2 = new DecimalFormat("##.");
+        DecimalFormat df2 = new DecimalFormat("##");
 
         double asfeed_hijauan[] = new double[10];
-        int harga_total = 0;
         int harga_hijauan[] = new int[10];
 
         for (int i = 0; i < j; i++) {
 
             asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
 
-            harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga());
+            harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga() / 1000);
 
             harga_total += harga_hijauan[i];
 
@@ -352,7 +365,7 @@ public class ResepRansumRecord extends Activity {
 
             asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
 
-            harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga());
+            harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga() / 1000);
 
             harga_total += harga_energi_akhir[i];
 
@@ -368,21 +381,15 @@ public class ResepRansumRecord extends Activity {
 
             asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
 
-            harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga());
+            harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga() / 1000);
 
             harga_total += harga_protein_akhir[i];
 
         }
 
-        int biaya_pakan = lama * harga_total * jumlah;
+        biaya_pakan = lama * harga_total * jumlah;
 
         Resep resep;
-
-        List<Resep> newlistResepHijauan = new ArrayList<Resep>();
-        List<Resep> newlistResepEnergi = new ArrayList<Resep>();
-        List<Resep> newlistResepProtein = new ArrayList<Resep>();
-
-        double asfeed_total = 0;
 
         for (int i = 0; i < j; i++) {
 
@@ -415,20 +422,6 @@ public class ResepRansumRecord extends Activity {
 
         }
 
-        Intent newIntent = new Intent(getApplicationContext(), ResepRansum.class);
-
-        Bundle var_resep = new Bundle();
-
-        newIntent.putExtra("resephijauan", (Serializable) newlistResepHijauan);
-        newIntent.putExtra("resepenergi", (Serializable) newlistResepEnergi);
-        newIntent.putExtra("resepprotein", (Serializable) newlistResepProtein);
-        var_resep.putInt("asfeedtotal", (int)asfeed_total);
-        var_resep.putInt("hargahari", harga_total);
-        var_resep.putInt("hargatotal", biaya_pakan);
-        var_resep.putInt("jmlternak", jumlah);
-        var_resep.putInt("lama", lama);
-        newIntent.putExtras(var_resep);
-        startActivity(newIntent);
     }
 
     public void CekUntung() {
@@ -444,13 +437,8 @@ public class ResepRansumRecord extends Activity {
         double pk_kg = (bk_kg * pk_hewan)/100;
         double bk_hijauan = (hijauan * bk_kg)/100;
         double bk_konsentrat = (konsentrat * bk_kg)/100;
-        //double pk_hijauan = ()
-
-        //Toast.makeText(getBaseContext(), bk_kg + "\n" + pk_kg + "\n" + bk_hijauan + "\n" + bk_konsentrat, Toast.LENGTH_LONG).show();
 
         String bahan[] = bahanid.split("-");
-
-        //Toast.makeText(getBaseContext(), String.valueOf(bahan.length), Toast.LENGTH_SHORT).show();
 
         int hijau[] = new int[10];
         int energi[] = new int[10];
@@ -513,14 +501,11 @@ public class ResepRansumRecord extends Activity {
 
             pk_kg_hijauan += pk_kg_hijauan_temp;
 
-            //Toast.makeText(getBaseContext(), "Pembagi hijauan = " + String.valueOf(pembagi_hijauan[i] + "\n" + "Pk prs hijauan = " + pk_prs_hijauan[i]) + "\nBk Hijauan = " + bk_hijauan + "\nPk kg hijauan = " + pk_kg_hijauan, Toast.LENGTH_LONG).show();
-
         }
 
         double pk_konsentrat = pk_kg - pk_kg_hijauan;
 
         double pk_konsentrat_prs = (pk_konsentrat/bk_konsentrat)*100; //Tanpa %
-
 
         double pk_energi[] = new double[10];
         double harga_energi[] = new double[10];
@@ -604,17 +589,16 @@ public class ResepRansumRecord extends Activity {
         double sbr_energi_kg = (prs_sbr_energi * bk_konsentrat)/100;
         double sbr_protein_kg = (prs_sbr_protein * bk_konsentrat)/100;
 
-        DecimalFormat df2 = new DecimalFormat("##.");
+        DecimalFormat df2 = new DecimalFormat("##");
 
         double asfeed_hijauan[] = new double[10];
-        int harga_total = 0;
         int harga_hijauan[] = new int[10];
 
         for (int i = 0; i < j; i++) {
 
             asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
 
-            harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga());
+            harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga() / 1000);
 
             harga_total += harga_hijauan[i];
 
@@ -630,7 +614,7 @@ public class ResepRansumRecord extends Activity {
 
             asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
 
-            harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga());
+            harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga() / 1000);
 
             harga_total += harga_energi_akhir[i];
 
@@ -646,17 +630,13 @@ public class ResepRansumRecord extends Activity {
 
             asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
 
-            harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga());
+            harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga() / 1000);
 
             harga_total += harga_protein_akhir[i];
 
         }
 
-        int biaya_pakan = lama * harga_total * jumlah;
-
-        String textProduk = new String();
-        int keuntungan = 0;
-        int penjualan_produk = 0;
+        biaya_pakan = lama * harga_total * jumlah;
 
         if(tujuan.equals("Potong")) {
 
@@ -668,7 +648,7 @@ public class ResepRansumRecord extends Activity {
         }
         else if (tujuan.equals("Perah")) {
 
-            penjualan_produk = (int)(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual() * produk * jumlah);
+            penjualan_produk = (int)(mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual() * produk * jumlah * lama);
             keuntungan = penjualan_produk - biaya_pakan;
             textProduk = "lt";
 
@@ -676,15 +656,9 @@ public class ResepRansumRecord extends Activity {
 
         Resep resep;
 
-        List<Resep> newlistResepHijauan = new ArrayList<Resep>();
-        List<Resep> newlistResepEnergi = new ArrayList<Resep>();
-        List<Resep> newlistResepProtein = new ArrayList<Resep>();
-
-        double asfeed_total = 0;
-
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
 
             asfeed_total += asfeed_hijauan[i];
 
@@ -694,7 +668,7 @@ public class ResepRansumRecord extends Activity {
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
 
             asfeed_total += asfeed_energi[i];
 
@@ -705,7 +679,7 @@ public class ResepRansumRecord extends Activity {
 
         for (int i = 0; i < l; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
+            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(protein[i]).getHarga()),df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
 
             asfeed_total += asfeed_protein[i];
 
@@ -713,25 +687,6 @@ public class ResepRansumRecord extends Activity {
 
         }
 
-        Intent newIntent = new Intent(getApplicationContext(), ResepRansum.class);
-
-        Bundle var_resep = new Bundle();
-
-        newIntent.putExtra("resephijauan", (Serializable) newlistResepHijauan);
-        newIntent.putExtra("resepenergi", (Serializable) newlistResepEnergi);
-        newIntent.putExtra("resepprotein", (Serializable) newlistResepProtein);
-        var_resep.putInt("asfeedtotal", (int)asfeed_total);
-        var_resep.putInt("hargahari", harga_total);
-        var_resep.putInt("hargatotal", biaya_pakan);
-        var_resep.putInt("hargaproduk", mHewanDao.getHewanByHewanTujuan(hewan, tujuan).getHargajual());
-        var_resep.putDouble("produk", produk);
-        var_resep.putInt("jmlternak", jumlah);
-        var_resep.putString("textproduk", textProduk);
-        var_resep.putInt("lama", lama);
-        var_resep.putInt("totalpemasukan", penjualan_produk);
-        var_resep.putInt("keuntungan", keuntungan);
-        newIntent.putExtras(var_resep);
-        startActivity(newIntent);
     }
 
     //Test scrollview custom

@@ -1,5 +1,7 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -92,8 +94,70 @@ public class Info_history extends Fragment {
             }
         });
 
+        mListviewRecord.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Record clickedRecord = mAdapter.getItem(position);
+
+                showDeleteDialogConfirmation(clickedRecord);
+
+                return false;
+            }
+        });
+
+
 
 
         return vieww;
+    }
+
+    private void showDeleteDialogConfirmation(final Record record) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+        alertDialogBuilder.setTitle("Hapus");
+        alertDialogBuilder
+                .setMessage("Apakah kamu yakin untuk menghapus data record \""
+                        + record.getNama_record() + " ?");
+
+        // set positive button YES message
+        alertDialogBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // delete the employee and refresh the list
+                if(mRecordDao != null) {
+                    mRecordDao.deleteRecord(record);
+
+                    //refresh the listView
+                    mListRecord.remove(record);
+                    if(mListRecord.isEmpty()) {
+                        mListviewRecord.setVisibility(View.INVISIBLE);
+                        //mTxtEmptyListEmployees.setVisibility(View.VISIBLE);
+                    }
+
+                    mAdapter.setItems(mListRecord);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+                dialog.dismiss();
+                Toast.makeText(getActivity(), "Data record telah berhasil dihapus", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        // set neutral button OK
+        alertDialogBuilder.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss the dialog
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show alert
+        alertDialog.show();
     }
 }

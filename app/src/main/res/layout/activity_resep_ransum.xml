@@ -229,7 +229,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/divider4"
                         android:layout_toStartOf="@id/divider4"
-                        android:textColor="@color/White" />
+                        android:textColor="@color/White"
+                        android:text="porsi" />
                 </RelativeLayout>
 
                 <!-- total biaya  -->
@@ -266,7 +267,8 @@
                             android:text="@string/tagpengeluaran"
                             android:textSize="9sp"
                             android:gravity="start"
-                            android:textColor="@color/White" />
+                            android:textColor="@color/White"
+                            android:id="@+id/textPengeluaranTotal" />
 
                     </LinearLayout>
                     <View
@@ -299,7 +301,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tabel"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:id="@+id/layoutUntung">
 
 
                 <RelativeLayout
@@ -315,7 +318,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center"
-                        android:id="@+id/text32"
+                        android:id="@+id/textTextProdukperKg"
                         android:padding="5dp"
                         android:text="@string/datamasuk1"
                         android:layout_centerVertical="true"
@@ -329,8 +332,8 @@
                         android:id="@+id/divider10"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/text32"
-                        android:layout_toEndOf="@id/text32"/>
+                        android:layout_toRightOf="@+id/textTextProdukperKg"
+                        android:layout_toEndOf="@id/textTextProdukperKg"/>
 
                     <TextView
                         android:layout_width="70dp"
@@ -403,7 +406,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center"
-                        android:id="@+id/text42"
+                        android:id="@+id/textProdukperKg"
                         android:padding="5dp"
                         android:text="@string/uang"
                         android:layout_centerVertical="true"
@@ -417,15 +420,15 @@
                         android:id="@+id/divider20"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/text42"
-                        android:layout_toEndOf="@id/text42"/>
+                        android:layout_toRightOf="@+id/textProdukperKg"
+                        android:layout_toEndOf="@id/textProdukperKg"/>
 
                     <TextView
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center"
-                        android:id="@+id/text43"
+                        android:id="@+id/textJumlahTernak"
                         android:text="@string/banyak"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/divider20"
@@ -438,15 +441,15 @@
                         android:id="@+id/divider21"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/text43"
-                        android:layout_toEndOf="@id/text43"/>
+                        android:layout_toRightOf="@+id/textJumlahTernak"
+                        android:layout_toEndOf="@id/textJumlahTernak"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center"
-                        android:id="@+id/text44"
+                        android:id="@+id/textLama"
                         android:padding="5dp"
                         android:text="@string/lama"
                         android:layout_centerVertical="true"
@@ -462,8 +465,8 @@
                         android:id="@+id/divider29"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/text41"
-                        android:layout_toStartOf="@id/text41"/>
+                        android:layout_toLeftOf="@+id/textProduksi"
+                        android:layout_toStartOf="@id/textProduksi"/>
 
                     <TextView
                         android:layout_width="80dp"
@@ -471,7 +474,7 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:id="@+id/text41"
+                        android:id="@+id/textProduksi"
                         android:text="@string/kilogram"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
@@ -512,7 +515,8 @@
                             android:text="@string/tagmasuk"
                             android:textSize="9sp"
                             android:gravity="start"
-                            android:textColor="@color/White" />
+                            android:textColor="@color/White"
+                            android:id="@+id/textTextTotalPemasukan" />
 
                     </LinearLayout>
                     <View
@@ -521,8 +525,8 @@
                         android:id="@+id/divider7"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/masuk"
-                        android:layout_toStartOf="@id/masuk"/>
+                        android:layout_toLeftOf="@+id/textTotalPemasukan"
+                        android:layout_toStartOf="@id/textTotalPemasukan"/>
                     <TextView
                         android:layout_width="122dp"
                         android:layout_height="wrap_content"
@@ -531,7 +535,7 @@
                         android:gravity="end"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:id="@+id/masuk"
+                        android:id="@+id/textTotalPemasukan"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_marginEnd="5dp"
@@ -569,7 +573,8 @@
                             android:text="@string/taguntung"
                             android:textSize="9sp"
                             android:gravity="start"
-                            android:textColor="@color/White" />
+                            android:textColor="@color/White"
+                            android:id="@+id/textTextTotalUntung" />
                     </LinearLayout>
                     <View
                         android:layout_width="2dp"
@@ -577,8 +582,8 @@
                         android:id="@+id/divider8"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/keuntungan"
-                        android:layout_toStartOf="@id/keuntungan"/>
+                        android:layout_toLeftOf="@+id/textTotalUntung"
+                        android:layout_toStartOf="@id/textTotalUntung"/>
                     <TextView
                         android:layout_width="122dp"
                         android:layout_height="wrap_content"
@@ -587,7 +592,7 @@
                         android:gravity="end"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:id="@+id/keuntungan"
+                        android:id="@+id/textTotalUntung"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_marginEnd="5dp"

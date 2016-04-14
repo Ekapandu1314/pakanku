@@ -99,8 +99,8 @@ public class CekUntung extends AppCompatActivity {
         buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
         buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
 
-        editBobot = (EditText) findViewById(R.id.editbobot2);
-        editBobot2 = (EditText) findViewById(R.id.editbobot);
+        editBobot = (EditText) findViewById(R.id.editbobot);
+        editBobot2 = (EditText) findViewById(R.id.editbobot2);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
@@ -462,6 +462,8 @@ public class CekUntung extends AppCompatActivity {
         layoutPotong.setVisibility(View.VISIBLE);
         layoutPerah.setVisibility(View.VISIBLE);
 
+        hewan = namaTernak[counter];
+
         if(hewan.equals("Sapi")) {
 
             check_hobi.setClickable(false);
@@ -664,9 +666,7 @@ public class CekUntung extends AppCompatActivity {
                         var_resep.putInt("jumlah", jumlah);
                         var_resep.putInt("lama", lama);
                         intent.putExtras(var_resep);
-
                         startActivity(intent);
-
                         dialog.dismiss();
 
                     } else {
@@ -707,15 +707,15 @@ public class CekUntung extends AppCompatActivity {
 
             }
 
-            if (editBobot2.getText().toString().trim().length() > 0) {
+            if (editBobot.getText().toString().trim().length() > 0) {
 
-                if (editBobot2.getText().toString().equals("0")) {
+                if (editBobot.getText().toString().equals("0")) {
 
                     Toast.makeText(getBaseContext(), "Produk tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else {
 
-                    produk = Double.parseDouble(editBobot2.getText().toString());
+                    produk = Double.parseDouble(editBobot.getText().toString());
 
                 }
 
@@ -803,4 +803,4 @@ public class CekUntung extends AppCompatActivity {
         }
     }
 }
-}
+

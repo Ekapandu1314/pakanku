@@ -1,6 +1,8 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,9 @@ public class ListResepAdapter extends BaseAdapter {
             holder.txtNama_bahan = (TextView) v.findViewById(R.id.nama_bahan_resep);
             holder.txtProporsi = (TextView) v.findViewById(R.id.proporsi_resep);
             holder.txtHarga_bahan = (TextView) v.findViewById(R.id.harga_resep);
+            holder.txtHarga_kg = (TextView) v.findViewById(R.id.harga_bahan_resep);
+
+            holder.txtNama_bahan.setTypeface(null, Typeface.BOLD);
 
             v.setTag(holder);
         }
@@ -66,8 +71,38 @@ public class ListResepAdapter extends BaseAdapter {
             //Log.d("Data : ", currentItem.getIdbahan());
 
             holder.txtNama_bahan.setText(currentItem.getNama_bahan());
-            holder.txtProporsi.setText(currentItem.getProporsi() + "%");
-            holder.txtHarga_bahan.setText("Rp. " + currentItem.getHarga_bahan());
+            holder.txtProporsi.setText(currentItem.getProporsi());
+            holder.txtHarga_bahan.setText(currentItem.getHarga_bahan());
+            holder.txtHarga_kg.setText(currentItem.getHarga_kg());
+
+        }
+
+        if(currentItem.getJenis_bahan().equals("hijauan")) {
+
+
+            v.setBackgroundResource(R.color.listHijauan);
+            holder.txtNama_bahan.setTextColor(Color.parseColor("#ffffff"));
+            holder.txtProporsi.setTextColor(Color.parseColor("#ffffff"));
+            holder.txtHarga_bahan.setTextColor(Color.parseColor("#ffffff"));
+            holder.txtHarga_kg.setTextColor(Color.parseColor("#ffffff"));
+
+        }
+        else if(currentItem.getJenis_bahan().equals("protein")) {
+
+            v.setBackgroundResource(R.color.listProtein);
+            holder.txtNama_bahan.setTextColor(Color.parseColor("#000000"));
+            holder.txtProporsi.setTextColor(Color.parseColor("#000000"));
+            holder.txtHarga_bahan.setTextColor(Color.parseColor("#000000"));
+            holder.txtHarga_kg.setTextColor(Color.parseColor("#000000"));
+
+        }
+        else if(currentItem.getJenis_bahan().equals("energi")) {
+
+            v.setBackgroundResource(R.color.listEnergi);
+            holder.txtNama_bahan.setTextColor(Color.parseColor("#FFE817"));
+            holder.txtProporsi.setTextColor(Color.parseColor("#FFE817"));
+            holder.txtHarga_bahan.setTextColor(Color.parseColor("#FFE817"));
+            holder.txtHarga_kg.setTextColor(Color.parseColor("#FFE817"));
 
         }
 
@@ -86,6 +121,7 @@ public class ListResepAdapter extends BaseAdapter {
         TextView txtNama_bahan;
         TextView txtProporsi;
         TextView txtHarga_bahan;
+        TextView txtHarga_kg;
     }
 
 }
