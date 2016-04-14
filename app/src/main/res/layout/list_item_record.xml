@@ -47,15 +47,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_alignBottom="@+id/thumbnail"
         android:layout_below="@id/tanggal_record"
         android:layout_toRightOf="@+id/thumbnail"
         android:layout_toEndOf="@id/thumbnail">
 
         <RelativeLayout
+            android:id="@+id/judul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/view2">
+            android:layout_alignParentTop="true">
             <TextView
                 android:id="@+id/bobot"
                 android:layout_width="65dp"
@@ -94,7 +95,8 @@
         <RelativeLayout
             android:id="@+id/view2"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/judul"
             android:layout_alignParentBottom="true"
             android:background="@drawable/custom_yellow">
 
