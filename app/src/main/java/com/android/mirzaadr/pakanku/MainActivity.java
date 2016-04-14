@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private BahanDAO mBahanDao;
     private HewanDAO mHewanDao;
     private VersionDAO mVersionDao;
+    CoordinatorLayout coordinatorLayout;
 
     Boolean internet = false;
     Boolean internet_error = false;
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         registerReceiver(mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
@@ -121,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
 
             if(mListBahan != null && !mListBahan.isEmpty()) {
 
-                Toast.makeText(getBaseContext(), "No Internet Connection, no update data", Toast.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, "No Internet Connection, no update data", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "No Internet Connection, no update data", Toast.LENGTH_SHORT).show();
 
             } else {
 
@@ -278,7 +283,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onCancelled() {
             super.onCancelled();
             pDialog.dismiss();
-            Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+            Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -289,7 +295,8 @@ public class MainActivity extends AppCompatActivity {
 
             if(internet_error) {
 
-                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -466,7 +473,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onCancelled() {
                 super.onCancelled();
-                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
             }
 
@@ -476,7 +484,8 @@ public class MainActivity extends AppCompatActivity {
                 if(internet_error || !internet) {
 
                     loadingDialog.dismiss();
-                    Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
+                    //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
                 }
                 else {

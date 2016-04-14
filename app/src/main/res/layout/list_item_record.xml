@@ -119,6 +119,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="0.0"
                     android:id="@+id/bobot_record" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Accent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="3dp"
+                    android:textSize="10sp"
+                    android:text="@string/kilogram" />
             </RelativeLayout>
 
             <ImageView
@@ -157,6 +167,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="0.0"
                     android:id="@+id/jumlah_record" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Accent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="2dp"
+                    android:textSize="10sp"
+                    android:text="@string/banyak" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
