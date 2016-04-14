@@ -112,7 +112,8 @@
                     android:textColor="@color/Accent"
                     android:layout_margin="3dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="0.0"/>
+                    android:text="0.0"
+                    android:id="@+id/bobot_record" />
             </RelativeLayout>
 
             <ImageView
@@ -127,7 +128,8 @@
                 android:layout_toLeftOf="@+id/view4"
                 android:layout_toStartOf="@id/view4"
                 android:layout_toRightOf="@+id/view3"
-                android:layout_toEndOf="@+id/view3" />
+                android:layout_toEndOf="@+id/view3"
+                android:id="@+id/thumbnailTujuan" />
 
             <RelativeLayout
                 android:id="@+id/view4"
@@ -146,7 +148,8 @@
                     android:textColor="@color/Accent"
                     android:layout_margin="3dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="0.0"/>
+                    android:text="0.0"
+                    android:id="@+id/jumlah_record" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

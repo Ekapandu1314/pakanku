@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -43,17 +44,18 @@ import java.util.HashMap;
  */
 public class Info_tips extends Fragment {
 
-    JSONObject jsonobject;
-    JSONArray jsonarray;
+    private Dialog pDialog;
+
     ListView listview;
     ListTipsAdapter adapter;
-    ProgressDialog mProgressDialog;
     ArrayList<HashMap<String, String>> arraylist;
     public static String JUDUL = "judul";
     public static String DESKRIPSI = "deskripsi";
     public static String LINK = "link";
     public static String GAMBAR = "gambar";
     Boolean internet_error = false;
+
+    Boolean first = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,19 +99,14 @@ public class Info_tips extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(getActivity());
-            // Set progressdialog title
-            mProgressDialog.setTitle("Please wait");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
+            pDialog = ProgressDialog.show(getActivity(), "Please wait...", "Silahkan tunggu");
         }
 
         @Override
         protected Void doInBackground(Void... params) {
+
+            arraylist = new ArrayList<HashMap<String, String>>();
+
             String serverData = null;
 
             if(!internet_error) {
@@ -147,16 +144,14 @@ public class Info_tips extends Fragment {
                     JSONObject jsonObject = new JSONObject(serverData);
                     JSONArray jsonarray = jsonObject.getJSONArray("artikel");
 
-                    jsonarray = jsonobject.getJSONArray("artikel");
-
                     for (int i = 0; i < jsonarray.length(); i++) {
                         HashMap<String, String> map = new HashMap<String, String>();
-                        jsonobject = jsonarray.getJSONObject(i);
+                        JSONObject jsonObjectBahan = jsonarray.getJSONObject(i);
                         // Retrive JSON Objects
-                        map.put(JUDUL, jsonobject.getString(JUDUL));
-                        map.put(DESKRIPSI, jsonobject.getString(DESKRIPSI));
-                        map.put(LINK, jsonobject.getString(LINK));
-                        map.put(GAMBAR, jsonobject.getString(GAMBAR));
+                        map.put(JUDUL, jsonObjectBahan.getString(JUDUL));
+                        map.put(DESKRIPSI, jsonObjectBahan.getString(DESKRIPSI));
+                        map.put(LINK, jsonObjectBahan.getString(LINK));
+                        map.put(GAMBAR, jsonObjectBahan.getString(GAMBAR));
                         // Set the JSON Objects into the array
                         arraylist.add(map);
                     }
@@ -180,7 +175,7 @@ public class Info_tips extends Fragment {
         protected void onCancelled() {
             internet_error = true;
             super.onCancelled();
-            mProgressDialog.dismiss();
+            pDialog.dismiss();
             Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
@@ -189,7 +184,7 @@ public class Info_tips extends Fragment {
             // Pass the results into ListViewAdapter.java
             if(internet_error) {
 
-                mProgressDialog.dismiss();
+                pDialog.dismiss();
                 Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
             }
@@ -199,7 +194,7 @@ public class Info_tips extends Fragment {
                 // Set the adapter to the ListView
                 listview.setAdapter(adapter);
                 // Close the progressdialog
-                mProgressDialog.dismiss();
+                pDialog.dismiss();
 
             }
 
