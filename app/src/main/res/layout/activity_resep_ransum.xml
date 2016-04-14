@@ -301,7 +301,6 @@
                 android:layout_below="@+id/tabel"
                 android:layout_margin="5dp">
 
-
                 <RelativeLayout
                     android:id="@+id/dataMasuk"
                     android:layout_width="match_parent"
@@ -325,7 +324,7 @@
 
                     <View
                         android:layout_width="2dp"
-                        android:layout_height="60dp"
+                        android:layout_height="62dp"
                         android:id="@+id/divider10"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
@@ -346,7 +345,7 @@
 
                     <View
                         android:layout_width="2dp"
-                        android:layout_height="60dp"
+                        android:layout_height="62dp"
                         android:id="@+id/divider11"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"
@@ -370,7 +369,7 @@
 
                     <View
                         android:layout_width="2dp"
-                        android:layout_height="60dp"
+                        android:layout_height="62dp"
                         android:id="@+id/divider9"
                         android:background="@color/Base"
                         android:layout_centerVertical="true"

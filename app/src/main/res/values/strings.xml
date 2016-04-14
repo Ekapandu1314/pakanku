@@ -23,6 +23,7 @@
     <string name="nomor">No</string>
     <string name="lama_ternak">lama pemeliharaan</string>
     <string name="lama">hari</string>
+    <string name="tanggal">dd-mm-yyyy</string>
     <string name="hewan">Hewan</string>
     <string name="plus_button">+</string>
     <string name="min_button">-</string>
@@ -42,8 +43,8 @@
     <string name="masukTot">total pemasukan</string>
     <string name="untungTot">total keuntungan</string>
     <string name="tagpengeluaran">pengeluaran / hari x jum. ternak x lama</string>
-    <string name="tagmasuk">(harga x jum. ternak x lama x produksi / hari)</string>
-    <string name="taguntung">TOTAL PEMASUKAN - TOTAL PENGELUARAN</string>
+    <string name="tagmasuk">(harga*jum. ternak*lama * produksi/hari)</string>
+    <string name="taguntung">Total pemasukan - Total pengeluaran</string>
     <string name="datamasuk1">Harga Produk (per kg)</string>
     <string name="datamasuk2">Jumlah Ternak (ekor)</string>
     <string name="datamasuk3">Lama Pemeliharaan (hari)</string>

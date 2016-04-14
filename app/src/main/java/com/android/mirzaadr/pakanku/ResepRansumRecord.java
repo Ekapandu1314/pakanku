@@ -114,19 +114,19 @@ public class ResepRansumRecord extends Activity {
         textviewHargaHari.setText("Rp. " + harga_total);
         textviewHargaBulan.setText("Rp. " + biaya_pakan);
         textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
-        textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
+        //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
 
-        if(keuntungan != 0) {
+        //if(keuntungan != 0) {
 
-            textviewKeuntungan.setText("Rp. " + keuntungan);
+            //textviewKeuntungan.setText("Rp. " + keuntungan);
 
-        }
-        else {
+       // }
+        //else {
 
-            textviewTextKeuntungan.setVisibility(View.GONE);
-            textviewKeuntungan.setVisibility(View.GONE);
+            //textviewTextKeuntungan.setVisibility(View.GONE);
+            //textviewKeuntungan.setVisibility(View.GONE);
 
-        }
+        //}
     }
 
     private void initViewResep() {

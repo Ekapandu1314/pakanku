@@ -32,7 +32,7 @@ public class ResepRansum extends AppCompatActivity {
     private TextView textviewHargaBulan;
     private TextView textviewTextHargaBulan;
     private TextView textviewKeuntungan;
-    private TextView textviewTextKeuntungan;
+    //private TextView textviewTextKeuntungan;
 
     int panjangListHijauan;
     int panjangListEnergi;
@@ -71,7 +71,7 @@ public class ResepRansum extends AppCompatActivity {
 
         textviewHargaHari.setText("Rp. " + hargaHari);
         textviewHargaBulan.setText("Rp. " + hargaBulan);
-        textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
+        //textviewTextHargaBulan.setText("Harga pakan " + lama + " bulan");
         //textviewTextKeuntungan.setText("Keuntungan " + lama + " bulan");
 
         if(Keuntungan != 0) {
@@ -81,7 +81,7 @@ public class ResepRansum extends AppCompatActivity {
         }
         else {
 
-            textviewTextKeuntungan.setVisibility(View.GONE);
+            //textviewTextKeuntungan.setVisibility(View.GONE);
             textviewKeuntungan.setVisibility(View.GONE);
 
         }
