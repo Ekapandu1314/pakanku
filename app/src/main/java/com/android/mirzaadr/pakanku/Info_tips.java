@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -44,7 +46,9 @@ import java.util.HashMap;
  */
 public class Info_tips extends Fragment {
 
-    private Dialog pDialog;
+    //private Dialog pDialog;
+
+    ProgressDialog progressDialog;
 
     ListView listview;
     ListTipsAdapter adapter;
@@ -99,7 +103,9 @@ public class Info_tips extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = ProgressDialog.show(getActivity(), "Please wait...", "Silahkan tunggu");
+            //pDialog = ProgressDialog.show(getActivity(), "Please wait...", "Silahkan tunggu");
+            progressDialog = createProgressDialog(getActivity());
+            progressDialog.show();
         }
 
         @Override
@@ -175,7 +181,7 @@ public class Info_tips extends Fragment {
         protected void onCancelled() {
             internet_error = true;
             super.onCancelled();
-            pDialog.dismiss();
+            progressDialog.dismiss();
             Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
@@ -184,7 +190,7 @@ public class Info_tips extends Fragment {
             // Pass the results into ListViewAdapter.java
             if(internet_error) {
 
-                pDialog.dismiss();
+                progressDialog.dismiss();
                 Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
             }
@@ -194,11 +200,24 @@ public class Info_tips extends Fragment {
                 // Set the adapter to the ListView
                 listview.setAdapter(adapter);
                 // Close the progressdialog
-                pDialog.dismiss();
+                progressDialog.dismiss();
 
             }
 
         }
+    }
+
+    public static ProgressDialog createProgressDialog(Context mContext) {
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+
+        }
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.progressdialog);
+        return dialog;
     }
 
 }

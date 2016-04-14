@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.android.mirzaadr.pakanku.Dao.DBHelper;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.VersionDAO;
 import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
+import com.android.mirzaadr.pakanku.Internet.Utils;
 import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
@@ -71,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     private VersionDAO mVersionDao;
     CoordinatorLayout coordinatorLayout;
 
+    ProgressDialog progressDialog;
+
     Boolean internet = false;
     Boolean internet_error = false;
 
@@ -78,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
     String version;
     String tanggal;
-
-    private Dialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,28 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-
- /*       Button buat = (Button) findViewById(R.id.BuatPakan);
-        buat.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BuatPakan.class);
-                startActivity(intent);
-            }
-        });
-
-        Button info = (Button) findViewById(R.id.Informasi);
-        info.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InformationActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     class DataFetcherTask extends AsyncTask<Void,Void,Void> {
@@ -165,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = ProgressDialog.show(MainActivity.this, "Please wait...", "Silahkan tunggu");
+            //pDialog = ProgressDialog.show(MainActivity.this, "Please wait...", "Silahkan tunggu");
+            progressDialog = createProgressDialog(MainActivity.this);
+            progressDialog.show();
         }
 
         @Override
@@ -282,21 +265,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            pDialog.dismiss();
             Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
-            //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            pDialog.dismiss();
+            progressDialog.dismiss();
 
             if(internet_error) {
 
                 Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
-                //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -397,14 +379,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onCancelled() {
             super.onCancelled();
             internet_error = true;
-            Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+            Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(internet_error) {
-                Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
 
             }
 
@@ -415,12 +397,12 @@ public class MainActivity extends AppCompatActivity {
 
         class LoginAsync extends AsyncTask<String, Void, String> {
 
-            private Dialog loadingDialog;
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
+                progressDialog = createProgressDialog(MainActivity.this);
+                progressDialog.show();
+                //loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
             }
 
             @Override
@@ -475,26 +457,27 @@ public class MainActivity extends AppCompatActivity {
                 super.onCancelled();
                 Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
                 //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
-                loadingDialog.dismiss();
+                progressDialog.dismiss();
+                //loadingDialog.dismiss();
             }
 
             @Override
             protected void onPostExecute(String result){
 
+                progressDialog.dismiss();
+
                 if(internet_error || !internet) {
 
-                    loadingDialog.dismiss();
+                    //loadingDialog.dismiss();
                     Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
                     //Toast.makeText(getBaseContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
 
-                    loadingDialog.dismiss();
+                    //loadingDialog.dismiss();
 
                     String hasil = result.trim();
-
-                    Toast.makeText(getBaseContext(), hasil, Toast.LENGTH_SHORT).show();
 
                     if(result!=null)
                     {
@@ -505,13 +488,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if (hasil.equals("tidak"))
                         {
-                            alert.showAlertDialog(MainActivity.this, "Checking complete..", "No data update", false);
+                            Toast.makeText(getBaseContext(), "Pengecekan berhasil, tidak ada data baru", Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
                     else
                     {
-                        alert.showAlertDialog(MainActivity.this, "Checking Failed..", "Check your internet connection", false);
+                        Toast.makeText(getBaseContext(), "Pengecekan gagal, cek kembali koneksi internet anda!", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -602,7 +586,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void BuatClick(View v) {
         Intent intent = new Intent(MainActivity.this, BuatPakan.class);
         startActivity(intent);
@@ -643,10 +626,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //unregisterReceiver(mConnReceiver);
         mBahanDao.close();
         mHewanDao.close();
         mVersionDao.close();
+    }
+
+    public static ProgressDialog createProgressDialog(Context mContext) {
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+
+        }
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.progressdialog);
+        return dialog;
     }
 
 
