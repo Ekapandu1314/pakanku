@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.Model.Resep;
+import com.android.mirzaadr.pakanku.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

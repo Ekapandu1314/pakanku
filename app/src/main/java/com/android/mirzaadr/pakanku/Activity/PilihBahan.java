@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -6,19 +6,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
+import com.android.mirzaadr.pakanku.Fragment.BahanEnergi;
+import com.android.mirzaadr.pakanku.Fragment.BahanHijauan;
+import com.android.mirzaadr.pakanku.Fragment.BahanProtein;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Resep;
+import com.android.mirzaadr.pakanku.R;
+import com.android.mirzaadr.pakanku.Interface.BahanCommunicator;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -26,11 +29,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ternak2 extends FragmentActivity implements interfaces.ActivityCommunicator {
+public class PilihBahan extends FragmentActivity implements BahanCommunicator.ActivityCommunicator {
 
-    public interfaces.FragmentCommunicator fragmentCommunicator1;
-    public interfaces.FragmentCommunicator fragmentCommunicator2;
-    public interfaces.FragmentCommunicator fragmentCommunicator3;
+    public BahanCommunicator.FragmentCommunicator fragmentCommunicator1;
+    public BahanCommunicator.FragmentCommunicator fragmentCommunicator2;
+    public BahanCommunicator.FragmentCommunicator fragmentCommunicator3;
 
     private BahanDAO mBahanDao;
     private HewanDAO mHewanDao;
@@ -57,7 +60,7 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ternak2);
+        setContentView(R.layout.activity_pilih_bahan);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
         setupViewPager(mViewPager);
@@ -90,9 +93,9 @@ public class ternak2 extends FragmentActivity implements interfaces.ActivityComm
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Paket_hijauan(), "hijauan");
-        adapter.addFragment(new Paket_energi(), "energi");
-        adapter.addFragment(new Paket_protein(), "protein");
+        adapter.addFragment(new BahanHijauan(), "hijauan");
+        adapter.addFragment(new BahanEnergi(), "energi");
+        adapter.addFragment(new BahanProtein(), "protein");
         viewPager.setAdapter(adapter);
     }
 

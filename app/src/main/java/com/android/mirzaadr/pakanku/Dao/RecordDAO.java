@@ -69,7 +69,6 @@ public class RecordDAO {
                                String pbahan
 ) {
         ContentValues values = new ContentValues();
-        //values.put(DBHelper.BAHAN_ID, idbahan);
         values.put(DBHelper.NAMA_RECORD, nama_record);
         values.put(DBHelper.RTANGGAL, rtanggal);
         values.put(DBHelper.RHEWAN, rhewan);
@@ -101,7 +100,6 @@ public class RecordDAO {
                                   String pbahan
 ) {
         ContentValues values = new ContentValues();
-        //values.put(DBHelper.BAHAN_ID, idbahan);
         values.put(DBHelper.NAMA_RECORD, nama_record);
         values.put(DBHelper.RTANGGAL, rtanggal);
         values.put(DBHelper.RHEWAN, rhewan);
@@ -135,7 +133,6 @@ public class RecordDAO {
                                String pbahan
     ) {
         ContentValues values = new ContentValues();
-        //values.put(DBHelper.BAHAN_ID, idbahan);
         values.put(DBHelper.NAMA_RECORD, nama_record);
         values.put(DBHelper.RTANGGAL, rtanggal);
         values.put(DBHelper.RHEWAN, rhewan);
@@ -164,32 +161,6 @@ public class RecordDAO {
         mDatabase.delete(DBHelper.TABLE_RECORD, DBHelper.RECORD_ID
                 + " = " + id, null);
     }
-
-    /*public void addRecordJson(Record record) {
-        //SQLiteDatabase db = this.getWritableDatabase();
-        try{
-            ContentValues values = new ContentValues();
-            values.put(DBHelper.RECORD_ID, record.getIdrecord());
-            values.put(DBHelper.NAMA_RECORD, record.getNama_record());
-            values.put(DBHelper.RTANGGAL, record.getRtanggal());
-            values.put(DBHelper.RHEWAN, record.getRhewan());
-            values.put(DBHelper.RTUJUAN, record.getRtujuan());
-            values.put(DBHelper.RBERAT, record.getRberat());
-            values.put(DBHelper.RJTERNAK, record.getRjternak());
-            values.put(DBHelper.PBAHAN, record.getPbahan());
-            values.put(DBHelper.RTUANG, record.getRtuang());
-            values.put(DBHelper.RTUNTUNG, record.getRtuntung());
-
-            mDatabase.insert(DBHelper.TABLE_RECORD, null, values);
-
-            mDatabase.update(DBHelper.TABLE_RECORD, values, DBHelper.RECORD_ID + " = " + record.getIdrecord(), null);
-
-
-            //mDatabase.close();
-        }catch (Exception e){
-            Log.e("problem",e+"");
-        }
-    }*/
 
     public List<Record> getAllRecord() {
         List<Record> listRecord = new ArrayList<Record>();

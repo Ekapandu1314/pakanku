@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:paddingBottom="5dp"
     android:background="@color/Base"
-    tools:context="com.android.mirzaadr.pakanku.ternak2">
+    tools:context=".Activity.PilihBahan">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,7 +1,6 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,54 +13,40 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.mirzaadr.pakanku.Adapter.ListBahanAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Dao.DBHelper;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.VersionDAO;
 import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
-import com.android.mirzaadr.pakanku.Internet.Utils;
 import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Version;
+import com.android.mirzaadr.pakanku.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -592,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void InfoClick(View v) {
-        Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+        Intent intent = new Intent(MainActivity.this, Informasi.class);
         startActivity(intent);
     }
 
@@ -640,7 +625,7 @@ public class MainActivity extends AppCompatActivity {
         }
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.progressdialog);
+        dialog.setContentView(R.layout.progress_dialog_loading);
         return dialog;
     }
 }

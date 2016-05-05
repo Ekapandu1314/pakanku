@@ -51,7 +51,7 @@ public class ListEdittextAdapter extends BaseAdapter {
         View v = convertView;
         final ViewHolder holder;
         if(v == null) {
-            v = mInflater.inflate(R.layout.list_item_edittext, parent, false);
+            v = mInflater.inflate(R.layout.list_item_input_harga, parent, false);
             holder = new ViewHolder();
             holder.txtBahanEdit = (TextView) v.findViewById(R.id.bahan_edittext);
             holder.editHarga = (EditText) v.findViewById(R.id.editHarga);

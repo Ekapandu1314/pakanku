@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.android.mirzaadr.pakanku.Internet.WebViewClientImpl;
+import com.android.mirzaadr.pakanku.R;
 
-public class ArticleView extends Activity {
+public class BukaArtikel extends Activity {
 	// Declare Variables
 
 	String link;
@@ -18,7 +19,7 @@ public class ArticleView extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.article_view);
+		setContentView(R.layout.activity_artikel);
 
 		Intent i = getIntent();
 		// Get the result of link

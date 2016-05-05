@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,13 +17,15 @@ import android.widget.Toast;
 import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
 import com.android.mirzaadr.pakanku.Model.Record;
+import com.android.mirzaadr.pakanku.R;
+import com.android.mirzaadr.pakanku.Activity.ResepRansumRecord;
 
 import java.util.List;
 
 /**
  * Created by Mirzaadr on 4/1/2016.
  */
-public class Info_history extends Fragment {
+public class InfoRecord extends Fragment {
 
     private ListRecordAdapter mAdapter;
     private List<Record> mListRecord;
@@ -40,7 +42,7 @@ public class Info_history extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View vieww = inflater.inflate(R.layout.history_layout, container, false);
+        final View vieww = inflater.inflate(R.layout.fragment_record, container, false);
 
         mRecordDao = new RecordDAO(getActivity());
         mListRecord = mRecordDao.getAllRecord();

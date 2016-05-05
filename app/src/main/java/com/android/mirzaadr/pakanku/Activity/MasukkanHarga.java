@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.android.mirzaadr.pakanku.Adapter.ListEdittextAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Model.Bahan;
+import com.android.mirzaadr.pakanku.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,7 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
 
-public class InputHarga extends Activity {
+public class MasukkanHarga extends Activity {
 
     private ListView mListviewBahan;
     private ListEdittextAdapter mAdapter;
@@ -144,7 +144,7 @@ public class InputHarga extends Activity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loadingDialog = ProgressDialog.show(InputHarga.this, "Please wait", "Silahkan tunggu...");
+                loadingDialog = ProgressDialog.show(MasukkanHarga.this, "Please wait", "Silahkan tunggu...");
             }
 
             @Override
