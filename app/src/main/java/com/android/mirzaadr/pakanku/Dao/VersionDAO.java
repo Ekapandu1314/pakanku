@@ -55,7 +55,6 @@ public class VersionDAO  {
     }
 
     public void addVersionJson(Version version) {
-        //SQLiteDatabase db = this.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
 
@@ -73,22 +72,6 @@ public class VersionDAO  {
             Log.e("problem",e+"");
         }
     }
-
-    /*public void updateVersionJSON(Version version) {
-
-        try{
-            ContentValues values = new ContentValues();
-
-            values.put(DBHelper.VERSION, version.getVersiBahan());
-            values.put(DBHelper.TANGGAL, version.getTanggal());
-            mDatabase.insert(DBHelper.TABLE_VERSION, null, values);
-
-            //mDatabase.close();
-        }catch (Exception e){
-            Log.e("problem",e+"");
-        }
-
-    }*/
 
      public Version createVersion(String version, String tanggal) {
         ContentValues values = new ContentValues();

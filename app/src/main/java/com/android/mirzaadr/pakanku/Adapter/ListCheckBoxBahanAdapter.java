@@ -1,7 +1,6 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
@@ -52,7 +50,7 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
         View v = convertView;
         final ViewHolder holder;
         if(v == null) {
-            v = mInflater.inflate(R.layout.table_layout, parent, false);
+            v = mInflater.inflate(R.layout.list_item_pilih_bahan, parent, false);
             holder = new ViewHolder();
             holder.txtKategori = (TextView) v.findViewById(R.id.table2);
             holder.txtNamaBahan = (TextView) v.findViewById(R.id.table);

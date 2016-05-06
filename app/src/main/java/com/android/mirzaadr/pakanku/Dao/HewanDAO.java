@@ -85,7 +85,6 @@ public class HewanDAO {
     }
 
     public void addHewanJson(Hewan hewan) {
-        //SQLiteDatabase db = this.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
             values.put(DBHelper.HEWAN_ID, hewan.getIdhewan());

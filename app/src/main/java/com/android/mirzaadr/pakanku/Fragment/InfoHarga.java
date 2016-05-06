@@ -1,9 +1,8 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Fragment;
 
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,13 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.android.mirzaadr.pakanku.Adapter.ListBahanAdapter;
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
-import com.android.mirzaadr.pakanku.Dao.VersionDAO;
+import com.android.mirzaadr.pakanku.Activity.MasukkanHarga;
 import com.android.mirzaadr.pakanku.Model.Bahan;
+import com.android.mirzaadr.pakanku.R;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ import java.util.List;
  * Created by Mirzaadr on 4/1/2016.
  */
 
-public class Info_harga extends Fragment {
+public class InfoHarga extends Fragment {
 
     private ListView mListviewHijau, mListviewEnergi, mListviewProtein;
 
@@ -42,7 +40,7 @@ public class Info_harga extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.harga_layout, container, false);
+        view = inflater.inflate(R.layout.fragment_harga, container, false);
 
         ListBahanHargaAdapter mAdapterHijauan;
         ListBahanHargaAdapter mAdapterEnergi;
@@ -77,7 +75,7 @@ public class Info_harga extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), InputHarga.class);
+                Intent intent = new Intent(getActivity(), MasukkanHarga.class);
                 startActivity(intent);}
         });
 

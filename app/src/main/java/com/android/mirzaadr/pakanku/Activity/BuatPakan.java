@@ -1,29 +1,38 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
+
 import android.widget.EditText;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.ActionBar;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
-public class CekUntung extends AppCompatActivity {
+import com.android.mirzaadr.pakanku.R;
+
+public class BuatPakan extends AppCompatActivity {
+
+    /*private static StackView stackView;
+    private static ArrayList<Stack_Items> list;
+
+    //Integer array for images
+    private static final Integer[] icons = { R.drawable.logo, R.drawable.logo,
+            R.drawable.logo, R.drawable.logo2 };/*/
 
     int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
     private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
@@ -47,15 +56,12 @@ public class CekUntung extends AppCompatActivity {
     TextView buttonPlus1;
     TextView buttonPlus2;
     TextView buttonPlus3;
-    TextView buttonPlus4;
     TextView buttonMin1;
     TextView buttonMin2;
     TextView buttonMin3;
-    TextView buttonMin4;
 
     EditText textEdit;
     EditText editBobot;
-    EditText editBobot2;
     EditText editJumlah;
     EditText editHari;
 
@@ -69,14 +75,13 @@ public class CekUntung extends AppCompatActivity {
     String tujuan;
     String nama;
     double berat1;
-    double produk;
     int jumlah;
     int lama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cek_untung);
+        setContentView(R.layout.activity_buat_pakan);
 
         indicatorImages = new ImageView[switcherImage];
         indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
@@ -90,41 +95,26 @@ public class CekUntung extends AppCompatActivity {
         check_hobi = (CheckBox) findViewById(R.id.checkHobi);
         check_kerja = (CheckBox) findViewById(R.id.checkKerja);
 
+        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongBuat);
+        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaBuat);
+        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahBuat);
+        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurBuat);
+        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiBuat);
+
         buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
         buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
         buttonPlus3 = (TextView) findViewById(R.id.buttonplus3);
-        buttonPlus4 = (TextView) findViewById(R.id.buttonplus4);
         buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
         buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
         buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
-        buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
 
         editBobot = (EditText) findViewById(R.id.editbobot);
-        editBobot2 = (EditText) findViewById(R.id.editbobot2);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
-        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
-        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
-        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
-        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
-        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
-
         editHari.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editBobot.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editBobot2.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editJumlah.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        Spinner spinner = (Spinner) findViewById(R.id.kilogram);
-        //Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinneritem, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        //spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
 
@@ -197,56 +187,11 @@ public class CekUntung extends AppCompatActivity {
                         editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
 
                     }
+
                 }
                 else {
 
                     editBobot.setText(String.valueOf(0));
-
-                }
-
-
-
-            }
-        });
-
-        buttonPlus4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(editBobot2.getText().toString().trim().length() > 0) {
-
-                    editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) + 1));
-
-                }
-                else {
-                    editBobot2.setText(String.valueOf(Integer.parseInt("0")));
-                }
-            }
-        });
-
-        buttonMin4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(editBobot2.getText().toString().trim().length() > 0) {
-
-                    if (Integer.parseInt(editBobot2.getText().toString()) <= 0) {
-
-                        editBobot2.setText(String.valueOf(0));
-
-                    }
-                    else {
-
-                        editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) - 1));
-
-                    }
-
-
-
-                }
-                else {
-
-                    editBobot2.setText(String.valueOf(0));
 
                 }
 
@@ -284,7 +229,7 @@ public class CekUntung extends AppCompatActivity {
                         editJumlah.setText(String.valueOf(0));
 
                     }
-                    else{
+                    else {
 
                         editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
 
@@ -298,8 +243,6 @@ public class CekUntung extends AppCompatActivity {
                     editJumlah.setText(String.valueOf(0));
 
                 }
-
-
 
             }
         });
@@ -319,8 +262,6 @@ public class CekUntung extends AppCompatActivity {
 
                 }
 
-
-
             }
         });
 
@@ -328,9 +269,9 @@ public class CekUntung extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(editHari.getText().toString().trim().length() > 0) {
+                if(editJumlah.getText().toString().trim().length() > 0) {
 
-                    if (Integer.parseInt(editHari.getText().toString()) <= 0) {
+                    if (Integer.parseInt(editJumlah.getText().toString()) <= 0) {
 
                         editHari.setText(String.valueOf(0));
 
@@ -340,19 +281,16 @@ public class CekUntung extends AppCompatActivity {
                         editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
 
                     }
-
-
-
+                    
                 }
                 else {
 
                     editHari.setText(String.valueOf(0));
 
                 }
+
             }
         });
-
-
 
         check_potong.setChecked(true);
 
@@ -436,6 +374,7 @@ public class CekUntung extends AppCompatActivity {
 
         animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+
     }
 
     public void nextImageButton(View view) {
@@ -461,8 +400,6 @@ public class CekUntung extends AppCompatActivity {
         layoutKerja.setVisibility(View.VISIBLE);
         layoutPotong.setVisibility(View.VISIBLE);
         layoutPerah.setVisibility(View.VISIBLE);
-
-        hewan = namaTernak[counter];
 
         if(hewan.equals("Sapi")) {
 
@@ -530,6 +467,7 @@ public class CekUntung extends AppCompatActivity {
         layoutPotong.setVisibility(View.VISIBLE);
         layoutPerah.setVisibility(View.VISIBLE);
 
+
         if(hewan.equals("Sapi")) {
 
             check_hobi.setClickable(false);
@@ -567,6 +505,7 @@ public class CekUntung extends AppCompatActivity {
             layoutPerah.setVisibility(View.GONE);
 
         }
+
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
@@ -581,11 +520,6 @@ public class CekUntung extends AppCompatActivity {
         editBobot.requestFocus();
     }
 
-    public void editBobot2 (View view){
-        editBobot2.setFocusableInTouchMode(true);
-        editBobot2.requestFocus();
-    }
-
     public void editJumlah (View view){
         editJumlah.setFocusableInTouchMode(true);
         editJumlah.requestFocus();
@@ -598,13 +532,13 @@ public class CekUntung extends AppCompatActivity {
 
     public void nextClick(View v) {
 
-        if (hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
+        if(hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
 
             Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
 
-        } else {
-
-            final Dialog dialog = new Dialog(CekUntung.this);
+        }
+        else {
+            final Dialog dialog = new Dialog(BuatPakan.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.dialog_paket);
             dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -655,25 +589,28 @@ public class CekUntung extends AppCompatActivity {
 
                     if (check_buat.isChecked()) {
 
-                        Intent intent = new Intent(CekUntung.this, ternak2.class);
+                        Intent intent = new Intent(BuatPakan.this, PilihBahan.class);
                         Bundle var_resep = new Bundle();
 
                         var_resep.putString("nama", nama);
                         var_resep.putString("hewan", hewan);
                         var_resep.putString("tujuan", tujuan);
                         var_resep.putDouble("berat1", berat1);
-                        var_resep.putDouble("produk", produk);
                         var_resep.putInt("jumlah", jumlah);
                         var_resep.putInt("lama", lama);
                         intent.putExtras(var_resep);
+
                         startActivity(intent);
+
                         dialog.dismiss();
 
-                    } else {
+                    }
+                    else {
 
                         Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
 
                     }
+
 
                 }
             });
@@ -706,23 +643,25 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-            
+
+
             if (editBobot.getText().toString().trim().length() > 0) {
 
                 if (editBobot.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Produk tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+
                 } else {
 
-                    produk = Double.parseDouble(editBobot.getText().toString());
+                    berat1 = Double.parseDouble(editBobot.getText().toString());
 
                 }
 
 
             } else {
 
-                Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Bobot tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
@@ -746,7 +685,6 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
 
             if (editHari.getText().toString().trim().length() > 0) {
 
@@ -779,29 +717,8 @@ public class CekUntung extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
-            if (editBobot.getText().toString().trim().length() > 0) {
-
-                if (editBobot.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else {
-
-                    berat1 = Double.parseDouble(editBobot2.getText().toString());
-
-                }
-
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-
         }
-    }
-}
 
+    }
+
+}

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
+            android:name=".Activity.SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,31 +24,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".InformationActivity"
+            android:name=".Activity.Informasi"
             android:label="@string/title_activity_information"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".BuatPakan"
+            android:name=".Activity.BuatPakan"
             android:label="@string/title_activity_buatpakan"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ternak2"
+            android:name=".Activity.PilihBahan"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ResepRansum"
+            android:name=".Activity.ResepRansum"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ArticleView"></activity>
+        <activity android:name=".Activity.BukaArtikel"></activity>
         <activity
-            android:name=".CekUntung"
+            android:name=".Activity.CekUntung"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".InputHarga"></activity>
+            android:name=".Activity.MasukkanHarga"></activity>
         <activity
-            android:name=".ResepRansumRecord"
+            android:name=".Activity.ResepRansumRecord"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

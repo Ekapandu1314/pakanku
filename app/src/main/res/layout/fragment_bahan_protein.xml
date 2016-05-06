@@ -5,8 +5,8 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@color/Base"
-    android:id="@+id/fragEnergi"
-    tools:context="com.android.mirzaadr.pakanku.ternak2">
+    android:id="@+id/fragProtein"
+    tools:context=".Activity.PilihBahan">
 
     <!--LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +16,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Accent"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:background="#E77817">
+
         <View
             android:layout_width="1dp"
             android:layout_height="40dp"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nama"
             android:id="@+id/table"
-            android:textColor="@color/listEnergi"
+            android:textColor="@color/Black"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
@@ -57,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/harga"
-            android:textColor="@color/listEnergi"
+            android:textColor="@color/Black"
             android:id="@+id/table2"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
@@ -70,19 +71,20 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkPetelur"
             android:checked="false"
-            android:shadowColor="@color/listEnergi"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp" />
+
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/listEnergi"
+        android:id="@+id/listProtein"
         android:layout_marginTop="1dip"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
 
 </LinearLayout>
+

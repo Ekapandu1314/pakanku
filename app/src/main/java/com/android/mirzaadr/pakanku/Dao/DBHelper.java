@@ -52,9 +52,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String RJTERNAK = "rjternak";
     public static final String RLAMA = "rlama";
     public static final String PBAHAN = "pbahan";
-    //public static final String JBAHAN = "jbahan";
-    //public static final String RTUANG = "rtuang";
-    //public static final String RTUNTUNG = "rtuntung";
 
     private static final String DATABASE_NAME = "pakanku.db";
     private static final int DATABASE_VERSION = 1;

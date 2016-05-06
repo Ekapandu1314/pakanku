@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.mirzaadr.pakanku.Adapter.ListResepAdapter;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Model.Resep;
+import com.android.mirzaadr.pakanku.R;
 
 import java.util.List;
 

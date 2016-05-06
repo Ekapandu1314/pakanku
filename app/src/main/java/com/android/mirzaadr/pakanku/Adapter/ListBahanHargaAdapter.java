@@ -48,7 +48,7 @@ public class ListBahanHargaAdapter extends BaseAdapter {
         View v = convertView;
         ViewHolder holder;
         if(v == null) {
-            v = mInflater.inflate(R.layout.harga_item_list, parent, false);
+            v = mInflater.inflate(R.layout.list_item_harga, parent, false);
             holder = new ViewHolder();
             holder.intIdBahan = (TextView) v.findViewById(R.id.notable);
             holder.txtNamaBahan = (TextView) v.findViewById(R.id.namatable);

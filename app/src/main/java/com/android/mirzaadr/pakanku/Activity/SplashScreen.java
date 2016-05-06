@@ -1,11 +1,13 @@
-package com.android.mirzaadr.pakanku;
+package com.android.mirzaadr.pakanku.Activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Splash extends AppCompatActivity {
+import com.android.mirzaadr.pakanku.R;
+
+public class SplashScreen extends AppCompatActivity {
 
 /*    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,7 +15,6 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
     }*/
 
-    // Splash screen timer
     private static int SPLASH_TIME_OUT = 1000;
 
     @Override
@@ -32,7 +33,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(Splash.this, MainActivity.class);
+                Intent i = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(i);
 
                 // close this activity
