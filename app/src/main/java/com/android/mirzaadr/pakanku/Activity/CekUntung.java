@@ -713,96 +713,89 @@ public class CekUntung extends AppCompatActivity {
 
                 if (editBobot.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Produk tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Produksi tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else {
 
                     produk = Double.parseDouble(editBobot.getText().toString());
+                    if (editJumlah.getText().toString().trim().length() > 0) {
+
+                        if (editJumlah.getText().toString().equals("0")) {
+
+                            Toast.makeText(getBaseContext(), "Jumlah ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                        } else {
+
+                            jumlah = Integer.parseInt(editJumlah.getText().toString());
+                            if (editHari.getText().toString().trim().length() > 0) {
+
+                                if (editHari.getText().toString().equals("0")) {
+
+                                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                } else {
+
+                                    lama = Integer.parseInt(editHari.getText().toString());
+                                    if (editBobot.getText().toString().trim().length() > 0) {
+
+                                        if (editBobot.getText().toString().equals("0")) {
+
+                                            Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        } else {
+
+                                            berat1 = Double.parseDouble(editBobot2.getText().toString());
+                                            if (textEdit.getText().toString().trim().length() > 0) {
+
+                                                nama = textEdit.getText().toString();
+
+                                            } else {
+
+                                                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                                                dialog.dismiss();
+
+                                            }
+
+                                        }
+
+
+                                    } else {
+
+                                        Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+
+                                    }
+
+                                }
+
+                            } else {
+
+                                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+
+                            }
+
+                        }
+
+                    } else {
+
+                        Toast.makeText(getBaseContext(), "Jumlah ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
 
                 }
 
 
             } else {
 
-                Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Produksi tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
-
-            if (editJumlah.getText().toString().trim().length() > 0) {
-
-                if (editJumlah.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    jumlah = Integer.parseInt(editJumlah.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-
-            if (editHari.getText().toString().trim().length() > 0) {
-
-                if (editHari.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    lama = Integer.parseInt(editHari.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-            if (textEdit.getText().toString().trim().length() > 0) {
-
-                nama = textEdit.getText().toString();
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
-
-            }
-
-            if (editBobot.getText().toString().trim().length() > 0) {
-
-                if (editBobot.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else {
-
-                    berat1 = Double.parseDouble(editBobot2.getText().toString());
-
-                }
-
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-
         }
     }
 }
