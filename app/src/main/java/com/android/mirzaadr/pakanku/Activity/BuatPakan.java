@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku.Activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,13 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
@@ -47,11 +50,11 @@ public class BuatPakan extends AppCompatActivity {
     Animation animationprevOut;
     Animation animationprevIn;
 
-    CheckBox check_potong;
-    CheckBox check_perah;
-    CheckBox check_petelur;
-    CheckBox check_hobi;
-    CheckBox check_kerja;
+    RadioButton check_potong;
+    RadioButton check_perah;
+    RadioButton check_petelur;
+    RadioButton check_hobi;
+    RadioButton check_kerja;
 
     TextView buttonPlus1;
     TextView buttonPlus2;
@@ -89,11 +92,11 @@ public class BuatPakan extends AppCompatActivity {
         indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
         indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
 
-        check_potong = (CheckBox) findViewById(R.id.checkPotong);
-        check_perah = (CheckBox) findViewById(R.id.checkPerah);
-        check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
-        check_hobi = (CheckBox) findViewById(R.id.checkHobi);
-        check_kerja = (CheckBox) findViewById(R.id.checkKerja);
+        check_potong = (RadioButton) findViewById(R.id.checkBox1);
+        check_perah = (RadioButton) findViewById(R.id.checkBox2);
+        check_petelur = (RadioButton) findViewById(R.id.checkBox3);
+        check_hobi = (RadioButton) findViewById(R.id.checkBox4);
+        check_kerja = (RadioButton) findViewById(R.id.checkBox5);
 
         layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongBuat);
         layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaBuat);
@@ -513,9 +516,14 @@ public class BuatPakan extends AppCompatActivity {
     public void editAction (View view){
         textEdit.setFocusableInTouchMode(true);
         textEdit.requestFocus();
+        InputMethodManager imm = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(textEdit,
+                InputMethodManager.SHOW_IMPLICIT);
+        textEdit.setSelection(hewan.length());
     }
 
-    public void editBobot (View view){
+/*    public void editBobot (View view){
         editBobot.setFocusableInTouchMode(true);
         editBobot.requestFocus();
     }
@@ -528,7 +536,7 @@ public class BuatPakan extends AppCompatActivity {
     public void editHari (View view){
         editHari.setFocusableInTouchMode(true);
         editHari.requestFocus();
-    }
+    }*/
 
     public void nextClick(View v) {
 

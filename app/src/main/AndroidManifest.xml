@@ -34,7 +34,8 @@
         <activity
             android:name=".Activity.BuatPakan"
             android:label="@string/title_activity_buatpakan"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name=".Activity.PilihBahan"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -44,7 +45,8 @@
         <activity android:name=".Activity.BukaArtikel"></activity>
         <activity
             android:name=".Activity.CekUntung"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name=".Activity.MasukkanHarga"></activity>
         <activity
