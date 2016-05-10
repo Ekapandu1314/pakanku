@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
@@ -353,7 +355,6 @@ public class BuatPakan extends AppCompatActivity {
         });
 
         textEdit = (EditText) findViewById(R.id.JenisTernak);
-        //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
         myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -515,6 +516,7 @@ public class BuatPakan extends AppCompatActivity {
 
     public void editAction (View view){
         textEdit.setFocusableInTouchMode(true);
+        textEdit.setClickable(true);
         textEdit.requestFocus();
         InputMethodManager imm = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -522,21 +524,6 @@ public class BuatPakan extends AppCompatActivity {
                 InputMethodManager.SHOW_IMPLICIT);
         textEdit.setSelection(hewan.length());
     }
-
-/*    public void editBobot (View view){
-        editBobot.setFocusableInTouchMode(true);
-        editBobot.requestFocus();
-    }
-
-    public void editJumlah (View view){
-        editJumlah.setFocusableInTouchMode(true);
-        editJumlah.requestFocus();
-    }
-
-    public void editHari (View view){
-        editHari.setFocusableInTouchMode(true);
-        editHari.requestFocus();
-    }*/
 
     public void nextClick(View v) {
 
