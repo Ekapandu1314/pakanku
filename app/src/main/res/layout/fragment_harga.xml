@@ -101,7 +101,6 @@
                 android:layout_marginTop="1dip"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
-                android:nestedScrollingEnabled="true"
                 android:background="@color/listHijauan"
                 android:layout_height="wrap_content"
                 android:clickable="true" />
@@ -177,7 +176,6 @@
                 android:layout_marginTop="1dip"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
-                android:nestedScrollingEnabled="true"
                 android:layout_height="wrap_content"
                 android:background="@color/listEnergi"
                 android:clickable="true"
@@ -253,7 +251,6 @@
                 android:id="@+id/hargalistprotein"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_marginTop="1dip"
-                android:nestedScrollingEnabled="true"
                 android:background="@color/listProtein"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
