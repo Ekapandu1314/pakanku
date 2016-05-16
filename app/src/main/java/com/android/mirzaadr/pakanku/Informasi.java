@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;

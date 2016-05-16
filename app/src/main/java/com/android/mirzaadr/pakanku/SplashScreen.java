@@ -1,11 +1,9 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.android.mirzaadr.pakanku.R;
 
 public class SplashScreen extends AppCompatActivity {
 

@@ -3,21 +3,20 @@
     <item android:state_pressed="true" >
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="@color/darkgray"
-                android:endColor="@color/darkgray"
+                android:startColor="@color/ButtonPressed"
+                android:endColor="@color/ButtonPressed"
                 android:angle="90">
             </gradient>
-            <corners android:radius="5dip" />
         </shape>
     </item>
+
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="@color/grayish"
-                android:endColor="@color/grayish"
+                android:startColor="@color/Button"
+                android:endColor="@color/Button"
                 android:angle="90">
             </gradient>
-            <corners android:radius="5dip" />
         </shape>
 
     </item>

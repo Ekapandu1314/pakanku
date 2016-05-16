@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -31,7 +31,6 @@ import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Version;
-import com.android.mirzaadr.pakanku.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

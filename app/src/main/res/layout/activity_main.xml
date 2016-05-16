@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     android:background="@color/Base"
-    tools:context=".Activity.MainActivity"
+    tools:context=".MainActivity"
     >
 
     <!--<android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
@@ -51,11 +51,7 @@
                 android:contentDescription="@string/BuatButton"
                 android:clickable="true"
                 android:onClick="BuatClick"/>
-                <!--TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/BuatButton"
-                    android:layout_gravity="center_horizontal"/-->
+
 
             <ImageView
                 android:layout_width="90dip"
@@ -69,18 +65,17 @@
                 android:contentDescription="@string/InfoButton"
                 android:onClick="InfoClick" />
 
-
-                <ImageView
-                    android:layout_width="90dip"
-                    android:layout_height="90dip"
-                    android:layout_gravity="center"
-                    android:id="@+id/CekUntung"
-                    android:layout_toRightOf="@+id/Informasi"
-                    android:layout_toEndOf="@+id/Informasi"
-                    android:src="@drawable/untung_button"
-                    android:contentDescription="@string/CekUntung"
-                    android:clickable="true"
-                    android:onClick="UntungClick"/>
+            <ImageView
+                android:layout_width="90dip"
+                android:layout_height="90dip"
+                android:layout_gravity="center"
+                android:id="@+id/CekUntung"
+                android:layout_toRightOf="@+id/Informasi"
+                android:layout_toEndOf="@+id/Informasi"
+                android:src="@drawable/untung_button"
+                android:contentDescription="@string/CekUntung"
+                android:clickable="true"
+                android:onClick="UntungClick"/>
         </RelativeLayout>
 
     </LinearLayout>

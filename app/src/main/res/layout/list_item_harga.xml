@@ -24,7 +24,7 @@
         android:layout_marginStart="10dp"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:hint="@string/nama"
         android:id="@+id/namatable"
         android:layout_gravity="center_horizontal"
@@ -36,7 +36,8 @@
         android:layout_toRightOf="@+id/notable"
         android:layout_toEndOf="@+id/notable"
         android:layout_toLeftOf="@+id/divider"
-        android:layout_toStartOf="@+id/divider" />
+        android:layout_toStartOf="@+id/divider"
+        android:gravity="center_vertical" />
     <TextView
         android:layout_width="20sp"
         android:layout_height="wrap_content"
@@ -48,11 +49,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp" />
+        android:layout_marginStart="10dp"
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/divider"
         android:layout_toEndOf="@+id/divider"

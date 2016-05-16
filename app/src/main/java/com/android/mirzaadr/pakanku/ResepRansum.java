@@ -1,10 +1,12 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -48,9 +50,6 @@ public class ResepRansum extends AppCompatActivity {
 
     private RelativeLayout layoutUntung;
 
-    String bahanid;
-    String hewan;
-    String tujuan;
     String textProduk = new String();
 
     double berat1;
@@ -69,6 +68,9 @@ public class ResepRansum extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resep_ransum);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         Intent i = getIntent();
         newlistResepHijauan = (List<Resep>) i.getSerializableExtra("resephijauan");
@@ -120,8 +122,6 @@ public class ResepRansum extends AppCompatActivity {
             layoutUntung.setVisibility(View.GONE);
         }
 
-
-
     }
 
     private void initViewResep() {
@@ -145,8 +145,6 @@ public class ResepRansum extends AppCompatActivity {
         this.textviewTextTotalUntung = (TextView) findViewById(R.id.textTextTotalUntung);
         this.layoutUntung = (RelativeLayout) findViewById(R.id.layoutUntung);
 
-
-
     }
 
     private void initListHeight(){
@@ -154,6 +152,7 @@ public class ResepRansum extends AppCompatActivity {
         Utility.setListViewHeightBasedOnChildren(mListviewResepEnergi);
         Utility.setListViewHeightBasedOnChildren(mListviewResepProtein);
     }
+
     //Test scrollview custom
     public static class Utility {
         public static void setListViewHeightBasedOnChildren(ListView listView) {
@@ -175,4 +174,5 @@ public class ResepRansum extends AppCompatActivity {
             listView.setLayoutParams(params);
         }
     }
+
 }

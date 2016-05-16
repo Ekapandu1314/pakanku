@@ -19,7 +19,7 @@ import com.android.mirzaadr.pakanku.Dao.VersionDAO;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.Interface.BahanCommunicator;
-import com.android.mirzaadr.pakanku.Activity.PilihBahan;
+import com.android.mirzaadr.pakanku.PilihBahan;
 
 import java.util.List;
 public class BahanProtein extends Fragment implements BahanCommunicator.FragmentCommunicator {

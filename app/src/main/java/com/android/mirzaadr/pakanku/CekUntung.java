@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.app.ActionBar;
 import android.app.Dialog;
@@ -22,8 +22,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
-
-import com.android.mirzaadr.pakanku.R;
 
 public class CekUntung extends AppCompatActivity {
 

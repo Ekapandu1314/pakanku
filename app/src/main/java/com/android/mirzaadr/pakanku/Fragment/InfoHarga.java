@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
-import com.android.mirzaadr.pakanku.Activity.MasukkanHarga;
+import com.android.mirzaadr.pakanku.MasukkanHarga;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 

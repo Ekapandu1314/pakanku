@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.android.mirzaadr.pakanku.Adapter.ListEdittextAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Model.Bahan;
-import com.android.mirzaadr.pakanku.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

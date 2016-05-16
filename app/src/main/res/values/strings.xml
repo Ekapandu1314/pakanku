@@ -50,6 +50,7 @@
     <string name="datamasuk3">Lama Pemeliharaan (hari)</string>
     <string name="datamasuk4">Produksi Ternak per hari</string>
     <string name="copyright">copyright 2016 Pakanku Apps by Patpat Corp.</string>
+    <string name="next"> next </string>
 
     <string-array name="spinneritem">
         <item>kg</item>
