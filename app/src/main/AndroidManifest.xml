@@ -53,5 +53,4 @@
             android:name=".Activity.ResepRansumRecord"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 </manifest>

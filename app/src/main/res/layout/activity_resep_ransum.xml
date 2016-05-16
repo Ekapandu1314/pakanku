@@ -143,22 +143,25 @@
                     android:layout_below="@+id/relativeLayout"
                     android:id="@+id/relativeLayout2">
 
-                    <ListView
+                    <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/listResepHijauan"
+                        android:background="@color/listHijauan"
                         android:layout_alignParentTop="true" />
 
-                    <ListView
+                    <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/listResepEnergi"
+                        android:background="@color/listEnergi"
                         android:layout_below="@id/listResepHijauan" />
 
-                    <ListView
+                    <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/listResepProtein"
+                        android:background="@color/listProtein"
                         android:layout_below="@+id/listResepEnergi" />
 
                 </RelativeLayout>

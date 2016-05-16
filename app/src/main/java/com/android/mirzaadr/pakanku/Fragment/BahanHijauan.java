@@ -5,7 +5,12 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -16,6 +21,7 @@ import com.android.mirzaadr.pakanku.Adapter.ListCheckBoxBahanAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.VersionDAO;
+import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.Interface.BahanCommunicator;
@@ -39,7 +45,7 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
 
 
     private TextView mTxtEmptyListBahan;
-    private ListView bahanListView;
+    private RecyclerView bahanListView;
 
     private BahanDAO mBahanDao;
 
@@ -61,7 +67,7 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
         mListBahan = mBahanDao.getAllBahanByKategori("hijauan");
 
         initViews();
-        mAdapter = new ListCheckBoxBahanAdapter(getActivity(), mListBahan);
+        mAdapter = new ListCheckBoxBahanAdapter(mListBahan);
         bahanListView.setAdapter(mAdapter);
 
         //Utility.setListViewHeightBasedOnChildren(bahanListView);
@@ -70,8 +76,26 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
     }
 
     private void initViews() {
-        this.bahanListView = (ListView) view.findViewById(R.id.listHijauan);
+        this.bahanListView = (RecyclerView) view.findViewById(R.id.listHijauan);
         this.mTxtEmptyListBahan = (TextView) view.findViewById(R.id.table);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
+        bahanListView.setLayoutManager(mLayoutManager);
+        bahanListView.setItemAnimator(new DefaultItemAnimator());
+        bahanListView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        bahanListView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), bahanListView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bahan bahan1 = mListBahan.get(position);
+                Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Override
@@ -94,7 +118,7 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
 
             StringBuffer responseText = new StringBuffer();
 
-            List<Bahan> bahanxxxx = mAdapter.getItems();
+            List<Bahan> bahanxxxx = mAdapter.getmItems();
             for (int i = 0; i < bahanxxxx.size(); i++) {
                 Bahan bahanxv = bahanxxxx.get(i);
                 if (bahanxv.isSelected()) {
@@ -134,4 +158,54 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
         }
         //textView.setText(activityAssignedValue);
     }
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private BahanHijauan.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final BahanHijauan.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    }
+
 }

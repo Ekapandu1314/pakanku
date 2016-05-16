@@ -2,7 +2,7 @@
     <string name="app_name">Pakanku</string>
     <string name="action_settings">Settings</string>
     <string name="Button">button</string>
-    <string name="title_activity_information">InformationActivity</string>
+    <string name="title_activity_information">Informasi</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="Logo">Logo Pakanku</string>
     <string name="title_activity_buatpakan">Buat Pakan</string>

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "23.0.3"
 
     useLibrary 'org.apache.http.legacy'
 
@@ -27,5 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
     compile 'com.github.moondroid.coverflow:library:1.0'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile project(':universal-image-loader-1.9.5')
 }

@@ -4,24 +4,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
     android:layout_gravity="center_horizontal"
-    android:background="@color/Button"
+
     >
-    <View
+    <RelativeLayout
         android:layout_width="1dp"
         android:id="@+id/mid"
         android:layout_height="32dp"
         android:visibility="invisible"
+        android:clickable="false"
         android:layout_centerInParent="true"/>
-    <View
+    <RelativeLayout
         android:layout_width="2dp"
         android:layout_height="32dp"
+        android:clickable="false"
         android:id="@+id/divider"
         android:background="@color/Base"
         android:layout_toRightOf="@+id/mid"
         android:layout_toEndOf="@+id/mid"
         android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,13 +63,13 @@
         android:layout_toEndOf="@+id/divider"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/harga"
-        android:textColor="@color/White"
-        android:id="@+id/hargatable"
-        android:layout_centerInParent="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/harga"
+            android:textColor="@color/White"
+            android:id="@+id/hargatable"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
 </RelativeLayout>

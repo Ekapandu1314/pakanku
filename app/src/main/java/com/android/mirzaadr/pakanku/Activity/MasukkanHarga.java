@@ -3,15 +3,23 @@ package com.android.mirzaadr.pakanku.Activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListEdittextAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
+import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 
@@ -31,7 +39,7 @@ import java.util.List;
 
 public class MasukkanHarga extends Activity {
 
-    private ListView mListviewBahan;
+    private RecyclerView mListviewBahan;
     private ListEdittextAdapter mAdapter;
     private List<Bahan> mListBahan;
     private BahanDAO mBahanDao;
@@ -47,20 +55,32 @@ public class MasukkanHarga extends Activity {
 
         initViews();
 
-        mAdapter = new ListEdittextAdapter(this, mListBahan);
+        mAdapter = new ListEdittextAdapter(mListBahan);
         mListviewBahan.setAdapter(mAdapter);
-
-        //RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) mListviewBahan.getLayoutParams();
-        //lp1.height = 70*mListBahan.size();
-
-        Utility.setListViewHeightBasedOnChildren(mListviewBahan);
+        mAdapter.notifyDataSetChanged();
 
     }
 
     private void initViews() {
-        this.mListviewBahan = (ListView) findViewById(R.id.listEdit);
-        //this.mTxtEmptyListBahan = (TextView) findViewById(R.id.txt_empty_list_companies);
-        //this.mListviewBahan.setOnItemClickListener(this);
+        this.mListviewBahan = (RecyclerView) findViewById(R.id.listEdit);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+
+        mListviewBahan.setLayoutManager(mLayoutManager);
+        mListviewBahan.setItemAnimator(new DefaultItemAnimator());
+        mListviewBahan.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
+
+        mListviewBahan.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mListviewBahan, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
     }
 
@@ -111,7 +131,7 @@ public class MasukkanHarga extends Activity {
 
         StringBuffer responseText = new StringBuffer();
 
-        List<Bahan> bahanxxxx = mAdapter.getItems();
+        List<Bahan> bahanxxxx = mAdapter.getmItems();
         for (int i = 0; i < bahanxxxx.size(); i++) {
             Bahan bahanxv = bahanxxxx.get(i);
             if (bahanxv.getHarga_baru() == "" || bahanxv.getHarga_baru() == "-"){
@@ -186,27 +206,53 @@ public class MasukkanHarga extends Activity {
 
     }
 
-    //Test scrollview custom
-    public static class Utility {
-        public static void setListViewHeightBasedOnChildren(ListView listView) {
-            ListAdapter listAdapter = listView.getAdapter();
-            if (listAdapter == null) {
-                // pre-condition
-                return;
-            }
+    public interface ClickListener {
+        void onClick(View view, int position);
 
-            int totalHeight = 0;
-            for (int i = 0; i < listAdapter.getCount(); i++) {
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            }
-
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
-        }
+        void onLongClick(View view, int position);
     }
 
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private MasukkanHarga.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MasukkanHarga.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    }
 
 }

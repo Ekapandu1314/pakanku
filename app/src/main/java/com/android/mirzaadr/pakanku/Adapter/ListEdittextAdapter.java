@@ -1,7 +1,9 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,53 +21,43 @@ import java.util.List;
 /**
  * Created by Eka Pandu Winata on 4/11/2016.
  */
-public class ListEdittextAdapter extends BaseAdapter {
+public class ListEdittextAdapter extends RecyclerView.Adapter<ListEdittextAdapter.MyViewHolder> {
 
-    public static final String TAG = "ListEdittextAdapter";
+private List<Bahan> mItems;
 
-    private List<Bahan> mItems;
-    private LayoutInflater mInflater;
+public class MyViewHolder extends RecyclerView.ViewHolder {
+    TextView txtBahanEdit;
+    EditText editHarga;
 
-    public ListEdittextAdapter(Context context, List<Bahan> listBahan) {
-        this.setItems(listBahan);
-        this.mInflater = LayoutInflater.from(context);
+    public MyViewHolder(View view) {
+        super(view);
+        txtBahanEdit = (TextView) view.findViewById(R.id.bahan_edittext);
+        editHarga = (EditText) view.findViewById(R.id.editHarga);
+    }
+}
+
+
+    public ListEdittextAdapter(List<Bahan> moviesList) {
+        this.mItems = moviesList;
     }
 
     @Override
-    public int getCount() {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().size() : 0 ;
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_input_harga, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    public List<Bahan> getmItems() {
+        return mItems;
     }
 
     @Override
-    public Bahan getItem(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position) : null ;
-    }
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-    @Override
-    public long getItemId(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position).getIdbahan() : position;
-    }
+        final Bahan currentItem = mItems.get(position);
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        final ViewHolder holder;
-        if(v == null) {
-            v = mInflater.inflate(R.layout.list_item_input_harga, parent, false);
-            holder = new ViewHolder();
-            holder.txtBahanEdit = (TextView) v.findViewById(R.id.bahan_edittext);
-            holder.editHarga = (EditText) v.findViewById(R.id.editHarga);
-
-            v.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder) v.getTag();
-        }
-
-
-
-        // fill row data
-        final Bahan currentItem = getItem(position);
         if(currentItem != null) {
 
             holder.txtBahanEdit.setText(currentItem.getNamaBahan());
@@ -155,21 +147,11 @@ public class ListEdittextAdapter extends BaseAdapter {
                 }
             });
         }
-        return v;
     }
 
-    public List<Bahan> getItems() {
-        return mItems;
-    }
-
-    public void setItems(List<Bahan> mItems) {
-        this.mItems = mItems;
-    }
-
-    class ViewHolder {
-        TextView txtBahanEdit;
-        EditText editHarga;
-
+    @Override
+    public int getItemCount() {
+        return mItems.size();
     }
 
 }
