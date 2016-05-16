@@ -1,4 +1,4 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,7 +22,6 @@ import com.android.mirzaadr.pakanku.Fragment.BahanProtein;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Resep;
-import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.Interface.BahanCommunicator;
 
 import java.io.Serializable;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class PilihBahan extends FragmentActivity implements BahanCommunicator.ActivityCommunicator {
+public class PilihBahan extends AppCompatActivity implements BahanCommunicator.ActivityCommunicator {
 
     public BahanCommunicator.FragmentCommunicator fragmentCommunicator1;
     public BahanCommunicator.FragmentCommunicator fragmentCommunicator2;
@@ -64,6 +65,9 @@ public class PilihBahan extends FragmentActivity implements BahanCommunicator.Ac
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
         setupViewPager(mViewPager);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mViewPager.setOffscreenPageLimit(2);
 

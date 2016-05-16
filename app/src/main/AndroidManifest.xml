@@ -9,12 +9,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo2"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.SplashScreen"
+            android:name=".SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,33 +24,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Activity.Informasi"
+            android:name=".Informasi"
             android:label="@string/title_activity_information"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Activity.BuatPakan"
+            android:name=".BuatPakan"
             android:label="@string/title_activity_buatpakan"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Activity.PilihBahan"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".PilihBahan"
+            android:label="@string/title_activity_buatpakan"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Activity.ResepRansum"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Activity.BukaArtikel"></activity>
+            android:name=".ResepRansum"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".BukaArtikel"/>
         <activity
-            android:name=".Activity.CekUntung"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:name=".CekUntung"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Activity.MasukkanHarga"></activity>
+            android:name=".MasukkanHarga"/>
         <activity
-            android:name=".Activity.ResepRansumRecord"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".ResepRansumRecord"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 </manifest>

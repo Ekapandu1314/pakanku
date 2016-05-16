@@ -1,43 +1,30 @@
-package com.android.mirzaadr.pakanku.Activity;
+package com.android.mirzaadr.pakanku;
 
+import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
-
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.view.View;
-import android.widget.RadioButton;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.app.ActionBar;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.android.mirzaadr.pakanku.R;
-
-public class BuatPakan extends AppCompatActivity {
-
-    /*private static StackView stackView;
-    private static ArrayList<Stack_Items> list;
-
-    //Integer array for images
-    private static final Integer[] icons = { R.drawable.logo, R.drawable.logo,
-            R.drawable.logo, R.drawable.logo2 };/*/
+public class CekUntung extends AppCompatActivity {
 
     int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
     private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
@@ -52,21 +39,24 @@ public class BuatPakan extends AppCompatActivity {
     Animation animationprevOut;
     Animation animationprevIn;
 
-    RadioButton check_potong;
-    RadioButton check_perah;
-    RadioButton check_petelur;
-    RadioButton check_hobi;
-    RadioButton check_kerja;
+    CheckBox check_potong;
+    CheckBox check_perah;
+    CheckBox check_petelur;
+    CheckBox check_hobi;
+    CheckBox check_kerja;
 
     TextView buttonPlus1;
     TextView buttonPlus2;
     TextView buttonPlus3;
+    TextView buttonPlus4;
     TextView buttonMin1;
     TextView buttonMin2;
     TextView buttonMin3;
+    TextView buttonMin4;
 
     EditText textEdit;
     EditText editBobot;
+    EditText editBobot2;
     EditText editJumlah;
     EditText editHari;
 
@@ -80,13 +70,14 @@ public class BuatPakan extends AppCompatActivity {
     String tujuan;
     String nama;
     double berat1;
+    double produk;
     int jumlah;
     int lama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buat_pakan);
+        setContentView(R.layout.activity_cek_untung);
 
         indicatorImages = new ImageView[switcherImage];
         indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
@@ -94,32 +85,47 @@ public class BuatPakan extends AppCompatActivity {
         indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
         indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
 
-        check_potong = (RadioButton) findViewById(R.id.checkBox1);
-        check_perah = (RadioButton) findViewById(R.id.checkBox2);
-        check_petelur = (RadioButton) findViewById(R.id.checkBox3);
-        check_hobi = (RadioButton) findViewById(R.id.checkBox4);
-        check_kerja = (RadioButton) findViewById(R.id.checkBox5);
-
-        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongBuat);
-        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaBuat);
-        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahBuat);
-        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurBuat);
-        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiBuat);
+        check_potong = (CheckBox) findViewById(R.id.checkPotong);
+        check_perah = (CheckBox) findViewById(R.id.checkPerah);
+        check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
+        check_hobi = (CheckBox) findViewById(R.id.checkHobi);
+        check_kerja = (CheckBox) findViewById(R.id.checkKerja);
 
         buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
         buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
         buttonPlus3 = (TextView) findViewById(R.id.buttonplus3);
+        buttonPlus4 = (TextView) findViewById(R.id.buttonplus4);
         buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
         buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
         buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
+        buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
 
         editBobot = (EditText) findViewById(R.id.editbobot);
+        editBobot2 = (EditText) findViewById(R.id.editbobot2);
         editJumlah = (EditText) findViewById(R.id.editjumlah);
         editHari = (EditText) findViewById(R.id.editHari);
 
+        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
+        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
+        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
+        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
+        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
+
         editHari.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editBobot.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editBobot2.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editJumlah.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        Spinner spinner = (Spinner) findViewById(R.id.kilogram);
+        //Spinner spinner2 = (Spinner) findViewById(R.id.kilogram2);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinneritem, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        //spinner2.setAdapter(adapter);
 
         hewan = "Sapi";
 
@@ -192,11 +198,56 @@ public class BuatPakan extends AppCompatActivity {
                         editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
 
                     }
-
                 }
                 else {
 
                     editBobot.setText(String.valueOf(0));
+
+                }
+
+
+
+            }
+        });
+
+        buttonPlus4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(editBobot2.getText().toString().trim().length() > 0) {
+
+                    editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) + 1));
+
+                }
+                else {
+                    editBobot2.setText(String.valueOf(Integer.parseInt("0")));
+                }
+            }
+        });
+
+        buttonMin4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(editBobot2.getText().toString().trim().length() > 0) {
+
+                    if (Integer.parseInt(editBobot2.getText().toString()) <= 0) {
+
+                        editBobot2.setText(String.valueOf(0));
+
+                    }
+                    else {
+
+                        editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) - 1));
+
+                    }
+
+
+
+                }
+                else {
+
+                    editBobot2.setText(String.valueOf(0));
 
                 }
 
@@ -234,7 +285,7 @@ public class BuatPakan extends AppCompatActivity {
                         editJumlah.setText(String.valueOf(0));
 
                     }
-                    else {
+                    else{
 
                         editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
 
@@ -248,6 +299,8 @@ public class BuatPakan extends AppCompatActivity {
                     editJumlah.setText(String.valueOf(0));
 
                 }
+
+
 
             }
         });
@@ -267,6 +320,8 @@ public class BuatPakan extends AppCompatActivity {
 
                 }
 
+
+
             }
         });
 
@@ -274,9 +329,9 @@ public class BuatPakan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(editJumlah.getText().toString().trim().length() > 0) {
+                if(editHari.getText().toString().trim().length() > 0) {
 
-                    if (Integer.parseInt(editJumlah.getText().toString()) <= 0) {
+                    if (Integer.parseInt(editHari.getText().toString()) <= 0) {
 
                         editHari.setText(String.valueOf(0));
 
@@ -286,16 +341,19 @@ public class BuatPakan extends AppCompatActivity {
                         editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
 
                     }
-                    
+
+
+
                 }
                 else {
 
                     editHari.setText(String.valueOf(0));
 
                 }
-
             }
         });
+
+
 
         check_potong.setChecked(true);
 
@@ -355,6 +413,7 @@ public class BuatPakan extends AppCompatActivity {
         });
 
         textEdit = (EditText) findViewById(R.id.JenisTernak);
+        //textEdit.setFocusableInTouchMode(false);
         myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
         myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -378,7 +437,6 @@ public class BuatPakan extends AppCompatActivity {
 
         animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
-
     }
 
     public void nextImageButton(View view) {
@@ -404,6 +462,8 @@ public class BuatPakan extends AppCompatActivity {
         layoutKerja.setVisibility(View.VISIBLE);
         layoutPotong.setVisibility(View.VISIBLE);
         layoutPerah.setVisibility(View.VISIBLE);
+
+        hewan = namaTernak[counter];
 
         if(hewan.equals("Sapi")) {
 
@@ -471,7 +531,6 @@ public class BuatPakan extends AppCompatActivity {
         layoutPotong.setVisibility(View.VISIBLE);
         layoutPerah.setVisibility(View.VISIBLE);
 
-
         if(hewan.equals("Sapi")) {
 
             check_hobi.setClickable(false);
@@ -509,31 +568,44 @@ public class BuatPakan extends AppCompatActivity {
             layoutPerah.setVisibility(View.GONE);
 
         }
-
         indicatorImages[prev].setImageResource(R.drawable.holo_circle);
         indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
 
     public void editAction (View view){
         textEdit.setFocusableInTouchMode(true);
-        textEdit.setClickable(true);
         textEdit.requestFocus();
-        InputMethodManager imm = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(textEdit,
-                InputMethodManager.SHOW_IMPLICIT);
-        textEdit.setSelection(hewan.length());
+    }
+
+    public void editBobot (View view){
+        editBobot.setFocusableInTouchMode(true);
+        editBobot.requestFocus();
+    }
+
+    public void editBobot2 (View view){
+        editBobot2.setFocusableInTouchMode(true);
+        editBobot2.requestFocus();
+    }
+
+    public void editJumlah (View view){
+        editJumlah.setFocusableInTouchMode(true);
+        editJumlah.requestFocus();
+    }
+
+    public void editHari (View view){
+        editHari.setFocusableInTouchMode(true);
+        editHari.requestFocus();
     }
 
     public void nextClick(View v) {
 
-        if(hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
+        if (hewan.equals("Ayam") || check_hobi.isChecked() || check_kerja.isChecked() || check_petelur.isChecked()) {
 
             Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
 
-        }
-        else {
-            final Dialog dialog = new Dialog(BuatPakan.this);
+        } else {
+
+            final Dialog dialog = new Dialog(CekUntung.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.dialog_paket);
             dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -584,28 +656,25 @@ public class BuatPakan extends AppCompatActivity {
 
                     if (check_buat.isChecked()) {
 
-                        Intent intent = new Intent(BuatPakan.this, PilihBahan.class);
+                        Intent intent = new Intent(CekUntung.this, PilihBahan.class);
                         Bundle var_resep = new Bundle();
 
                         var_resep.putString("nama", nama);
                         var_resep.putString("hewan", hewan);
                         var_resep.putString("tujuan", tujuan);
                         var_resep.putDouble("berat1", berat1);
+                        var_resep.putDouble("produk", produk);
                         var_resep.putInt("jumlah", jumlah);
                         var_resep.putInt("lama", lama);
                         intent.putExtras(var_resep);
-
                         startActivity(intent);
-
                         dialog.dismiss();
 
-                    }
-                    else {
+                    } else {
 
                         Toast.makeText(getBaseContext(), "Fitur belum tersedia, aplikasi masih dalam versi beta", Toast.LENGTH_SHORT).show();
 
                     }
-
 
                 }
             });
@@ -638,23 +707,21 @@ public class BuatPakan extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-
-
+            
             if (editBobot.getText().toString().trim().length() > 0) {
 
                 if (editBobot.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Produksi tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-
                 } else {
 
-                    berat1 = Double.parseDouble(editBobot.getText().toString());
+                    produk = Double.parseDouble(editBobot.getText().toString());
                     if (editJumlah.getText().toString().trim().length() > 0) {
 
                         if (editJumlah.getText().toString().equals("0")) {
 
-                            Toast.makeText(getBaseContext(), "Jumlah ternal tidak boleh nol", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Jumlah ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
 
                         } else {
@@ -670,14 +737,33 @@ public class BuatPakan extends AppCompatActivity {
                                 } else {
 
                                     lama = Integer.parseInt(editHari.getText().toString());
-                                    if (textEdit.getText().toString().trim().length() > 0) {
+                                    if (editBobot.getText().toString().trim().length() > 0) {
 
-                                        nama = textEdit.getText().toString();
+                                        if (editBobot.getText().toString().equals("0")) {
+
+                                            Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        } else {
+
+                                            berat1 = Double.parseDouble(editBobot2.getText().toString());
+                                            if (textEdit.getText().toString().trim().length() > 0) {
+
+                                                nama = textEdit.getText().toString();
+
+                                            } else {
+
+                                                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                                                dialog.dismiss();
+
+                                            }
+
+                                        }
+
 
                                     } else {
 
-                                        Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-
+                                        Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
 
                                     }
@@ -705,18 +791,230 @@ public class BuatPakan extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(getBaseContext(), "Bobot tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Produksi tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
-
-
-
-
-
-
         }
-
     }
 
+    float initialX;
+
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                initialX = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                float finalX = event.getX();
+                if (initialX > finalX)
+                {
+                    prev = counter;
+                    counter--;
+                    myImageSwitcher.setOutAnimation(animationprevOut);
+                    myImageSwitcher.setInAnimation(animationprevIn);
+
+                    int max = switcherImage - 1;
+                    if (counter == -1)
+                        counter = max;
+                    myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                    textEdit.setText(namaTernak[counter]);
+                    hewan = namaTernak[counter];
+
+                    check_kerja.setClickable(true);
+                    check_hobi.setClickable(true);
+                    check_petelur.setClickable(true);
+                    check_potong.setClickable(true);
+                    check_perah.setClickable(true);
+
+                    layoutPetelur.setVisibility(View.VISIBLE);
+                    layoutHobi.setVisibility(View.VISIBLE);
+                    layoutKerja.setVisibility(View.VISIBLE);
+                    layoutPotong.setVisibility(View.VISIBLE);
+                    layoutPerah.setVisibility(View.VISIBLE);
+
+                    if(hewan.equals("Sapi")) {
+
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+
+                    }
+                    else if(hewan.equals("Kambing")) {
+
+                        check_kerja.setClickable(false);
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+                        layoutKerja.setVisibility(View.GONE);
+
+                    }
+                    else if(hewan.equals("Domba")) {
+
+                        check_kerja.setClickable(false);
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+                        layoutKerja.setVisibility(View.GONE);
+
+
+                    }
+                    else if(hewan.equals("Ayam")) {
+
+                        check_kerja.setClickable(false);
+                        check_perah.setClickable(false);
+                        layoutKerja.setVisibility(View.GONE);
+                        layoutPerah.setVisibility(View.GONE);
+
+                    }
+
+                    indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                    indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                }
+                else
+                {
+                    if(counter > 0)
+                    {
+                        prev = counter;
+                        counter ++;
+                        myImageSwitcher.setOutAnimation(animationOut);
+                        myImageSwitcher.setInAnimation(animationIn);
+                        if (counter == switcherImage)
+                            counter = 0;
+                        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                        textEdit.setText(namaTernak[counter]);
+                        hewan = namaTernak[counter];
+
+                        check_kerja.setClickable(true);
+                        check_hobi.setClickable(true);
+                        check_petelur.setClickable(true);
+                        check_potong.setClickable(true);
+                        check_perah.setClickable(true);
+
+                        layoutPetelur.setVisibility(View.VISIBLE);
+                        layoutHobi.setVisibility(View.VISIBLE);
+                        layoutKerja.setVisibility(View.VISIBLE);
+                        layoutPotong.setVisibility(View.VISIBLE);
+                        layoutPerah.setVisibility(View.VISIBLE);
+
+                        hewan = namaTernak[counter];
+
+                        if(hewan.equals("Sapi")) {
+
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Kambing")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Domba")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+
+                        }
+                        else if(hewan.equals("Ayam")) {
+
+                            check_kerja.setClickable(false);
+                            check_perah.setClickable(false);
+                            layoutKerja.setVisibility(View.GONE);
+                            layoutPerah.setVisibility(View.GONE);
+
+                        }
+
+                        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                    }
+                    else
+                    {
+                        prev = counter;
+                        counter ++;
+                        myImageSwitcher.setOutAnimation(animationOut);
+                        myImageSwitcher.setInAnimation(animationIn);
+                        if (counter == switcherImage)
+                            counter = 0;
+                        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                        textEdit.setText(namaTernak[counter]);
+                        hewan = namaTernak[counter];
+
+                        check_kerja.setClickable(true);
+                        check_hobi.setClickable(true);
+                        check_petelur.setClickable(true);
+                        check_potong.setClickable(true);
+                        check_perah.setClickable(true);
+
+                        layoutPetelur.setVisibility(View.VISIBLE);
+                        layoutHobi.setVisibility(View.VISIBLE);
+                        layoutKerja.setVisibility(View.VISIBLE);
+                        layoutPotong.setVisibility(View.VISIBLE);
+                        layoutPerah.setVisibility(View.VISIBLE);
+
+                        hewan = namaTernak[counter];
+
+                        if(hewan.equals("Sapi")) {
+
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Kambing")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Domba")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+
+                        }
+                        else if(hewan.equals("Ayam")) {
+
+                            check_kerja.setClickable(false);
+                            check_perah.setClickable(false);
+                            layoutKerja.setVisibility(View.GONE);
+                            layoutPerah.setVisibility(View.GONE);
+
+                        }
+
+                        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                    }
+                }
+                break;
+        }
+        return false;
+    }
 }
+

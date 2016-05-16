@@ -18,7 +18,7 @@ import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.R;
-import com.android.mirzaadr.pakanku.Activity.ResepRansumRecord;
+import com.android.mirzaadr.pakanku.ResepRansumRecord;
 
 import java.util.List;
 

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#70BE4C</color>
-    <color name="colorPrimaryDark">#4D8D3F</color>
+    <color name="colorPrimaryDark">#4d8d3f</color>
     <color name="colorAccent">#F0E613</color>
     <color name="colorPrimary1">#3F51B5</color>
     <color name="colorPrimaryDark1">#303F9F</color>
     <color name="colorAccent1">#FF4081</color>
-    <color name="Dark">#27401A</color>
+    <color name="Dark">#27401a</color>
     <color name="Shade">#4D8D3F</color>
     <color name="Base">#8bc34a</color>
     <color name="Accent">#fff500</color>
     <color name="Black">#000000</color>
     <color name="White">#ffffff</color>
-    <color name="Button">#558B2F</color>
-    <color name="ButtonPressed">#9CCC65</color>
+    <color name="grayish">#dfdfdf</color>
+    <color name="darkgray">#9e9e9e</color>
+    <color name="Button">#558b2f</color>
+    <color name="ButtonPressed">#9ccc65</color>
     <color name="listHijauan">#558B2F</color>
     <color name="listEnergi">#23421C</color>
     <color name="listProtein">#FFB34F</color>
@@ -21,4 +23,5 @@
     <color name="textEnergi">#FFE817</color>
     <color name="cyan">#0093DD</color>
     <color name="red">#DA251D</color>
+    <color name="wind_back">#85f16a</color>
 </resources>

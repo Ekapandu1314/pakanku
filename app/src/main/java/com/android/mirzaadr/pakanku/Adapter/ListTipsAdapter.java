@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.mirzaadr.pakanku.Activity.BukaArtikel;
+import com.android.mirzaadr.pakanku.BukaArtikel;
 import com.android.mirzaadr.pakanku.Fragment.InfoTips;
 import com.android.mirzaadr.pakanku.R;
 
