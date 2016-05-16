@@ -44,10 +44,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
     String version;
     String tanggal;
+    String tanggalNow;
+
+    int month_calendar;
+    int date_calendar;
+    int year_calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         mHewanDao = new HewanDAO(this);
         // fill the listView
         mListBahan = mBahanDao.getAllBahan();
+
+        Calendar c = Calendar.getInstance();
+
+        month_calendar = c.get(Calendar.MONTH) + 1;
+        date_calendar = c.get(Calendar.DAY_OF_MONTH);
+        year_calendar = c.get(Calendar.YEAR);
 
         NetworkUtils utils = new NetworkUtils(MainActivity.this);
         if(utils.isConnectingToInternet())
@@ -113,15 +127,68 @@ public class MainActivity extends AppCompatActivity {
             if(mListBahan != null && !mListBahan.isEmpty()) {
 
                 Snackbar.make(coordinatorLayout, "No Internet Connection, no update data", Snackbar.LENGTH_LONG).show();
-                //Toast.makeText(getBaseContext(), "No Internet Connection, no update data", Toast.LENGTH_SHORT).show();
 
             } else {
 
-                alert.showAlertDialog(MainActivity.this, "No update data..", "Require to connect internet for first use", false);
+                progressDialog = createProgressDialog(MainActivity.this);
+                progressDialog.show();
+                DataDefault();
+                progressDialog.dismiss();
+                //alert.showAlertDialog(MainActivity.this, "No update data..", "Require to connect internet for first use", false);
 
             }
 
         }
+
+    }
+
+    public void DataDefault() {
+
+        InputStream inputStreamBahan = getBaseContext().getResources().openRawResource(R.raw.bahan);
+        InputStream inputStreamHewan = getBaseContext().getResources().openRawResource(R.raw.hewan);
+        BufferedReader readerBahan = new BufferedReader(new InputStreamReader(inputStreamBahan));
+        BufferedReader readerHewan = new BufferedReader(new InputStreamReader(inputStreamHewan));
+        String lineBahan = "";
+        String lineHewan = "";
+        try {
+            while ((lineBahan = readerBahan.readLine()) != null) {
+
+                String[] strBahan = lineBahan.split(",");
+                Bahan bahanDefault = new Bahan();
+                bahanDefault.setIdBahan(Integer.parseInt(strBahan[0]));
+                bahanDefault.setNamaBahan(strBahan[1]);
+                bahanDefault.setBk_prs(Double.parseDouble(strBahan[2]));
+                bahanDefault.setPk_prs(Double.parseDouble(strBahan[3]));
+                bahanDefault.setKategori(strBahan[4]);
+                bahanDefault.setHarga(Integer.parseInt(strBahan[5]));
+                mBahanDao.addBahanJson(bahanDefault);
+
+            }
+
+            while ((lineHewan = readerHewan.readLine()) != null) {
+
+                String[] strHewan = lineHewan.split(",");
+                Hewan hewanDefault = new Hewan();
+                hewanDefault.setIdhewan(Integer.parseInt(strHewan[0]));
+                hewanDefault.setHewan(strHewan[1]);
+                hewanDefault.setTujuan(strHewan[2]);
+                hewanDefault.setHijau(Double.parseDouble(strHewan[3]));
+                hewanDefault.setKonsentrat(Double.parseDouble(strHewan[4]));
+                hewanDefault.setBk_hewan(Double.parseDouble(strHewan[5]));
+                hewanDefault.setPk_hewan(Double.parseDouble(strHewan[6]));
+                hewanDefault.setHargajual(Integer.parseInt(strHewan[7]));
+                mHewanDao.addHewanJson(hewanDefault);
+
+            }
+
+        }
+        catch (IOException e) {
+            Toast.makeText(getBaseContext(), "Dataset not found", Toast.LENGTH_SHORT).show();
+        }
+
+        tanggalNow = String.valueOf(date_calendar) + "-" + String.valueOf(month_calendar) + "-" + String.valueOf(year_calendar);
+
+        mVersionDao.createVersion("1", tanggalNow);
 
     }
 
@@ -130,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //pDialog = ProgressDialog.show(MainActivity.this, "Please wait...", "Silahkan tunggu");
             progressDialog = createProgressDialog(MainActivity.this);
             progressDialog.show();
         }
@@ -168,14 +234,9 @@ public class MainActivity extends AppCompatActivity {
                 this.cancel(true);
             }
 
-// Http Request Code end
-// Json Parsing Code Start
-            //success = jsonObj.getInt(TAG_SUCCESS);
-
             if(!internet_error && internet){
 
                 try {
-                    //bahanArrayList = new ArrayList<Bahan>();
                     JSONObject jsonObject = new JSONObject(serverData);
                     JSONArray jsonArray = jsonObject.getJSONArray("bahan");
 
@@ -211,16 +272,7 @@ public class MainActivity extends AppCompatActivity {
                             bahan.setKategori(kategori);
                             bahan.setHarga(harga);
 
-                            int id = id_bahan;
-
-                            //if (mBahanDao.getBahanById(id).getNama_bahan() == null)
-                            //{
                             mBahanDao.addBahanJson(bahan);// Inserting into DB
-                            //}
-                            //else
-                            //{
-                            //mBahanDao.updateBahanJSON(bahan);
-                            //}
 
                         }
                         else {
@@ -265,9 +317,6 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(coordinatorLayout, "Internet connection error", Snackbar.LENGTH_LONG).show();
 
             }
-
-
-
         }
     }
 
@@ -386,7 +435,6 @@ public class MainActivity extends AppCompatActivity {
                 super.onPreExecute();
                 progressDialog = createProgressDialog(MainActivity.this);
                 progressDialog.show();
-                //loadingDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Silahkan tunggu...");
             }
 
             @Override

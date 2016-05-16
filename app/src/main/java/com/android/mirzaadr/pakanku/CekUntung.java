@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -711,97 +712,309 @@ public class CekUntung extends AppCompatActivity {
 
                 if (editBobot.getText().toString().equals("0")) {
 
-                    Toast.makeText(getBaseContext(), "Produk tidak boleh nol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Produksi tidak boleh nol", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else {
 
                     produk = Double.parseDouble(editBobot.getText().toString());
+                    if (editJumlah.getText().toString().trim().length() > 0) {
+
+                        if (editJumlah.getText().toString().equals("0")) {
+
+                            Toast.makeText(getBaseContext(), "Jumlah ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                        } else {
+
+                            jumlah = Integer.parseInt(editJumlah.getText().toString());
+                            if (editHari.getText().toString().trim().length() > 0) {
+
+                                if (editHari.getText().toString().equals("0")) {
+
+                                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                } else {
+
+                                    lama = Integer.parseInt(editHari.getText().toString());
+                                    if (editBobot.getText().toString().trim().length() > 0) {
+
+                                        if (editBobot.getText().toString().equals("0")) {
+
+                                            Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        } else {
+
+                                            berat1 = Double.parseDouble(editBobot2.getText().toString());
+                                            if (textEdit.getText().toString().trim().length() > 0) {
+
+                                                nama = textEdit.getText().toString();
+
+                                            } else {
+
+                                                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                                                dialog.dismiss();
+
+                                            }
+
+                                        }
+
+
+                                    } else {
+
+                                        Toast.makeText(getBaseContext(), "Bobot ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+
+                                    }
+
+                                }
+
+                            } else {
+
+                                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+
+                            }
+
+                        }
+
+                    } else {
+
+                        Toast.makeText(getBaseContext(), "Jumlah ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
 
                 }
 
 
             } else {
 
-                Toast.makeText(getBaseContext(), "Bobot 1 tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Produksi tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
-
-            if (editJumlah.getText().toString().trim().length() > 0) {
-
-                if (editJumlah.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    jumlah = Integer.parseInt(editJumlah.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-
-            if (editHari.getText().toString().trim().length() > 0) {
-
-                if (editHari.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    lama = Integer.parseInt(editHari.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-            if (textEdit.getText().toString().trim().length() > 0) {
-
-                nama = textEdit.getText().toString();
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
-
-            }
-
-            if (editBobot.getText().toString().trim().length() > 0) {
-
-                if (editBobot.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Bobot tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else {
-
-                    berat1 = Double.parseDouble(editBobot2.getText().toString());
-
-                }
-
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Bobot 2 tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-
         }
+    }
+
+    float initialX;
+
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                initialX = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                float finalX = event.getX();
+                if (initialX > finalX)
+                {
+                    prev = counter;
+                    counter--;
+                    myImageSwitcher.setOutAnimation(animationprevOut);
+                    myImageSwitcher.setInAnimation(animationprevIn);
+
+                    int max = switcherImage - 1;
+                    if (counter == -1)
+                        counter = max;
+                    myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                    textEdit.setText(namaTernak[counter]);
+                    hewan = namaTernak[counter];
+
+                    check_kerja.setClickable(true);
+                    check_hobi.setClickable(true);
+                    check_petelur.setClickable(true);
+                    check_potong.setClickable(true);
+                    check_perah.setClickable(true);
+
+                    layoutPetelur.setVisibility(View.VISIBLE);
+                    layoutHobi.setVisibility(View.VISIBLE);
+                    layoutKerja.setVisibility(View.VISIBLE);
+                    layoutPotong.setVisibility(View.VISIBLE);
+                    layoutPerah.setVisibility(View.VISIBLE);
+
+                    if(hewan.equals("Sapi")) {
+
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+
+                    }
+                    else if(hewan.equals("Kambing")) {
+
+                        check_kerja.setClickable(false);
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+                        layoutKerja.setVisibility(View.GONE);
+
+                    }
+                    else if(hewan.equals("Domba")) {
+
+                        check_kerja.setClickable(false);
+                        check_hobi.setClickable(false);
+                        check_petelur.setClickable(false);
+                        layoutPetelur.setVisibility(View.GONE);
+                        layoutHobi.setVisibility(View.GONE);
+                        layoutKerja.setVisibility(View.GONE);
+
+
+                    }
+                    else if(hewan.equals("Ayam")) {
+
+                        check_kerja.setClickable(false);
+                        check_perah.setClickable(false);
+                        layoutKerja.setVisibility(View.GONE);
+                        layoutPerah.setVisibility(View.GONE);
+
+                    }
+
+                    indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                    indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                }
+                else
+                {
+                    if(counter > 0)
+                    {
+                        prev = counter;
+                        counter ++;
+                        myImageSwitcher.setOutAnimation(animationOut);
+                        myImageSwitcher.setInAnimation(animationIn);
+                        if (counter == switcherImage)
+                            counter = 0;
+                        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                        textEdit.setText(namaTernak[counter]);
+                        hewan = namaTernak[counter];
+
+                        check_kerja.setClickable(true);
+                        check_hobi.setClickable(true);
+                        check_petelur.setClickable(true);
+                        check_potong.setClickable(true);
+                        check_perah.setClickable(true);
+
+                        layoutPetelur.setVisibility(View.VISIBLE);
+                        layoutHobi.setVisibility(View.VISIBLE);
+                        layoutKerja.setVisibility(View.VISIBLE);
+                        layoutPotong.setVisibility(View.VISIBLE);
+                        layoutPerah.setVisibility(View.VISIBLE);
+
+                        hewan = namaTernak[counter];
+
+                        if(hewan.equals("Sapi")) {
+
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Kambing")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Domba")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+
+                        }
+                        else if(hewan.equals("Ayam")) {
+
+                            check_kerja.setClickable(false);
+                            check_perah.setClickable(false);
+                            layoutKerja.setVisibility(View.GONE);
+                            layoutPerah.setVisibility(View.GONE);
+
+                        }
+
+                        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                    }
+                    else
+                    {
+                        prev = counter;
+                        counter ++;
+                        myImageSwitcher.setOutAnimation(animationOut);
+                        myImageSwitcher.setInAnimation(animationIn);
+                        if (counter == switcherImage)
+                            counter = 0;
+                        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+                        textEdit.setText(namaTernak[counter]);
+                        hewan = namaTernak[counter];
+
+                        check_kerja.setClickable(true);
+                        check_hobi.setClickable(true);
+                        check_petelur.setClickable(true);
+                        check_potong.setClickable(true);
+                        check_perah.setClickable(true);
+
+                        layoutPetelur.setVisibility(View.VISIBLE);
+                        layoutHobi.setVisibility(View.VISIBLE);
+                        layoutKerja.setVisibility(View.VISIBLE);
+                        layoutPotong.setVisibility(View.VISIBLE);
+                        layoutPerah.setVisibility(View.VISIBLE);
+
+                        hewan = namaTernak[counter];
+
+                        if(hewan.equals("Sapi")) {
+
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Kambing")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+                        }
+                        else if(hewan.equals("Domba")) {
+
+                            check_kerja.setClickable(false);
+                            check_hobi.setClickable(false);
+                            check_petelur.setClickable(false);
+                            layoutPetelur.setVisibility(View.GONE);
+                            layoutHobi.setVisibility(View.GONE);
+                            layoutKerja.setVisibility(View.GONE);
+
+
+                        }
+                        else if(hewan.equals("Ayam")) {
+
+                            check_kerja.setClickable(false);
+                            check_perah.setClickable(false);
+                            layoutKerja.setVisibility(View.GONE);
+                            layoutPerah.setVisibility(View.GONE);
+
+                        }
+
+                        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+                    }
+                }
+                break;
+        }
+        return false;
     }
 }
 

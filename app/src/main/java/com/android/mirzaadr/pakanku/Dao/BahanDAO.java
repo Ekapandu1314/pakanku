@@ -81,7 +81,6 @@ public class BahanDAO {
     }
 
     public void addBahanJson(Bahan bahan) {
-        //SQLiteDatabase db = this.getWritableDatabase();
         try{
             ContentValues values = new ContentValues();
             values.put(DBHelper.BAHAN_ID, bahan.getIdbahan());
