@@ -58,8 +58,6 @@ public class ListRecordAdapter extends RecyclerView.Adapter<ListRecordAdapter.My
         return new MyViewHolder(itemView);
     }
 
-
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Record currentItem = mItems.get(position);
