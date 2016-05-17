@@ -63,6 +63,8 @@ public class MasukkanHarga extends Activity {
     private void initViews() {
         this.mListviewBahan = (RecyclerView) findViewById(R.id.listEdit);
 
+        mListviewBahan.setNestedScrollingEnabled(false);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         mListviewBahan.setLayoutManager(mLayoutManager);

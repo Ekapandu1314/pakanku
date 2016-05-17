@@ -106,6 +106,10 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
         mListviewProtein = (RecyclerView)view.findViewById(R.id.hargalistprotein);
         scroll_harga = (NestedScrollView)view.findViewById(R.id.scroll_harga);
 
+        mListviewHijau.setNestedScrollingEnabled(false);
+        mListviewEnergi.setNestedScrollingEnabled(false);
+        mListviewProtein.setNestedScrollingEnabled(false);
+
         (view.findViewById(R.id.scroll_harga)).getViewTreeObserver().addOnScrollChangedListener(this);
 
 

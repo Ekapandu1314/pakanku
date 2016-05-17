@@ -448,6 +448,55 @@ public class BuatPakan extends AppCompatActivity {
                 } else {
 
                     berat1 = Double.parseDouble(editBobot.getText().toString());
+                    if (editJumlah.getText().toString().trim().length() > 0) {
+
+                        if (editJumlah.getText().toString().equals("0")) {
+
+                            Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                        } else {
+
+                            jumlah = Integer.parseInt(editJumlah.getText().toString());
+                            if (editHari.getText().toString().trim().length() > 0) {
+
+                                if (editHari.getText().toString().equals("0")) {
+
+                                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                } else {
+
+                                    lama = Integer.parseInt(editHari.getText().toString());
+                                    if (textEdit.getText().toString().trim().length() > 0) {
+
+                                        nama = textEdit.getText().toString();
+
+                                    } else {
+
+                                        Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                                        dialog.dismiss();
+
+                                    }
+
+                                }
+
+                            } else {
+
+                                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+
+                            }
+
+                        }
+
+                    } else {
+
+                        Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
 
                 }
 
@@ -459,57 +508,6 @@ public class BuatPakan extends AppCompatActivity {
 
             }
 
-            if (editJumlah.getText().toString().trim().length() > 0) {
-
-                if (editJumlah.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Jumlah tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    jumlah = Integer.parseInt(editJumlah.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Banyak ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-            if (editHari.getText().toString().trim().length() > 0) {
-
-                if (editHari.getText().toString().equals("0")) {
-
-                    Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh nol", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-
-                } else {
-
-                    lama = Integer.parseInt(editHari.getText().toString());
-
-                }
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Lama pemeliharaan tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-
-            }
-
-            if (textEdit.getText().toString().trim().length() > 0) {
-
-                nama = textEdit.getText().toString();
-
-            } else {
-
-                Toast.makeText(getBaseContext(), "Nama ternak tidak boleh kosong", Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
-
-            }
         }
 
     }
@@ -625,7 +623,7 @@ public class BuatPakan extends AppCompatActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((ImageView) object);
+            return view == (object);
         }
 
         @Override
@@ -643,7 +641,7 @@ public class BuatPakan extends AppCompatActivity {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            ((ViewPager) container).removeView((ImageView) object);
+            (container).removeView((ImageView) object);
         }
     }
 

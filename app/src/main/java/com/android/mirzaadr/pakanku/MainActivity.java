@@ -561,6 +561,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         this.registerReceiver(this.mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
         super.onResume();
     }
 
@@ -621,6 +622,7 @@ public class MainActivity extends AppCompatActivity {
     public void BuatClick(View v) {
         Intent intent = new Intent(MainActivity.this, BuatPakan.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 
     public void InfoClick(View v) {
@@ -675,4 +677,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.progress_dialog_loading);
         return dialog;
     }
+
 }
