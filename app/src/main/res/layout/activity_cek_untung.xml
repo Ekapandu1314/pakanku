@@ -168,7 +168,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:id="@+id/layoutPotongCek">
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -190,7 +190,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:id="@+id/layoutPerahCek">
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -212,7 +212,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:id="@+id/layoutPetelurCek">
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -234,7 +234,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:id="@+id/layoutHobiCek">
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -256,7 +256,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:id="@+id/layoutKerjaCek">
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

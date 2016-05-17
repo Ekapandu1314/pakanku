@@ -1,6 +1,5 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,19 +20,18 @@ import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Resep;
-import com.android.mirzaadr.pakanku.R;
 
 import java.util.List;
 
-public class ResepRansum extends Activity {
+public class ResepRansum extends AppCompatActivity {
 
     List<Resep> newlistResepHijauan;
     List<Resep> newlistResepEnergi;
     List<Resep> newlistResepProtein;
 
-    private ListResepAdapter mAdapterHijauan;
-    private ListResepAdapter mAdapterEnergi;
-    private ListResepAdapter mAdapterProtein;
+    public ListResepAdapter mAdapterHijauan;
+    public ListResepAdapter mAdapterEnergi;
+    public ListResepAdapter mAdapterProtein;
 
     private TextView textviewPorsi;
     private TextView textviewHargaHari;
@@ -79,6 +75,9 @@ public class ResepRansum extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resep_ransum);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Intent i = getIntent();
         newlistResepHijauan = (List<Resep>) i.getSerializableExtra("resephijauan");

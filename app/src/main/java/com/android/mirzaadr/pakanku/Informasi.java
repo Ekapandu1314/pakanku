@@ -18,11 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TabHost;
+import android.view.View;
 
 import com.android.mirzaadr.pakanku.Fragment.InfoHarga;
 import com.android.mirzaadr.pakanku.Fragment.InfoRecord;
 import com.android.mirzaadr.pakanku.Fragment.InfoTips;
-import com.android.mirzaadr.pakanku.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +50,9 @@ public class Informasi extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_informasi);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

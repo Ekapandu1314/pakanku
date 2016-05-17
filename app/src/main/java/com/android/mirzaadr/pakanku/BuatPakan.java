@@ -86,6 +86,8 @@ public class BuatPakan extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         switcherImage = adapter.getCount();
 
         displayInit();
