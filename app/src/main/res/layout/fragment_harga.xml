@@ -9,8 +9,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/scroll_harga"
+        android:isScrollContainer="false"
         android:orientation="vertical"
         android:paddingLeft="5dp"
         android:paddingStart="5dp"
@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:paddingBottom="80dp">
 
             <!-- Layout untuk Hijauan -->
@@ -99,11 +98,10 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hargalist"
                 android:layout_marginTop="1dip"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:background="@color/listHijauan"
                 android:layout_height="wrap_content"
-                android:clickable="true" />
+/>
 
             <!-- Layout untuk sumber Energi -->
             <TextView
@@ -174,11 +172,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hargalistenergi"
                 android:layout_marginTop="1dip"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/listEnergi"
-                android:clickable="true"
                 />
 
             <!-- Layout untuk sumber Energi -->
@@ -249,22 +245,13 @@
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hargalistprotein"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_marginTop="1dip"
                 android:background="@color/listProtein"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true" />
+/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add"/>
 </android.support.design.widget.CoordinatorLayout>

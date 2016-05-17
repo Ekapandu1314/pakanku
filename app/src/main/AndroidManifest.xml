@@ -34,7 +34,7 @@
         <activity
             android:name=".BuatPakan"
             android:label="@string/title_activity_buatpakan"
-            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".PilihBahan"
