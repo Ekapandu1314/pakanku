@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListTipsAdapter;
@@ -36,11 +39,18 @@ import java.util.HashMap;
 /**
  * Created by Mirzaadr on 4/1/2016.
  */
+
 public class InfoTips extends Fragment {
 
     //private Dialog pDialog;
 
     ProgressDialog progressDialog;
+
+    private Handler mHandler = new Handler();
+
+    private AppBarLayout mActionBar;
+
+    View view;
 
     ListView listview;
     ListTipsAdapter adapter;
@@ -52,6 +62,10 @@ public class InfoTips extends Fragment {
     Boolean internet_error = false;
 
     Boolean first = false;
+
+    ProgressBar haha;
+
+    Boolean coba= false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +79,9 @@ public class InfoTips extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tips, container, false);
 
         listview = (ListView) view.findViewById(R.id.tipslist);
+        haha = (ProgressBar) view.findViewById(R.id.progress_tips);
+
+        haha.setVisibility(View.GONE);
 
         return view;
     }
@@ -76,10 +93,15 @@ public class InfoTips extends Fragment {
             NetworkUtils utils = new NetworkUtils(getActivity());
             if(utils.isConnectingToInternet()) {
 
+                if(coba==true)
+                {
+                    haha.setVisibility(View.VISIBLE);
+                }
                 new DownloadJSON().execute();
 
             }
             else {
+
 
                 Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
 
@@ -94,10 +116,13 @@ public class InfoTips extends Fragment {
 
         @Override
         protected void onPreExecute() {
+            //haha.setVisibility(View.VISIBLE);
             super.onPreExecute();
+            coba = true;
             //pDialog = ProgressDialog.show(getActivity(), "Please wait...", "Silahkan tunggu");
-            progressDialog = createProgressDialog(getActivity());
-            progressDialog.show();
+            //progressDialog = createProgressDialog(getActivity());
+            //progressDialog.show();
+
         }
 
         @Override
@@ -173,7 +198,8 @@ public class InfoTips extends Fragment {
         protected void onCancelled() {
             internet_error = true;
             super.onCancelled();
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
+            haha.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
         }
 
@@ -182,7 +208,8 @@ public class InfoTips extends Fragment {
             // Pass the results into ListViewAdapter.java
             if(internet_error) {
 
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
+                haha.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Internet connection error", Toast.LENGTH_SHORT).show();
 
             }
@@ -192,7 +219,8 @@ public class InfoTips extends Fragment {
                 // Set the adapter to the ListView
                 listview.setAdapter(adapter);
                 // Close the progress dialog
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
+                haha.setVisibility(View.GONE);
 
             }
 

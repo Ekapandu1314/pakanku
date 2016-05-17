@@ -36,6 +36,8 @@ import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.ResepRansumRecord;
 
 import java.util.List;
+import it.gmariotti.recyclerview.itemanimator.SlideInOutRightItemAnimator;
+import it.gmariotti.recyclerview.itemanimator.SlideScaleInOutRightItemAnimator;
 
 /**
  * Created by Mirzaadr on 4/1/2016.
@@ -111,11 +113,13 @@ public class InfoRecord extends Fragment {
         mListviewRecord.setItemAnimator(new DefaultItemAnimator());
         mListviewRecord.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
+        mListviewRecord.setItemAnimator(new DefaultItemAnimator());
+
         mListviewRecord.addOnScrollListener(new MyScrollListener(getActivity()) {
 
             @Override
             public void onMoved(int distance) {
-                toolbar.setTranslationY(-distance);
+                //toolbar.setTranslationY(-distance);
                 fab.hide();
             }
 
@@ -149,7 +153,7 @@ public class InfoRecord extends Fragment {
 
                 Record clickedRecord = mListRecord.get(position);
 
-                showDeleteDialogConfirmation(clickedRecord);
+                showDeleteDialogConfirmation(clickedRecord, position);
 
             }
         }));
@@ -157,7 +161,7 @@ public class InfoRecord extends Fragment {
         return vieww;
     }
 
-    private void showDeleteDialogConfirmation(final Record record) {
+    private void showDeleteDialogConfirmation(final Record record, final int position) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
         alertDialogBuilder.setTitle("Hapus");
@@ -175,18 +179,23 @@ public class InfoRecord extends Fragment {
                     mRecordDao.deleteRecord(record);
 
                     //refresh the listView
-                    mListRecord.remove(record);
+                    //mListRecord.remove(record);
+                    mListRecord.remove(position);
+                    mAdapter.setmItems(mListRecord);
+                    mAdapter.notifyItemRemoved(position);
                     if(mListRecord.isEmpty()) {
                         mListviewRecord.setVisibility(View.INVISIBLE);
                         //mTxtEmptyListEmployees.setVisibility(View.VISIBLE);
                     }
 
-                    mAdapter.setmItems(mListRecord);
-                    mAdapter.notifyDataSetChanged();
+                    //mAdapter.setmItems(mListRecord);
+
+                    //mAdapter.notifyDataSetChanged();
                 }
 
                 dialog.dismiss();
                 Toast.makeText(getActivity(), "Data record telah berhasil dihapus", Toast.LENGTH_SHORT).show();
+                //mAdapter.notifyDataSetChanged();
 
             }
         });

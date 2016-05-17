@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragmentTips">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/Base"
@@ -21,6 +21,8 @@
             android:textStyle="bold"
             android:layout_centerInParent="true"/-->
 
+
+
         <ListView
             android:id="@+id/tipslist"
             android:background="@color/ButtonPressed"
@@ -28,11 +30,17 @@
             android:layout_height="wrap_content">
         </ListView>
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="false" />
 
-
-
-
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
+
+
 
