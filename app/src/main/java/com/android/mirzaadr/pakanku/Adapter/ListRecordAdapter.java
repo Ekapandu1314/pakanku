@@ -1,6 +1,8 @@
 package com.android.mirzaadr.pakanku.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.R;
 
@@ -16,56 +19,50 @@ import java.util.List;
 /**
  * Created by Eka Pandu Winata on 4/11/2016.
  */
-public class ListRecordAdapter extends BaseAdapter {
-
-    public static final String TAG = "ListRecordAdapter";
+public class ListRecordAdapter extends RecyclerView.Adapter<ListRecordAdapter.MyViewHolder> {
 
     private List<Record> mItems;
-    private LayoutInflater mInflater;
 
-    public ListRecordAdapter(Context context, List<Record> listBahan) {
-        this.setItems(listBahan);
-        this.mInflater = LayoutInflater.from(context);
-    }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView txtNama;
+        TextView txtJumlah;
+        TextView txtBobot;
+        TextView txtTanggal;
+        ImageView thumbHewan;
+        ImageView thumbTujuan;
 
-    @Override
-    public int getCount() {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().size() : 0 ;
-    }
-
-    @Override
-    public Record getItem(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position) : null ;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position).getIdrecord() : position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        final ViewHolder holder;
-        if(v == null) {
-            v = mInflater.inflate(R.layout.list_item_record, parent, false);
-            holder = new ViewHolder();
-            holder.thumbHewan = (ImageView) v.findViewById(R.id.thumbnail);
-            holder.thumbTujuan = (ImageView) v.findViewById(R.id.thumbnailTujuan);
-            holder.txtNama = (TextView) v.findViewById(R.id.nama_record);
-            holder.txtBobot = (TextView) v.findViewById(R.id.bobot_record);
-            holder.txtJumlah = (TextView) v.findViewById(R.id.jumlah_record);
-            holder.txtTanggal = (TextView) v.findViewById(R.id.tanggal_record);
-
-            v.setTag(holder);
+        public MyViewHolder(View view) {
+            super(view);
+            thumbHewan = (ImageView) view.findViewById(R.id.thumbnail);
+            thumbTujuan = (ImageView) view.findViewById(R.id.thumbnailTujuan);
+            txtNama = (TextView) view.findViewById(R.id.nama_record);
+            txtBobot = (TextView) view.findViewById(R.id.bobot_record);
+            txtJumlah = (TextView) view.findViewById(R.id.jumlah_record);
+            txtTanggal = (TextView) view.findViewById(R.id.tanggal_record);
         }
-        else {
-            holder = (ViewHolder) v.getTag();
-        }
+    }
+
+    public void setmItems(List<Record> mItems) {
+        this.mItems = mItems;
+    }
+
+    public ListRecordAdapter(List<Record> moviesList) {
+        this.mItems = moviesList;
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_record, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
 
 
-        // fill row data
-        final Record currentItem = getItem(position);
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        final Record currentItem = mItems.get(position);
         if(currentItem != null) {
 
             holder.txtNama.setText(currentItem.getNama_record());
@@ -117,25 +114,13 @@ public class ListRecordAdapter extends BaseAdapter {
             else {
                 holder.thumbTujuan.setImageResource(R.drawable.fail);
 
-           }
+            }
         }
-        return v;
     }
 
-    public List<Record> getItems() {
-        return mItems;
+    @Override
+    public int getItemCount() {
+        return mItems.size();
     }
 
-    public void setItems(List<Record> mItems) {
-        this.mItems = mItems;
-    }
-
-    class ViewHolder {
-        TextView txtNama;
-        TextView txtJumlah;
-        TextView txtBobot;
-        TextView txtTanggal;
-        ImageView thumbHewan;
-        ImageView thumbTujuan;
-    }
 }

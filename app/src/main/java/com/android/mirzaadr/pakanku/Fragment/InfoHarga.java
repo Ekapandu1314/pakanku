@@ -3,13 +3,18 @@ package com.android.mirzaadr.pakanku.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +24,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
@@ -34,7 +40,7 @@ import java.util.List;
  * Created by Mirzaadr on 4/1/2016.
  */
 
-public class InfoHarga extends Fragment {
+public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChangedListener {
 
     private RecyclerView mListviewHijau, mListviewEnergi, mListviewProtein;
 
@@ -42,7 +48,10 @@ public class InfoHarga extends Fragment {
     List<Bahan> mListHargaEnergi;
     List<Bahan> mListHargaProtein;
 
-    NestedScrollView scrollharga;
+    NestedScrollView scroll_harga;
+
+    private float mActionBarHeight;
+    private AppBarLayout mActionBar;
 
     View view;
 
@@ -69,6 +78,12 @@ public class InfoHarga extends Fragment {
         mListHargaEnergi = mBahanDao.getAllBahanByKategori("energi");
         mListHargaProtein = mBahanDao.getAllBahanByKategori("protein");
 
+
+        mActionBar = (AppBarLayout)getActivity().findViewById(R.id.appbar);
+        final TypedArray styledAttributes = getActivity().obtainStyledAttributes(
+                new int[] { android.R.attr.actionBarSize });
+        mActionBarHeight = styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
         initViews();
 
         mAdapterHijauan = new ListBahanHargaAdapter(mListHargaHijauan);
@@ -82,14 +97,6 @@ public class InfoHarga extends Fragment {
         mAdapterEnergi.notifyDataSetChanged();
         mAdapterProtein.notifyDataSetChanged();
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MasukkanHarga.class);
-                startActivity(intent);}
-        });
-
         return view;
     }
 
@@ -97,6 +104,10 @@ public class InfoHarga extends Fragment {
         mListviewHijau = (RecyclerView)view.findViewById(R.id.hargalist);
         mListviewEnergi = (RecyclerView)view.findViewById(R.id.hargalistenergi);
         mListviewProtein = (RecyclerView)view.findViewById(R.id.hargalistprotein);
+        scroll_harga = (NestedScrollView)view.findViewById(R.id.scroll_harga);
+
+        (view.findViewById(R.id.scroll_harga)).getViewTreeObserver().addOnScrollChangedListener(this);
+
 
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
@@ -152,6 +163,19 @@ public class InfoHarga extends Fragment {
         }));
 
     }
+
+    @Override
+    public void onScrollChanged() {
+
+        float y = ((NestedScrollView)view.findViewById(R.id.scroll_harga)).getScrollY();
+        if (y >= mActionBarHeight + 700 && mActionBar.isShown()) {
+            mActionBar.setExpanded(false, true);
+        } else if ( y==0 && !mActionBar.isShown()) {
+            mActionBar.setExpanded(true, true);
+        }
+        Log.d("Scroll", String.valueOf(y) + " " + mActionBarHeight);
+    }
+
 
     public interface ClickListener {
         void onClick(View view, int position);
