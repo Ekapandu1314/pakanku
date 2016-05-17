@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Base"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="3dp"
     tools:context=".CekUntung">
 
     <!-- indicator -->
@@ -51,375 +48,108 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_centerInParent="true"
+        android:orientation="horizontal"
         android:layout_below="@+id/indicator"
-        android:layout_above="@+id/layout2"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/layout4"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:overScrollMode="never">
 
-        <!-- prev button -->
-        <Button
-            android:layout_width="30dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:onClick="prevImageButton"
-            android:gravity="start"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp"
-            android:id="@+id/buttonPrev"
-            android:background="@drawable/pre_button" />
-
-        <ImageSwitcher
-            android:id="@+id/imageSwitcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/buttonPrev"
-            android:layout_toEndOf="@+id/buttonPrev"
-            android:layout_toLeftOf="@+id/buttonNext"
-            android:layout_toStartOf="@id/buttonNext"
             android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_above="@+id/editNama"/>
+            android:layout_above="@+id/editNama">
 
-        <!-- next button -->
-        <Button
-            android:layout_width="30dp"
-            android:gravity="end"
-            android:id="@+id/buttonNext"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:onClick="nextImageButton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/nex_button" />
+            <!-- prev button -->
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:onClick="prevImageButton"
+                android:gravity="start"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/buttonPrev"
+                android:background="@drawable/pre_button" />
 
-        <LinearLayout
+            <ImageSwitcher
+                android:id="@+id/imageSwitcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/buttonPrev"
+                android:layout_toEndOf="@+id/buttonPrev"
+                android:layout_toLeftOf="@+id/buttonNext"
+                android:layout_toStartOf="@id/buttonNext"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:overScrollMode="never"/>
+
+            <!-- next button -->
+            <Button
+                android:layout_width="30dp"
+                android:gravity="end"
+                android:id="@+id/buttonNext"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:onClick="nextImageButton"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/nex_button" />
+        </RelativeLayout>
+
+        <!-- ganti namo -->
+        <RelativeLayout
             android:id="@+id/editNama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:orientation="horizontal">
+
             <EditText
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:id="@+id/JenisTernak"
                 android:maxLength="10"
+                android:id="@+id/JenisTernak"
                 android:hint="@string/hewan"
                 android:gravity="center"
                 android:clickable="false"
                 android:focusable="false"
                 android:textStyle="bold"
                 android:textColor="@color/Accent"
-                android:textColorHint="@color/Accent"
-                android:ems="10"/>
+                android:textColorHint="@color/bright_foreground_disabled_material_dark"
+                android:ems="10"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:textColorHighlight="#ffffff"
+                android:textColorLink="#ffffff"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:contentDescription="@string/Button"
                 android:id="@+id/edit"
                 android:layout_gravity="center"
-                android:src="@drawable/edit_action"
+                android:src="@android:drawable/ic_menu_edit"
                 android:clickable="true"
-                android:onClick="editAction"/>
-        </LinearLayout>
-    </RelativeLayout>
-
-    <!-- insert bobot dan jumlah ternak layout -->
-    <RelativeLayout
-        android:id="@+id/layout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/layout3"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal">
-
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:inputType="numberDecimal"
-                android:hint="produk"
-                android:ems="10"
-                android:focusable="false"
-                android:clickable="true"
-                android:onClick="editBobot"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:id="@+id/editbobot"
-                android:background="@drawable/round_object"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/kilogram"
-                android:layout_toStartOf="@+id/kilogram"/>
-            <TextView
-                android:id="@+id/buttonmin1"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:text="@string/min_button"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"/>
-            <TextView
-                android:id="@+id/buttonplus1"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_toLeftOf="@+id/kilogram"
-                android:layout_toStartOf="@+id/kilogram"
-                android:text="@string/plus_button"/>
-
-            <TextView
-                android:layout_width="48dp"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:background="@drawable/round_object"
+                android:onClick="editAction"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_centerInParent="true" />
-
-            <Spinner
-                android:id="@+id/kilogram"
-                android:layout_width="48dp"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"/>
-
-            <!--
-            android:layout_toRightOf="@+id/buttonmin1"
-            android:layout_toEndOf="@+id/buttonmin1"
-            android:layout_toLeftOf="@+id/buttonplus1"
-            android:layout_toStartOf="@+id/buttonplus1" -->
-
-        <View
-            android:id="@+id/mid"
-            android:layout_width="5dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/kilogram"
-            android:layout_toEndOf="@+id/kilogram"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/mid"
-            android:layout_toEndOf="@+id/mid"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-
-            <EditText
-                android:layout_width="270dp"
-                android:layout_height="32dp"
-                android:inputType="number"
-                android:gravity="center"
-                android:hint="@string/byk_ternak"
-                android:ems="10"
-                android:textSize="15sp"
-                android:id="@+id/editjumlah"
-                android:focusable="false"
-                android:clickable="true"
-                android:onClick="editJumlah"
-                android:background="@drawable/round_object"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/ekor"
-                android:layout_toStartOf="@+id/ekor"/>
-            <TextView
-                android:id="@+id/buttonmin2"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_width="20dp"
-                android:layout_height="32dp"
-                android:text="@string/min_button"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"/>
-            <TextView
-                android:id="@+id/buttonplus2"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_width="20dp"
-                android:layout_height="32dp"
-                android:layout_toLeftOf="@+id/ekor"
-                android:layout_toStartOf="@+id/ekor"
-                android:text="@string/plus_button"/>
-
-            <TextView
-                android:id="@+id/ekor"
-                android:layout_width="35dp"
-                android:layout_height="32dp"
-                android:text="@string/banyak"
-                android:gravity="center"
-                android:background="@drawable/round_object"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <!--
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/ekor"
-                android:layout_toStartOf="@+id/ekor"
-
-            android:layout_toRightOf="@+id/buttonmin1"
-            android:layout_toEndOf="@+id/buttonmin1"
-            android:layout_toLeftOf="@+id/buttonplus1"
-            android:layout_toStartOf="@+id/buttonplus1 -->
-
-
+                android:layout_alignRight="@+id/JenisTernak"
+                android:layout_alignEnd="@+id/JenisTernak" />
         </RelativeLayout>
-    </RelativeLayout>
 
-    <!-- insert bobot 2 dan lama pemeliharaan layout -->
-    <RelativeLayout
-        android:id="@+id/layout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_above="@+id/layout4"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="5dp">
-
-        <View
-            android:id="@+id/mid2"
-            android:layout_width="5dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/kilogram2"
-            android:layout_toEndOf="@+id/kilogram2"/>
-
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:inputType="numberDecimal"
-                android:hint="@string/brt_ternak"
-                android:ems="10"
-                android:focusable="false"
-                android:clickable="true"
-                android:onClick="editBobot2"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:id="@+id/editbobot2"
-                android:background="@drawable/round_object"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/kilogram2"
-                android:layout_toStartOf="@+id/kilogram2"/>
-            <TextView
-                android:id="@+id/buttonmin4"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:text="@string/min_button"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"/>
-            <TextView
-                android:id="@+id/buttonplus4"
-                android:layout_width="25dp"
-                android:layout_height="32dp"
-                android:background="@drawable/button_plus_min"
-                android:gravity="center"
-                android:clickable="true"
-                android:layout_toLeftOf="@+id/kilogram2"
-                android:layout_toStartOf="@+id/kilogram2"
-                android:text="@string/plus_button"/>
-
-            <TextView
-                android:id="@+id/kilogram2"
-                android:layout_width="48dp"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:background="@drawable/round_object"
-                android:layout_centerVertical="true"
-                android:layout_centerInParent="true"
-                android:text="@string/kilogram"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"/>
-            <!--
-            android:layout_toRightOf="@+id/buttonmin1"
-            android:layout_toEndOf="@+id/buttonmin1"
-            android:layout_toLeftOf="@+id/buttonplus1"
-            android:layout_toStartOf="@+id/buttonplus1" -->
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/mid2"
-            android:layout_toEndOf="@+id/mid2"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="32dp"
-            android:inputType="number"
-            android:hint="hari"
-            android:ems="10"
-            android:textSize="15sp"
-            android:id="@+id/editHari"
-            android:focusable="false"
-            android:clickable="true"
-            android:onClick="editHari"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/round_object"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/hari"
-            android:layout_toStartOf="@+id/hari"/>
-        <TextView
-            android:id="@+id/buttonmin3"
-            android:layout_width="20dp"
-            android:layout_height="32dp"
-            android:background="@drawable/button_plus_min"
-            android:gravity="center"
-            android:clickable="true"
-            android:text="@string/min_button"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"/>
-        <TextView
-            android:id="@+id/buttonplus3"
-            android:layout_width="20dp"
-            android:layout_height="32dp"
-            android:background="@drawable/button_plus_min"
-            android:gravity="center"
-            android:clickable="true"
-            android:layout_toLeftOf="@+id/hari"
-            android:layout_toStartOf="@+id/hari"
-            android:text="@string/plus_button"/>
-        <TextView
-            android:id="@+id/hari"
-            android:layout_width="35dp"
-            android:layout_height="32dp"
-            android:text="@string/lama"
-            android:gravity="center"
-            android:background="@drawable/round_object"
-            android:layout_marginStart="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        </RelativeLayout>
     </RelativeLayout>
 
     <!-- checkbox series -->
@@ -427,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/layout4"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/layout2"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
@@ -542,18 +272,308 @@
 
     </LinearLayout>
 
+    <!-- insert bobot dan jumlah ternak layout -->
+    <RelativeLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout3"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:inputType="numberDecimal"
+                android:hint="produk"
+                android:ems="10"
+                android:clickable="true"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:id="@+id/editbobot"
+                android:background="@drawable/round_object"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/kilogram"
+                android:layout_toStartOf="@+id/kilogram"/>
+            <TextView
+                android:id="@+id/buttonmin1"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:text="@string/min_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/buttonplus1"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_toLeftOf="@+id/kilogram"
+                android:layout_toStartOf="@+id/kilogram"
+                android:text="@string/plus_button"/>
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:background="@drawable/round_object"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_centerInParent="true" />
+
+            <Spinner
+                android:id="@+id/kilogram"
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"/>
+
+            <!--
+            android:layout_toRightOf="@+id/buttonmin1"
+            android:layout_toEndOf="@+id/buttonmin1"
+            android:layout_toLeftOf="@+id/buttonplus1"
+            android:layout_toStartOf="@+id/buttonplus1" -->
+
+        <View
+            android:id="@+id/mid"
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/kilogram"
+            android:layout_toEndOf="@+id/kilogram"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/mid"
+            android:layout_toEndOf="@+id/mid"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="32dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:hint="@string/byk_ternak"
+                android:ems="10"
+                android:textSize="15sp"
+                android:id="@+id/editjumlah"
+                android:clickable="true"
+                android:background="@drawable/round_object"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"/>
+            <TextView
+                android:id="@+id/buttonmin2"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_width="20dp"
+                android:layout_height="32dp"
+                android:text="@string/min_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/buttonplus2"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_width="20dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"
+                android:text="@string/plus_button"/>
+
+            <TextView
+                android:id="@+id/ekor"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:text="@string/banyak"
+                android:gravity="center"
+                android:background="@drawable/round_object"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <!--
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/ekor"
+                android:layout_toStartOf="@+id/ekor"
+
+            android:layout_toRightOf="@+id/buttonmin1"
+            android:layout_toEndOf="@+id/buttonmin1"
+            android:layout_toLeftOf="@+id/buttonplus1"
+            android:layout_toStartOf="@+id/buttonplus1 -->
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- insert bobot 2 dan lama pemeliharaan layout -->
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/button"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp">
+
+        <View
+            android:id="@+id/mid2"
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/kilogram2"
+            android:layout_toEndOf="@+id/kilogram2"/>
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:inputType="numberDecimal"
+                android:hint="@string/brt_ternak"
+                android:ems="10"
+                android:clickable="true"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:id="@+id/editbobot2"
+                android:background="@drawable/round_object"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/kilogram2"
+                android:layout_toStartOf="@+id/kilogram2"/>
+            <TextView
+                android:id="@+id/buttonmin4"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:text="@string/min_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:id="@+id/buttonplus4"
+                android:layout_width="25dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_plus_min"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_toLeftOf="@+id/kilogram2"
+                android:layout_toStartOf="@+id/kilogram2"
+                android:text="@string/plus_button"/>
+
+            <TextView
+                android:id="@+id/kilogram2"
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:background="@drawable/round_object"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:text="@string/kilogram"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"/>
+            <!--
+            android:layout_toRightOf="@+id/buttonmin1"
+            android:layout_toEndOf="@+id/buttonmin1"
+            android:layout_toLeftOf="@+id/buttonplus1"
+            android:layout_toStartOf="@+id/buttonplus1" -->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/mid2"
+            android:layout_toEndOf="@+id/mid2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        <EditText
+            android:layout_width="270dp"
+            android:layout_height="32dp"
+            android:inputType="number"
+            android:hint="hari"
+            android:ems="10"
+            android:textSize="15sp"
+            android:id="@+id/editHari"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:background="@drawable/round_object"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/hari"
+            android:layout_toStartOf="@+id/hari"/>
+        <TextView
+            android:id="@+id/buttonmin3"
+            android:layout_width="20dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_plus_min"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/min_button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+        <TextView
+            android:id="@+id/buttonplus3"
+            android:layout_width="20dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_plus_min"
+            android:gravity="center"
+            android:clickable="true"
+            android:layout_toLeftOf="@+id/hari"
+            android:layout_toStartOf="@+id/hari"
+            android:text="@string/plus_button"/>
+        <TextView
+            android:id="@+id/hari"
+            android:layout_width="35dp"
+            android:layout_height="32dp"
+            android:text="@string/lama"
+            android:gravity="center"
+            android:background="@drawable/round_object"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
     <!-- oke button -->
     <Button
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:text="@string/oke"
-        android:textColor="@color/Base"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/next"
+        android:textColor="@color/White"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="5dp"
         android:id="@+id/button"
         android:onClick="nextClick"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_custom" />
+        android:background="@drawable/button_custom_rec" />
 
 </RelativeLayout>

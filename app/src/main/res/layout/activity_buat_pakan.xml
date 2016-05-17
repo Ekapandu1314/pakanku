@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".BuatPakan">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,25 +25,21 @@
             android:layout_height="50dp"
             android:background="@color/Button"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-            <!--<Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/next"
-                android:onClick="nextClick"
-                android:background="@color/colorPrimaryDark"
-                android:layout_gravity="end"/>-->
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/rellayout"
             android:layout_below="@id/appbar"
             android:layout_above="@+id/nextbutt"
             android:background="@color/Base"
             android:paddingBottom="20dp"
             android:orientation="vertical"
-            android:paddingTop="3dp">
+            android:paddingTop="3dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <!-- indicator -->
             <LinearLayout
@@ -125,7 +122,8 @@
                     android:layout_toStartOf="@id/buttonNext"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:overScrollMode="never"/>
 
                 <!-- next button -->
                 <Button
@@ -400,6 +398,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/mid"
                     android:layout_toStartOf="@+id/mid"
+                    android:focusableInTouchMode="true"
                     android:background="@drawable/round_object">
                     <EditText
                         android:layout_width="wrap_content"
@@ -407,7 +406,7 @@
                         android:inputType="numberDecimal"
                         android:hint="@string/brt_ternak"
                         android:ems="10"
-                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:clickable="true"
                         android:gravity="center"
                         android:textSize="15sp"
@@ -472,6 +471,7 @@
                     android:layout_toEndOf="@+id/mid"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:focusableInTouchMode="true"
                     android:background="@drawable/round_object">
 
                     <EditText
@@ -483,7 +483,7 @@
                         android:ems="10"
                         android:textSize="15sp"
                         android:id="@+id/editjumlah"
-                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:clickable="true"
                         android:background="@color/White"
                         android:layout_toLeftOf="@+id/buttonplus2"
@@ -548,6 +548,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/round_object"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
@@ -559,7 +560,6 @@
                     android:ems="10"
                     android:textSize="15sp"
                     android:id="@+id/editHari"
-                    android:focusable="true"
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceMedium"
