@@ -69,6 +69,8 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mViewPager.setOffscreenPageLimit(2);
 
         mBahanDao = new BahanDAO(this);

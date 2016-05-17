@@ -51,7 +51,7 @@ public class InfoRecord extends Fragment {
     private int mToolbarHeight;
 
     private Toolbar toolbar;
-    FloatingActionButton fab;
+//    FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class InfoRecord extends Fragment {
         mAdapter = new ListRecordAdapter(mListRecord);
         mListviewRecord.setAdapter(mAdapter);
 
-        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        //fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         mToolbarHeight = toolbar.getHeight();
 
@@ -116,7 +116,7 @@ public class InfoRecord extends Fragment {
             @Override
             public void onMoved(int distance) {
                 toolbar.setTranslationY(-distance);
-                fab.hide();
+//                fab.hide();
             }
 
             @Override
