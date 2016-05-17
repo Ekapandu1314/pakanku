@@ -3,11 +3,15 @@ package com.android.mirzaadr.pakanku.Adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.mirzaadr.pakanku.Model.Bahan;
@@ -18,56 +22,45 @@ import java.util.List;
 /**
  * Created by Eka Pandu Winata on 4/4/2016.
  */
-public class ListCheckBoxBahanAdapter extends BaseAdapter {
-
-    public static final String TAG = "ListCheckBoxBahanAdapter";
+public class ListCheckBoxBahanAdapter extends RecyclerView.Adapter<ListCheckBoxBahanAdapter.MyViewHolder> {
 
     private List<Bahan> mItems;
-    private LayoutInflater mInflater;
 
-    public ListCheckBoxBahanAdapter(Context context, List<Bahan> listBahan) {
-        this.setItems(listBahan);
-        this.mInflater = LayoutInflater.from(context);
-    }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView txtKategori;
+        TextView txtNamaBahan;
+        CheckBox chckBahan;
 
-    @Override
-    public int getCount() {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().size() : 0 ;
-    }
+        public MyViewHolder(View view) {
+            super(view);
+            txtKategori = (TextView) view.findViewById(R.id.table2);
+            txtNamaBahan = (TextView) view.findViewById(R.id.table);
+            chckBahan = (CheckBox) view.findViewById(R.id.checkBox);
 
-    @Override
-    public Bahan getItem(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position) : null ;
-    }
 
-    @Override
-    public long getItemId(int position) {
-        return (getItems() != null && !getItems().isEmpty()) ? getItems().get(position).getIdbahan() : position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        final ViewHolder holder;
-        if(v == null) {
-            v = mInflater.inflate(R.layout.list_item_pilih_bahan, parent, false);
-            holder = new ViewHolder();
-            holder.txtKategori = (TextView) v.findViewById(R.id.table2);
-            holder.txtNamaBahan = (TextView) v.findViewById(R.id.table);
-            holder.chckBahan = (CheckBox) v.findViewById(R.id.checkBox);
-
-            holder.txtNamaBahan.setTypeface(null, Typeface.BOLD);
-
-            v.setTag(holder);
         }
-        else {
-            holder = (ViewHolder) v.getTag();
-        }
+    }
 
 
+    public ListCheckBoxBahanAdapter(List<Bahan> moviesList) {
+        this.mItems = moviesList;
+    }
 
-        // fill row data
-        final Bahan currentItem = getItem(position);
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_pilih_bahan, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    public List<Bahan> getmItems() {
+        return mItems;
+    }
+
+    @Override
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        final Bahan currentItem = mItems.get(position);
         if(currentItem != null) {
 
             holder.chckBahan.setOnClickListener(new View.OnClickListener() {
@@ -78,31 +71,27 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
                     currentItem.setSelected(cb.isChecked());
                 }
             });
-            //Log.d("Data : ", currentItem.getIdbahan());
 
             //holder.intIdBahan.setText(String.valueOf(currentItem.getIdbahan()));
             holder.txtNamaBahan.setText(currentItem.getNamaBahan());
             holder.txtKategori.setText("Rp. " + String.valueOf(currentItem.getHarga()));
             holder.chckBahan.setChecked(currentItem.isSelected());
+            holder.txtNamaBahan.setTypeface(null, Typeface.BOLD);
 
             if(currentItem.getKategori().equals("hijauan")) {
 
-
-                v.setBackgroundResource(R.color.listHijauan);
                 holder.txtNamaBahan.setTextColor(Color.parseColor("#ffffff"));
                 holder.txtKategori.setTextColor(Color.parseColor("#ffffff"));
 
             }
             else if(currentItem.getKategori().equals("protein")) {
 
-                v.setBackgroundResource(R.color.listProtein);
                 holder.txtNamaBahan.setTextColor(Color.parseColor("#000000"));
                 holder.txtKategori.setTextColor(Color.parseColor("#000000"));
 
             }
             else if(currentItem.getKategori().equals("energi")) {
 
-                v.setBackgroundResource(R.color.listEnergi);
                 holder.txtNamaBahan.setTextColor(Color.parseColor("#FFE817"));
                 holder.txtKategori.setTextColor(Color.parseColor("#FFE817"));
 
@@ -111,23 +100,11 @@ public class ListCheckBoxBahanAdapter extends BaseAdapter {
 
 
         }
-
-        return v;
     }
 
-    public List<Bahan> getItems() {
-        return mItems;
-    }
-
-    public void setItems(List<Bahan> mItems) {
-        this.mItems = mItems;
-    }
-
-    class ViewHolder {
-        TextView txtKategori;
-        TextView txtNamaBahan;
-        CheckBox chckBahan;
-
+    @Override
+    public int getItemCount() {
+        return mItems.size();
     }
 
 }

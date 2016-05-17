@@ -1,19 +1,30 @@
 package com.android.mirzaadr.pakanku.Fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
 import com.android.mirzaadr.pakanku.MasukkanHarga;
+import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 
@@ -25,9 +36,13 @@ import java.util.List;
 
 public class InfoHarga extends Fragment {
 
-    private ListView mListviewHijau, mListviewEnergi, mListviewProtein;
+    private RecyclerView mListviewHijau, mListviewEnergi, mListviewProtein;
 
+    List<Bahan> mListHargaHijauan;
+    List<Bahan> mListHargaEnergi;
+    List<Bahan> mListHargaProtein;
 
+    NestedScrollView scrollharga;
 
     View view;
 
@@ -46,10 +61,6 @@ public class InfoHarga extends Fragment {
         ListBahanHargaAdapter mAdapterEnergi;
         ListBahanHargaAdapter mAdapterProtein;
 
-        List<Bahan> mListHargaHijauan;
-        List<Bahan> mListHargaEnergi;
-        List<Bahan> mListHargaProtein;
-
         BahanDAO mBahanDao;
 
         mBahanDao = new BahanDAO(getActivity());
@@ -60,16 +71,16 @@ public class InfoHarga extends Fragment {
 
         initViews();
 
-        mAdapterHijauan = new ListBahanHargaAdapter(getActivity(), mListHargaHijauan);
-        mAdapterEnergi = new ListBahanHargaAdapter(getActivity(), mListHargaEnergi);
-        mAdapterProtein = new ListBahanHargaAdapter(getActivity(), mListHargaProtein);
+        mAdapterHijauan = new ListBahanHargaAdapter(mListHargaHijauan);
+        mAdapterEnergi = new ListBahanHargaAdapter(mListHargaEnergi);
+        mAdapterProtein = new ListBahanHargaAdapter(mListHargaProtein);
         mListviewHijau.setAdapter(mAdapterHijauan);
         mListviewEnergi.setAdapter(mAdapterEnergi);
         mListviewProtein.setAdapter(mAdapterProtein);
 
-        Utility.setListViewHeightBasedOnChildren(mListviewHijau);
-        Utility.setListViewHeightBasedOnChildren(mListviewEnergi);
-        Utility.setListViewHeightBasedOnChildren(mListviewProtein);
+        mAdapterHijauan.notifyDataSetChanged();
+        mAdapterEnergi.notifyDataSetChanged();
+        mAdapterProtein.notifyDataSetChanged();
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -83,31 +94,111 @@ public class InfoHarga extends Fragment {
     }
 
     private void initViews() {
-        this.mListviewHijau = (ListView)view.findViewById(R.id.hargalist);
-        this.mListviewEnergi = (ListView)view.findViewById(R.id.hargalistenergi);
-        this.mListviewProtein = (ListView)view.findViewById(R.id.hargalistprotein);
-        //this.mTxtEmptyListBahan = (TextView)view.findViewById(R.id.table);
+        mListviewHijau = (RecyclerView)view.findViewById(R.id.hargalist);
+        mListviewEnergi = (RecyclerView)view.findViewById(R.id.hargalistenergi);
+        mListviewProtein = (RecyclerView)view.findViewById(R.id.hargalistprotein);
+
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager3 = new LinearLayoutManager(getActivity());
+
+        mListviewHijau.setLayoutManager(mLayoutManager1);
+        mListviewHijau.setItemAnimator(new DefaultItemAnimator());
+        mListviewHijau.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        mListviewHijau.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mListviewHijau, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bahan bahan1 = mListHargaHijauan.get(position);
+                Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        mListviewEnergi.setLayoutManager(mLayoutManager2);
+        mListviewEnergi.setItemAnimator(new DefaultItemAnimator());
+        mListviewEnergi.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        mListviewEnergi.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mListviewEnergi, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bahan bahan2 = mListHargaEnergi.get(position);
+                Toast.makeText(getActivity(), bahan2.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        mListviewProtein.setLayoutManager(mLayoutManager3);
+        mListviewProtein.setItemAnimator(new DefaultItemAnimator());
+        mListviewProtein.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        mListviewProtein.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mListviewProtein, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bahan bahan3 = mListHargaProtein.get(position);
+                Toast.makeText(getActivity(), bahan3.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
     }
 
-    //Test scrollview custom
-    public static class Utility {
-        public static void setListViewHeightBasedOnChildren(ListView listView) {
-            ListAdapter listAdapter = listView.getAdapter();
-            if (listAdapter == null) {
-                // pre-condition
-                return;
-            }
+    public interface ClickListener {
+        void onClick(View view, int position);
 
-            int totalHeight = 0;
-            for (int i = 0; i < listAdapter.getCount(); i++) {
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            }
+        void onLongClick(View view, int position);
+    }
 
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private InfoHarga.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final InfoHarga.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
         }
     }
 }

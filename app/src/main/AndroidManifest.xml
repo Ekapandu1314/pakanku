@@ -53,5 +53,4 @@
             android:name=".ResepRansumRecord"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
     </application>
-
 </manifest>

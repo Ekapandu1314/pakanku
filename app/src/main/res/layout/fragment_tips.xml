@@ -23,6 +23,7 @@
 
         <ListView
             android:id="@+id/tipslist"
+            android:background="@color/ButtonPressed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </ListView>

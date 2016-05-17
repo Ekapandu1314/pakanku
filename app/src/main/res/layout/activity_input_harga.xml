@@ -89,9 +89,10 @@
             android:layout_below="@+id/layot"
             android:paddingTop="2dp">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/Button"
             android:id="@+id/listEdit" />
         <Button
             android:layout_width="100dp"

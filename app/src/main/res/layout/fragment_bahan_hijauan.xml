@@ -8,11 +8,6 @@
     android:id="@+id/fragHijauan"
     tools:context=".PilihBahan">
 
-    <!--LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,11 +73,12 @@
                 android:layout_marginStart="5dp" />
     </RelativeLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listHijauan"
         android:layout_marginTop="1dip"
+        android:background="@color/listHijauan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
