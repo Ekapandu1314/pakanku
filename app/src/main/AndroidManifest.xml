@@ -16,7 +16,7 @@
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,32 +26,32 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".Informasi"
             android:label="@string/title_activity_information"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".BuatPakan"
             android:label="@string/title_activity_buatpakan"
             android:windowSoftInputMode="adjustPan|stateHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".PilihBahan"
             android:label="@string/title_activity_buatpakan"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".ResepRansum"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity android:name=".BukaArtikel"/>
         <activity
             android:name=".CekUntung"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".MasukkanHarga"/>
         <activity
             android:name=".ResepRansumRecord"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
     </application>
 
 </manifest>
