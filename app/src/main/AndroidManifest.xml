@@ -42,6 +42,7 @@
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".ResepRansum"
+            android:label="@string/title_activity_resepransum"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity android:name=".BukaArtikel"/>
         <activity
@@ -51,6 +52,7 @@
             android:name=".MasukkanHarga"/>
         <activity
             android:name=".ResepRansumRecord"
+            android:label="@string/title_activity_rasumrecord"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
     </application>
 </manifest>

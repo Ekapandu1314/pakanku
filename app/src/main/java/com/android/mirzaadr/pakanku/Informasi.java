@@ -11,11 +11,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.mirzaadr.pakanku.Fragment.InfoHarga;
 import com.android.mirzaadr.pakanku.Fragment.InfoRecord;
 import com.android.mirzaadr.pakanku.Fragment.InfoTips;
-import com.android.mirzaadr.pakanku.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,9 @@ public class Informasi extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_informasi);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -100,7 +103,7 @@ public class Informasi extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_information, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -117,6 +120,5 @@ public class Informasi extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

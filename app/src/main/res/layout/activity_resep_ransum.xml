@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout android:id="@+id/appbar"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+            android:layout_width="match_parent" android:layout_height="55dp"
+            android:background="@color/Shade" app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:contentDescription="@string/Close"
+            android:clickable="true"
+            android:onClick="backHome"
+            android:src="@drawable/abc_ic_clear_mtrl_alpha"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/Base">
 
         <RelativeLayout
@@ -14,15 +40,16 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp">
 
-            <!-- toolbar layout -->
+            <!-- toolbar layout-->
             <TextView
                 android:id="@+id/txt_header"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@color/Dark"
-                android:gravity="center"
-                android:text="Resep Ransum"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="Resep Pakan :"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/White" />
 
@@ -32,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/txt_header">
 
                 <!-- header untuk tabel -->

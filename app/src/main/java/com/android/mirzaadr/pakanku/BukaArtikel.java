@@ -1,25 +1,29 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.android.mirzaadr.pakanku.Internet.WebViewClientImpl;
-import com.android.mirzaadr.pakanku.R;
 
-public class BukaArtikel extends Activity {
+@SuppressLint("setJavaScriptEnabled")
+public class BukaArtikel extends AppCompatActivity {
 	// Declare Variables
 
 	String link;
-	private WebView webView = null;
+	public WebView webView = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_artikel);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_informasi);
+		setSupportActionBar(toolbar);
 
 		Intent i = getIntent();
 		// Get the result of link
