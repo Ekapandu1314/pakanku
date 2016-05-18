@@ -1,6 +1,8 @@
 package com.android.mirzaadr.pakanku.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -12,6 +14,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -38,18 +43,8 @@ import java.util.HashMap;
 
 public class InfoTips extends Fragment {
 
-    //private Dialog pDialog;
-
-    ProgressDialog progressDialog;
-
-    private Handler mHandler = new Handler();
-
-    private AppBarLayout mActionBar;
-
-    View view;
-
     ListView listview;
-    ListTipsAdapter adapter;
+    ListTipsAdapter adapter = null;
     ArrayList<HashMap<String, String>> arraylist;
     public static String JUDUL = "judul";
     public static String DESKRIPSI = "deskripsi";
@@ -57,11 +52,12 @@ public class InfoTips extends Fragment {
     public static String GAMBAR = "gambar";
     Boolean internet_error = false;
 
-//    Boolean first = false;
-
     ProgressBar haha;
 
-    Boolean coba= false;
+    Boolean prog = false;
+    Boolean conn = false;
+
+    ImageButton reload;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,8 +73,33 @@ public class InfoTips extends Fragment {
 
         listview = (ListView) view.findViewById(R.id.tipslist);
         haha = (ProgressBar) view.findViewById(R.id.progress_tips);
+        reload = (ImageButton) getActivity().findViewById(R.id.reload);
 
-        haha.setVisibility(View.GONE);
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                NetworkUtils utils = new NetworkUtils(getActivity());
+                if(utils.isConnectingToInternet()) {
+                    haha.setVisibility(View.VISIBLE);
+                    listview.setVisibility(View.INVISIBLE);
+                    new DownloadJSON().execute();
+                }
+                else {
+                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        if(!conn) {
+            haha.setVisibility(View.VISIBLE);
+        }
+        else {
+            haha.setVisibility(View.GONE);
+            prog = true;
+        }
+
 
         return view;
     }
@@ -90,19 +111,25 @@ public class InfoTips extends Fragment {
             NetworkUtils utils = new NetworkUtils(getActivity());
             if(utils.isConnectingToInternet()) {
 
-                if(coba)
-                {
-                    haha.setVisibility(View.VISIBLE);
+                if(adapter == null){
+                    if(prog)
+                    {
+                        haha.setVisibility(View.VISIBLE);
+                    }
+                    new DownloadJSON().execute();
                 }
-                new DownloadJSON().execute();
+
 
             }
             else {
 
-
+                conn = true;
                 Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
 
             }
+        }else{
+
+            // fragment is no longer visible
         }
     }
 
@@ -112,7 +139,7 @@ public class InfoTips extends Fragment {
         protected void onPreExecute() {
             //haha.setVisibility(View.VISIBLE);
             super.onPreExecute();
-            coba = true;
+            prog = true;
             //pDialog = ProgressDialog.show(getActivity(), "Please wait...", "Silahkan tunggu");
             //progressDialog = createProgressDialog(getActivity());
             //progressDialog.show();
@@ -122,7 +149,7 @@ public class InfoTips extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            arraylist = new ArrayList<>();
+            arraylist = new ArrayList<HashMap<String, String>>();
 
             String serverData = null;
 
@@ -138,8 +165,8 @@ public class InfoTips extends Fragment {
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                     internet_error = true;
-                    this.cancel(true);}
-                catch (UnsupportedEncodingException e) {
+                    this.cancel(true);
+                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                     internet_error = true;
                     this.cancel(true);
@@ -162,7 +189,7 @@ public class InfoTips extends Fragment {
                     JSONArray jsonarray = jsonObject.getJSONArray("artikel");
 
                     for (int i = 0; i < jsonarray.length(); i++) {
-                        HashMap<String, String> map = new HashMap<>();
+                        HashMap<String, String> map = new HashMap<String, String>();
                         JSONObject jsonObjectBahan = jsonarray.getJSONObject(i);
                         // Retrive JSON Objects
                         map.put(JUDUL, jsonObjectBahan.getString(JUDUL));

@@ -166,8 +166,6 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
     @Override
     public void onScrollChanged() {
 
-
-
         float y = (view.findViewById(R.id.scroll_harga)).getScrollY();
         float yy = (view.findViewById(R.id.scroll_harga)).getOverScrollMode();
         if (y >= mActionBarHeight + view.getHeight() && mActionBar.isShown()) {

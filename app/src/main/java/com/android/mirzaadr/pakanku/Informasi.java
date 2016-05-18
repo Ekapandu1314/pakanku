@@ -1,5 +1,7 @@
 package com.android.mirzaadr.pakanku;
 
+import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -39,11 +41,14 @@ public class Informasi extends AppCompatActivity {
      */
     ImageView reload, add;
 
+    private AppBarLayout mActionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
+        mActionBar = (AppBarLayout)findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_informasi);
         setSupportActionBar(toolbar);
 
@@ -121,6 +126,13 @@ public class Informasi extends AppCompatActivity {
 
     }
 
+    public void masukkan_harga(View view) {
+
+        Intent intent = new Intent(getApplicationContext(), MasukkanHarga.class);
+        startActivity(intent);
+
+    }
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -169,18 +181,21 @@ public class Informasi extends AppCompatActivity {
             {
                 reload.setVisibility(View.VISIBLE);
                 add.setVisibility(View.GONE);
+                mActionBar.setExpanded(true, true);
                 break;
             }
             case 1:
             {
                 reload.setVisibility(View.GONE);
                 add.setVisibility(View.VISIBLE);
+                mActionBar.setExpanded(true, true);
                 break;
             }
             default:
             {
                 reload.setVisibility(View.GONE);
                 add.setVisibility(View.GONE);
+                mActionBar.setExpanded(true, true);
                 break;
             }
         }

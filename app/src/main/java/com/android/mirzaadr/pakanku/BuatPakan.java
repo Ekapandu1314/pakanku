@@ -18,9 +18,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;

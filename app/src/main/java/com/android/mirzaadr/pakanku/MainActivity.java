@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     int date_calendar;
     int year_calendar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         registerReceiver(mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
+        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 
         mBahanDao = new BahanDAO(this);
         mVersionDao = new VersionDAO(this);
@@ -561,7 +565,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         this.registerReceiver(this.mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
         super.onResume();
     }
 
@@ -618,11 +622,9 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-
     public void BuatClick(View v) {
         Intent intent = new Intent(MainActivity.this, BuatPakan.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
 
     public void InfoClick(View v) {
