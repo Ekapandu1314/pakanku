@@ -97,8 +97,8 @@ public class Informasi extends AppCompatActivity {
 //            }
 //        });
 
-        reload = (ImageView) findViewById(R.id.reload);
-        add = (ImageView) findViewById(R.id.add);
+//        reload = (ImageView) findViewById(R.id.reload);
+//        add = (ImageView) findViewById(R.id.add);
         mViewPager.setOffscreenPageLimit(2);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -207,8 +207,5 @@ public class Informasi extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }

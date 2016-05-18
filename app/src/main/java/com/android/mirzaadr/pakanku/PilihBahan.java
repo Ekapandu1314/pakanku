@@ -3,7 +3,6 @@ package com.android.mirzaadr.pakanku;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -52,8 +51,6 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
     int jumlah;
     int lama;
 
-    Fragment myFragment;
-
     String bahanid = new String();
 
     int j = 0;
@@ -69,7 +66,9 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         mViewPager.setOffscreenPageLimit(2);
 
@@ -143,10 +142,9 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
     public void passDataToActivity(String someValue){
 
 
-        if(!someValue.equals(null) && !someValue.equals("haha")) {
+        if(someValue != null && !someValue.equals("haha")) {
 
             j++;
-
             bahanid = someValue+bahanid;
 
         }
@@ -172,26 +170,17 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         if (j == 3) {
 
             if (produk == 0) {
-
                 HitungPakan();
                 //Toast.makeText(getBaseContext(), "berat 2 kosong", Toast.LENGTH_SHORT).show();
-
             }
             else {
-
                 CekUntung();
                 //Toast.makeText(getBaseContext(), hewan + " " + tujuan, Toast.LENGTH_SHORT).show();
 
             }
-            //
-
             j = 0;
             bahanid = "";
-
-
         }
-
-
     }
 
     public void HitungPakan() {
@@ -227,30 +216,48 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
             Bahan bahanzz = mBahanDao.getBahanById(Integer.parseInt(bahan[i]));
 
-            if(bahanzz.getKategori().equals("hijauan")) {
-
-                hijau[j] = Integer.parseInt(bahan[i]);
-
-                j++;
-
+            switch (bahanzz.getKategori()){
+                case "hijauan":{
+                    hijau[j] = Integer.parseInt(bahan[i]);
+                    j++;
+                    break;
+                }
+                case "energi":{
+                    energi[k] = Integer.parseInt(bahan[i]);
+                    k++;
+                    break;
+                }
+                case "protein":{
+                    protein[l] = Integer.parseInt(bahan[i]);
+                    l++;
+                    break;
+                }
+                default:{
+                    Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+                }
             }
-            else if (bahanzz.getKategori().equals("energi")) {
 
-                energi[k] = Integer.parseInt(bahan[i]);
-
-                k++;
-
-            }
-            else if (bahanzz.getKategori().equals("protein")) {
-
-                protein[l] = Integer.parseInt(bahan[i]);
-
-                l++;
-
-            }
-            else {
-                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-            }
+//            if(bahanzz.getKategori().equals("hijauan")) {
+//
+//                hijau[j] = Integer.parseInt(bahan[i]);
+//                j++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("energi")) {
+//
+//                energi[k] = Integer.parseInt(bahan[i]);
+//                k++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("protein")) {
+//
+//                protein[l] = Integer.parseInt(bahan[i]);
+//                l++;
+//
+//            }
+//            else {
+//                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+//            }
         }
 
         double pk_prs_hijauan[] = new double[10];
@@ -267,7 +274,7 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         //double prs_pk_hijauan[] = new double[10];
 
-        double pk_kg_hijauan_temp = 0;
+        double pk_kg_hijauan_temp;
         double pk_kg_hijauan = 0;
 
         for (int i = 0; i < j ; i++) {
@@ -516,30 +523,27 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
             Bahan bahanzz = mBahanDao.getBahanById(Integer.parseInt(bahan[i]));
 
-            if(bahanzz.getKategori().equals("hijauan")) {
-
-                hijau[j] = Integer.parseInt(bahan[i]);
-
-                j++;
-
+            switch (bahanzz.getKategori()) {
+                case "hijauan": {
+                    hijau[j] = Integer.parseInt(bahan[i]);
+                    j++;
+                    break;
+                }
+                case "energi": {
+                    energi[k] = Integer.parseInt(bahan[i]);
+                    k++;
+                    break;
+                }
+                case "protein": {
+                    protein[l] = Integer.parseInt(bahan[i]);
+                    l++;
+                    break;
+                }
+                default: {
+                    Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+                }
             }
-            else if (bahanzz.getKategori().equals("energi")) {
 
-                energi[k] = Integer.parseInt(bahan[i]);
-
-                k++;
-
-            }
-            else if (bahanzz.getKategori().equals("protein")) {
-
-                protein[l] = Integer.parseInt(bahan[i]);
-
-                l++;
-
-            }
-            else {
-                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-            }
         }
 
         double pk_prs_hijauan[] = new double[10];
@@ -556,7 +560,7 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         //double prs_pk_hijauan[] = new double[10];
 
-        double pk_kg_hijauan_temp = 0;
+        double pk_kg_hijauan_temp;
         double pk_kg_hijauan = 0;
 
         for (int i = 0; i < j ; i++) {
@@ -735,9 +739,9 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         Resep resep;
 
-        List<Resep> newlistResepHijauan = new ArrayList<Resep>();
-        List<Resep> newlistResepEnergi = new ArrayList<Resep>();
-        List<Resep> newlistResepProtein = new ArrayList<Resep>();
+        List<Resep> newlistResepHijauan = new ArrayList<>();
+        List<Resep> newlistResepEnergi = new ArrayList<>();
+        List<Resep> newlistResepProtein = new ArrayList<>();
 
         double asfeed_total = 0;
 

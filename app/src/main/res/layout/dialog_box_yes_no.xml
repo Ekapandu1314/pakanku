@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/Base"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Apakah kamu yakin untuk menghapus data record ?"
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/button_no"
+            android:textColor="@color/White"
+            android:id="@+id/buttonNO"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/button_custom_rec"
+            android:layout_toLeftOf="@+id/buttonYES"
+            android:layout_toStartOf="@+id/buttonYES" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/button_yes"
+            android:textColor="@color/White"
+            android:id="@+id/buttonYES"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_custom_rec" />
+
+    </RelativeLayout>
+
+</LinearLayout>
