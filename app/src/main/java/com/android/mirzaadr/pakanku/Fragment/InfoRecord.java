@@ -1,12 +1,9 @@
 package com.android.mirzaadr.pakanku.Fragment;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,14 +19,12 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
 import com.android.mirzaadr.pakanku.Dao.RecordDAO;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
-import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.MyScrollListener;
 import com.android.mirzaadr.pakanku.R;
@@ -37,21 +32,17 @@ import com.android.mirzaadr.pakanku.ResepRansumRecord;
 
 import java.util.List;
 
-/**
- * Created by Mirzaadr on 4/1/2016.
- */
+
 public class InfoRecord extends Fragment {
 
     private ListRecordAdapter mAdapter;
     private List<Record> mListRecord;
     private RecordDAO mRecordDao;
     private RecyclerView mListviewRecord;
-    Boolean list = false;
 
     private int mToolbarHeight;
 
     private Toolbar toolbar;
-    FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,28 +53,25 @@ public class InfoRecord extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View vieww = inflater.inflate(R.layout.fragment_record, container, false);
+        final View view = inflater.inflate(R.layout.fragment_record, container, false);
 
         mRecordDao = new RecordDAO(getActivity());
         mListRecord = mRecordDao.getAllRecord();
 
+        setHasOptionsMenu(true);
+
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_informasi);
 
-        final Spinner spinner = (Spinner) vieww.findViewById(R.id.spinnerHewan);
+        final Spinner spinner = (Spinner) view.findViewById(R.id.spinnerHewan);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.hewan, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
 
-        this.mListviewRecord = (RecyclerView) vieww.findViewById(R.id.listRecord);
+        this.mListviewRecord = (RecyclerView) view.findViewById(R.id.listRecord);
 
         mAdapter = new ListRecordAdapter(mListRecord);
         mListviewRecord.setAdapter(mAdapter);
-
-        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         mToolbarHeight = toolbar.getHeight();
 
@@ -92,7 +80,7 @@ public class InfoRecord extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String hewan;
                 hewan = spinner.getSelectedItem().toString();
-                mListviewRecord = (RecyclerView) vieww.findViewById(R.id.listRecord);
+                mListviewRecord = (RecyclerView) view.findViewById(R.id.listRecord);
                 mListRecord = mRecordDao.getAllRecordByHewan(hewan);
                 mAdapter = new ListRecordAdapter(mListRecord);
                 mListviewRecord.setAdapter(mAdapter);
@@ -133,7 +121,6 @@ public class InfoRecord extends Fragment {
 
         });
 
-
         mListviewRecord.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mListviewRecord, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -156,7 +143,7 @@ public class InfoRecord extends Fragment {
             }
         }));
 
-        return vieww;
+        return view;
     }
 
     private void showDeleteDialogConfirmation(final Record record, final int position) {
@@ -214,7 +201,6 @@ public class InfoRecord extends Fragment {
 
     public interface ClickListener {
         void onClick(View view, int position);
-
         void onLongClick(View view, int position);
     }
 
@@ -235,7 +221,7 @@ public class InfoRecord extends Fragment {
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -246,7 +232,7 @@ public class InfoRecord extends Fragment {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }
@@ -261,4 +247,6 @@ public class InfoRecord extends Fragment {
 
         }
     }
+
+
 }

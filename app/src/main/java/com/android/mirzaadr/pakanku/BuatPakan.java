@@ -18,11 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
@@ -86,7 +84,9 @@ public class BuatPakan extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         switcherImage = adapter.getCount();
 
@@ -317,7 +317,6 @@ public class BuatPakan extends AppCompatActivity {
         if (counter == -1)
             counter = switcherImage;
         viewPager.setCurrentItem(counter, true);
-
     }
 
     public void editAction (View view){

@@ -1,8 +1,6 @@
 package com.android.mirzaadr.pakanku.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -10,9 +8,10 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,9 +35,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Mirzaadr on 4/1/2016.
- */
 
 public class InfoTips extends Fragment {
 
@@ -61,7 +57,7 @@ public class InfoTips extends Fragment {
     public static String GAMBAR = "gambar";
     Boolean internet_error = false;
 
-    Boolean first = false;
+//    Boolean first = false;
 
     ProgressBar haha;
 
@@ -77,6 +73,7 @@ public class InfoTips extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tips, container, false);
+        setHasOptionsMenu(true);
 
         listview = (ListView) view.findViewById(R.id.tipslist);
         haha = (ProgressBar) view.findViewById(R.id.progress_tips);
@@ -93,7 +90,7 @@ public class InfoTips extends Fragment {
             NetworkUtils utils = new NetworkUtils(getActivity());
             if(utils.isConnectingToInternet()) {
 
-                if(coba==true)
+                if(coba)
                 {
                     haha.setVisibility(View.VISIBLE);
                 }
@@ -106,9 +103,6 @@ public class InfoTips extends Fragment {
                 Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
 
             }
-        }else{
-
-            // fragment is no longer visible
         }
     }
 
@@ -128,7 +122,7 @@ public class InfoTips extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            arraylist = new ArrayList<HashMap<String, String>>();
+            arraylist = new ArrayList<>();
 
             String serverData = null;
 
@@ -144,8 +138,8 @@ public class InfoTips extends Fragment {
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                     internet_error = true;
-                    this.cancel(true);
-                } catch (UnsupportedEncodingException e) {
+                    this.cancel(true);}
+                catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                     internet_error = true;
                     this.cancel(true);
@@ -168,7 +162,7 @@ public class InfoTips extends Fragment {
                     JSONArray jsonarray = jsonObject.getJSONArray("artikel");
 
                     for (int i = 0; i < jsonarray.length(); i++) {
-                        HashMap<String, String> map = new HashMap<String, String>();
+                        HashMap<String, String> map = new HashMap<>();
                         JSONObject jsonObjectBahan = jsonarray.getJSONObject(i);
                         // Retrive JSON Objects
                         map.put(JUDUL, jsonObjectBahan.getString(JUDUL));
@@ -227,17 +221,23 @@ public class InfoTips extends Fragment {
         }
     }
 
-    public static ProgressDialog createProgressDialog(Context mContext) {
-        ProgressDialog dialog = new ProgressDialog(mContext);
-        try {
-            dialog.show();
-        } catch (WindowManager.BadTokenException e) {
+//    public static ProgressDialog createProgressDialog(Context mContext) {
+//        ProgressDialog dialog = new ProgressDialog(mContext);
+//        try {
+//            dialog.show();
+//        } catch (WindowManager.BadTokenException e) {
+//
+//        }
+//        dialog.setCancelable(false);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        dialog.setContentView(R.layout.progress_dialog_loading);
+//        return dialog;
+//    }
 
-        }
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.progress_dialog_loading);
-        return dialog;
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_info_tips, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
 }

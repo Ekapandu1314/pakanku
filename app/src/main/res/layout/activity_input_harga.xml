@@ -8,10 +8,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <!--
         <TextView
             android:id="@+id/txt_header"
@@ -28,88 +24,92 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_below="@+id/txt_header"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/layot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#23421C"
-            android:layout_gravity="center_horizontal">
 
+            <!-- tabel tag-->
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layot"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/divider"
-                android:layout_toStartOf="@+id/divider"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-                <TextView
+                android:background="#23421C"
+                android:layout_gravity="center_horizontal">
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/nama"
-                    android:id="@+id/table"
-                    android:textColor="@color/White"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal"/>
-            </RelativeLayout>
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/divider"
+                    android:layout_toStartOf="@+id/divider"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nama"
+                        android:id="@+id/table"
+                        android:textColor="@color/White"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal"/>
+                </RelativeLayout>
 
-            <View
-                android:layout_width="2dp"
-                android:layout_height="32dp"
-                android:id="@+id/divider"
-                android:background="@color/Base"
-                android:layout_centerInParent="true"/>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/divider"
-                android:layout_toEndOf="@+id/divider"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/harga"
-                    android:textColor="@color/White"
-                    android:id="@+id/table2"
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/divider"
+                    android:background="@color/Base"
                     android:layout_centerInParent="true"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/divider"
+                    android:layout_toEndOf="@+id/divider"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/harga"
+                        android:textColor="@color/White"
+                        android:id="@+id/table2"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
             </RelativeLayout>
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/layot"
-            android:paddingTop="2dp">
+            <!-- relative layout and button -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="true"
+                android:paddingTop="2dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/Button"
-            android:id="@+id/listEdit" />
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/oke"
-            android:textColor="@color/Base"
-            android:id="@+id/button6"
-            android:background="@drawable/button_custom"
-            android:layout_below="@+id/listEdit"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="checkHargaBaru" />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/Button"
+                    android:id="@+id/listEdit" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:text="@string/oke"
+                    android:textColor="@color/White"
+                    android:id="@+id/button6"
+                    android:background="@drawable/button_custom"
+                    android:layout_below="@+id/listEdit"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="checkHargaBaru" />
 
-        </RelativeLayout>
+            </RelativeLayout>
+
         </LinearLayout>
-    </RelativeLayout>
     </ScrollView>
 
 

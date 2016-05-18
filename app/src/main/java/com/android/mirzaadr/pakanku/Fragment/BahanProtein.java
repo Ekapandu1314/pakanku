@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,20 +32,20 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
     View view;
 
     private BahanCommunicator.ActivityCommunicator activityCommunicator;
-    private BahanCommunicator.ActivityCommunicator fragmentCommunicator;
+//    private BahanCommunicator.ActivityCommunicator fragmentCommunicator;
 
     public Context context;
 
     private ListCheckBoxBahanAdapter mAdapter;
     private List<Bahan> mListBahan;
-    private VersionDAO mVersionDao;
-    private HewanDAO mHewanDao;
+//    private VersionDAO mVersionDao;
+//    private HewanDAO mHewanDao;
 
 
-    private TextView mTxtEmptyListBahan;
+//    private TextView mTxtEmptyListBahan;
     private RecyclerView bahanListView;
 
-    private BahanDAO mBahanDao;
+    public BahanDAO mBahanDao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,8 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
         view = inflater.inflate(R.layout.fragment_bahan_protein, container, false);
 
         mBahanDao = new BahanDAO(getActivity());
-        mVersionDao = new VersionDAO(getActivity());
-        mHewanDao = new HewanDAO(getActivity());
+//        mVersionDao = new VersionDAO(getActivity());
+//        mHewanDao = new HewanDAO(getActivity());
         // fill the listView
         mListBahan = mBahanDao.getAllBahanByKategori("protein");
 
@@ -75,7 +74,7 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
 
     private void initViews() {
         this.bahanListView = (RecyclerView) view.findViewById(R.id.listProtein);
-        this.mTxtEmptyListBahan = (TextView) view.findViewById(R.id.table);
+//        this.mTxtEmptyListBahan = (TextView) view.findViewById(R.id.table);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
         bahanListView.setLayoutManager(mLayoutManager);
@@ -177,7 +176,7 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -188,7 +187,7 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }

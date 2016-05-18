@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
@@ -18,28 +17,22 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListBahanHargaAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
-import com.android.mirzaadr.pakanku.MasukkanHarga;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
 
 import java.util.List;
 
-/**
- * Created by Mirzaadr on 4/1/2016.
- */
+
 
 public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChangedListener {
 
@@ -66,6 +59,7 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_harga, container, false);
+        setHasOptionsMenu(true);
 
         ListBahanHargaAdapter mAdapterHijauan;
         ListBahanHargaAdapter mAdapterEnergi;
@@ -208,7 +202,7 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -219,7 +213,7 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }
@@ -235,4 +229,10 @@ public class InfoHarga extends Fragment implements ViewTreeObserver.OnScrollChan
 
 
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_info_harga, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 }

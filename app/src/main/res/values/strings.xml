@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pakanku</string>
-    <string name="action_settings">Settings</string>
 
     <string name="title_activity_information">Informasi</string>
     <string name="title_activity_resepransum">Resep Ransum</string>
@@ -8,19 +7,30 @@
     <string name="title_activity_rasumrecord">Record Resep</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="button_yes">YES</string>
+    <string name="button_no">NO</string>
+    <string name="oke">OKE</string>
+    <string name="next"> next </string>
+
+    <string name="tips">TIPS</string>
+    <string name="history">HISTORY</string>
+
     <string name="action_add">Add</string>
+    <string name="action_close">Close</string>
+    <string name="action_reload">Reload</string>
+    <string name="action_settings">Settings</string>
+
+
     <string name="Button">button</string>
     <string name="Close">close</string>
     <string name="Logo">Logo Pakanku</string>
     <string name="BuatButton">Buat Pakan</string>
     <string name="InfoButton">Informasi</string>
     <string name="CekUntung">Cek Untung</string>
-    <string name="tips">TIPS</string>
     <string name="indicator">Indicator</string>
     <string name="harga">harga/kg</string>
     <string name="porsi">porsi(gr)</string>
     <string name="biaya">biaya(Rp)</string>
-    <string name="history">HISTORY</string>
     <string name="record">Record Ternak</string>
     <string name="byk_ternak">jml</string>
     <string name="banyak">ekor</string>
@@ -33,7 +43,6 @@
     <string name="hewan">Hewan</string>
     <string name="plus_button">+</string>
     <string name="min_button">-</string>
-    <string name="oke">OKE</string>
     <string name="nama">Nama Bahan</string>
     <string name="potong">potong</string>
     <string name="perah">perah</string>
@@ -57,7 +66,6 @@
     <string name="datamasuk4">Produksi Ternak per hari</string>
 
     <string name="copyright">copyright 2016 Pakanku Apps by Patpat Corp.</string>
-    <string name="next"> next </string>
 
     <string-array name="spinneritem">
         <item>kg</item>

@@ -2,16 +2,22 @@ package com.android.mirzaadr.pakanku;
 
 import android.app.ActionBar;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +26,7 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,18 +34,22 @@ import android.widget.ViewSwitcher;
 
 public class CekUntung extends AppCompatActivity {
 
-    int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
+//    int imageSwitcherImages[] = {R.drawable.sapi, R.drawable.ayam, R.drawable.kambing, R.drawable.domba};
+//    ImageSwitcher myImageSwitcher;
+//    Animation animationOut;
+//    Animation animationIn;
+//    Animation animationprevOut;
+//    Animation animationprevIn;
+
     private String[] namaTernak = {"Sapi", "Ayam", "Kambing", "Domba"};
     public ImageView indicatorImages[];
 
-    ImageSwitcher myImageSwitcher;
-    int switcherImage = imageSwitcherImages.length;
+    private ViewPager viewPager;
+    ImagePagerAdapter pagerAdapter = new ImagePagerAdapter();
+    int switcherImage;
     int prev;
     int counter = 0;
-    Animation animationOut;
-    Animation animationIn;
-    Animation animationprevOut;
-    Animation animationprevIn;
+    private int previousState, currentState;
 
     RadioButton check_potong;
     RadioButton check_perah;
@@ -67,7 +78,7 @@ public class CekUntung extends AppCompatActivity {
     LinearLayout layoutKerja;
     LinearLayout layoutHobi;
 
-    String hewan;
+    String hewan = namaTernak[0];
     String tujuan;
     String nama;
     double berat1;
@@ -79,6 +90,14 @@ public class CekUntung extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cek_untung);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        switcherImage = pagerAdapter.getCount();
 
         indicatorImages = new ImageView[switcherImage];
         indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
@@ -123,451 +142,244 @@ public class CekUntung extends AppCompatActivity {
                 R.array.spinneritem, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        //spinner2.setAdapter(adapter);
 
-        hewan = "Sapi";
-
-        if(hewan.equals("Sapi")) {
-
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Kambing")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Domba")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-
-        }
-        else if(hewan.equals("Ayam")) {
-
-            check_kerja.setClickable(false);
-            check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.GONE);
-            layoutPerah.setVisibility(View.GONE);
-
-        }
+        selectTujuan(hewan);
+//        if(hewan.equals("Sapi")) {
+//
+//            check_hobi.setClickable(false);
+//            check_petelur.setClickable(false);
+//            layoutPetelur.setVisibility(View.GONE);
+//            layoutHobi.setVisibility(View.GONE);
+//
+//        }
+//        else if(hewan.equals("Kambing")) {
+//
+//            check_kerja.setClickable(false);
+//            check_hobi.setClickable(false);
+//            check_petelur.setClickable(false);
+//            layoutPetelur.setVisibility(View.GONE);
+//            layoutHobi.setVisibility(View.GONE);
+//            layoutKerja.setVisibility(View.GONE);
+//
+//        }
+//        else if(hewan.equals("Domba")) {
+//
+//            check_kerja.setClickable(false);
+//            check_hobi.setClickable(false);
+//            check_petelur.setClickable(false);
+//            layoutPetelur.setVisibility(View.GONE);
+//            layoutHobi.setVisibility(View.GONE);
+//            layoutKerja.setVisibility(View.GONE);
+//
+//
+//        }
+//        else if(hewan.equals("Ayam")) {
+//
+//            check_kerja.setClickable(false);
+//            check_perah.setClickable(false);
+//            layoutKerja.setVisibility(View.GONE);
+//            layoutPerah.setVisibility(View.GONE);
+//
+//        }
 
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editBobot.getText().toString().trim().length() > 0) {
-
-                    editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) + 1));
-
-                }
-                else {
-                    editBobot.setText(String.valueOf(Integer.parseInt("0")));
-                }
+                plusButton(editBobot);
             }
         });
 
         buttonMin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editBobot.getText().toString().trim().length() > 0) {
-
-                    if (Integer.parseInt(editBobot.getText().toString()) <= 0) {
-
-                        editBobot.setText(String.valueOf(0));
-
-                    }
-                    else {
-
-                        editBobot.setText(String.valueOf(Integer.parseInt(editBobot.getText().toString()) - 1));
-
-                    }
-                }
-                else {
-
-                    editBobot.setText(String.valueOf(0));
-
-                }
-
-
-
+                minButton(editBobot);
             }
         });
 
         buttonPlus4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editBobot2.getText().toString().trim().length() > 0) {
-
-                    editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) + 1));
-
-                }
-                else {
-                    editBobot2.setText(String.valueOf(Integer.parseInt("0")));
-                }
+                plusButton(editBobot2);
             }
         });
 
         buttonMin4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editBobot2.getText().toString().trim().length() > 0) {
-
-                    if (Integer.parseInt(editBobot2.getText().toString()) <= 0) {
-
-                        editBobot2.setText(String.valueOf(0));
-
-                    }
-                    else {
-
-                        editBobot2.setText(String.valueOf(Integer.parseInt(editBobot2.getText().toString()) - 1));
-
-                    }
-
-
-
-                }
-                else {
-
-                    editBobot2.setText(String.valueOf(0));
-
-                }
-
-
-
+                minButton(editBobot2);
             }
         });
 
         buttonPlus2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editJumlah.getText().toString().trim().length() > 0) {
-
-                    editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) + 1));
-
-                }
-                else {
-
-                    editJumlah.setText(String.valueOf(Integer.parseInt("0")));
-
-                }
-
+                plusButton(editJumlah);
             }
         });
 
         buttonMin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editJumlah.getText().toString().trim().length() > 0) {
-
-                    if (Integer.parseInt(editJumlah.getText().toString()) <= 0) {
-
-                        editJumlah.setText(String.valueOf(0));
-
-                    }
-                    else{
-
-                        editJumlah.setText(String.valueOf(Integer.parseInt(editJumlah.getText().toString()) - 1));
-
-                    }
-
-
-
-                }
-                else {
-
-                    editJumlah.setText(String.valueOf(0));
-
-                }
-
-
-
+                minButton(editJumlah);
             }
         });
 
         buttonPlus3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editHari.getText().toString().trim().length() > 0) {
-
-                    editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) + 1));
-
-                }
-                else {
-
-                    editHari.setText(String.valueOf(Integer.parseInt("0")));
-
-                }
-
-
-
+                plusButton(editHari);
             }
         });
 
         buttonMin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editHari.getText().toString().trim().length() > 0) {
-
-                    if (Integer.parseInt(editHari.getText().toString()) <= 0) {
-
-                        editHari.setText(String.valueOf(0));
-
-                    }
-                    else {
-
-                        editHari.setText(String.valueOf(Integer.parseInt(editHari.getText().toString()) - 1));
-
-                    }
-
-
-
-                }
-                else {
-
-                    editHari.setText(String.valueOf(0));
-
-                }
+                minButton(editHari);
             }
         });
 
-
-
-        check_potong.setChecked(true);
-
-        check_potong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_potong.setChecked(true);
-                check_perah.setChecked(false);
-                check_petelur.setChecked(false);
-                check_hobi.setChecked(false);
-                check_kerja.setChecked(false);
-            }
-        });
-
-        check_perah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_potong.setChecked(false);
-                check_perah.setChecked(true);
-                check_petelur.setChecked(false);
-                check_hobi.setChecked(false);
-                check_kerja.setChecked(false);
-            }
-        });
-
-        check_petelur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_potong.setChecked(false);
-                check_perah.setChecked(false);
-                check_petelur.setChecked(true);
-                check_hobi.setChecked(false);
-                check_kerja.setChecked(false);
-            }
-        });
-
-        check_hobi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_potong.setChecked(false);
-                check_perah.setChecked(false);
-                check_petelur.setChecked(false);
-                check_hobi.setChecked(true);
-                check_kerja.setChecked(false);
-            }
-        });
-
-        check_kerja.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_potong.setChecked(false);
-                check_perah.setChecked(false);
-                check_petelur.setChecked(false);
-                check_hobi.setChecked(false);
-                check_kerja.setChecked(true);
-            }
-        });
+        radioseries();
 
         textEdit = (EditText) findViewById(R.id.JenisTernak);
-        //textEdit.setFocusableInTouchMode(false);
-        myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
+//        myImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
 
-        myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+        viewPager = (ViewPager) findViewById(R.id.imageSwitcher);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
-            public View makeView() {
-                ImageView switcherImageView = new ImageView(getApplicationContext());
-                switcherImageView.setLayoutParams(new ImageSwitcher.LayoutParams(
-                        ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT
-                ));
-                switcherImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                switcherImageView.setImageResource(R.drawable.sapi);
-                textEdit.setText(namaTernak[0]);
-                indicatorImages[0].setImageResource(R.drawable.fill_circle);
-                //switcherImageView.setMaxHeight(100);
-                return switcherImageView;
+            public void onPageSelected(int pageSelected) {
+                counter = viewPager.getCurrentItem();
+                textEdit.setText(namaTernak[counter]);
+                indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+                indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+
+                hewan = namaTernak[counter];
+                selectTujuan(hewan);
+
+                prev = counter;
+            }
+
+            @Override
+            public void onPageScrolled(int pageSelected, float positionOffset,
+                                       int positionOffsetPixel) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                int currentPage = viewPager.getCurrentItem();
+                if (currentPage == 3 || currentPage == 0) {
+                    previousState = currentState;
+                    currentState = state;
+                    if (previousState == 1 && currentState == 0) {
+                        viewPager.setCurrentItem(currentPage == 0 ? 3 : 0);
+                    }
+                }
             }
         });
 
-        animationOut = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-        animationIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+//        myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+//            @Override
+//            public View makeView() {
+//                ImageView switcherImageView = new ImageView(getApplicationContext());
+//                switcherImageView.setLayoutParams(new ImageSwitcher.LayoutParams(
+//                        ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT
+//                ));
+//                switcherImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                switcherImageView.setImageResource(R.drawable.sapi);
+//                textEdit.setText(namaTernak[0]);
+//                indicatorImages[0].setImageResource(R.drawable.fill_circle);
+//                return switcherImageView;
+//            }
+//        });
+//
+//        animationOut = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+//        animationIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+//
+//        animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
+//        animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
 
-        animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
-        animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.reltvLayout);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) v.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                relativeLayout.requestFocus();
+            }
+        });
+
+//        myImageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+//            @Override
+//            public View makeView() {
+//                ImageView switcherImageView = new ImageView(getApplicationContext());
+//                switcherImageView.setLayoutParams(new ImageSwitcher.LayoutParams(
+//                        ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT
+//                ));
+//                switcherImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                switcherImageView.setImageResource(R.drawable.sapi);
+//                textEdit.setText(namaTernak[0]);
+//                indicatorImages[0].setImageResource(R.drawable.fill_circle);
+//                //switcherImageView.setMaxHeight(100);
+//                return switcherImageView;
+//            }
+//        });
+//
+//        animationOut = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+//        animationIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+//        animationprevOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
+//        animationprevIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
     }
 
-    public void nextImageButton(View view) {
-        prev = counter;
-        counter ++;
-        myImageSwitcher.setOutAnimation(animationOut);
-        myImageSwitcher.setInAnimation(animationIn);
+//    public void nextImageButton(View view) {
+//        prev = counter;
+//        counter ++;
+//        myImageSwitcher.setOutAnimation(animationOut);
+//        myImageSwitcher.setInAnimation(animationIn);
+//
+//        if (counter == switcherImage)
+//            counter = 0;
+//        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+//        textEdit.setText(namaTernak[counter]);
+//        hewan = namaTernak[counter];
+//
+//        selectTujuan(hewan);
+//        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+//        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+//    }
+//
+//    public void prevImageButton(View view) {
+//        prev = counter;
+//        counter--;
+//        myImageSwitcher.setOutAnimation(animationprevOut);
+//        myImageSwitcher.setInAnimation(animationprevIn);
+//
+//        int max = switcherImage - 1;
+//        if (counter == -1)
+//            counter = max;
+//        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
+//        textEdit.setText(namaTernak[counter]);
+//        hewan = namaTernak[counter];
+//
+//        selectTujuan(hewan);
+//        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
+//        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+//    }
 
+    public void nextImageButton(View view) {
+        counter = viewPager.getCurrentItem()+1;
         if (counter == switcherImage)
             counter = 0;
-        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
-        textEdit.setText(namaTernak[counter]);
-        hewan = namaTernak[counter];
+        viewPager.setCurrentItem(counter, true);
 
-        check_kerja.setClickable(true);
-        check_hobi.setClickable(true);
-        check_petelur.setClickable(true);
-        check_potong.setClickable(true);
-        check_perah.setClickable(true);
-
-        layoutPetelur.setVisibility(View.VISIBLE);
-        layoutHobi.setVisibility(View.VISIBLE);
-        layoutKerja.setVisibility(View.VISIBLE);
-        layoutPotong.setVisibility(View.VISIBLE);
-        layoutPerah.setVisibility(View.VISIBLE);
-
-        hewan = namaTernak[counter];
-
-        if(hewan.equals("Sapi")) {
-
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Kambing")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Domba")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-
-        }
-        else if(hewan.equals("Ayam")) {
-
-            check_kerja.setClickable(false);
-            check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.GONE);
-            layoutPerah.setVisibility(View.GONE);
-
-        }
-        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
-        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
     }
 
     public void prevImageButton(View view) {
-        prev = counter;
-        counter--;
-        myImageSwitcher.setOutAnimation(animationprevOut);
-        myImageSwitcher.setInAnimation(animationprevIn);
-
-        int max = switcherImage - 1;
+        counter = viewPager.getCurrentItem()-1;
         if (counter == -1)
-            counter = max;
-        myImageSwitcher.setImageResource(imageSwitcherImages[counter]);
-        textEdit.setText(namaTernak[counter]);
-        hewan = namaTernak[counter];
-
-        check_kerja.setClickable(true);
-        check_hobi.setClickable(true);
-        check_petelur.setClickable(true);
-        check_potong.setClickable(true);
-        check_perah.setClickable(true);
-
-        layoutPetelur.setVisibility(View.VISIBLE);
-        layoutHobi.setVisibility(View.VISIBLE);
-        layoutKerja.setVisibility(View.VISIBLE);
-        layoutPotong.setVisibility(View.VISIBLE);
-        layoutPerah.setVisibility(View.VISIBLE);
-
-        if(hewan.equals("Sapi")) {
-
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Kambing")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-        }
-        else if(hewan.equals("Domba")) {
-
-            check_kerja.setClickable(false);
-            check_hobi.setClickable(false);
-            check_petelur.setClickable(false);
-            layoutPetelur.setVisibility(View.GONE);
-            layoutHobi.setVisibility(View.GONE);
-            layoutKerja.setVisibility(View.GONE);
-
-
-        }
-        else if(hewan.equals("Ayam")) {
-
-            check_kerja.setClickable(false);
-            check_perah.setClickable(false);
-            layoutKerja.setVisibility(View.GONE);
-            layoutPerah.setVisibility(View.GONE);
-
-        }
-        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
-        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
+            counter = switcherImage;
+        viewPager.setCurrentItem(counter, true);
     }
 
     public void editAction (View view){
@@ -776,6 +588,196 @@ public class CekUntung extends AppCompatActivity {
         }
     }
 
+    public void plusButton(EditText edtxt){
+        if(edtxt.getText().toString().trim().length() > 0) {
+
+            edtxt.setText(String.valueOf(Integer.parseInt(edtxt.getText().toString()) + 1));
+        }
+        else {
+            edtxt.setText(String.valueOf(Integer.parseInt("0")));
+        }
+    }
+
+    public void minButton(EditText edtxt){
+        if(edtxt.getText().toString().trim().length() > 0) {
+
+            if (Integer.parseInt(edtxt.getText().toString()) <= 0) {
+                edtxt.setText(String.valueOf(0));
+            }
+            else {
+                edtxt.setText(String.valueOf(Integer.parseInt(edtxt.getText().toString()) - 1));
+            }
+        }
+        else {
+            edtxt.setText(String.valueOf(0));
+        }
+    }
+
+    public void radioseries(){
+
+        check_potong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(true);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_perah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(true);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_petelur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(true);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_hobi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(true);
+                check_kerja.setChecked(false);
+            }
+        });
+
+        check_kerja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check_potong.setChecked(false);
+                check_perah.setChecked(false);
+                check_petelur.setChecked(false);
+                check_hobi.setChecked(false);
+                check_kerja.setChecked(true);
+            }
+        });
+    }
+
+    public void selectTujuan(String jns_hewan){
+
+        check_kerja.setClickable(true);
+        check_hobi.setClickable(true);
+        check_petelur.setClickable(true);
+        check_potong.setClickable(true);
+        check_perah.setClickable(true);
+
+        check_petelur.setVisibility(View.VISIBLE);
+        check_hobi.setVisibility(View.VISIBLE);
+        check_kerja.setVisibility(View.VISIBLE);
+        check_potong.setVisibility(View.VISIBLE);
+        check_perah.setVisibility(View.VISIBLE);
+
+        check_kerja.setTextColor(ContextCompat.getColor(this ,R.color.White));
+        check_hobi.setTextColor(ContextCompat.getColor(this ,R.color.White));
+        check_petelur.setTextColor(ContextCompat.getColor(this ,R.color.White));
+        check_perah.setTextColor(ContextCompat.getColor(this ,R.color.White));
+
+        switch (jns_hewan) {
+            case "Sapi":
+            {
+                check_hobi.setClickable(false);
+                check_petelur.setClickable(false);
+                check_hobi.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_petelur.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                //check_hobi.setVisibility(View.GONE);
+                //check_petelur.setVisibility(View.GONE);
+                break;
+            }
+            case "Kambing":
+            {
+                check_kerja.setClickable(false);
+                check_hobi.setClickable(false);
+                check_petelur.setClickable(false);
+                check_kerja.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_hobi.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_petelur.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                //check_petelur.setVisibility(View.GONE);
+                //check_hobi.setVisibility(View.GONE);
+                //check_kerja.setVisibility(View.GONE);
+                break;
+            }
+            case "Domba":
+            {
+                check_kerja.setClickable(false);
+                check_hobi.setClickable(false);
+                check_petelur.setClickable(false);
+                check_kerja.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_hobi.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_petelur.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                //check_petelur.setVisibility(View.GONE);
+                //check_hobi.setVisibility(View.GONE);
+                //check_kerja.setVisibility(View.GONE);
+                break;
+            }
+            case "Ayam":
+            {
+                check_kerja.setClickable(false);
+                check_perah.setClickable(false);
+                check_kerja.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                check_perah.setTextColor(ContextCompat.getColor(this ,R.color.Black));
+                //check_kerja.setVisibility(View.GONE);
+                //check_perah.setVisibility(View.GONE);
+                break;
+            }
+        }
+
+        check_potong.setChecked(true);
+    }
+
+    private class ImagePagerAdapter extends PagerAdapter {
+        private int[] mImages = new int[] {
+                R.drawable.sapi,
+                R.drawable.ayam,
+                R.drawable.kambing,
+                R.drawable.domba
+        };
+
+        @Override
+        public int getCount() {
+            return mImages.length;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == (object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Context context = CekUntung.this;
+            ImageView imageView = new ImageView(context);
+//            int padding = context.getResources().getDimensionPixelSize(
+//                    R.dimen.activity_horizontal_margin);
+//            imageView.setPadding(padding, padding, padding, padding);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            imageView.setImageResource(mImages[position]);
+            ((ViewPager) container).addView(imageView, 0);
+            return imageView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            (container).removeView((ImageView) object);
+        }
+    }
 
 }
 
