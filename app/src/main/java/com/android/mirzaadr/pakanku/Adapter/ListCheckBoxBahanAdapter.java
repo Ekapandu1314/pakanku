@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.R;
@@ -25,17 +27,20 @@ import java.util.List;
 public class ListCheckBoxBahanAdapter extends RecyclerView.Adapter<ListCheckBoxBahanAdapter.MyViewHolder> {
 
     private List<Bahan> mItems;
+    Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtKategori;
         TextView txtNamaBahan;
         CheckBox chckBahan;
+        RelativeLayout kanan;
 
         public MyViewHolder(View view) {
             super(view);
             txtKategori = (TextView) view.findViewById(R.id.table2);
             txtNamaBahan = (TextView) view.findViewById(R.id.table);
             chckBahan = (CheckBox) view.findViewById(R.id.checkBox);
+            kanan = (RelativeLayout) view.findViewById(R.id.kanan);
 
 
         }
@@ -69,6 +74,13 @@ public class ListCheckBoxBahanAdapter extends RecyclerView.Adapter<ListCheckBoxB
                     CheckBox cb = (CheckBox) holder.chckBahan;
                     Bahan bahanx = (Bahan) cb.getTag();
                     currentItem.setSelected(cb.isChecked());
+                }
+            });
+
+            holder.kanan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), currentItem.getNamaBahan() + " Selected!", Toast.LENGTH_SHORT).show();
                 }
             });
 

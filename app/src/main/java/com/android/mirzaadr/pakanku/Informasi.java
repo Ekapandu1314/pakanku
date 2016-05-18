@@ -223,4 +223,9 @@ public class Informasi extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void tambahClick (View view){
+        Intent intent = new Intent(Informasi.this, MasukkanHarga.class);
+        startActivity(intent);
+    }
+
 }

@@ -26,8 +26,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="?attr/selectableItemBackground"
                 android:visibility="gone"
-                android:layout_gravity="end"
-                android:onClick="masukkan_harga" />
+                android:onClick="tambahClick"
+                android:layout_gravity="end"/>
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

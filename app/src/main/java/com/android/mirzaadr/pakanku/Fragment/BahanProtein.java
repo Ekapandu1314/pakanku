@@ -37,7 +37,7 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
     public Context context;
 
     private ListCheckBoxBahanAdapter mAdapter;
-    private List<Bahan> mListBahan;
+    public List<Bahan> mListBahan;
 //    private VersionDAO mVersionDao;
 //    private HewanDAO mHewanDao;
 
@@ -84,8 +84,8 @@ public class BahanProtein extends Fragment implements BahanCommunicator.Fragment
         bahanListView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), bahanListView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Bahan bahan1 = mListBahan.get(position);
-                Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+                //Bahan bahan1 = mListBahan.get(position);
+                //Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
