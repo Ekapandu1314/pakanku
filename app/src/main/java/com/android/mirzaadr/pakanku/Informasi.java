@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -206,6 +207,11 @@ public class Informasi extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void tambahClick (View view){
+        Intent intent = new Intent(Informasi.this, MasukkanHarga.class);
+        startActivity(intent);
     }
 
 }

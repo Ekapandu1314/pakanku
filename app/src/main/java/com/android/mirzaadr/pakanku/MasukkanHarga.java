@@ -1,21 +1,28 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+//import android.widget.RelativeLayout;
+//import android.widget.ScrollView;
+////import android.view.ViewGroup;
+////import android.widget.ListAdapter;
+////import android.widget.ListView;
+////import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListEdittextAdapter;
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
@@ -36,17 +43,24 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
 
-public class MasukkanHarga extends Activity {
+public class MasukkanHarga extends AppCompatActivity {
 
     private RecyclerView mListviewBahan;
     private ListEdittextAdapter mAdapter;
-    private List<Bahan> mListBahan;
+    public List<Bahan> mListBahan;
     private BahanDAO mBahanDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_harga);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         mBahanDao = new BahanDAO(this);
         // fill the listView
@@ -57,6 +71,17 @@ public class MasukkanHarga extends Activity {
         mAdapter = new ListEdittextAdapter(mListBahan);
         mListviewBahan.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
+        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.rellyt);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) v.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                linearLayout.requestFocus();
+            }
+        });
 
     }
 
@@ -70,18 +95,6 @@ public class MasukkanHarga extends Activity {
         mListviewBahan.setLayoutManager(mLayoutManager);
         mListviewBahan.setItemAnimator(new DefaultItemAnimator());
         mListviewBahan.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
-
-        mListviewBahan.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mListviewBahan, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
 
     }
 
@@ -130,12 +143,12 @@ public class MasukkanHarga extends Activity {
 
         int ulang = 1;
 
-        StringBuffer responseText = new StringBuffer();
+        StringBuilder responseText = new StringBuilder();
 
         List<Bahan> bahanxxxx = mAdapter.getmItems();
         for (int i = 0; i < bahanxxxx.size(); i++) {
             Bahan bahanxv = bahanxxxx.get(i);
-            if (bahanxv.getHarga_baru() == "" || bahanxv.getHarga_baru() == "-"){
+            if (bahanxv.getHarga_baru().equals("")  || bahanxv.getHarga_baru().equals("-")){
                 responseText.append("&tgl" + ulang + "=" + tanggal + "&idbahan" + ulang + "=" + String.valueOf(bahanxv.getIdbahan()) + "&harga" + ulang + "=" + bahanxv.getHarga());
                 mBahanDao.updateBahanFromId(bahanxv.getIdbahan(), bahanxv.getHarga());
             }
@@ -230,7 +243,7 @@ public class MasukkanHarga extends Activity {
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -241,7 +254,7 @@ public class MasukkanHarga extends Activity {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }

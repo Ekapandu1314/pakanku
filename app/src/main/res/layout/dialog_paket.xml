@@ -112,8 +112,8 @@
 
     <!-- oke button -->
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:text="@string/oke"
         android:textColor="@color/White"
         android:id="@+id/buttonk"

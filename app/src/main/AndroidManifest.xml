@@ -49,10 +49,12 @@
             android:name=".CekUntung"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
-            android:name=".MasukkanHarga"/>
+            android:name=".MasukkanHarga"
+            android:label="@string/title_activity_inputharga"
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
         <activity
             android:name=".ResepRansumRecord"
-            android:label="@string/title_activity_rasumrecord"
+            android:label="@string/title_activity_ransumrecord"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
     </application>
 </manifest>

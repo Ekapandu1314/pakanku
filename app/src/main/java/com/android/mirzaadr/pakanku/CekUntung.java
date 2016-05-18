@@ -143,6 +143,9 @@ public class CekUntung extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        indicatorImages[0].setImageResource(R.drawable.fill_circle);
+        check_potong.setChecked(true);
+        textEdit.setText(namaTernak[0]);
         selectTujuan(hewan);
 //        if(hewan.equals("Sapi")) {
 //

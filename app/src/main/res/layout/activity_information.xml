@@ -25,6 +25,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 android:visibility="gone"
+                android:onClick="tambahClick"
                 android:layout_gravity="end"/>
             <ImageView
                 android:layout_width="wrap_content"

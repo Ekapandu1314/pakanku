@@ -87,8 +87,8 @@ public class BahanHijauan extends Fragment implements BahanCommunicator.Fragment
         bahanListView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), bahanListView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Bahan bahan1 = mListBahan.get(position);
-                Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
+                //Bahan bahan1 = mListBahan.get(position);
+                //Toast.makeText(getActivity(), bahan1.getNamaBahan() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
