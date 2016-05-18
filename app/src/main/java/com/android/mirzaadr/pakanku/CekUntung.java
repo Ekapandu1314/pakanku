@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +40,11 @@ public class CekUntung extends AppCompatActivity {
     Animation animationprevOut;
     Animation animationprevIn;
 
-    CheckBox check_potong;
-    CheckBox check_perah;
-    CheckBox check_petelur;
-    CheckBox check_hobi;
-    CheckBox check_kerja;
+    RadioButton check_potong;
+    RadioButton check_perah;
+    RadioButton check_petelur;
+    RadioButton check_hobi;
+    RadioButton check_kerja;
 
     TextView buttonPlus1;
     TextView buttonPlus2;
@@ -85,11 +86,11 @@ public class CekUntung extends AppCompatActivity {
         indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
         indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
 
-        check_potong = (CheckBox) findViewById(R.id.checkPotong);
-        check_perah = (CheckBox) findViewById(R.id.checkPerah);
-        check_petelur = (CheckBox) findViewById(R.id.checkPetelur);
-        check_hobi = (CheckBox) findViewById(R.id.checkHobi);
-        check_kerja = (CheckBox) findViewById(R.id.checkKerja);
+        check_potong = (RadioButton) findViewById(R.id.checkPotong);
+        check_perah = (RadioButton) findViewById(R.id.checkPerah);
+        check_petelur = (RadioButton) findViewById(R.id.checkPetelur);
+        check_hobi = (RadioButton) findViewById(R.id.checkHobi);
+        check_kerja = (RadioButton) findViewById(R.id.checkKerja);
 
         buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
         buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);

@@ -36,8 +36,6 @@ import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.ResepRansumRecord;
 
 import java.util.List;
-import it.gmariotti.recyclerview.itemanimator.SlideInOutRightItemAnimator;
-import it.gmariotti.recyclerview.itemanimator.SlideScaleInOutRightItemAnimator;
 
 /**
  * Created by Mirzaadr on 4/1/2016.
@@ -119,8 +117,8 @@ public class InfoRecord extends Fragment {
 
             @Override
             public void onMoved(int distance) {
-                //toolbar.setTranslationY(-distance);
-                fab.hide();
+//                toolbar.setTranslationY(-distance);
+//                fab.hide();
             }
 
             @Override
@@ -195,7 +193,6 @@ public class InfoRecord extends Fragment {
 
                 dialog.dismiss();
                 Toast.makeText(getActivity(), "Data record telah berhasil dihapus", Toast.LENGTH_SHORT).show();
-                //mAdapter.notifyDataSetChanged();
 
             }
         });
