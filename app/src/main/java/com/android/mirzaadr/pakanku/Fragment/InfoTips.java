@@ -226,6 +226,7 @@ public class InfoTips extends Fragment {
 
         @Override
         protected void onPostExecute(Void args) {
+            listview.setVisibility(View.VISIBLE);
             // Pass the results into ListViewAdapter.java
             if(internet_error) {
 

@@ -44,7 +44,7 @@
             android:name=".ResepRansum"
             android:label="@string/title_activity_resepransum"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>
-        <activity android:name=".BukaArtikel"/>
+        <activity android:name=".BukaArtikel" />
         <activity
             android:name=".CekUntung"
             android:theme="@style/AppTheme.NoActionBar.Fullscreen"/>

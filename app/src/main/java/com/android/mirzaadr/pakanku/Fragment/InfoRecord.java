@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku.Fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,11 +16,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListRecordAdapter;
@@ -30,6 +36,8 @@ import com.android.mirzaadr.pakanku.MyScrollListener;
 import com.android.mirzaadr.pakanku.R;
 import com.android.mirzaadr.pakanku.ResepRansumRecord;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 
@@ -38,7 +46,7 @@ public class InfoRecord extends Fragment {
     private ListRecordAdapter mAdapter;
     private List<Record> mListRecord;
     private RecordDAO mRecordDao;
-    private RecyclerView mListviewRecord;
+    RecyclerView mListviewRecord;
 
     private int mToolbarHeight;
 
@@ -77,8 +85,8 @@ public class InfoRecord extends Fragment {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String hewan;
+            public void onItemSelected(AdapterView<?> parent, View views, int position, long id) {
+                String hewan = "Semua";
                 hewan = spinner.getSelectedItem().toString();
                 mListviewRecord = (RecyclerView) view.findViewById(R.id.listRecord);
                 mListRecord = mRecordDao.getAllRecordByHewan(hewan);
@@ -134,11 +142,53 @@ public class InfoRecord extends Fragment {
             }
 
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(View view, final int position) {
 
-                Record clickedRecord = mListRecord.get(position);
+                final Record clickedRecord = mListRecord.get(position);
 
-                showDeleteDialogConfirmation(clickedRecord, position);
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_box_yes_no);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                final Button yesHapus = (Button) dialog.findViewById(R.id.buttonYES);
+                final Button noHapus = (Button) dialog.findViewById(R.id.buttonNO);
+                final TextView hapus = (TextView) dialog.findViewById(R.id.hapus_record);
+
+                hapus.setText("Apakah kamu yakin untuk menghapus data record "
+                        + clickedRecord.getNama_record() + " ?");
+
+                yesHapus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(mRecordDao != null) {
+                            mRecordDao.deleteRecord(clickedRecord);
+
+                            //refresh the listView
+                            //mListRecord.remove(record);
+                            mListRecord.remove(position);
+                            mAdapter.setmItems(mListRecord);
+                            mAdapter.notifyItemRemoved(position);
+                            if(mListRecord.isEmpty()) {
+                                mListviewRecord.setVisibility(View.INVISIBLE);
+                            }
+
+                        }
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+                noHapus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
 
             }
         }));
@@ -146,58 +196,58 @@ public class InfoRecord extends Fragment {
         return view;
     }
 
-    private void showDeleteDialogConfirmation(final Record record, final int position) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-
-        alertDialogBuilder.setTitle("Hapus");
-        alertDialogBuilder
-                .setMessage("Apakah kamu yakin untuk menghapus data record \""
-                        + record.getNama_record() + " ?");
-
-        // set positive button YES message
-        alertDialogBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // delete the employee and refresh the list
-                if(mRecordDao != null) {
-                    mRecordDao.deleteRecord(record);
-
-                    //refresh the listView
-                    //mListRecord.remove(record);
-                    mListRecord.remove(position);
-                    mAdapter.setmItems(mListRecord);
-                    mAdapter.notifyItemRemoved(position);
-                    if(mListRecord.isEmpty()) {
-                        mListviewRecord.setVisibility(View.INVISIBLE);
-                        //mTxtEmptyListEmployees.setVisibility(View.VISIBLE);
-                    }
-
-                    //mAdapter.setmItems(mListRecord);
-
-                    //mAdapter.notifyDataSetChanged();
-                }
-
-                dialog.dismiss();
-                Toast.makeText(getActivity(), "Data record telah berhasil dihapus", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        // set neutral button OK
-        alertDialogBuilder.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Dismiss the dialog
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show alert
-        alertDialog.show();
-    }
+//    private void showDeleteDialogConfirmation(final Record record, final int position) {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+//
+//        alertDialogBuilder.setTitle("Hapus");
+//        alertDialogBuilder
+//                .setMessage("Apakah kamu yakin untuk menghapus data record "
+//                        + record.getNama_record() + " ?");
+//
+//        // set positive button YES message
+//        alertDialogBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                // delete the employee and refresh the list
+//                if(mRecordDao != null) {
+//                    mRecordDao.deleteRecord(record);
+//
+//                    //refresh the listView
+//                    //mListRecord.remove(record);
+//                    mListRecord.remove(position);
+//                    mAdapter.setmItems(mListRecord);
+//                    mAdapter.notifyItemRemoved(position);
+//                    if(mListRecord.isEmpty()) {
+//                        mListviewRecord.setVisibility(View.INVISIBLE);
+//                        //mTxtEmptyListEmployees.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    //mAdapter.setmItems(mListRecord);
+//
+//                    //mAdapter.notifyDataSetChanged();
+//                }
+//
+//                dialog.dismiss();
+//                Toast.makeText(getActivity(), "Data record telah berhasil dihapus", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//        // set neutral button OK
+//        alertDialogBuilder.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                // Dismiss the dialog
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        // show alert
+//        alertDialog.show();
+//    }
 
     public interface ClickListener {
         void onClick(View view, int position);
