@@ -15,12 +15,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListResepAdapter;
-import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
-import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Resep;
 
 import java.util.List;
@@ -56,12 +54,9 @@ public class ResepRansum extends AppCompatActivity {
 
     private RelativeLayout layoutUntung;
 
-    String bahanid;
-    String hewan;
-    String tujuan;
-    String textProduk = new String();
+    String textProduk = "";
 
-    double berat1;
+//    double berat1;
     double produk;
     double asfeed_total;
 
@@ -129,7 +124,6 @@ public class ResepRansum extends AppCompatActivity {
             textviewTextTotalUntung.setText("Rp. " + String.valueOf(penjualan_produk) + " - " + "Rp. " + biaya_pakan);
         }
         else {
-
             layoutUntung.setVisibility(View.GONE);
         }
 
@@ -236,7 +230,7 @@ public class ResepRansum extends AppCompatActivity {
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -247,7 +241,7 @@ public class ResepRansum extends AppCompatActivity {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }
@@ -279,9 +273,10 @@ public class ResepRansum extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_close) {
-            return true;
+            finish();
         }
-        return super.onOptionsItemSelected(item);
+
+        return true;
     }
 
 }

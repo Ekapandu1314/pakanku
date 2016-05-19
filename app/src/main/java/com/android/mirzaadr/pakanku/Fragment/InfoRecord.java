@@ -58,8 +58,6 @@ public class InfoRecord extends Fragment {
         mRecordDao = new RecordDAO(getActivity());
         mListRecord = mRecordDao.getAllRecord();
 
-        setHasOptionsMenu(true);
-
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_informasi);
 
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinnerHewan);
@@ -67,6 +65,7 @@ public class InfoRecord extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.hewan, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
 
         this.mListviewRecord = (RecyclerView) view.findViewById(R.id.listRecord);
 

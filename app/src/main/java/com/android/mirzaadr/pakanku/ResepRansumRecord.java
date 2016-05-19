@@ -1,6 +1,5 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+//import android.view.ViewGroup;
+//import android.widget.ListAdapter;
+//import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,6 @@ import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.Model.Resep;
-import com.android.mirzaadr.pakanku.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ResepRansumRecord extends AppCompatActivity {
     String bahanid;
     String hewan;
     String tujuan;
-    String textProduk = new String();
+    String textProduk = "";
 
     double berat1;
     double produk;
@@ -79,15 +79,13 @@ public class ResepRansumRecord extends AppCompatActivity {
     private TextView textviewTotalUntung;
     private TextView textviewTextTotalUntung;
 
-    private ListResepAdapter mAdapterHijauan;
-    private ListResepAdapter mAdapterEnergi;
-    private ListResepAdapter mAdapterProtein;
+
 
     private RelativeLayout layoutUntung;
 
-    List<Resep> newlistResepHijauan = new ArrayList<Resep>();
-    List<Resep> newlistResepEnergi = new ArrayList<Resep>();
-    List<Resep> newlistResepProtein = new ArrayList<Resep>();
+    List<Resep> newlistResepHijauan = new ArrayList<>();
+    List<Resep> newlistResepEnergi = new ArrayList<>();
+    List<Resep> newlistResepProtein = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +94,10 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ListResepAdapter mAdapterHijauan;
+        ListResepAdapter mAdapterEnergi;
+        ListResepAdapter mAdapterProtein;
 
         Intent i = getIntent();
         idrecord = i.getExtras().getInt("idrecord");
@@ -159,9 +161,7 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         }
         else {
-
             layoutUntung.setVisibility(View.GONE);
-
         }
 
     }
@@ -270,30 +270,50 @@ public class ResepRansumRecord extends AppCompatActivity {
 
             Bahan bahanzz = mBahanDao.getBahanById(Integer.parseInt(bahan[i]));
 
-            if(bahanzz.getKategori().equals("hijauan")) {
-
-                hijau[j] = Integer.parseInt(bahan[i]);
-
-                j++;
-
+            switch (bahanzz.getKategori()){
+                case "hijauan":{
+                    hijau[j] = Integer.parseInt(bahan[i]);
+                    j++;
+                    break;
+                }
+                case "energi":{
+                    energi[k] = Integer.parseInt(bahan[i]);
+                    k++;
+                    break;
+                }
+                case "protein":{
+                    protein[l] = Integer.parseInt(bahan[i]);
+                    l++;
+                    break;
+                }
+                default:{
+                    Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+                }
             }
-            else if (bahanzz.getKategori().equals("energi")) {
 
-                energi[k] = Integer.parseInt(bahan[i]);
-
-                k++;
-
-            }
-            else if (bahanzz.getKategori().equals("protein")) {
-
-                protein[l] = Integer.parseInt(bahan[i]);
-
-                l++;
-
-            }
-            else {
-                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-            }
+//            if(bahanzz.getKategori().equals("hijauan")) {
+//
+//                hijau[j] = Integer.parseInt(bahan[i]);
+//                j++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("energi")) {
+//
+//                energi[k] = Integer.parseInt(bahan[i]);
+//
+//                k++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("protein")) {
+//
+//                protein[l] = Integer.parseInt(bahan[i]);
+//
+//                l++;
+//
+//            }
+//            else {
+//                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+//            }
         }
 
         double pk_prs_hijauan[] = new double[10];
@@ -460,7 +480,9 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),
+                    df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
 
             asfeed_total += asfeed_hijauan[i];
 
@@ -470,7 +492,9 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()),
+                    df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
 
             asfeed_total += asfeed_energi[i];
 
@@ -481,7 +505,9 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         for (int i = 0; i < l; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(protein[i]).getHarga()),df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
+            resep = new Resep(i+1, mBahanDao.getBahanById(protein[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(protein[i]).getHarga()),
+                    df2.format(asfeed_protein[i]), String.valueOf(harga_protein_akhir[i]), "protein");
 
             asfeed_total += asfeed_protein[i];
 
@@ -519,30 +545,48 @@ public class ResepRansumRecord extends AppCompatActivity {
 
             Bahan bahanzz = mBahanDao.getBahanById(Integer.parseInt(bahan[i]));
 
-            if(bahanzz.getKategori().equals("hijauan")) {
-
-                hijau[j] = Integer.parseInt(bahan[i]);
-
-                j++;
-
+            switch (bahanzz.getKategori()){
+                case "hijauan":{
+                    hijau[j] = Integer.parseInt(bahan[i]);
+                    j++;
+                    break;
+                }
+                case "energi":{
+                    energi[k] = Integer.parseInt(bahan[i]);
+                    k++;
+                    break;
+                }
+                case "protein":{
+                    protein[l] = Integer.parseInt(bahan[i]);
+                    l++;
+                    break;
+                }
+                default:{
+                    Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+                }
             }
-            else if (bahanzz.getKategori().equals("energi")) {
 
-                energi[k] = Integer.parseInt(bahan[i]);
-
-                k++;
-
-            }
-            else if (bahanzz.getKategori().equals("protein")) {
-
-                protein[l] = Integer.parseInt(bahan[i]);
-
-                l++;
-
-            }
-            else {
-                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-            }
+//            if(bahanzz.getKategori().equals("hijauan")) {
+//
+//                hijau[j] = Integer.parseInt(bahan[i]);
+//                j++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("energi")) {
+//
+//                energi[k] = Integer.parseInt(bahan[i]);
+//                k++;
+//
+//            }
+//            else if (bahanzz.getKategori().equals("protein")) {
+//
+//                protein[l] = Integer.parseInt(bahan[i]);
+//                l++;
+//
+//            }
+//            else {
+//                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
+//            }
         }
 
         double pk_prs_hijauan[] = new double[10];
@@ -552,26 +596,22 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < j ; i++) {
 
             pk_prs_hijauan[i] = mBahanDao.getBahanById(hijau[i]).getPk_prs();   // Tanpa %
-
             total_prs_pk_hijauan += pk_prs_hijauan[i];      // Tanpa %
 
         }
 
-        double pk_kg_hijauan_temp = 0;
+        double pk_kg_hijauan_temp;
         double pk_kg_hijauan = 0;
 
         for (int i = 0; i < j ; i++) {
 
             pembagi_hijauan[i] = (pk_prs_hijauan[i]*100)/total_prs_pk_hijauan;  //Tanpa %
-
             pk_kg_hijauan_temp = (pembagi_hijauan[i] * pk_prs_hijauan[i] * bk_hijauan)/10000;
-
             pk_kg_hijauan += pk_kg_hijauan_temp;
 
         }
 
         double pk_konsentrat = pk_kg - pk_kg_hijauan;
-
         double pk_konsentrat_prs = (pk_konsentrat/bk_konsentrat)*100; //Tanpa %
 
         double pk_energi[] = new double[10];
@@ -583,11 +623,8 @@ public class ResepRansumRecord extends AppCompatActivity {
 
 
             pk_energi[i] = mBahanDao.getBahanById(energi[i]).getPk_prs();   //Tanpa %
-
             harga_energi[i] = mBahanDao.getBahanById(energi[i]).getHarga(); //Tanpa %
-
             perbandingan_energi_temp[i] = harga_energi[i]/pk_energi[i];
-
             total_perbandingan_energi += perbandingan_energi_temp[i];
 
         }
@@ -599,9 +636,7 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < k; i++) {
 
             perbandingan_energi[i] = (perbandingan_energi_temp[i]*100)/total_perbandingan_energi;  //Tanpa %
-
             prs_pk_energi[i] = (perbandingan_energi[i] * pk_energi[i])/100; //Tanpa %
-
             total_pk_prs_energi += prs_pk_energi[i];    //Tanpa %
 
         }
@@ -614,11 +649,9 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < l; i++) {
 
             pk_protein[i] = mBahanDao.getBahanById(protein[i]).getPk_prs();   //Tanpa %
-
             harga_protein[i] = mBahanDao.getBahanById(protein[i]).getHarga(); //Tanpa %
 
             perbandingan_protein_temp[i] = harga_protein[i]/pk_protein[i];
-
             total_perbandingan_protein += perbandingan_protein_temp[i];
 
         }
@@ -664,9 +697,7 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < j; i++) {
 
             asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
-
             harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga() / 1000);
-
             harga_total += harga_hijauan[i];
 
         }
@@ -678,11 +709,8 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < k; i++) {
 
             jml_energi[i] = (perbandingan_energi[i] * sbr_energi_kg)/100;
-
             asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
-
             harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga() / 1000);
-
             harga_total += harga_energi_akhir[i];
 
         }
@@ -694,11 +722,8 @@ public class ResepRansumRecord extends AppCompatActivity {
         for (int i = 0; i < l; i++) {
 
             jml_protein[i] = (perbandingan_protein[i] * sbr_protein_kg)/100;
-
             asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
-
             harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga() / 1000);
-
             harga_total += harga_protein_akhir[i];
 
         }
@@ -725,20 +750,22 @@ public class ResepRansumRecord extends AppCompatActivity {
 
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),
+                    df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
 
             asfeed_total += asfeed_hijauan[i];
-
             newlistResepHijauan.add(resep);
 
         }
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()),
+                    df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
 
             asfeed_total += asfeed_energi[i];
-
             newlistResepEnergi.add(resep);
 
         }
@@ -779,7 +806,7 @@ public class ResepRansumRecord extends AppCompatActivity {
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
                     }
                 }
             });
@@ -790,7 +817,7 @@ public class ResepRansumRecord extends AppCompatActivity {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }
@@ -805,5 +832,26 @@ public class ResepRansumRecord extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_resep_ransum, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_close) {
+            finish();
+        }
+        return true;
+    }
 
 }

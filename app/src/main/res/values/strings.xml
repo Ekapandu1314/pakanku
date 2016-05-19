@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Pakanku</string>
+    <string name="Logo">Logo Pakanku</string>
 
     <string name="title_activity_information">Informasi</string>
     <string name="title_activity_resepransum">Resep Ransum</string>
     <string name="title_activity_buatpakan">Buat Pakan</string>
     <string name="title_activity_ransumrecord">Record Resep</string>
     <string name="title_activity_inputharga">Edit Harga</string>
+    <string name="title_activity_cekuntung">Cek Untung</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="button_yes">YES</string>
@@ -23,40 +25,44 @@
     <string name="action_info">Info</string>
     <string name="action_help">Help</string>
 
-
-    <string name="Button">button</string>
-    <string name="Close">close</string>
-    <string name="Logo">Logo Pakanku</string>
     <string name="BuatButton">Buat Pakan</string>
     <string name="InfoButton">Informasi</string>
     <string name="CekUntung">Cek Untung</string>
-    <string name="indicator">Indicator</string>
-    <string name="harga">harga/kg</string>
-    <string name="porsi">porsi(gr)</string>
-    <string name="biaya">biaya(Rp)</string>
-    <string name="record">Record Ternak</string>
-    <string name="byk_ternak">jml</string>
+
+    <string name="byk_ternak">banyak</string>
     <string name="banyak">ekor</string>
     <string name="brt_ternak">bobot</string>
     <string name="kilogram">kg</string>
-    <string name="nomor">No</string>
     <string name="lama_ternak">lama pemeliharaan</string>
     <string name="lama">hari</string>
-    <string name="tanggal">dd-mm-yyyy</string>
-    <string name="hewan">Hewan</string>
+    <string name="byk_produk">Hasil Produk /hari</string>
+
     <string name="plus_button">+</string>
     <string name="min_button">-</string>
-    <string name="nama">Nama Bahan</string>
+
     <string name="potong">potong</string>
     <string name="perah">perah</string>
     <string name="petelur">petelur</string>
     <string name="hobi">hobi</string>
     <string name="kerja">kerja</string>
+
+    <string name="Button">button</string>
+    <string name="Close">close</string>
+    <string name="indicator">Indicator</string>
+    <string name="harga">harga/kg</string>
+    <string name="porsi">porsi(gr)</string>
+    <string name="biaya">biaya(Rp)</string>
+    <string name="record">Record Ternak</string>
+    <string name="nomor">No</string>
+    <string name="tanggal">dd-mm-yyyy</string>
+    <string name="hewan">Hewan</string>
+    <string name="nama">Nama Bahan</string>
     <string name="hijauan">Hijauan</string>
     <string name="energi">Sumber Energi</string>
     <string name="protein">Sumber Protein</string>
     <string name="uang">Rp.</string>
     <string name="sumber">Sumber : </string>
+
     <string name="pengeluaran">Pengeluaran per hari</string>
     <string name="masukTot">total pemasukan</string>
     <string name="untungTot">total keuntungan</string>

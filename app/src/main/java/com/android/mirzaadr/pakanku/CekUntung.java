@@ -1,6 +1,5 @@
 package com.android.mirzaadr.pakanku;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,19 +9,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+//import android.view.animation.Animation;
+//import android.view.animation.AnimationUtils;
+//import android.widget.ImageSwitcher;
+//import android.widget.ViewSwitcher;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -30,7 +31,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 public class CekUntung extends AppCompatActivity {
 
@@ -98,55 +98,8 @@ public class CekUntung extends AppCompatActivity {
         }
 
         switcherImage = pagerAdapter.getCount();
+        initDisplay();
 
-        indicatorImages = new ImageView[switcherImage];
-        indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
-        indicatorImages[1] = (ImageView) findViewById(R.id.btn2);
-        indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
-        indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
-
-        check_potong = (RadioButton) findViewById(R.id.checkPotong);
-        check_perah = (RadioButton) findViewById(R.id.checkPerah);
-        check_petelur = (RadioButton) findViewById(R.id.checkPetelur);
-        check_hobi = (RadioButton) findViewById(R.id.checkHobi);
-        check_kerja = (RadioButton) findViewById(R.id.checkKerja);
-
-        buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
-        buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
-        buttonPlus3 = (TextView) findViewById(R.id.buttonplus3);
-        buttonPlus4 = (TextView) findViewById(R.id.buttonplus4);
-        buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
-        buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
-        buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
-        buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
-
-        editBobot = (EditText) findViewById(R.id.editbobot);
-        editBobot2 = (EditText) findViewById(R.id.editbobot2);
-        editJumlah = (EditText) findViewById(R.id.editjumlah);
-        editHari = (EditText) findViewById(R.id.editHari);
-
-        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
-        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
-        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
-        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
-        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
-
-        editHari.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editBobot.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editBobot2.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editJumlah.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        Spinner spinner = (Spinner) findViewById(R.id.kilogram);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinneritem, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        indicatorImages[0].setImageResource(R.drawable.fill_circle);
-        check_potong.setChecked(true);
-        textEdit.setText(namaTernak[0]);
-        selectTujuan(hewan);
 //        if(hewan.equals("Sapi")) {
 //
 //            check_hobi.setClickable(false);
@@ -369,6 +322,57 @@ public class CekUntung extends AppCompatActivity {
 //        indicatorImages[prev].setImageResource(R.drawable.holo_circle);
 //        indicatorImages[counter].setImageResource(R.drawable.fill_circle);
 //    }
+
+    public void initDisplay(){
+        indicatorImages = new ImageView[switcherImage];
+        indicatorImages[0] = (ImageView) findViewById(R.id.btn1);
+        indicatorImages[1] = (ImageView) findViewById(R.id.btn2);
+        indicatorImages[2] = (ImageView) findViewById(R.id.btn3);
+        indicatorImages[3] = (ImageView) findViewById(R.id.btn4);
+
+        check_potong = (RadioButton) findViewById(R.id.checkPotong);
+        check_perah = (RadioButton) findViewById(R.id.checkPerah);
+        check_petelur = (RadioButton) findViewById(R.id.checkPetelur);
+        check_hobi = (RadioButton) findViewById(R.id.checkHobi);
+        check_kerja = (RadioButton) findViewById(R.id.checkKerja);
+
+        buttonPlus1 = (TextView) findViewById(R.id.buttonplus1);
+        buttonPlus2 = (TextView) findViewById(R.id.buttonplus2);
+        buttonPlus3 = (TextView) findViewById(R.id.buttonplus3);
+        buttonPlus4 = (TextView) findViewById(R.id.buttonplus4);
+        buttonMin1 = (TextView) findViewById(R.id.buttonmin1);
+        buttonMin2 = (TextView) findViewById(R.id.buttonmin2);
+        buttonMin3 = (TextView) findViewById(R.id.buttonmin3);
+        buttonMin4 = (TextView) findViewById(R.id.buttonmin4);
+
+        textEdit = (EditText) findViewById(R.id.JenisTernak);
+        editBobot = (EditText) findViewById(R.id.editbobot);
+        editBobot2 = (EditText) findViewById(R.id.editbobot2);
+        editJumlah = (EditText) findViewById(R.id.editjumlah);
+        editHari = (EditText) findViewById(R.id.editHari);
+
+        layoutPotong = (LinearLayout) findViewById(R.id.layoutPotongCek);
+        layoutKerja = (LinearLayout) findViewById(R.id.layoutKerjaCek);
+        layoutPerah = (LinearLayout) findViewById(R.id.layoutPerahCek);
+        layoutPetelur = (LinearLayout) findViewById(R.id.layoutPetelurCek);
+        layoutHobi = (LinearLayout) findViewById(R.id.layoutHobiCek);
+
+        editHari.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editBobot.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editBobot2.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editJumlah.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        Spinner spinner = (Spinner) findViewById(R.id.kilogram);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinneritem, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        indicatorImages[0].setImageResource(R.drawable.fill_circle);
+        check_potong.setChecked(true);
+        textEdit.setText(namaTernak[0]);
+        selectTujuan(hewan);
+    }
 
     public void nextImageButton(View view) {
         counter = viewPager.getCurrentItem()+1;
@@ -782,5 +786,18 @@ public class CekUntung extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
 }
 

@@ -55,7 +55,6 @@ public class Informasi extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -125,14 +124,6 @@ public class Informasi extends AppCompatActivity {
         });
 
     }
-
-    public void masukkan_harga(View view) {
-
-        Intent intent = new Intent(getApplicationContext(), MasukkanHarga.class);
-        startActivity(intent);
-
-    }
-
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -217,10 +208,11 @@ public class Informasi extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == android.R.id.home) {
+            finish();
         }
-        return super.onOptionsItemSelected(item);
+        return true;
+
     }
 
     public void tambahClick (View view){
