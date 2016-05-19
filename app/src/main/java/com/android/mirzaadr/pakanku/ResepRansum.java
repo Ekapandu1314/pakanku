@@ -15,12 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListResepAdapter;
-import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
-import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Resep;
 
 import java.util.List;
@@ -56,12 +53,8 @@ public class ResepRansum extends AppCompatActivity {
 
     private RelativeLayout layoutUntung;
 
-    String bahanid;
-    String hewan;
-    String tujuan;
     String textProduk = new String();
 
-    double berat1;
     double produk;
     double asfeed_total;
 
@@ -80,6 +73,10 @@ public class ResepRansum extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent i = getIntent();
         newlistResepHijauan = (List<Resep>) i.getSerializableExtra("resephijauan");
@@ -129,7 +126,6 @@ public class ResepRansum extends AppCompatActivity {
             textviewTextTotalUntung.setText("Rp. " + String.valueOf(penjualan_produk) + " - " + "Rp. " + biaya_pakan);
         }
         else {
-
             layoutUntung.setVisibility(View.GONE);
         }
 
@@ -215,7 +211,6 @@ public class ResepRansum extends AppCompatActivity {
 
     public interface ClickListener {
         void onClick(View view, int position);
-
         void onLongClick(View view, int position);
     }
 
@@ -277,8 +272,20 @@ public class ResepRansum extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.action_close_resepransum) {
+            finish();
+            BuatPakan.buatPakan.finish();
+            PilihBahan.pilihBahan.finish();
+        }
+
+        if(id == android.R.id.home)
+        {
+            finish();
+            PilihBahan.pilihBahan.finish();
+        }
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_close) {
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
