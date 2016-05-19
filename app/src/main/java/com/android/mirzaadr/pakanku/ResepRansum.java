@@ -56,7 +56,6 @@ public class ResepRansum extends AppCompatActivity {
 
     String textProduk = "";
 
-//    double berat1;
     double produk;
     double asfeed_total;
 
@@ -75,6 +74,10 @@ public class ResepRansum extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent i = getIntent();
         newlistResepHijauan = (List<Resep>) i.getSerializableExtra("resephijauan");
@@ -209,7 +212,6 @@ public class ResepRansum extends AppCompatActivity {
 
     public interface ClickListener {
         void onClick(View view, int position);
-
         void onLongClick(View view, int position);
     }
 
@@ -230,7 +232,7 @@ public class ResepRansum extends AppCompatActivity {
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && clickListener != null) {
-                        clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
                     }
                 }
             });
@@ -241,7 +243,7 @@ public class ResepRansum extends AppCompatActivity {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildLayoutPosition(child));
+                clickListener.onClick(child, rv.getChildPosition(child));
             }
             return false;
         }
@@ -271,10 +273,19 @@ public class ResepRansum extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_close) {
+        if(id == R.id.action_close_resepransum) {
             finish();
+            BuatPakan.buatPakan.finish();
+            PilihBahan.pilihBahan.finish();
         }
+
+        if(id == android.R.id.home)
+        {
+            finish();
+            PilihBahan.pilihBahan.finish();
+        }
+
+        //noinspection SimplifiableIfStatement
 
         return true;
     }

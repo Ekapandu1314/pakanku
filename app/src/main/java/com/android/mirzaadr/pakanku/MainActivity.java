@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+        //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 
         mBahanDao = new BahanDAO(this);
         mVersionDao = new VersionDAO(this);
@@ -562,7 +562,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         this.registerReceiver(this.mConnReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+        //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
         super.onResume();
     }
 

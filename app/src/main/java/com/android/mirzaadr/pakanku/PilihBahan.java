@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,8 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
     int jumlah;
     int lama;
 
+    public static Activity pilihBahan;
+
     String bahanid = "";
 
     int j = 0;
@@ -69,6 +72,8 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
         setupViewPager(mViewPager);
+
+        pilihBahan = this;
 
         mViewPager.setOffscreenPageLimit(2);
 
@@ -671,7 +676,9 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         for (int i = 0; i < j; i++) {
 
             asfeed_hijauan[i] = (bk_hijauan * pembagi_hijauan[i] * 1000)/(mBahanDao.getBahanById(hijau[i]).getBk_prs());
+
             harga_hijauan[i] = (int)(asfeed_hijauan[i] * mBahanDao.getBahanById(hijau[i]).getHarga() / 1000);
+
             harga_total += harga_hijauan[i];
 
         }
@@ -795,11 +802,12 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
+        if(id == android.R.id.home)
+        {
             finish();
         }
         return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }

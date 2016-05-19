@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -291,31 +292,6 @@ public class ResepRansumRecord extends AppCompatActivity {
                 }
             }
 
-//            if(bahanzz.getKategori().equals("hijauan")) {
-//
-//                hijau[j] = Integer.parseInt(bahan[i]);
-//                j++;
-//
-//            }
-//            else if (bahanzz.getKategori().equals("energi")) {
-//
-//                energi[k] = Integer.parseInt(bahan[i]);
-//
-//                k++;
-//
-//            }
-//            else if (bahanzz.getKategori().equals("protein")) {
-//
-//                protein[l] = Integer.parseInt(bahan[i]);
-//
-//                l++;
-//
-//            }
-//            else {
-//                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-//            }
-        }
-
         double pk_prs_hijauan[] = new double[10];
         double total_prs_pk_hijauan = 0;
         double pembagi_hijauan[] = new double[10];
@@ -565,29 +541,6 @@ public class ResepRansumRecord extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
                 }
             }
-
-//            if(bahanzz.getKategori().equals("hijauan")) {
-//
-//                hijau[j] = Integer.parseInt(bahan[i]);
-//                j++;
-//
-//            }
-//            else if (bahanzz.getKategori().equals("energi")) {
-//
-//                energi[k] = Integer.parseInt(bahan[i]);
-//                k++;
-//
-//            }
-//            else if (bahanzz.getKategori().equals("protein")) {
-//
-//                protein[l] = Integer.parseInt(bahan[i]);
-//                l++;
-//
-//            }
-//            else {
-//                Toast.makeText(getBaseContext(), "Error klasifikasi", Toast.LENGTH_SHORT).show();
-//            }
-        }
 
         double pk_prs_hijauan[] = new double[10];
         double total_prs_pk_hijauan = 0;
@@ -847,11 +800,11 @@ public class ResepRansumRecord extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_close) {
+        if(id == R.id.action_close_resepransum) {
             finish();
         }
-        return true;
+          return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }

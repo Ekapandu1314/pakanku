@@ -9,13 +9,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:padding="@dimen/activity_horizontal_margin"
+        android:id="@+id/hapus_record"
         android:text="Apakah kamu yakin untuk menghapus data record ?"
-        android:textColor="@color/White"
+        android:textColor="@color/Shade"
+        android:textStyle="bold"
         android:textSize="18sp"
         android:gravity="center"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/Shade"
         android:layout_height="wrap_content">
         <Button
             android:layout_width="wrap_content"
@@ -24,19 +27,21 @@
             android:textColor="@color/White"
             android:id="@+id/buttonNO"
             android:layout_alignParentStart="true"
+            android:textStyle="bold"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/button_custom_rec"
+            android:background="?attr/selectableItemBackground"
             android:layout_toLeftOf="@+id/buttonYES"
             android:layout_toStartOf="@+id/buttonYES" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/button_yes"
+            android:textStyle="bold"
             android:textColor="@color/White"
             android:id="@+id/buttonYES"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_custom_rec" />
+            android:background="?attr/selectableItemBackground" />
 
     </RelativeLayout>
 

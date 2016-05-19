@@ -11,10 +11,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Fragment.InfoHarga;
 import com.android.mirzaadr.pakanku.Fragment.InfoRecord;
@@ -135,6 +137,17 @@ public class Informasi extends AppCompatActivity {
         //setup toolbar icon
         reload = (ImageView) findViewById(R.id.reload);
         add = (ImageView) findViewById(R.id.add);
+
+        add.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast toast= Toast.makeText(getApplicationContext(),
+                        "Ubah Harga", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP| Gravity.RIGHT, 0, 0);
+                toast.show();
+                return false;
+            }
+        });
     }
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -207,10 +220,17 @@ public class Informasi extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
+        if(id == R.id.action_close_resepransum) {
             finish();
         }
+
+        if(id == android.R.id.home)
+        {
+            finish();
+        }
+
+        //noinspection SimplifiableIfStatement
+
         return true;
 
     }

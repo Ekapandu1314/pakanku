@@ -1,5 +1,6 @@
 package com.android.mirzaadr.pakanku;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -79,6 +80,7 @@ public class BuatPakan extends AppCompatActivity {
     int jumlah;
     int lama;
 
+    public static Activity buatPakan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class BuatPakan extends AppCompatActivity {
         switcherImage = adapter.getCount();
 
         displayInit();
+
+        buatPakan = this;
 
         buttonPlus1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -656,11 +660,12 @@ public class BuatPakan extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
+        if(id == android.R.id.home)
+        {
             finish();
         }
         return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }
