@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,7 +20,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Dao.BahanDAO;
@@ -30,6 +34,7 @@ import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
 import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
+import com.android.mirzaadr.pakanku.Model.Record;
 import com.android.mirzaadr.pakanku.Model.Version;
 
 import org.json.JSONArray;
@@ -519,7 +524,49 @@ public class MainActivity extends AppCompatActivity {
                     {
                         if (hasil.equals("update")){
 
-                            showUpdateDialogConfirmation();
+                            final Dialog dialog = new Dialog(MainActivity.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_box_yes_no);
+                            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                            final Button yesHapus = (Button) dialog.findViewById(R.id.buttonYES);
+                            final Button noHapus = (Button) dialog.findViewById(R.id.buttonNO);
+                            final TextView hapus = (TextView) dialog.findViewById(R.id.hapus_record);
+
+                            hapus.setText("Apakah kamu yakin untuk memperbarui data bahan ?");
+
+                            yesHapus.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    if(mBahanDao != null) {
+
+                                        new DataFetcherTask().execute();
+
+                                        //refresh the listView
+                                        Version versixx = new Version();
+
+                                        versixx.setVersiBahan(version);
+                                        versixx.setTanggal(tanggal);
+
+                                        mVersionDao.deleteVersion(versixx);
+
+                                    }
+
+                                    dialog.dismiss();
+                                    Toast.makeText(MainActivity.this, "Pembaruan data bahan berhasil", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+                            noHapus.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            dialog.show();
 
                         }
                         else if (hasil.equals("tidak"))
@@ -573,53 +620,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         unregisterReceiver(mConnReceiver);
         super.onPause();
-    }
-
-    private void showUpdateDialogConfirmation() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        alertDialogBuilder.setTitle("Update");
-        alertDialogBuilder.setMessage("Are you sure you want to update data?");
-
-        // set positive button YES message
-        alertDialogBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // delete the company and refresh the list
-                if(mBahanDao != null) {
-
-                    new DataFetcherTask().execute();
-
-                    //refresh the listView
-
-                    Version versixx = new Version();
-
-                    versixx.setVersiBahan(version);
-                    versixx.setTanggal(tanggal);
-
-                    mVersionDao.deleteVersion(versixx);
-
-                }
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this, "Update succesfull", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // set neutral button OK
-        alertDialogBuilder.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Dismiss the dialog
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show alert
-        alertDialog.show();
     }
 
     public void BuatClick(View v) {

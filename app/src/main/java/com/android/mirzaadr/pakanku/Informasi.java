@@ -1,6 +1,7 @@
 package com.android.mirzaadr.pakanku;
 
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -143,13 +144,38 @@ public class Informasi extends AppCompatActivity {
         reload = (ImageView) findViewById(R.id.reload);
         add = (ImageView) findViewById(R.id.add);
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Informasi.this, MasukkanHarga.class);
+                startActivity(intent);
+
+            }
+        });
+
         add.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast toast= Toast.makeText(getApplicationContext(),
-                        "Ubah Harga", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP| Gravity.RIGHT, 0, 0);
+                int x = add.getLeft() - 150;
+                int y = add.getTop() + 2*add.getHeight();
+                Toast toast = Toast.makeText(getApplicationContext(), "Ubah Harga", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP|Gravity.LEFT, x, y-50);
                 toast.show();
+                ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(30);
+                return false;
+            }
+        });
+
+        reload.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int x = reload.getLeft() - 150;
+                int y = reload.getTop() + 2*reload.getHeight();
+                Toast toast = Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP|Gravity.LEFT, x, y-50);
+                toast.show();
+                ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(30);
                 return false;
             }
         });
@@ -242,10 +268,4 @@ public class Informasi extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void tambahClick (View view){
-        Intent intent = new Intent(Informasi.this, MasukkanHarga.class);
-        startActivity(intent);
-    }
-
 }
