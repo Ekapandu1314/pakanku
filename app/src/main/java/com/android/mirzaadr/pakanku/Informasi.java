@@ -44,8 +44,6 @@ public class Informasi extends AppCompatActivity {
      */
     ImageView reload, add;
 
-    Menu menu_informasi;
-
     private AppBarLayout mActionBar;
 
     @Override
@@ -60,9 +58,6 @@ public class Informasi extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -244,8 +239,6 @@ public class Informasi extends AppCompatActivity {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -263,9 +256,8 @@ public class Informasi extends AppCompatActivity {
         }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+        return true;
+
     }
 }

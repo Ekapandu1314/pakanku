@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+//import android.widget.Toast;
 
 import com.android.mirzaadr.pakanku.Adapter.ListResepAdapter;
 import com.android.mirzaadr.pakanku.Decoration.DividerItemDecoration;
@@ -53,7 +54,7 @@ public class ResepRansum extends AppCompatActivity {
 
     private RelativeLayout layoutUntung;
 
-    String textProduk = new String();
+    String textProduk = "";
 
     double produk;
     double asfeed_total;
@@ -285,10 +286,8 @@ public class ResepRansum extends AppCompatActivity {
         }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+        return true;
     }
 
 }

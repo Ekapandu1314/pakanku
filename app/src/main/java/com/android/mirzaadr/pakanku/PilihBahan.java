@@ -55,7 +55,7 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
     public static Activity pilihBahan;
 
-    String bahanid = new String();
+    String bahanid = "";
 
     int j = 0;
 
@@ -64,15 +64,14 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_bahan);
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
-        setupViewPager(mViewPager);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);}
+
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.containerbahan);
+        setupViewPager(mViewPager);
 
         pilihBahan = this;
 
@@ -149,26 +148,18 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
 
         if(someValue != null && !someValue.equals("haha")) {
-
             j++;
             bahanid = someValue+bahanid;
-
         }
         else if (someValue.equals("")){
-
             j = 0 ;
-
         }
         else if (someValue.equals(null)){
-
             j=0;
-
         }
         else if (someValue.equals("haha")){
-
             j=0;
             bahanid = "";
-
         }
 
 
@@ -439,15 +430,17 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         Resep resep;
 
-        List<Resep> newlistResepHijauan = new ArrayList<Resep>();
-        List<Resep> newlistResepEnergi = new ArrayList<Resep>();
-        List<Resep> newlistResepProtein = new ArrayList<Resep>();
+        List<Resep> newlistResepHijauan = new ArrayList<>();
+        List<Resep> newlistResepEnergi = new ArrayList<>();
+        List<Resep> newlistResepProtein = new ArrayList<>();
 
         double asfeed_total = 0;
 
         for (int i = 0; i < j; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()), df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
+            resep = new Resep(i+1, mBahanDao.getBahanById(hijau[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(hijau[i]).getHarga()),
+                    df2.format(asfeed_hijauan[i]), String.valueOf(harga_hijauan[i]), "hijauan");
 
             asfeed_total += asfeed_hijauan[i];
 
@@ -457,10 +450,11 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
 
         for (int i = 0; i < k; i++) {
 
-            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(), String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]), String.valueOf(harga_energi_akhir[i]), "energi");
+            resep = new Resep(i+1, mBahanDao.getBahanById(energi[i]).getNamaBahan(),
+                    String.valueOf(mBahanDao.getBahanById(energi[i]).getHarga()), df2.format(asfeed_energi[i]),
+                    String.valueOf(harga_energi_akhir[i]), "energi");
 
             asfeed_total += asfeed_energi[i];
-
             newlistResepEnergi.add(resep);
 
         }
@@ -696,11 +690,8 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         for (int i = 0; i < k; i++) {
 
             jml_energi[i] = (perbandingan_energi[i] * sbr_energi_kg)/100;
-
             asfeed_energi[i] = (jml_energi[i] * 100 * 1000)/mBahanDao.getBahanById(energi[i]).getBk_prs();
-
             harga_energi_akhir[i] = (int)(asfeed_energi[i] * mBahanDao.getBahanById(energi[i]).getHarga() / 1000);
-
             harga_total += harga_energi_akhir[i];
 
         }
@@ -712,18 +703,15 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         for (int i = 0; i < l; i++) {
 
             jml_protein[i] = (perbandingan_protein[i] * sbr_protein_kg)/100;
-
             asfeed_protein[i] = (jml_protein[i] * 100 * 1000)/mBahanDao.getBahanById(protein[i]).getBk_prs();
-
             harga_protein_akhir[i] = (int)(asfeed_protein[i] * mBahanDao.getBahanById(protein[i]).getHarga() / 1000);
-
             harga_total += harga_protein_akhir[i];
 
         }
 
         int biaya_pakan = lama * harga_total * jumlah;
 
-        String textProduk = new String();
+        String textProduk = "";
         int keuntungan = 0;
         int penjualan_produk = 0;
 
@@ -818,12 +806,8 @@ public class PilihBahan extends AppCompatActivity implements BahanCommunicator.A
         {
             finish();
         }
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }

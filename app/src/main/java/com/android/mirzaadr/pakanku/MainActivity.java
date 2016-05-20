@@ -31,7 +31,7 @@ import com.android.mirzaadr.pakanku.Dao.DBHelper;
 import com.android.mirzaadr.pakanku.Dao.HewanDAO;
 import com.android.mirzaadr.pakanku.Dao.VersionDAO;
 import com.android.mirzaadr.pakanku.Internet.NetworkUtils;
-import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
+//import com.android.mirzaadr.pakanku.Manager.AlertDialogManager;
 import com.android.mirzaadr.pakanku.Model.Bahan;
 import com.android.mirzaadr.pakanku.Model.Hewan;
 import com.android.mirzaadr.pakanku.Model.Record;
@@ -60,7 +60,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Bahan> mListBahan;
+    public List<Bahan> mListBahan;
     private BahanDAO mBahanDao;
     private HewanDAO mHewanDao;
     private VersionDAO mVersionDao;
@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
     Boolean internet = false;
     Boolean internet_error = false;
 
-    AlertDialogManager alert = new AlertDialogManager();
-
     String version;
     String tanggal;
     String tanggalNow;
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     int month_calendar;
     int date_calendar;
     int year_calendar;
-
 
 
     @Override

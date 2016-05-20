@@ -64,11 +64,6 @@ public class BukaArtikel extends AppCompatActivity {
 		if(id == R.id.action_close_resepransum) {
 			finish();
 		}
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+        return true;
 	}
 }

@@ -664,12 +664,8 @@ public class BuatPakan extends AppCompatActivity {
         {
             finish();
         }
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }
